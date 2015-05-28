@@ -1,0 +1,38 @@
+{
+  "name": "toolz",
+  "version": "0.1.0",
+  "description": "An awesome module being created",
+  "main": "index.js",
+  "scripts": {
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/akileez/toolz.git"
+  },
+  "author": {
+    "name": "Keith Williams",
+    "email": "git@keeda.net",
+    "url": "https://github.com/akileez/toolz"
+  },
+  "homepage": "https://github.com/akileez/toolz",
+  "bugs": {
+    "url": "https://github.com/akileez/toolz/issues"
+  },
+  "license": {
+    "type": "ISC",
+    "url": "https://github.com/akileez/toolz/blob/master/LICENSE"
+  },
+  "keywords": [],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "files": [
+    "LICENSE",
+    "index.js",
+    "README.md"
+  ]
+}
