@@ -1,7 +1,7 @@
 {
   "name": "toolz",
-  "version": "0.1.0",
-  "description": "An awesome module being created",
+  "version": "0.1.1",
+  "description": "basic javascript utils for working with arrays, objects and types",
   "main": "index.js",
   "scripts": {
   },
@@ -21,10 +21,7 @@
   "bugs": {
     "url": "https://github.com/akileez/toolz/issues"
   },
-  "license": {
-    "type": "ISC",
-    "url": "https://github.com/akileez/toolz/blob/master/LICENSE"
-  },
+  "license": "ISC",
   "keywords": [],
   "dependencies": {
   },
