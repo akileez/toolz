@@ -1,7 +1,7 @@
 {
   "name": "toolz",
-  "version": "0.1.1",
-  "description": "basic javascript utils for working with arrays, objects and types",
+  "version": "0.1.2",
+  "description": "basic javascript utils for working with arrays, objects, functions, types and other",
   "main": "index.js",
   "scripts": {
   },
@@ -28,8 +28,7 @@
   "devDependencies": {
   },
   "files": [
-    "LICENSE",
     "index.js",
-    "README.md"
+    "src"
   ]
 }
