@@ -1,5 +1,5 @@
 var kindOf = require('./kindOf')
-var isFiniteNumber = require('./isFiniteNumber')
+var isFiniteNumber = require('./isFinite')
 
 function toArray (value) {
   var ret = []
@@ -7,7 +7,7 @@ function toArray (value) {
   var n
 
   if (value !== null && value !== undefined) {
-    if (value.length === null || kind === 'string' || kind === 'function' || kind === 'regExp' || isFiniteNumber(value)) {
+    if (value.length === null || kind === 'string' || kind === 'function' || kind === 'regExp' || isFinite(value)) {
       ret[ret.length] = value
     } else {
       n = value.length
