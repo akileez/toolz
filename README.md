@@ -4,6 +4,12 @@
 [![Test coverage][coveralls-image]][coveralls-url]
 [![Downloads][downloads-image]][downloads-url]
 
+development tools for node, devtoolz. A complete rewrite of mout.js for educational purposes.
+
+## Why?
+Why would I do something stupid like that? TO LEARN, PERIOD. While I am retyping everything in, I get
+intimate with the code. I am able to play with each function and learn it inside out.
+
 ## Installation
 ```bash
 $ npm install akileez\toolz
@@ -18,9 +24,6 @@ $ npm install akileez\toolz
 ```js
 
 ```
-
-## Why?
-
 
 ## See Also
 -
