@@ -5,8 +5,18 @@
  * Licensed under the ISC license.
  */
 
-'use strict'
-
-module.exports = function () {
-  // do stuff
-}
+module.exports = {
+    'array'       : require('./src/array'),
+    'collection'  : require('./src/collection'),
+    'date'        : require('./src/date'),
+    'function'    : require('./src/function'),
+    'lang'        : require('./src/lang'),
+    'math'        : require('./src/math'),
+    'number'      : require('./src/number'),
+    'object'      : require('./src/object'),
+    'queryString' : require('./src/queryString'),
+    'random'      : require('./src/random'),
+    'string'      : require('./src/string'),
+    'time'        : require('./src/time'),
+    'fn'          : require('./src/function')
+};
