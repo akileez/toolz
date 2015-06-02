@@ -1,5 +1,7 @@
 var toString = require('../lang/toString')
 
+// replaces hyphens with spaces (only hyphens between word chars)
+
 function unhyphenate (str) {
   str = toString(str)
   return str.replace(/(\w)(-)(\w)/g, '$1 $3')
