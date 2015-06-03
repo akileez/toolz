@@ -1,4 +1,4 @@
-var isPrimitive = require('../lang/isPrimitive')
+// get nested object property
 
 function get (obj, prop) {
   var parts = prop.split('.')
