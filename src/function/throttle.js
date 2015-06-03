@@ -14,7 +14,7 @@ function throttle (fn, delay) {
     result = fn.apply(context, args)
   }
 
-  function throtled () {
+  function throttled () {
     context = this
     args = arguments
     diff = delay - (now() - prevCall)
@@ -26,7 +26,7 @@ function throttle (fn, delay) {
     return result
   }
 
-  throtled.cancel = function () {
+  throttled.cancel = function () {
     clearTimeoute(timeout)
   }
 
