@@ -14,7 +14,7 @@ module.exports = {
     'math'        : require('./src/math'),
     'number'      : require('./src/number'),
     'object'      : require('./src/object'),
-    'queryString' : require('./src/queryString'),
+    'query'       : require('./src/query'),
     'random'      : require('./src/random'),
     'string'      : require('./src/string'),
     'time'        : require('./src/time'),
