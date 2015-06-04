@@ -1,4 +1,4 @@
-var makeIterator = require('../function/makeIterator')
+var makeIterator = require('../function/makeIterator_')
 
 function findLastIndex (arr, iter, thisObj) {
   iter = makeIterator(iter, thisObj)

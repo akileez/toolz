@@ -1,5 +1,5 @@
 var sort = require('./sort')
-var makeIterator = require('../function/makeIterator')
+var makeIterator = require('../function/makeIterator_')
 
 function sortBy (arr, fn, context) {
   fn = makeIterator(fn, context)

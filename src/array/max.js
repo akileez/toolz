@@ -1,4 +1,4 @@
-var makeIterator = require('../function/makeIterator')
+var makeIterator = require('../function/makeIterator_')
 
 function max (arr, iterator, thisObj) {
   if (arr == null || !arr.length) return Infinity

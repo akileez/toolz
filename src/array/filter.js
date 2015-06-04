@@ -1,4 +1,4 @@
-var makeIterator = require('../function/makeIterator')
+var makeIterator = require('../function/makeIterator_')
 
 function filter (arr, fn, thisObj) {
   fn = makeIterator(fn, thisObj)

@@ -1,5 +1,5 @@
 var forOwn = require('./forOwn')
-var makeIterator = require('../function/makeIterator')
+var makeIterator = require('../function/makeIterator_')
 
 function every (obj, fn, thisObj) {
   fn = makeIterator(fn, thisObj)
