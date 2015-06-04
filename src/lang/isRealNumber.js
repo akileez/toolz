@@ -1,8 +1,8 @@
-var isFinite = require('./isFinite')
 var isNumber = require('./isNumber')
+var GLOBAL = require('./GLOBAL')
 
 function isRealNumber (value) {
-  return isNumber(value) && isFinite(value)
+  return isNumber(value) && GLOBAL.isFinite(value)
 }
 
 module.exports = isRealNumber
