@@ -1,5 +1,5 @@
 function toString (value) {
-  return value == null ? '' : val.toString()
+  return value == null ? '' : value.toString()
 }
 
 module.exports = toString

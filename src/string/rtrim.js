@@ -29,4 +29,4 @@ function rtrim (str, chars) {
   return (end >= 0) ? str.substring(0, end + 1) : ''
 }
 
-return rtrim
+module.exports = rtrim
