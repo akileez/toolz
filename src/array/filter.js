@@ -2,7 +2,7 @@ var makeIterator = require('../function/makeIterator_')
 
 function filter (arr, fn, thisObj) {
   fn = makeIterator(fn, thisObj)
-  var resuts = []
+  var results = []
   if (arr == null) return results
   var iter = -1
   var len = arr.length
