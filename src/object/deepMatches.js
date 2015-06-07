@@ -2,7 +2,7 @@ var forOwn = require('./forOwn')
 var isArray = require('../lang/isArray')
 
 function deepMatches (target, pattern) {
-  if (target && typeof target === 'object') {
+  if (target && typeof target === 'object' && pattern && typeof pattern === 'object') {
     if (isArray(target) && isArray(pattern)) return matchArray(target, pattern)
     else return matchObject(target, pattern)
   } else {
