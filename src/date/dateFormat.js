@@ -19,57 +19,75 @@ function dateFormat (date, mask) {
   }
 
   date = date || new Date
+
   if (date instanceof Date) date = new Date(date)
   else date = new Date(Date.parse(date))
 
   if (isNaN(date)) throw TypeError('Invalid date')
 
+  // what we wish to match
   var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMSsTt])\1?|[oZWQNv]|O{1,2}|u{1,2}|x{1,3}|'[^']*'/g
-  var flags = {
-    d        : date.getDate(),
-    dd       : pad(date.getDate(), 2),
-    ddd      : nameOfDay(date, 3),
-    dddd     : nameOfDay(date),
-    m        : date.getMonth() + 1,
-    mm       : pad(date.getMonth() + 1, 2),
-    mmm      : nameOfMonth(date, 3),
-    mmmm     : nameOfMonth(date),
-    yyyy     : pad(date.getFullYear(), 4),
-    yy       : pad(date.getFullYear() % 100, 2),
-    h        : date.getHours() % 12 || 12,
-    hh       : pad(date.getHours() % 12 || 12, 2),
-    H        : date.getHours(),
-    HH       : pad(date.getHours(),2),
-    M        : date.getMinutes(),
-    MM       : pad(date.getMinutes(), 2),
-    S        : date.getSeconds(),
-    SS       : pad(date.getSeconds(),2),
-    s        : date.getMilliseconds(),
-    ss       : pad(date.getMilliseconds(), 3),
-    t        : date.getHours() < 12 ? ' a' : ' p',
-    tt       : date.getHours() < 12 ? ' am' : ' pm',
-    T        : date.getHours() < 12 ? ' A' : ' P',
-    TT       : date.getHours() < 12 ? ' AM' : ' PM',
-    N        : dayOfTheYear(date),
-    W        : weekOfTheYear(date),
-    Q        : quarterOfTheYear(date),
-    Z        : timezoneOffset(date),
-    u        : totalDaysThisMonth(date),
-    uu       : totalDaysThisYear(date),
-    x        : daysLeftThisWeek(date),
-    xx       : daysLeftThisMonth(date),
-    xxx      : daysLeftThisYear(date),
-    v        : isLeapYear(date),
-    o        : ordinal(date.getDate()),
-    O        : nameOfDay(date, 1),
-    OO       : nameOfDay(date, 2)
+  // what we don't wish to match -- need to optimize!!
+  var antiToken = /[AaBbCcDEeFfGgIiJjKkLlnPpqRrUVwXYz0-9\?\.\,\!@#\$%\^\&\*\(\)\+\-]/g
+
+  // what mask to use
+  mask = String(frmt[mask] || antiPattern(mask, antiToken) || frmt.default)
+
+  function makeIterator (fn) {
+    return function (mask, token) {
+      return fn(date, mask)
+    }
   }
 
-  mask = String(frmt[mask] || mask || frmt.default)
-  return mask.replace(token, function (match) {
-    if (match in flags) return flags[match]
-    return match.slice(1, match.length - 1)
-  })
+  return mask.replace(token, makeIterator(convertFlag))
+}
+
+function convertFlag (date, token) {
+  switch (token) {
+    case 'd'     : return date.getDate()
+    case 'dd'    : return pad(date.getDate(), 2)
+    case 'ddd'   : return nameOfDay(date, 3)
+    case 'dddd'  : return nameOfDay(date)
+    case 'm'     : return date.getMonth() + 1
+    case 'mm'    : return pad(date.getMonth() + 1, 2)
+    case 'mmm'   : return nameOfMonth(date, 3)
+    case 'mmmm'  : return nameOfMonth(date)
+    case 'yyyy'  : return pad(date.getFullYear(), 4)
+    case 'yy'    : return pad(date.getFullYear() % 100, 2)
+    case 'h'     : return date.getHours() % 12 || 12
+    case 'hh'    : return pad(date.getHours() % 12 || 12, 2)
+    case 'H'     : return date.getHours()
+    case 'HH'    : return pad(date.getHours(),2)
+    case 'M'     : return date.getMinutes()
+    case 'MM'    : return pad(date.getMinutes(), 2)
+    case 'S'     : return date.getSeconds()
+    case 'SS'    : return pad(date.getSeconds(),2)
+    case 's'     : return date.getMilliseconds()
+    case 'ss'    : return pad(date.getMilliseconds(), 3)
+    case 't'     : return date.getHours() < 12 ? ' a' : ' p'
+    case 'tt'    : return date.getHours() < 12 ? ' am' : ' pm'
+    case 'T'     : return date.getHours() < 12 ? ' A' : ' P'
+    case 'TT'    : return date.getHours() < 12 ? ' AM' : ' PM'
+    case 'N'     : return dayOfTheYear(date)
+    case 'W'     : return weekOfTheYear(date)
+    case 'Q'     : return quarterOfTheYear(date)
+    case 'Z'     : return timezoneOffset(date)
+    case 'u'     : return totalDaysThisMonth(date)
+    case 'uu'    : return totalDaysThisYear(date)
+    case 'x'     : return daysLeftThisWeek(date)
+    case 'xx'    : return daysLeftThisMonth(date)
+    case 'xxx'   : return daysLeftThisYear(date)
+    case 'v'     : return isLeapYear(date)
+    case 'o'     : return ordinal(date.getDate())
+    case 'O'     : return nameOfDay(date, 1)
+    case 'OO'    : return nameOfDay(date, 2)
+    default      : return ''
+  }
+}
+
+function antiPattern (mask, token) {
+  if (!token.test(mask)) return mask
+  return false
 }
 
 function daysLeftThisWeek (date) {
