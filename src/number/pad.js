@@ -1,5 +1,5 @@
 var lpad = require('../string/lpad')
-var toNumber = require('../toNumber')
+var toNumber = require('../lang/toNumber')
 
 // add padding zeros if n.length < minLength
 
