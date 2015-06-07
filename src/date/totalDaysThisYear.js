@@ -1,6 +1,7 @@
 var isLeapYear = require('./isLeapYear')
 
-function daysInTheYear (thisYear) {
+function daysInTheYear (date) {
+  var thisYear = new Date(date.getFullYear())
   return isLeapYear(thisYear) ? 366 : 365
 }
 

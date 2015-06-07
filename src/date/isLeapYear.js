@@ -1,7 +1,9 @@
 var isDate = require('../lang/isDate')
 
-function isLeapYear (thisYear) {
-  if (isDate(thisYear)) thisYear = thisYear.getFullYear()
+function isLeapYear (date) {
+  if (isDate(date)) thisYear = date.getFullYear()
+  else thisYear = new Date().getFullYear()
+
   return thisYear % 400 === 0 || (thisYear % 100 !== 0 && thisYear % 4 === 0)
 }
 
