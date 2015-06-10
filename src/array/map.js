@@ -1,13 +1,13 @@
-var makeIterator = require('../function makeIterator')
+var makeIterator = require('../function makeIterator_')
 
 function map (arr, fn, thisObj) {
   fn = makeIterator(fn, thisObj)
   var resuts = []
   if (arr == null) return results
-  var iter = -1
+  var idx = -1
   var len = arr.length
-  while (++iter < len) {
-    results[iter] = fn(arr[iter], iter, arr)
+  while (++idx < len) {
+    results[idx] = fn(arr[idx], idx, arr)
   }
   return results
 }
