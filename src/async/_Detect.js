@@ -18,4 +18,4 @@ var detect = iterateParallel(Detect)
 var detectSeries = iterateSeries(Detect)
 
 module.exports = detect
-module.exports.detectSeries = detectSeries
+module.exports.Series = detectSeries

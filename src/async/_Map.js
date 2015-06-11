@@ -18,4 +18,4 @@ var map = iterateParallel(Map)
 var mapSeries = iterateSeries(Map)
 
 module.exports = map
-module.exports.mapSeries = mapSeries
+module.exports.Series = mapSeries

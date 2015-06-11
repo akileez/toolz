@@ -17,4 +17,4 @@ var concat = iterateParallel(Concat)
 var concatSeries = iterateSeries(Concat)
 
 module.exports = concat
-module.exports.concatSeries = concatSeries
+module.exports.Series = concatSeries

@@ -24,4 +24,4 @@ var reject = iterateParallel(Reject)
 var rejectSeries = iterateSeries(Reject)
 
 module.exports = reject
-module.exports.rejectSeries = rejectSeries
+module.exports.Series = rejectSeries

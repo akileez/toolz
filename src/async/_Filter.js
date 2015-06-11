@@ -24,4 +24,4 @@ var filter = iterateParallel(Filter)
 var filterSeries = iterateSeries(Filter)
 
 module.exports = filter
-module.exports.filterSeries = filterSeries
+module.exports.Series = filterSeries
