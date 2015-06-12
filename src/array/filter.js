@@ -4,11 +4,12 @@ function filter (arr, fn, thisObj) {
   fn = makeIterator(fn, thisObj)
   var results = []
   if (arr == null) return results
-  var iter = -1
+  var i = -1
   var len = arr.length
   var value
-  while (++iter < len) {
-    if (fn(value, iter, arr)) results.push(value)
+  while (++i < len) {
+    value = arr[i]
+    if (fn(value, i, arr)) results.push(value)
   }
   return results
 }
