@@ -1,3 +1,4 @@
+// mout.js
 var filter = require('./filter')
 
 function compact (arr) {
