@@ -1,5 +1,5 @@
 var reduce = require('./reduce')
-var map = require()
+var map = require('../base/asyncMap')
 
 function reduceRight (arr, memo, iterator, callback) {
   var reversed = _map(arr, function (x) {

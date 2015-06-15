@@ -1,3 +1,8 @@
+var noop = require('../base/noop')
+var isArrayLike = require('../lang/isArrayLike')
+var eachOf = require('./eachOf')
+var _baseSlice = require('../base/asyncBaseSlice')
+
 function parallel (tasks, callback) {
   callback = callback || noop
   var results = isArrayLike(tasks) ? [] : {}
@@ -14,3 +19,5 @@ function parallel (tasks, callback) {
     callback(err, results)
   })
 }
+
+module.exports = parallel

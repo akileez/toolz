@@ -1,5 +1,10 @@
+var _once = require('../base/asyncOnce')
+var noop = require('../base/noop')
+var isArrayLike = require('../lang/isArrayLike')
+var _each = require('../base/asyncEach')
+
 function eachOf (obj, iterator, callback) {
-  callback = once(callback || noop)
+  callback = _once(callback || noop)
   obj = obj || []
   var size = isArrayLike(obj) ? obj.length : _keys(obj).length
   var completed = 0
@@ -15,3 +20,5 @@ function eachOf (obj, iterator, callback) {
     }
   }
 }
+
+module.exports = eachOf

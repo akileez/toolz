@@ -1,6 +1,10 @@
-var _once = require('./lsdkjfsd')
+var _once = require('../base/asyncOnce')
 var noop = require('../base/noop')
-var _keys = require('../base/keys') //???
+var _keys = require('../base/asyncKeys')
+var _arrayEach = require('../base/asyncArrayEach')
+var _baseSlice = require('../base/asyncBaseSlice')
+var _reduce = require('../base/asyncReduce')
+var isArray = require('../lang/isArray')
 
 function auto (tasks, callback) {
   callback = _once(callback || noop)

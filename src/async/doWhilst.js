@@ -1,4 +1,4 @@
-var _baseSlice = require('../base/baseSlice')
+var _baseSlice = require('../base/asyncBaseSlice')
 
 function doWhilst (iterator, test, callback) {
   iterator(function (err) {

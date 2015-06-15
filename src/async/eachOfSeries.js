@@ -1,3 +1,9 @@
+var noop = require('../base/noop')
+var _keyIterator = require('../base/asyncKeyIterator')
+var only_once = require('../base/asyncOnlyOnce')
+var _once = require('../base/asyncOnce')
+var nextTick = process.nextTick
+
 function eachOfSeries (obj, iterator, callback) {
   callback = _once(callback || noop)
   obj = obj || []
@@ -23,3 +29,5 @@ function eachOfSeries (obj, iterator, callback) {
   }
   iterate()
 }
+
+module.exports = eachOfSeries

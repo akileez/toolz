@@ -1,4 +1,5 @@
 var eachOf = require('./eachOf')
+var noop = require('../base/noop')
 
 function every (arr, iterator, main_callback) {
   eachOf(arr, function (x, _, callback) {

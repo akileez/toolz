@@ -1,3 +1,6 @@
+var _baseSlice = require('../base/asyncBaseSlice')
+var setImmediate = process.nextTick
+
 function ensureAsync (fn) {
   return function(/*...args, callback*/) {
     var args = _baseSlice(arguments)
@@ -15,3 +18,5 @@ function ensureAsync (fn) {
     sync = false
   }
 }
+
+moudule.exports = ensureAsync
