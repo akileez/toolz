@@ -1,4 +1,4 @@
-var _baseSlice = require('../base/baseSlice')
+var _baseSlice = require('../base/asyncBaseSlice')
 var noop = require('../base/noop')
 var reduce = require('./reduce')
 

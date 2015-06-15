@@ -13,3 +13,5 @@ function some (arr, iterator, main_callback) {
     main_callback(false)
   })
 }
+
+module.exports = some
