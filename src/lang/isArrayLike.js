@@ -1,5 +1,5 @@
 // lodash internal
-var getLength = requrie('../base/getLength')
+var getLength = require('../base/getLength')
 var isLength = require('./isLength')
 
 // checks if `value` is array-like

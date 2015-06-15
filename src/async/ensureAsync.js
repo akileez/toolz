@@ -19,4 +19,4 @@ function ensureAsync (fn) {
   }
 }
 
-moudule.exports = ensureAsync
+module.exports = ensureAsync

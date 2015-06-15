@@ -7,7 +7,7 @@ function _baseSlice (arr, start) {
     len -= start
     len = len < 0 ? 0 : len
   }
-  var result = Array(length)
+  var result = Array(len)
   while (++idx < len) {
     result[idx] = arr[idx + start]
   }
