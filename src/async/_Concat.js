@@ -1,7 +1,7 @@
 var iterateParallel = require('./iterateParallel')
 var iterateSeries = require('./iterateSeries')
 
-function Concat (eachfn, arr, fn, callback) {
+function _concat (eachfn, arr, fn, callback) {
   var result = []
   eachfn(arr, function (x, index, cb) {
     fn(x, function (err, y) {
@@ -13,8 +13,8 @@ function Concat (eachfn, arr, fn, callback) {
   })
 }
 
-var concat = iterateParallel(Concat)
-var concatSeries = iterateSeries(Concat)
+var concat = iterateParallel(_concat)
+var concatSeries = iterateSeries(_concat)
 
 module.exports = concat
 module.exports.Series = concatSeries

@@ -1,7 +1,8 @@
 var iterateParallel = require('./iterateParallel')
 var iterateSeries = require('./iterateSeries')
+var _map = require('../base/asyncMap')
 
-function Filter (eachfn, arr, iterator, callback) {
+function _filter (eachfn, arr, iterator, callback) {
   var results = []
   arr = _map(arr, function (x, i) {
     return {index: i, value: x}
@@ -20,8 +21,8 @@ function Filter (eachfn, arr, iterator, callback) {
   })
 }
 
-var filter = iterateParallel(Filter)
-var filterSeries = iterateSeries(Filter)
+var filter = iterateParallel(_filter)
+var filterSeries = iterateSeries(_filter)
 
 module.exports = filter
 module.exports.Series = filterSeries

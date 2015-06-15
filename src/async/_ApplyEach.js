@@ -1,8 +1,8 @@
-var _baseSlice = require('../base/_baseSlice')
+var _baseSlice = require('../base/asyncBaseSlice')
 var eachOf = require('./eachOf')
 var eachOfSeries = require('./eachOfSeries')
 
-function ApplyEach (eachfn, fns /* args ... */) {
+function _applyEach (eachfn, fns /* args ... */) {
   function go () {
     var that = this
     var args = _baseSlice(arguments)
@@ -19,12 +19,12 @@ function ApplyEach (eachfn, fns /* args ... */) {
 
 function applyEach (/* fns, args ... */) {
   var args = _baseSlice(arguments)
-  return ApplyEach.apply(null, [eachOf].concat(args))
+  return _applyEach.apply(null, [eachOf].concat(args))
 }
 
 function applyEachSeries (/* fns, args ... */) {
   var args = _baseSlice(arguments)
-  return ApplyEach.apply(null, [eachOfSeries].concat(args))
+  return _applyEach.apply(null, [eachOfSeries].concat(args))
 }
 
 module.exports = applyEach

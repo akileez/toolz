@@ -1,6 +1,6 @@
 var map = require('./_Map')
 var mapSeries = require('./_Map').Series
-var _range = require('../base/range')
+var _range = require('../base/asyncRange')
 
 function Times (mapper) {
   return function (count, iterator, callback) {

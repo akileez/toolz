@@ -1,7 +1,7 @@
-var _baseSlice = require('../base/baseSlice')
-var _arrayEach = require('../sdfasdlkfhjsd')
+var _baseSlice = require('../base/asyncBaseSlice')
+var _arrayEach = require('../base/asyncArrayEach')
 
-function Console (name) {
+function _console (name) {
   return function (fn) {
     var args = _baseSlice(arguments, 1)
     fn.apply(null, args.concat([function (err) {
@@ -19,8 +19,8 @@ function Console (name) {
   }
 }
 
-var log = Console('log')
-var dir = Console('dir')
+var log = _console('log')
+var dir = _console('dir')
 
 module.exports = log
 module.exports.dir = dir

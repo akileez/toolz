@@ -1,7 +1,8 @@
 var iterateParallel = require('./iterateParallel')
 var iterateSeries = require('./iterateSeries')
+var _once = require('../base/asyncOnce')
 
-function Map (eachfn, arr, iterator, callback) {
+function _map (eachfn, arr, iterator, callback) {
   callback = _once(callback || noop)
   var results = []
   eachfn(arr, function (value, index, callback) {
@@ -14,8 +15,8 @@ function Map (eachfn, arr, iterator, callback) {
   })
 }
 
-var map = iterateParallel(Map)
-var mapSeries = iterateSeries(Map)
+var map = iterateParallel(_map)
+var mapSeries = iterateSeries(_map)
 
 module.exports = map
 module.exports.Series = mapSeries

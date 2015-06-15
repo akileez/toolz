@@ -1,7 +1,7 @@
 var iterateParallel = require('./iterateParallel')
 var iterateSeries = require('./iterateSeries')
 
-function Detect (eachfn, arr, iterator, main_callback) {
+function _detect (eachfn, arr, iterator, main_callback) {
   eachfn(arr, function (x, index, callback) {
     iterator(x, function (result) {
       if (result) {
@@ -14,8 +14,8 @@ function Detect (eachfn, arr, iterator, main_callback) {
   })
 }
 
-var detect = iterateParallel(Detect)
-var detectSeries = iterateSeries(Detect)
+var detect = iterateParallel(_detect)
+var detectSeries = iterateSeries(_detect)
 
 module.exports = detect
 module.exports.Series = detectSeries

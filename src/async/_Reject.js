@@ -1,7 +1,8 @@
 var iterateParallel = require('./iterateParallel')
 var iterateSeries = require('./iterateSeries')
+var _map = require('../base/asyncMap')
 
-function Reject (eachfn, arr, iterator, callback) {
+function _reject (eachfn, arr, iterator, callback) {
   var results = []
   arr = _map(arr, function (x, i) {
     return {index: i, value: x}
@@ -20,8 +21,8 @@ function Reject (eachfn, arr, iterator, callback) {
   })
 }
 
-var reject = iterateParallel(Reject)
-var rejectSeries = iterateSeries(Reject)
+var reject = iterateParallel(_reject)
+var rejectSeries = iterateSeries(_reject)
 
 module.exports = reject
 module.exports.Series = rejectSeries
