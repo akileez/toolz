@@ -1,6 +1,6 @@
-var daysInTheMonth = require('./daysInTheMonth')
-var daysInTheYear = require('./daysInTheYear')
-var convert = require('./convert')
+var daysInTheMonth = require('./totalDaysThisMonth')
+var daysInTheYear = require('./totaldaysThisYear')
+var convert = require('../time/convert')
 
 // calculate the difference between dates (ranges)
 

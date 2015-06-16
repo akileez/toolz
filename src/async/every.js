@@ -14,3 +14,5 @@ function every (arr, iterator, main_callback) {
     main_callback(true)
   })
 }
+
+module.exports = every

@@ -7,3 +7,5 @@ function arrayEach (arr, fn) {
   }
   return arr
 }
+
+module.exports = arrayEach

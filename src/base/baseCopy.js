@@ -10,3 +10,5 @@ function objectCopy (source, prop, object) {
   }
   return object
 }
+
+module.exports = objectCopy
