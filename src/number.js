@@ -7,6 +7,7 @@ module.exports = {
   'currencyFormat'   : require('./number/currencyFormat'),
   'enforcePrecision' : require('./number/enforcePrecision'),
   'isNaN'            : require('./number/isNaN'),
+  'isNumber'         : require('./number/isNumber'),
   'nth'              : require('./number/nth'),
   'ordinal'          : require('./number/ordinal'),
   'pad'              : require('./number/pad'),
