@@ -21,3 +21,5 @@ function shuffle (arr) {
   }
   return results
 }
+
+module.exports = shuffle
