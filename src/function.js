@@ -7,6 +7,7 @@ module.exports = {
   'func'          : require('./function/func'),
   'identity'      : require('./function/identity'),
   'makeIterator_' : require('./function/makeIterator_'),
+  'once'          : require('./function/once'),
   'partial'       : require('./function/partial'),
   'prop'          : require('./function/prop'),
   'series'        : require('./function/series'),

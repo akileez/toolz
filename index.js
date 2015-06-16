@@ -7,6 +7,8 @@
 
 module.exports = {
     'array'       : require('./src/array'),
+    'async'       : require('./src/async'),
+    'base'        : require('./src/base'),
     'collection'  : require('./src/collection'),
     'date'        : require('./src/date'),
     'function'    : require('./src/function'),
