@@ -1,8 +1,10 @@
 module.exports = {
   'append'        : require('./array/append'),
+  'cherryPick'    : require('./array/cherryPick'),
   'collect'       : require('./array/collect'),
   'combine'       : require('./array/combine'),
   'compact'       : require('./array/compact'),
+  'compactor'     : require('./array/compactor'),
   'contains'      : require('./array/contains'),
   'difference'    : require('./array/difference'),
   'equals'        : require('./array/equals'),

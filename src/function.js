@@ -13,6 +13,7 @@ module.exports = {
   'series'        : require('./function/series'),
   'throttle'      : require('./function/throttle'),
   'timeout'       : require('./function/timeout'),
+  'timout'        : require('./function/timout'),
   'times'         : require('./function/times'),
   'wrap'          : require('./function/wrap')
 }

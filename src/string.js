@@ -3,7 +3,9 @@ module.exports = {
   'camelCase'           : require('./string/camelCase'),
   'contains'            : require('./string/contains'),
   'crop'                : require('./string/crop'),
+  'dashCase'            : require('./string/dashCase'),
   'endsWith'            : require('./string/endsWith'),
+  'escapeHandlebars'    : require('./string/escapeHandlebars'),
   'escapeHtml'          : require('./string/escapeHtml'),
   'escapeRegExp'        : require('./string/escapeRegExp'),
   'escapeUnicode'       : require('./string/escapeUnicode'),
@@ -13,7 +15,9 @@ module.exports = {
   'lowerCase'           : require('./string/lowerCase'),
   'lpad'                : require('./string/lpad'),
   'ltrim'               : require('./string/ltrim'),
+  'makeArray'           : require('./string/makeArray'),
   'makePath'            : require('./string/makePath'),
+  'newLinesArray'       : require('./string/newLinesArray'),
   'normalizeLineBreaks' : require('./string/normalizeLineBreaks'),
   'pascalCase'          : require('./string/pascalCase'),
   'properCase'          : require('./string/properCase'),
@@ -28,6 +32,8 @@ module.exports = {
   'slugify'             : require('./string/slugify'),
   'startsWith'          : require('./string/startsWith'),
   'stripHtmlTags'       : require('./string/stripHtmlTags'),
+  'strNatrualCompare'   : require('./string/strNatrualCompare'),
+  'titleCase'           : require('./string/titleCase'),
   'trim'                : require('./string/trim'),
   'truncate'            : require('./string/truncate'),
   'typecast'            : require('./string/typecast'),
@@ -36,5 +42,6 @@ module.exports = {
   'unescapeHtml'        : require('./string/unescapeHtml'),
   'unescapeUnicode'     : require('./string/unescapeUnicode'),
   'unhyphenate'         : require('./string/unhyphenate'),
-  'upperCase'           : require('./string/upperCase')
+  'upperCase'           : require('./string/upperCase'),
+  'words'               : require('./string/words')
 }
