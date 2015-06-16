@@ -16,4 +16,4 @@ function compose () {
   }
 }
 
-modules.exports = compose
+module.exports = compose

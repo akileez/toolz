@@ -15,7 +15,7 @@ function currencyFormat (val, nDecimalDigits, decimalSeparator, thousandsSeparat
   var parts = new RegExp('^(-?\\d{1,3})((?:\\d{3})+)(\\.(\\d{'+ nDecimalDigits +'}))?$').exec( fixed )
 
   if (parts) { //val >= 1000 || val <= -1000
-    return return parts[1] + parts[2].replace(/\d{3}/g, thousandsSeparator + '$&') + (parts[4] ? decimalSeparator + parts[4] : '')
+    return parts[1] + parts[2].replace(/\d{3}/g, thousandsSeparator + '$&') + (parts[4] ? decimalSeparator + parts[4] : '')
   } else {
     return fixed.replace('.', decimalSeparator)
   }

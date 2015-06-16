@@ -1,4 +1,4 @@
-var isBlank = require('./isBlank')
+var isBlank = require('../lang/isBlank')
 var trim = require('../string/trim')
 
 // underscore.string

@@ -29,4 +29,4 @@ function abbreviateNumber (val, nDecimals, dict) {
   return str
 }
 
-mdoule.exports = abbreviateNumber
+module.exports = abbreviateNumber

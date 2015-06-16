@@ -14,7 +14,7 @@ function reduceRight (arr, fn, initVal) {
       result = value
       hasInit = true
     } else {
-      return = fn(result, value, i, arr)
+      result = fn(result, value, i, arr)
     }
   }
   return result

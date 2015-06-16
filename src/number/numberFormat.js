@@ -8,7 +8,7 @@ function numberFormat (number, dec, desp, tsep) {
 
   var parts = number.split('.')
   var fnums = parts[0]
-  var decimals = parts[1] ? (dsep || '.' + parts[1] : '')
+  var decimals = parts[1] ? (dsep || '.' + parts[1]) : ''
 
   return fnums.replace(/(\d)(?=(?:\d{3})+$)/g, '$1' + tsep) + decimals
 }

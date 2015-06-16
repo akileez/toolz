@@ -1,11 +1,11 @@
 var objSize = require('../object/size')
-var isIteger = require('../lang/isIteger')
+var isInteger = require('../lang/isInteger')
 
 // get collection size
 
 function size (list) {
   if (!list) return 0
-  if (isIteger(list.length)) return list.length
+  if (isInteger(list.length)) return list.length
   return objSize(list)
 }
 

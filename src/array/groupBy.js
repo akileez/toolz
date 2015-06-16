@@ -1,6 +1,6 @@
 var identity = require('../function/identity')
 var forEach = require('./forEach')
-var makeIterator = require('../function makeIterator_')
+var makeIterator = require('../function/makeIterator_')
 
 function groupBy (arr, categorize, thisObj) {
   if (categorize) categorize = makeIterator(categorize, thisObj)

@@ -1,4 +1,4 @@
-var makeIterator = require('../function makeIterator_')
+var makeIterator = require('../function/makeIterator_')
 
 function map (arr, fn, thisObj) {
   fn = makeIterator(fn, thisObj)
