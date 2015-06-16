@@ -28,4 +28,4 @@ function applyEachSeries (/* fns, args ... */) {
 }
 
 module.exports = applyEach
-modules.exports.Series = applyEachSeries
+module.exports.Series = applyEachSeries

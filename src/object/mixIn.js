@@ -1,3 +1,5 @@
+var forOwn = require('./forOwn')
+
 function mixIn (target, objects) {
   var i = 0
   var n = arguments.length
