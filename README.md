@@ -8,9 +8,9 @@
 
 A semi-complete rewrite of [mout.js](http://moutjs.com), a modularization of [async.js](https://github.com/caolan/async) and a peppering of [lodash](https://lodash.com) all for educational purposes (with a couple tibits from underscore.string). 
 
-There is no intention of competing with these giants. Please, I advocate, USE mout.js/lodash/async/underscore.string or any other library that fits your needs. This library will always be experimental with the potential to change at any moment. The focus here is node. Although the above libraries work in the browser, changes I have made or will make in the future will ensure breakage somewhere along the line. 
+There is no intention of competing with these giants. Please, I advocate, USE mout.js/lodash/async/underscore.string or any other library that fits your needs. This library will forever be experimental with the potential to change at any moment. 
 
-Server-side use is more inline with my thinking -- but I did say these were devtoolz. 
+The focus here is node. Although the above libraries work in the browser, changes I have made or will make in the future will ensure breakage somewhere along the line. Server-side use is more inline with my thinking -- but I did say these were devtoolz. 
 
 **Warning!!!** there are bugs. This code was hand typed. It is not ready for even development yet.
 
