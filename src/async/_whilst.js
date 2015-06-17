@@ -1,5 +1,14 @@
 var _baseSlice = require('../utils/asyncBaseSlice')
 
+function whilst (test, iterator, callback) {
+  if (test) {
+    iterator(function (err) {
+      if (err) return callback(err)
+      whilst(test, iterator, callback)
+    })
+  } else callback(null)
+}
+
 function doWhilst (iterator, test, callback) {
   iterator(function (err) {
     if (err) return callback(err)
@@ -9,4 +18,5 @@ function doWhilst (iterator, test, callback) {
   })
 }
 
-module.exports = doWhilst
+exports.whilst = whilst
+exports.doWhilst = doWhilst

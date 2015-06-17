@@ -28,5 +28,5 @@ function compose (/* functions ... */) {
   return seq.apply(null, Array.prototype.reverse.call(arguments))
 }
 
-module.exports = seq
-module.exports.compose = compose
+exports.seq = seq
+exports.compose = compose
