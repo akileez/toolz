@@ -14,8 +14,5 @@ function _detect (eachfn, arr, iterator, main_callback) {
   })
 }
 
-var detect = iterateParallel(_detect)
-var detectSeries = iterateSeries(_detect)
-
-module.exports = detect
-module.exports.Series = detectSeries
+exports.detect = iterateParallel(_detect)
+exports.detectSeries = iterateSeries(_detect)

@@ -15,8 +15,5 @@ function _map (eachfn, arr, iterator, callback) {
   })
 }
 
-var map = iterateParallel(_map)
-var mapSeries = iterateSeries(_map)
-
-module.exports = map
-module.exports.Series = mapSeries
+exports.map = iterateParallel(_map)
+exports.mapSeries = iterateSeries(_map)

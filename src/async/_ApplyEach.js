@@ -27,5 +27,5 @@ function applyEachSeries (/* fns, args ... */) {
   return _applyEach.apply(null, [eachOfSeries].concat(args))
 }
 
-module.exports = applyEach
-module.exports.Series = applyEachSeries
+exports.applyEach = applyEach
+exports.applyEachSeries = applyEachSeries

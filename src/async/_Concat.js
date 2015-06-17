@@ -13,8 +13,5 @@ function _concat (eachfn, arr, fn, callback) {
   })
 }
 
-var concat = iterateParallel(_concat)
-var concatSeries = iterateSeries(_concat)
-
-module.exports = concat
-module.exports.Series = concatSeries
+exports.concat = iterateParallel(_concat)
+exports.concatSeries = iterateSeries(_concat)
