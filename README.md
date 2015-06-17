@@ -4,7 +4,7 @@
 [![experimental][stability-image]][stability-url]
 [![ISC license][license-img]][license-url]
 
-development tools for node, devtoolz. A complete rewrite of mout.js for educational purposes.
+development tools for node, devtoolz. A semi-complete rewrite of mout.js, modularization of async and peppering of lodash for educational purposes.
 
 **Warning!!!** there are bugs. This was hand typed. Not clean yet.
 
