@@ -1,7 +1,7 @@
 var noop = require('../base/noop')
 var isArrayLike = require('../lang/isArrayLike')
 var eachOf = require('./eachOf')
-var _baseSlice = require('../base/asyncBaseSlice')
+var _baseSlice = require('../utils/asyncBaseSlice')
 
 function parallel (tasks, callback) {
   callback = callback || noop

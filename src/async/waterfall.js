@@ -1,8 +1,8 @@
 var asyncIterator = require('./iterator')
 var ensureAsync = require('./ensureAsync')
-var _baseSlice = require('../base/asyncBaseSlice')
+var _baseSlice = require('../utils/asyncBaseSlice')
 var isArray = require('../lang/isArray')
-var _once = require('../base/asyncOnce')
+var _once = require('../utils/asyncOnce')
 var noop = require('../base/noop')
 
 function waterfall (tasks, callback) {

@@ -1,7 +1,7 @@
 var noop        = require('../base/noop')
-var _once       = require('../base/asyncOnce')
-var _each       = require('../base/asyncEach')
-var only_once   = require('../base/asyncOnlyOnce')
+var _once       = require('../utils/asyncOnce')
+var _each       = require('../utils/asyncEach')
+var only_once   = require('../utils/asyncOnlyOnce')
 var isArrayLike = require('../lang/isArrayLike')
 
 function eachOf (obj, iterator, callback) {

@@ -1,7 +1,7 @@
 var noop = require('../base/noop')
-var _keyIterator = require('../base/asyncKeyIterator')
-var only_once = require('../base/asyncOnlyOnce')
-var _once = require('../base/asyncOnce')
+var _keyIterator = require('../utils/asyncKeyIterator')
+var only_once = require('../utils/asyncOnlyOnce')
+var _once = require('../utils/asyncOnce')
 var nextTick = process.nextTick
 
 function eachOfSeries (obj, iterator, callback) {

@@ -1,5 +1,5 @@
 var map = require('./_Map')
-var _map = require('../base/asyncMap')
+var _map = require('../utils/asyncMap')
 
 function sortBy (arr, iterator, callback) {
   map(arr, function (x, callback) {

@@ -1,9 +1,9 @@
-var _once = require('../base/asyncOnce')
+var _once = require('../utils/asyncOnce')
 var noop = require('../base/noop')
-var _keys = require('../base/asyncKeys')
-var _arrayEach = require('../base/asyncArrayEach')
-var _baseSlice = require('../base/asyncBaseSlice')
-var _reduce = require('../base/asyncReduce')
+var _keys = require('../utils/asyncKeys')
+var _arrayEach = require('../utils/asyncArrayEach')
+var _baseSlice = require('../utils/asyncBaseSlice')
+var _reduce = require('../utils/asyncReduce')
 var isArray = require('../lang/isArray')
 
 function auto (tasks, callback) {

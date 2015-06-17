@@ -1,4 +1,4 @@
-var _baseSlice = require('../base/asyncBaseSlice')
+var _baseSlice = require('../utils/asyncBaseSlice')
 
 function apply (fn) {
   var args = _baseSlice(arguments, 1)

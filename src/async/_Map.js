@@ -1,6 +1,6 @@
 var iterateParallel = require('./iterateParallel')
 var iterateSeries = require('./iterateSeries')
-var _once = require('../base/asyncOnce')
+var _once = require('../utils/asyncOnce')
 
 function _map (eachfn, arr, iterator, callback) {
   callback = _once(callback || noop)

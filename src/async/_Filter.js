@@ -1,6 +1,6 @@
 var iterateParallel = require('./iterateParallel')
 var iterateSeries = require('./iterateSeries')
-var _map = require('../base/asyncMap')
+var _map = require('../utils/asyncMap')
 
 function _filter (eachfn, arr, iterator, callback) {
   var results = []

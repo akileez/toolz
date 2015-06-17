@@ -1,4 +1,4 @@
-var _baseSlice = require('../base/asyncBaseSlice')
+var _baseSlice = require('../utils/asyncBaseSlice')
 var setImmediate = process.nextTick
 
 function ensureAsync (fn) {
