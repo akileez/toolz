@@ -18,6 +18,7 @@ module.exports = {
   'isFinite'         : require('./lang/isFinite'),
   'isFunction'       : require('./lang/isFunction'),
   'isInteger'        : require('./lang/isInteger'),
+  'isKey'            : require('./lang/isKey'),
   'isKind'           : require('./lang/isKind'),
   'isLength'         : require('./lang/isLength'),
   'isNaN'            : require('./lang/isNaN'),
@@ -37,5 +38,6 @@ module.exports = {
   'toBoolean'        : require('./lang/toBoolean'),
   'toNumber'         : require('./lang/toNumber'),
   'toObject'         : require('./lang/toObject'),
+  'toPlainObject'    : require('./lang/toPlainObject'),
   'toString'         : require('./lang/toString')
 }

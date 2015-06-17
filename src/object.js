@@ -17,6 +17,7 @@ module.exports = {
   'get'         : require('./object/get'),
   'has'         : require('./object/has'),
   'hasOwn'      : require('./object/hasOwn'),
+  'hasProp'     : require('./object/hasProp'),
   'keys'        : require('./object/keys'),
   'map'         : require('./object/map'),
   'matches'     : require('./object/matches'),

@@ -3,6 +3,9 @@ module.exports = {
   'arrEach'           : require('./base/arrEach'),
   'arrEachRight'      : require('./base/arrEachRight'),
   'arrEvery'          : require('./base/arrEvery'),
+  'arrFilter'         : require('./base/arrFilter'),
+  'arrMap'            : require('./base/arrMap'),
+  'arrPush'           : require('./base/arrPush'),
   'asyncArrayEach'    : require('./base/asyncArrayEach'),
   'asyncBaseSlice'    : require('./base/asyncBaseSlice'),
   'asyncEach'         : require('./base/asyncEach'),
@@ -17,7 +20,11 @@ module.exports = {
   'asyncWithoutIndex' : require('./base/asyncWithoutIndex'),
   'baseAssign'        : require('./base/baseAssign'),
   'baseCopy'          : require('./base/baseCopy'),
+  'baseGet'           : require('./base/baseGet'),
   'baseProperty'      : require('./base/baseProperty'),
+  'baseSlice'         : require('./base/baseSlice'),
+  'baseToString'      : require('./base/baseToString'),
   'getLength'         : require('./base/getLength'),
-  'noop'              : require('./base/noop')
+  'noop'              : require('./base/noop'),
+  'toPath'            : require('./base/toPath')
 }
