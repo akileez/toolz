@@ -4,21 +4,26 @@
 [![experimental][stability-image]][stability-url]
 [![ISC license][license-img]][license-url]
 
-development tools for node, devtoolz. A semi-complete rewrite of mout.js, modularization of async and peppering of lodash for educational purposes.
+> development tools for node, devtoolz. 
 
-**Warning!!!** there are bugs. This was hand typed. Not clean yet.
+A semi-complete rewrite of [mout.js](http://moutjs.com), a modularization of [async.js](https://github.com/caolan/async) and a peppering of [lodash](https://lodash.com) all for educational purposes (with a couple tibits from underscore.string). 
+
+There is no intention of competing with these giants. Please, I advocate, USE mout.js/lodash/async/underscore.string or any other library that fits your needs. This library will always be experimental with the potential to change at any moment. The focus here is node. Although the above libraries work in the browser, changes I have made or will make in the future will ensure breakage somewhere along the line. 
+
+Server-side use is more inline with my thinking -- but I did say these were devtoolz. 
+
+**Warning!!!** there are bugs. This code was hand typed. It is not ready for even development yet.
 
 ## Why?
-Why would I do something stupid like that? TO LEARN, PERIOD. While I am retyping everything in, I get
-intimate with the code. I am able to play with each function and learn it inside out.
+Why would I do something stupid like re-writing portions of these libs when I could easily clone or fork them? TO LEARN, PERIOD. While I am retyping everything in, I get intimate with the code. I am able to play with each function, learn it inside out.
 
 ## Goals
 
 - eduction first and foremost
 - understanding the complexities of a large project
-- automated build system for filesets and documentation
-- formal testing with unit-tests (**!**console.log)
-- goto library for my handlebars helpers
+- automated build system for filesets and documentation (eventually)
+- formal testing with unit-tests (**!**console.log) (eventually)
+- goto library for my handlebars helpers 
 - practice typing in personal code style
 
 ## Installation
@@ -27,14 +32,23 @@ $ npm install akileez\toolz
 ```
 
 ## Usage
+As with mout.js, each method is a separate module, so you can require only the methods you need or the entire kitchen sink if you like:
+
 ```js
+// individual methods (recommended)
+var nameOfDay = require('toolz/src/date/nameOfDay')
+nameOfDay(new Date(), 3) // Wed
 
+// a collection
+var dateUtils = require('toolz/src/date')
+dateUtils.nameOfMonth(new Date()) // June
+
+// the entire libaray
+var toolz = require('toolz')
+console.log(toolz.object.extend({}, {a: "Hello", b: "World"})) // {a: "Hello", b: "World"}
 ```
+There is no documentation at the moment. Only markdown files from mout and async in the doc folder. 
 
-## API
-```js
-
-```
 
 ## See Also
 -
