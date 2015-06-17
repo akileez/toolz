@@ -21,8 +21,5 @@ function _filter (eachfn, arr, iterator, callback) {
   })
 }
 
-var filter = iterateParallel(_filter)
-var filterSeries = iterateSeries(_filter)
-
-module.exports = filter
-module.exports.Series = filterSeries
+exports.filter = iterateParallel(_filter)
+exports.filterSeries = iterateSeries(_filter)

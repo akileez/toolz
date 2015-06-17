@@ -1,5 +1,5 @@
-var map = require('./_Map')
-var mapSeries = require('./_Map').Series
+var map = require('./_map').map
+var mapSeries = require('./_map').mapSeries
 var _range = require('../utils/asyncRange')
 
 function _times (mapper) {
@@ -8,8 +8,5 @@ function _times (mapper) {
   }
 }
 
-var times = _times(map)
-var timesSeries = _times(mapSeries)
-
-module.exports = times
-module.exports.Series = timesSeries
+exports.times = _times(map)
+exports.timesSeries = _times(mapSeries)

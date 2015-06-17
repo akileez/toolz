@@ -1,6 +1,6 @@
 var _baseSlice = require('../utils/asyncBaseSlice')
 var noop = require('../base/noop')
-var reduce = require('./reduce')
+var reduce = require('./_reduce').reduce
 
 function seq (/* functions ... */) {
   var fns = arguments

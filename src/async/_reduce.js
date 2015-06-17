@@ -1,4 +1,5 @@
 var eachOfSeries = require('./eachOfSeries')
+var _map = require('../utils/asyncMap')
 
 function reduce (arr, memo, iterator, callback) {
   eachOfSeries(arr, function (x, i, callback) {
@@ -11,4 +12,12 @@ function reduce (arr, memo, iterator, callback) {
   })
 }
 
-module.exports = reduce
+function reduceRight (arr, memo, iterator, callback) {
+  var reversed = _map(arr, function (x) {
+    return x
+  }).reverse()
+  reduce(reversed, memo, iterator, callback)
+}
+
+exports.reduce = reduce
+exports.reduceRight = reduceRight

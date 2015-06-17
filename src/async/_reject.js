@@ -21,8 +21,5 @@ function _reject (eachfn, arr, iterator, callback) {
   })
 }
 
-var reject = iterateParallel(_reject)
-var rejectSeries = iterateSeries(_reject)
-
-module.exports = reject
-module.exports.Series = rejectSeries
+exports.reject = iterateParallel(_reject)
+exports.rejectSeries = iterateSeries(_reject)
