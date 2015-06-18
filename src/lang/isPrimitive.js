@@ -1,8 +1,15 @@
-// from  is-primitive <https://github.com/jonschlinkert/is-primitive>
-// Licensed under the MIT License.
+// checks if the object is a primitive
 
 function isPrimitive (value) {
-  return value == null || (typeof value != 'function' && typeof value !== 'object')
+  // using switch falltrhrough because its simple to read and its
+  // generally fast : http://jsperf.com/testing-value-is-primitive/5
+  switch (typeof value) {
+    case 'string' :
+    case 'number' :
+    case 'boolean' :
+      return true
+  }
+  return value == null
 }
 
 module.exports = isPrimitive
