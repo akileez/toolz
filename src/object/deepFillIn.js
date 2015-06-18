@@ -2,6 +2,7 @@ var forOwn = require('./forOwn')
 var isPlainObject = require('../lang/isPlainObject')
 
 // deeply copy missing properties in the target from the defaults
+// like lodash "_.defaults"
 
 function deepFillIn (target, defaults) {
   var i = 0
