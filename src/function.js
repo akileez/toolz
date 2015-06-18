@@ -4,6 +4,7 @@ module.exports = {
   'compose'       : require('./function/compose'),
   'constant'      : require('./function/constant'),
   'debounce'      : require('./function/debounce'),
+  'delay'         : require('./function/delay'),
   'func'          : require('./function/func'),
   'identity'      : require('./function/identity'),
   'makeIterator_' : require('./function/makeIterator_'),
@@ -11,9 +12,9 @@ module.exports = {
   'partial'       : require('./function/partial'),
   'prop'          : require('./function/prop'),
   'series'        : require('./function/series'),
+  'rest'          : require('./function/rest'),
   'throttle'      : require('./function/throttle'),
   'timeout'       : require('./function/timeout'),
-  'timout'        : require('./function/timout'),
   'times'         : require('./function/times'),
   'wrap'          : require('./function/wrap')
 }
