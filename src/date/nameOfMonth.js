@@ -14,16 +14,16 @@ var monthNames = [
 ]
 
 function nameOfMonth (date, n) {
-  thismonth = date.getMonth()
+  var thismonth = date.getMonth()
   var name = monthNames.filter(monthOfYear).toString()
+
+  function monthOfYear (val, idx, arr) {
+    if (idx === thismonth) return val
+  }
 
   if (n == null) return name
   else return abbreviateName(name, n)
 }
-
-function monthOfYear (val, idx, arr) {
-    if (idx === thismonth) return val
-  }
 
 function abbreviateName (name, num) {
   if (num > 3) num = 3
