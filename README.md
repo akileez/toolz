@@ -37,11 +37,12 @@ As with mout.js, each method is a separate module, so you can require only the m
 ```js
 // individual methods (recommended)
 var nameOfDay = require('toolz/src/date/nameOfDay')
-nameOfDay(new Date(), 3) // Wed
+nameOfDay(new Date(), 2) // We (Wednesday)
 
 // a collection
 var dateUtils = require('toolz/src/date')
 dateUtils.nameOfMonth(new Date()) // June
+dateUtils.nameOfMonth(new Date(), 3) // Jun
 
 // the entire libaray
 var toolz = require('toolz')
