@@ -17,6 +17,7 @@ module.exports = {
   'isEmpty'          : require('./lang/isEmpty'),
   'isFinite'         : require('./lang/isFinite'),
   'isFunction'       : require('./lang/isFunction'),
+  'isIndex'          : require('./lang/isIndex'),
   'isInteger'        : require('./lang/isInteger'),
   'isKey'            : require('./lang/isKey'),
   'isKind'           : require('./lang/isKind'),
