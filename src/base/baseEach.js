@@ -14,3 +14,5 @@ function baseEach (collection, iteratee) {
   }
   return collection
 }
+
+module.exports = baseEach

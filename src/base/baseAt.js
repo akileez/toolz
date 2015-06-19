@@ -1,5 +1,5 @@
 var isArrayLike = require('../lang/isArrayLike')
-var isIndex = require('../isIndex')
+var isIndex = require('../lang/isIndex')
 
 // the base implementation of lodash "at" without support for string
 // collections and individual key arguments
