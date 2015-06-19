@@ -2,6 +2,7 @@ module.exports = {
   'awaitDelay'    : require('./function/awaitDelay'),
   'bind'          : require('./function/bind'),
   'compose'       : require('./function/compose'),
+  'composite'     : require('./function/composite'),
   'constant'      : require('./function/constant'),
   'debounce'      : require('./function/debounce'),
   'delay'         : require('./function/delay'),
