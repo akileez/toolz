@@ -13,7 +13,11 @@ function nameOfDay (date, n) {
 }
 
 function abbreviateName (name, num) {
-  if (num > 3) num = 3
+  if (num > 3) {
+    if (name === 'Tuesday') return name.slice(0, 4)
+    else if (name === 'Thursday' && num < 6) return name.slice(0, num)
+    else return name.slice(0, 3)
+  }
   return name.slice(0, num)
 }
 
