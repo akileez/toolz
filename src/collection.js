@@ -1,4 +1,5 @@
 module.exports = {
+  'at'       : require('./collection/at'),
   'contains' : require('./collection/contains'),
   'every'    : require('./collection/every'),
   'filter'   : require('./collection/filter'),
