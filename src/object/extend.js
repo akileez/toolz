@@ -1,8 +1,18 @@
-function extend (a, b) {
-  for (var key in b) {
-    if (b.hasOwnProperty(key)) a[key] = b[key]
+function extend (target) {
+  var arg
+  var key
+  var len = arguments.length
+  var i = 0
+
+  while (++i < len) {
+    arg = arguments[i]
+    if (!arg) continue
+
+    for (key in arg) {
+      if (arg.hasOwnProperty(key)) target[key] = arg[key]
+    }
   }
-  return a
+  return target
 }
 
 module.exports = extend
