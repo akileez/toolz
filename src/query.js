@@ -1,9 +1,9 @@
 module.exports = {
-  'contains' : require('./queryString/contains'),
-  'decode'   : require('./queryString/decode'),
-  'encode'   : require('./queryString/encode'),
-  'getParam' : require('./queryString/getParam'),
-  'getQuery' : require('./queryString/getQuery'),
-  'parse'    : require('./queryString/parse'),
-  'setParam' : require('./queryString/setParam')
+  'contains' : require('./query/contains'),
+  'decode'   : require('./query/decode'),
+  'encode'   : require('./query/encode'),
+  'getParam' : require('./query/getParam'),
+  'getQuery' : require('./query/getQuery'),
+  'parse'    : require('./query/parse'),
+  'setParam' : require('./query/setParam')
 }

@@ -22,7 +22,7 @@ module.exports = {
   'keys'        : require('./object/keys'),
   'keysIn'      : require('./object/keysIn'),
   'map'         : require('./object/map'),
-  'mapKeys'     : require('./object/mapKeys'),
+  'mapKey'      : require('./object/mapKey'),
   'matches'     : require('./object/matches'),
   'max'         : require('./object/max'),
   'merge'       : require('./object/merge'),

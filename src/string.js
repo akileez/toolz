@@ -32,7 +32,7 @@ module.exports = {
   'slugify'             : require('./string/slugify'),
   'startsWith'          : require('./string/startsWith'),
   'stripHtmlTags'       : require('./string/stripHtmlTags'),
-  'strNatrualCompare'   : require('./string/strNatrualCompare'),
+  'strNaturalCompare'   : require('./string/strNaturalCompare'),
   'titleCase'           : require('./string/titleCase'),
   'trim'                : require('./string/trim'),
   'truncate'            : require('./string/truncate'),
