@@ -1,6 +1,7 @@
 module.exports = {
   'bindAll'     : require('./object/bindAll'),
   'contains'    : require('./object/contains'),
+  'deepExtend'  : require('./object/deepExtend'),
   'deepFillIn'  : require('./object/deepFillIn'),
   'deepMatches' : require('./object/deepMatches'),
   'deepMixIn'   : require('./object/deepMixIn'),
@@ -29,7 +30,7 @@ module.exports = {
   'mixIn'       : require('./object/mixIn'),
   'namespace'   : require('./object/namespace'),
   'omit'        : require('./object/omit'),
-  'paris'       : require('./object/paris'),
+  'pairs'       : require('./object/pairs'),
   'pick'        : require('./object/pick'),
   'pluck'       : require('./object/pluck'),
   'reduce'      : require('./object/reduce'),
