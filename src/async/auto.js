@@ -5,6 +5,7 @@ var _arrayEach = require('../utils/asyncArrayEach')
 var _baseSlice = require('../utils/asyncBaseSlice')
 var _reduce = require('../utils/asyncReduce')
 var isArray = require('../lang/isArray')
+var setImmediate = process.nextTick
 
 function auto (tasks, callback) {
   callback = _once(callback || noop)
