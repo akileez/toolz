@@ -1,6 +1,6 @@
 var kindOf = require('../lang/kindOf')
 var toFunction = require('../function/toFunction')
-var hasOwn = require('../lang/hasOwn')
+var hasOwn = require('../object/hasOwn')
 
 // component/each
 

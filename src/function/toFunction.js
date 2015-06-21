@@ -84,3 +84,5 @@ function stripNested (prop, str, val) {
     return $1 ? $0 : val
   })
 }
+
+module.exports = toFuncton
