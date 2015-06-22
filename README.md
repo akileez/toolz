@@ -52,7 +52,9 @@ There is no documentation at the moment. Only markdown files from mout and async
 
 
 ## See Also
--
+- [mout.js](http://moutjs.com)
+- [async.js](https://github.com/caolan/async)
+- [lodash](https://lodash.com)
 
 ## License
 [ISC](https://tldrlegal.com/license/ISC-license)
