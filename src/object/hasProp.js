@@ -1,19 +1,13 @@
-baseGet = require('../base/baseGet'),
-baseSlice = require('../base/baseSlice'),
-isArguments = require('../lang/isArguments'),
-isArray = require('../lang/isArray'),
-isIndex = require('../lang/isIndex'),
-isKey = require('../lang/isKey'),
-isLength = require('../lang/isLength'),
-last = require('../array/last'),
-toPath = require('../base/toPath');
-
-/** Used for native method references. */
-var objectProto = Object.prototype;
-
-/** Used to check objects for own properties. */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
+var baseGet = require('../base/baseGet'),
+var baseSlice = require('../base/baseSlice'),
+var isArguments = require('../lang/isArguments'),
+var isArray = require('../lang/isArray'),
+var isIndex = require('../lang/isIndex'),
+var isKey = require('../lang/isKey'),
+var isLength = require('../lang/isLength'),
+var last = require('../array/last'),
+var toPath = require('../base/toPath');
+var hasOwn = require('./hasOwn')
 
 // Checks if `path` is a direct property.
 
@@ -26,7 +20,7 @@ function has (object, path) {
     object = path.length == 1 ? object : baseGet(object, baseSlice(path, 0, 1))
     if (object == null) return false
     path = last(path)
-    result = hasOwnProperty.call(object, path)
+    result = hasOwn(object, path)
   }
   return result || (
     isLength(object.length)
