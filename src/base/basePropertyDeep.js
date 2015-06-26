@@ -1,5 +1,5 @@
 var baseGet = require('./baseGet')
-var toPath = require('./toPath')
+var toPath = require('../string/toPath')
 
 function basePropertyDeep (path) {
   var pathKey = (path + '')

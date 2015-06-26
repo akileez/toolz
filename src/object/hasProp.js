@@ -6,7 +6,7 @@ var isIndex = require('../lang/isIndex'),
 var isKey = require('../lang/isKey'),
 var isLength = require('../lang/isLength'),
 var last = require('../array/last'),
-var toPath = require('../base/toPath');
+var toPath = require('../string/toPath');
 var hasOwn = require('./hasOwn')
 
 // Checks if `path` is a direct property.

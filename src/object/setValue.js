@@ -1,7 +1,7 @@
 var isIndex = require('../lang/isIndex')
 var isKey = require('../lang/isKey')
 var isObject = require('../lang/isObject') // isObjectLike ? to capture arrays?
-var toPath = require('../base/toPath')
+var toPath = require('../string/toPath')
 
 // sets the property value of 'path' on 'object'. if a portion of 'path'
 // does not exist, it is created

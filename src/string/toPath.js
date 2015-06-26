@@ -1,4 +1,4 @@
-var baseToString = require('./baseToString')
+var baseToString = require('../base/baseToString')
 var isArray = require('../lang/isArray')
 
 // used to match property names within property paths.

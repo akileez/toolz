@@ -1,5 +1,5 @@
 var baseGet = require('../base/baseGet')
-var toPath = require('../base/toPath')
+var toPath = require('../string/toPath')
 
 // gets the property value at 'path' of 'object'. If the resolved value is
 // undefined the defaultValue is used in its place
