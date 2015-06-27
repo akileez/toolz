@@ -1,7 +1,5 @@
-var isKind = require('./isKind')
-
 function isBoolean (value) {
-  return isKind(value, 'boolean')
+  return typeof value === 'boolean'
 }
 
 module.exports = isBoolean

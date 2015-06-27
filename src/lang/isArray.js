@@ -1,7 +1,7 @@
-var isKind = require('./isKind')
+var kindOf = require('./kindOf')
 
 function isArray (value) {
-  return Array.isArray(value) || isKind(value, 'array')
+  return Array.isArray(value) || kindOf(value) === 'array'
 }
 
 module.exports = isArray

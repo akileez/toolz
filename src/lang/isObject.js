@@ -1,7 +1,7 @@
-var isKind = require('./isKind')
+var kindOf = require('./isKind')
 
 function isObject (value) {
-  return isKind(value, 'object')
+  return kindOf(value) === 'object'
 }
 
 module.exports = isObject

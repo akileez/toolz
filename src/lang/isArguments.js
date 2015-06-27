@@ -1,7 +1,7 @@
 var kindOf = require('./kindOf')
 
 function isArguments (value) {
-  return isKind(value, 'arguments')
+  return kindOf(value) === 'arguments'
 }
 
 module.exports = isArguments

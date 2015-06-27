@@ -1,7 +1,5 @@
-var isKind = require('./isKind')
-
 function isNumber (value) {
-  return isKind(value, 'number')
+  return typeof value === 'number'
 }
 
 module.exports = isNumber

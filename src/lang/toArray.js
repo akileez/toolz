@@ -9,7 +9,12 @@ function toArray (value) {
   var n
 
   if (value != null){
-    if (value.length == null || kind === 'string' || kind === 'function' || kind === 'regexp' || value === GLOBAL) {
+    if (value.length == null
+      || kind === 'string'
+      || kind === 'function'
+      || kind === 'regexp'
+      || value === GLOBAL
+      ) {
       // string, regexp, function have .length but user probably just want
       // to wrap value into array..
       ret[ret.length] = value

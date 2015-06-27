@@ -1,7 +1,7 @@
-var isKind = require('./isKind')
+var kindOf = require('./kindOf')
 
 function isRegExp (value) {
-  return isKind(value, 'regexp')
+  return kindOf(value) === 'regexp'
 }
 
 module.exports = isRegExp

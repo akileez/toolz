@@ -1,7 +1,7 @@
-var isKind = require('./isKind')
+var kindOf = require('./kindOf')
 
 function isDate (value) {
-  return isKind(value, 'date')
+  return kindOf(value) === 'date'
 }
 
 module.exports = isDate
