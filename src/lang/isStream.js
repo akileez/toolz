@@ -20,7 +20,7 @@ function isStreamDuplex (val) {
   return isStream.writable(val) && isStream.readable(val);
 };
 
-exports.isStream = isStream
-exports.isStreamReadable = isStreamReadable
-exports.isStreamWritable = isStreamWritable
-exports.isStreamDuplex = isStreamDuplex
+module.exports = isStream
+module.exports.isStreamReadable = isStreamReadable
+module.exports.isStreamWritable = isStreamWritable
+module.exports.isStreamDuplex = isStreamDuplex
