@@ -1,5 +1,5 @@
 var kindOf = require('../lang/kindOf')
-var expr = require('../component/props')
+var expr = require('../utils/compnentProps')
 
 // https://github.com/component/to-functon
 
