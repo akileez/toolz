@@ -33,15 +33,15 @@ Config.mixin = function (receiver, provider) {
   return receiver.contructor
 }
 
-Config.prototype.set = set
-Config.prototype.get = get
+Config.prototype.set = setter
+Config.prototype.get = getter
 Config.prototype.constant = constant
 Config.prototype.union = union
 Config.prototype.extend = extend
 Config.prototype.del = del
 
 // assign 'value' to 'key' or return the value of 'key'
-function set (key, value) {
+function setter (key, value) {
   if (arguments.length === 1 && kindOf(key) === 'object') this.extend(key)
   else oset(this.cache, key, value)
 
@@ -50,7 +50,7 @@ function set (key, value) {
 }
 
 // return the stored value of 'key'.
-function get (key) {
+function getter (key) {
   return key ? oget(this.cache, key) : this.cache
 }
 
