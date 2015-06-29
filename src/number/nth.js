@@ -4,7 +4,7 @@ function nth (i) {
   return ['th', 'st', 'nd', 'rd'][i % 10 > 3 ? 0 : (i % 100 - i % 10 != 10) * i % 10]
 }
 
-return nth
+module.exports = nth
 
 // original code from mout:
 // function nth(i) {
