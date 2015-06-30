@@ -81,7 +81,7 @@ function convertFlag (date, token) {
     case 'o'     : return ordinal(date.getDate())
     case 'O'     : return nameOfDay(date, 1)
     case 'OO'    : return nameOfDay(date, 2)
-    default      : return ''
+    default      : return token.replace(/'/g, '')
   }
 }
 
