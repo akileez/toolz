@@ -3,6 +3,7 @@ var _once       = require('../utils/asyncOnce')
 var _each       = require('../utils/asyncEach')
 var only_once   = require('../utils/asyncOnlyOnce')
 var isArrayLike = require('../lang/isArrayLike')
+var _keys       = require('../utils/asyncKeys')
 
 function eachOf (obj, iterator, callback) {
   callback = _once(callback || noop)
