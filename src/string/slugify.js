@@ -20,4 +20,4 @@ function slugify (str, delimeter) {
   return str
 }
 
-return slugify
+module.exports = slugify
