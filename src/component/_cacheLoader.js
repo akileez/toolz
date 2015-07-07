@@ -6,7 +6,7 @@ var isStream = require('../lang/isStream')
 
 // create new instance of 'Loaders'
 function Loaders (options) {
-  if (!(this.instanceof Loaders)) return new Loaders(options)
+  if (!(this instanceof Loaders)) return new Loaders(options)
   options = options || {}
   this.cache = options.cache || {}
   this.iterator = options.iterator

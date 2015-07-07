@@ -1,4 +1,4 @@
-function isSteam (val) {
+function isStream (val) {
   return val !== null && typeof val === 'object' && typeof val.pipe === 'function'
 }
 
