@@ -1,0 +1,51 @@
+var once = require('./once')
+var helpers = require('./helpers')
+
+function mapSeries (values, iterator, extensions, done) {
+  // allow for extensions to not be specified
+  if (typeof extensions === 'function') {
+    done = extensions
+    extensions = {}
+  }
+
+  // handle no callback case
+  if (typeof done !== 'function') done = helpers.noop
+
+  done = once(done)
+
+  // will throw if non-object
+  var keys = Object.keys(values)
+  var len = keys.length
+  var idx = 0
+  // return the same type of passed in
+  var results = helpers.intializedResults(values)
+  var exts = helpers.defaultextensions(extensions)
+
+
+  var key = keys[idx]
+  next(key)
+
+
+  function next (key) {
+    var value = values[key]
+    var storage = exts.create(value, key) || {}
+
+    exts.before(storage)
+    iterator(value, once(handler))
+
+    function handler (err, result) {
+      if (err) {
+        exts.error(err, storage)
+        return done(err, results)
+      }
+
+      exts.after(result, storage)
+      results[key] = result
+
+      if (++idx >= len) done(err, results)
+      else next(keys[idx])
+    }
+  }
+}
+
+module.exports = mapSeries
