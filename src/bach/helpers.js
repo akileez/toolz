@@ -1,8 +1,8 @@
 var assert = require('assert')
-var where = require('') // make where function
-var pluck = require('../collection/pluck') // check this
-var flatten = require('../array/flatten') // check this with lodash/mout
-var forEach = require('../collection/forEach') // confirm this
+var where = require('../collection/where')
+var pluck = require('../collection/pluck')
+var flatten = require('../array/flatten')
+var forEach = require('../collection/forEach')
 var isFunction = require('../lang/isFunction')
 
 function getExtensions (lastArg) {

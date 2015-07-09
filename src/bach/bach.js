@@ -1,7 +1,7 @@
 var asyncDone = require('./asyncDone')
 var nowAndLater = require('./nowAndLater')
-var last = require('') // make last function
-var initial = require('') // make initial function
+var last = require('../array/last')
+var initial = require('../array/initial')
 
 var helpers = require('./helpers')
 

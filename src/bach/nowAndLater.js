@@ -19,8 +19,8 @@ function map (values, iterator, extensions, done) {
   var count = len
   var idx = 0
   // return the same type of passed in
-  var results = helpers.intializedResults(values)
-  var exts = helpers.defaultextensions(extensions)
+  var results = helpers.initializeResults(values)
+  var exts = helpers.defaultExtensions(extensions)
 
   while (idx++ < len) {
     var key = keys[idx]
@@ -65,8 +65,8 @@ function mapSeries (values, iterator, extensions, done) {
   var len = keys.length
   var idx = 0
   // return the same type of passed in
-  var results = helpers.intializedResults(values)
-  var exts = helpers.defaultextensions(extensions)
+  var results = helpers.initializeResults(values)
+  var exts = helpers.defaultExtensions(extensions)
 
 
   var key = keys[idx]
