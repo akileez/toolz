@@ -1,6 +1,6 @@
 // get nested object property
 
-function get (obj, prop) {
+function getValue (obj, prop) {
   var parts = prop.split('.')
   var last = parts.pop()
 
@@ -11,4 +11,4 @@ function get (obj, prop) {
   return obj[last]
 }
 
-module.exports = get
+module.exports = getValue
