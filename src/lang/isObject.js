@@ -1,4 +1,4 @@
-var kindOf = require('./isKind')
+var kindOf = require('./kindOf')
 
 function isObject (value) {
   return kindOf(value) === 'object'
