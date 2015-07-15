@@ -1,4 +1,4 @@
-var sequence = require('../async/_seq').seq
+var sequence = require('../../lib/async/_seq').seq
 
 function iterator (stack) {
   return sequence.apply(this, stack)
