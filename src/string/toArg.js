@@ -10,9 +10,22 @@ function toArgs (key, val, opts) {
     throw new TypeError('toArgs expects an array or primitive for the second argument')
 
   if (val === true) val = null
-  if (val === false && (!opts || opts && opts.invert !== false)) key = 'no-' + key
 
-  key = '--' + (key.length === 1 ? key.toLowerCase() : dashify(key))
+  // the next two blocks are hacks to achieve the results
+  // I am looking for. This needs to be refactored. I use argh as
+  // my argv processor and single letters are used as Booleans
+  if (val === false && (!opts || opts && opts.invert !== false)) {
+    // key = 'no-' + key
+    key = key.length === 1
+      ? ''
+      : 'no-' + key
+  }
+
+  // key = '--' + (key.length === 1 ? key.toLowerCase() : dashify(key))
+  key = (key.length === 1 || key === '')
+    ? (key === '' ? '' : '-' + key.toLowerCase())
+    : '--' + dashify(key)
+
   return key + (val ? '=' + val : '')
 }
 
