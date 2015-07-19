@@ -4,8 +4,8 @@
 
 'use strict'
 
-var isSyncFn = require('isSyncFn')
-var handleArgs = require('handleArgs')
+var isSyncFn = require('./isSyncFn')
+var handleArgs = require('./handleArgs')
 
 function makeCallback (fn) {
   if (!isSyncFn(fn))
@@ -39,3 +39,5 @@ function makeCallback (fn) {
     return res ? argz.callback(null, res) : null
   }
 }
+
+module.exports = makeCallback

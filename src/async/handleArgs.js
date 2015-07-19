@@ -4,7 +4,7 @@ var isArguments = require('../lang/isArguments')
 'use strict'
 
 function handleArgs (argsObj) {
-  var args = manageArgd(argsObj)
+  var args = manageArgs(argsObj)
   var len = args.length
   var last = args[len - 1]
   var callback = null
