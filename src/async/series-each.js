@@ -1,29 +1,19 @@
 function each (arr, iterator, callback) {
   var idx = 0
   var len = arr.length
-  var iter
   var results = []
 
   function done (err, res) {
-    if (err) {
-      callback(err, results)
-      callback = function () {}
-      return
-    }
-    if (res) results[idx] = res
+    var i = idx++
 
-    idx++
+    if (err) return callback(err, results)
+    if (res) results[i] = res
+    if (idx < len) return iter.call(this)
 
-    if (idx === len) {
-      callback(err, results)
-      return
-    }
-
-    iter()
+    return callback(err, results)
   }
 
   function iter () {
-
     iterator(arr[idx], idx, done)
   }
 
