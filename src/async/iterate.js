@@ -1,7 +1,5 @@
-// lightweight async iterators (map, each, reduce)
-// https://github.com/aliaksandr-pasynkau/async-iterate
-// author: "aliaksandr-pasynkau"
-// license: "MIT"
+// lightweight async iterators (map, each, reduce, filter, reject)
+// adpoted from: https://github.com/aliaksandr-pasynkau/async-iterate
 
 var keys    = require('../object/keys')
 var isArray = require('../lang/isArray')
@@ -56,6 +54,26 @@ function asyncMap (obj, iterator, done) {
   }, done)
 }
 
+function asyncFilter (obj, iterator, done) {
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    iterator(v, k, function (err, result) {
+      if (result) resultObject.push(obj[k])
+      done(err, resultObject)
+    })
+  }, done)
+}
+
+function asyncReject (obj, iterator, done) {
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    iterator(v, k, function (err, result) {
+      if (!result) resultObject.push(obj[k])
+      done(err, resultObject)
+    })
+  }, done)
+}
+
 exports.map = asyncMap
 exports.each = asyncEach
 exports.reduce = asyncReduce
+exports.filter = asyncFilter
+exports.reject = asyncReject
