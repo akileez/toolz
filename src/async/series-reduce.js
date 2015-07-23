@@ -1,4 +1,4 @@
-ffunction reduce (array, memo, iterator, callback) {
+function reduce (array, memo, iterator, callback) {
   var idx = 0
   var len = array.length
 

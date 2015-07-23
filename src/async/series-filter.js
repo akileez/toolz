@@ -5,7 +5,7 @@ function filter (array, iterator, callback) {
 
   function done (err, res) {
     var i = idx++
-    if (res) results.push(array[idx])
+    if (res) results.push(array[i])
 
     if (err) return callback(err, results)
     if (idx < len) return iter.call(this)
