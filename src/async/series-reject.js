@@ -14,7 +14,7 @@ function reject (array, iterator, callback) {
   }
 
   function iter () {
-    iterator(arr[idx], idx, done)
+    iterator(array[idx], idx, done)
   }
 
   iter()
