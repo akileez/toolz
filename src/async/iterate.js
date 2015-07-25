@@ -1,3 +1,4 @@
+// async series collection
 // lightweight async iterators (map, each, reduce, filter, reject)
 // adpoted from: https://github.com/aliaksandr-pasynkau/async-iterate
 
