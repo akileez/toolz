@@ -3,10 +3,22 @@ function some (array, iterator, callback) {
   var len = array.len
 
   function done (err, res) {
-    if (err) return callback(err, res)
-    if (res) return callback(err, true)
-    if (i === len -1) return callback(err, false)
+    if (err) {
+      callback(err, res)
+      callback = noop
+      return
+    }
+
+    if (res) {
+      callback(err, true)
+      callback = noop
+      return
+    }
+
+    if (i === len - 1) return callback(err, false)
   }
+
+  function noop () {}
 
   while (++i < len) {
     iterator(array[i], i, done)

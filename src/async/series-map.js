@@ -7,11 +7,18 @@ function map (arr, iterator, callback) {
     var i = idx++
     results[i] = res
 
-    if (err) return callback(err, results)
+    if (err) {
+      callback(err, results)
+      callback = noop
+      return
+    }
+
     if (idx < len) return iter.call(this)
 
     return callback(err, results)
   }
+
+  function noop () {}
 
   function iter () {
     iterator(arr[idx], idx, done)

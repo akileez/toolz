@@ -4,9 +4,17 @@ function times (num, iterator, callback) {
 
   function done (err, res) {
     results[i] = res
-    if (err) return callback(err, results)
+
+    if (err) {
+      callback(err, results)
+      callback = noop
+      return
+    }
+
     if (i == num - 1) return callback(err, results)
   }
+
+  function noop () {}
 
   while (++i < num) {
     iterator(i, done)

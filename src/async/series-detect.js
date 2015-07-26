@@ -6,12 +6,24 @@ function detect (array, iterator, callback) {
   function done (err, res) {
     idx++
 
-    if (res) return callback(err, res)
-    if (err) return callback(err, res)
+    if (err) {
+      callback(err, res)
+      callback = noop
+      return
+    }
+
+    if (res) {
+      callback(err, res)
+      callback = noop
+      return
+    }
+
     if (idx < len) return iter.call(this)
 
     return callback(err, res)
   }
+
+  function noop () {}
 
   function iter () {
     iterator(array[idx], idx, done)

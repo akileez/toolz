@@ -7,11 +7,18 @@ function each (arr, iterator, callback) {
     results[i] = res
     i++
 
-    if (err) return callback(err, results)
+    if (err) {
+      callback(err, results)
+      callback = noop
+      return
+    }
+
     if (i === len) return callback(err, results)
 
     return iter.call(this)
   }
+
+  function noop () {}
 
   function iter () {
     iterator(arr[i], i, done)

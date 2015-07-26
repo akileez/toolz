@@ -6,11 +6,18 @@ function reduce (array, memo, iterator, callback) {
     idx++
     memo = result
 
-    if (err) return callback(err)
+    if (err) {
+      callback(err, result)
+      callback = noop
+      return
+    }
+
     if (idx < len) return iter.call(this)
 
     return callback(err, result)
   }
+
+  function noop () {}
 
   function iter () {
     iterator(memo, array[idx], idx, done)

@@ -7,11 +7,18 @@ function reject (array, iterator, callback) {
     var i = idx++
     if (!res) results.push(array[i])
 
-    if (err) return callback(err, results)
+    if (err) {
+      callback(err, results)
+      callback = noop
+      return
+    }
+
     if (idx < len) return iter.call(this)
 
     return callback(err, results)
   }
+
+  function noop () {}
 
   function iter () {
     iterator(array[idx], idx, done)
