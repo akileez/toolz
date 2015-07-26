@@ -34,3 +34,25 @@ times(5, function (n, done) {
   console.log('Done', res[4]+1, 'times')
 })
 ```
+##### better example
+```javascript
+function crushpng (num, cb) {
+  if (!isNumber(num)) num = 1
+
+  logger.info('Starting pngquant ... crushing png images')
+
+  var cmd = ['pngquant -f --ext .png --speed 1 --quality 70-95 *.png']
+
+  times(num, function (n, done) {
+    exec(cmd, {cwd: 'build/assets/img'}, function (err, stdout) {
+      assert.ifError(err)
+      logger.info('pngquant', 'run done')
+      done(null, n)
+    })
+  }, function (err, res) {
+    assert.ifError(err)
+    logger.done('pngquant process completed ' + num + ' times.')
+    cb(null, 'crushpng')
+  })
+}
+```
