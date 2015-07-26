@@ -1,6 +1,6 @@
 function some (array, iterator, callback) {
   var i = -1
-  var len = array.len
+  var len = array.length
 
   function done (err, res) {
     if (err) {
