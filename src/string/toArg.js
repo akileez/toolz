@@ -15,7 +15,13 @@ function toArgs (key, val, opts) {
 
   key = '--' + (key.length === 1 ? key.toLowerCase() : dashify(key))
 
-  return key + (val ? '=' + val : '')
+  return key + (val ? quote(val) : '')
+}
+
+function quote (str) {
+  return str.split(' ').length > 1
+    ? '=' + '"' + str + '"'
+    : '=' + str
 }
 
 module.exports = toArgs
