@@ -112,6 +112,15 @@ function asyncConcat (obj, iterator, done) {
   }, done)
 }
 
+function asyncSeries (obj, done) {
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    v.call(null, function (err, res) {
+      resultObject.push(res)
+      done(null, resultObject)
+    })
+  }, done)
+}
+
 exports.each   = asyncEach
 exports.reduce = asyncReduce
 exports.map    = asyncMap
@@ -121,3 +130,4 @@ exports.detect = asyncDetect
 exports.every  = asyncEvery
 exports.some   = asyncSome
 exports.concat = asyncConcat
+exports.series = asyncSeries
