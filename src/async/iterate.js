@@ -73,8 +73,38 @@ function asyncReject (obj, iterator, done) {
   }, done)
 }
 
-exports.map = asyncMap
-exports.each = asyncEach
+function asyncEvery (obj, iterator, done) {
+  asyncReduce(obj, true, function (resultObject, v, k, done) {
+    iterator(v, k, function (err, result) {
+      if (!result) resultObject = false
+      done(err, resultObject)
+    })
+  }, done)
+}
+
+function asyncSome (obj, iterator, done) {
+  asyncReduce(obj, false, function (resultObject, v, k, done) {
+    iterator(v, k, function (err, result) {
+      if (result) resultObject = true
+      done(err, resultObject)
+    })
+  }, done)
+}
+
+function asyncConcat (obj, iterator, done) {
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    iterator(v, k, function (err, result) {
+      resultObject = resultObject.concat(result || [])
+      done(err, resultObject)
+    })
+  }, done)
+}
+
+exports.map    = asyncMap
+exports.each   = asyncEach
 exports.reduce = asyncReduce
 exports.filter = asyncFilter
 exports.reject = asyncReject
+exports.every  = asyncEvery
+exports.some   = asyncSome
+exports.concat = asyncConcat
