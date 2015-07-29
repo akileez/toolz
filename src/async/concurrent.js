@@ -6,27 +6,22 @@ function asyncEachArray (arr, iterator, done) {
     return
   }
 
+  var len
   var idx = -1
-  var lastIdx = arr.length
+  var lastIdx = len = arr.length
 
   while (++idx < lastIdx) {
     iterator(arr[idx], idx, next.bind(null, idx))
   }
 
   function next (i, err) {
-    if (err) {
-      done(err)
-      done = noop
-      return
-    }
+    if (err) return once(done(err))
 
-    if (i === lastIdx - 1 ) return
+    if (--len === 0) {
       done(null)
       return
     }
   }
-
-  function noop () {}
 }
 
 function asyncEach (obj, iterator, done) {
@@ -105,12 +100,43 @@ function asyncConcat (obj, iterator, done) {
   }, done)
 }
 
-exports.each = asyncEach
-exports.map = asyncEach
-exports.filter = asyncFilter
-exports.map = asyncMap
-exports.reject = asyncReject
-exports.every  = asyncEvery
-exports.some   = asyncSome
-exports.concat = asyncConcat
+function asyncTimes (num, iterator, done) {
+  var obj = new Array(num)
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    iterator(num, function (err, res) {
+      resultObject.push(res)
+      done(null, resultObject)
+    })
+  }, done)
+}
+
+function asyncParallel (obj, done) {
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    v.call(null, function (err, res) {
+      resultObject.push(res)
+      done(null, resultObject)
+    })
+  }, done)
+}
+
+function once (fn) {
+  return function () {
+    var ret = fn.apply(this, arguments)
+    fn = noop
+    return ret
+  }
+}
+
+function noop () {}
+
+exports.each     = asyncEach
+exports.map      = asyncEach
+exports.filter   = asyncFilter
+exports.map      = asyncMap
+exports.reject   = asyncReject
+exports.every    = asyncEvery
+exports.some     = asyncSome
+exports.concat   = asyncConcat
+exports.times    = asyncTimes
+exports.parallel = asyncParallel
 
