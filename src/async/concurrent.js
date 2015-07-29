@@ -110,6 +110,28 @@ function asyncTimes (num, iterator, done) {
   }, done)
 }
 
+function asyncReduceSort (obj, result, iterator, done) {
+  asyncEach(obj, function (v, k, done) {
+    iterator(result, v, k, function (err, value) {
+      result = value
+      done(err)
+    })
+  }, function (err) {
+      done(err, _map(result.sort(comparator), function (x) {
+        return x.value
+      }))
+  })
+}
+
+function asyncSort (obj, iterator, done) {
+  asyncReduceSort(obj, [], function (resultObject, v, k, done) {
+    iterator(v, k, function (err, result) {
+      resultObject.push({value: v, result: result})
+      done(err, resultObject)
+    })
+  }, done)
+}
+
 function asyncParallel (obj, done) {
   asyncReduce(obj, [], function (resultObject, v, k, done) {
     v.call(null, function (err, res) {
@@ -127,6 +149,23 @@ function once (fn) {
   }
 }
 
+function comparator (left, right) {
+  var a = left.result
+  var b = right.result
+  return a < b ? -1 : a > b ? 1 : 0
+}
+
+function _map (arr, iterator) {
+  var idx = -1
+  var len = arr.length
+  var result = Array(len)
+
+  while (++idx < len) {
+    result[idx] = iterator(arr[idx], idx, arr)
+  }
+  return result
+}
+
 function noop () {}
 
 exports.each     = asyncEach
@@ -138,5 +177,6 @@ exports.every    = asyncEvery
 exports.some     = asyncSome
 exports.concat   = asyncConcat
 exports.times    = asyncTimes
+exports.sort     = asyncSort
 exports.parallel = asyncParallel
 
