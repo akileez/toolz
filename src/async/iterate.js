@@ -1,9 +1,9 @@
 // async series collection
-// lightweight async iterators (map, each, reduce, filter, reject)
+// lightweight async iterators (each, reduce, map, filter, reject, detect, every, some, concat)
 // adpoted from: https://github.com/aliaksandr-pasynkau/async-iterate
 
-var keys    = require('../object/keys')
-var isArray = require('../lang/isArray')
+// var keys    = require('../object/keys')
+// var isArray = require('../lang/isArray')
 
 function asyncEachArray (arr, iterator, done) {
   if (!arr || !arr.length) {
@@ -25,12 +25,12 @@ function asyncEachArray (arr, iterator, done) {
 }
 
 function asyncEach (obj, iterator, done) {
-  if (isArray(obj)) {
+  if (Array.isArray(obj)) {
     asyncEachArray(obj, iterator, done)
     return
   }
 
-  asyncEachArray(obj && keys(obj), function (key, index, done) {
+  asyncEachArray(obj && Object.keys(obj), function (key, index, done) {
     iterator(obj[key], key, done)
   }, done)
 }
@@ -73,6 +73,18 @@ function asyncReject (obj, iterator, done) {
   }, done)
 }
 
+function asyncDetect (obj, iterator, cb) {
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    iterator(v, k, function (err, result) {
+      if (result) {
+        resultObject = obj[k]
+        return cb(err, resultObject)
+      }
+      done(err, resultObject)
+    })
+  }, cb)
+}
+
 function asyncEvery (obj, iterator, done) {
   asyncReduce(obj, true, function (resultObject, v, k, done) {
     iterator(v, k, function (err, result) {
@@ -100,11 +112,12 @@ function asyncConcat (obj, iterator, done) {
   }, done)
 }
 
-exports.map    = asyncMap
 exports.each   = asyncEach
 exports.reduce = asyncReduce
+exports.map    = asyncMap
 exports.filter = asyncFilter
 exports.reject = asyncReject
+exports.detect = asyncDetect
 exports.every  = asyncEvery
 exports.some   = asyncSome
 exports.concat = asyncConcat
