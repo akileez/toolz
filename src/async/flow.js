@@ -1,5 +1,6 @@
 // placeholder for async control flow functions: series, parallel, etc.
 
+// from https://github.com/mmaelzer/weachy
 function waterfall (objs, done) {
   var idx = 0
 
