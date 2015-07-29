@@ -11,10 +11,10 @@ function asyncEachArray (arr, iterator, done) {
   var lastIdx = len = arr.length
 
   while (++idx < lastIdx) {
-    iterator(arr[idx], idx, next.bind(null, idx))
+    iterator(arr[idx], idx, next)
   }
 
-  function next (i, err) {
+  function next (err) {
     if (err) return once(done(err))
 
     if (--len === 0) {
