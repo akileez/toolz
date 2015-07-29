@@ -1,9 +1,7 @@
 // async series collection
-// lightweight async iterators (each, reduce, map, filter, reject, detect, every, some, concat)
+// lightweight serial async iterators:
+// [each, reduce, map, filter, reject, detect, every, some, concat, times, series]
 // adpoted from: https://github.com/aliaksandr-pasynkau/async-iterate
-
-// var keys    = require('../object/keys')
-// var isArray = require('../lang/isArray')
 
 function asyncEachArray (arr, iterator, done) {
   if (!arr || !arr.length) {
@@ -112,6 +110,16 @@ function asyncConcat (obj, iterator, done) {
   }, done)
 }
 
+function asyncTimes (num, iterator, done) {
+  var obj = new Array(num)
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    iterator(num, function (err, res) {
+      resultObject.push(res)
+      done(null, resultObject)
+    })
+  }, done)
+}
+
 function asyncSeries (obj, done) {
   asyncReduce(obj, [], function (resultObject, v, k, done) {
     v.call(null, function (err, res) {
@@ -130,4 +138,5 @@ exports.detect = asyncDetect
 exports.every  = asyncEvery
 exports.some   = asyncSome
 exports.concat = asyncConcat
+exports.times  = asyncTimes
 exports.series = asyncSeries
