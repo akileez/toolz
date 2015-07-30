@@ -1,4 +1,6 @@
-// placeholder for async parallel functions: each, map, detect, filter, etc.
+// lightweight parallel async iterators:
+// [each, reduce, map, filter, reject, detect, every, some, concat, times, sort, parallel]
+// adpoted from: https://github.com/aliaksandr-pasynkau/async-iterate
 
 function asyncEachArray (arr, iterator, done) {
   if (!arr || !arr.length) {
@@ -101,7 +103,7 @@ function asyncConcat (obj, iterator, done) {
 }
 
 function asyncTimes (num, iterator, done) {
-  var obj = new Array(num)
+  var obj = Array(num)
   asyncReduce(obj, [], function (resultObject, v, k, done) {
     iterator(num, function (err, res) {
       resultObject.push(res)
