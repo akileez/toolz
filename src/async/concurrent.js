@@ -3,14 +3,13 @@
 // adpoted from: https://github.com/aliaksandr-pasynkau/async-iterate
 
 function asyncEachArray (arr, iterator, done) {
-  if (!arr || !arr.length) {
-    done()
-    return
-  }
+  if (!arr || !arr.length) return done()
 
-  var len
   var idx = -1
-  var lastIdx = len = arr.length
+  var len
+  var lastIdx
+
+  lastIdx = len = arr.length
 
   while (++idx < lastIdx) {
     iterator(arr[idx], idx, next)
@@ -18,11 +17,7 @@ function asyncEachArray (arr, iterator, done) {
 
   function next (err) {
     if (err) return once(done(err))
-
-    if (--len === 0) {
-      done(null)
-      return
-    }
+    if (--len === 0) return done(null)
   }
 }
 
