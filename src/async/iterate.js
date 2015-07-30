@@ -111,7 +111,7 @@ function asyncConcat (obj, iterator, done) {
 }
 
 function asyncTimes (num, iterator, done) {
-  var obj = new Array(num)
+  var obj = Array(num)
   asyncReduce(obj, [], function (resultObject, v, k, done) {
     iterator(num, function (err, res) {
       resultObject.push(res)
