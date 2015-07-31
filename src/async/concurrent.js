@@ -70,6 +70,18 @@ function asyncReject (obj, iterator, done) {
   }, done)
 }
 
+function asyncDetect (obj, iterator, cb) {
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
+    iterator(v, k, function (err, result) {
+      if (result) {
+        resultObject = obj[k]
+        return cb(err, resultObject)
+      }
+      done(err, resultObject)
+    })
+  }, cb)
+}
+
 function asyncEvery (obj, iterator, done) {
   asyncReduce(obj, true, function (resultObject, v, k, done) {
     iterator(v, k, function (err, result) {
@@ -191,10 +203,10 @@ function _baseSlice (arr, start) {
 function noop () {}
 
 exports.each     = asyncEach
-exports.map      = asyncEach
-exports.filter   = asyncFilter
 exports.map      = asyncMap
+exports.filter   = asyncFilter
 exports.reject   = asyncReject
+exports.detect   = asyncDetect
 exports.every    = asyncEvery
 exports.some     = asyncSome
 exports.concat   = asyncConcat
