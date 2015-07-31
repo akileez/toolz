@@ -127,6 +127,24 @@ function asyncSeries (obj, done) {
   }, done)
 }
 
+function asyncApply (fns /* an array or object of functions */) {
+  function go () {
+    var that = this
+    var args = _baseSlice(arguments, 1)
+    var cb = args.pop()
+    return asyncEach(fns, function (fn, k, done) {
+      fn.apply(that, args.concat([done]))
+    }, cb)
+  }
+
+  if (arguments.length > 2) {
+    var args = _baseSlice(arguments, args)
+    return go.apply(this, args)
+  } else {
+    return go
+  }
+}
+
 function asyncSequence (/* functions ... */) {
   var fns = arguments
   return function () {
@@ -180,5 +198,6 @@ exports.some      = asyncSome
 exports.concat    = asyncConcat
 exports.times     = asyncTimes
 exports.series    = asyncSeries
+exports.apply     = asyncApply
 exports.composite = asyncSequence
 exports.compose   = asyncCompose
