@@ -1,7 +1,7 @@
 // async series collection
 // lightweight serial async iterators:
-// [each, reduce, map, filter, reject, detect, every, some, concat, times, series
-// sequence(composite) and compose]
+// [each, reduce, map, filter, reject, detect, every, some, concat, times, series, apply,
+// composite(sequence) and compose]
 // adpoted from: https://github.com/aliaksandr-pasynkau/async-iterate
 
 function asyncEachArray (arr, iterator, done) {

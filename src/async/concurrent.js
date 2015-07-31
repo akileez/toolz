@@ -1,5 +1,5 @@
 // lightweight parallel async iterators:
-// [each, reduce, map, filter, reject, detect, every, some, concat, times, sort, parallel]
+// [each, reduce, map, filter, reject, detect, every, some, concat, times, sort, apply, parallel]
 // adpoted from: https://github.com/aliaksandr-pasynkau/async-iterate
 
 function asyncEachArray (arr, iterator, done) {
