@@ -107,26 +107,17 @@ function asyncTimes (num, iterator, done) {
   }, done)
 }
 
-function asyncReduceSort (obj, result, iterator, done) {
-  asyncEach(obj, function (v, k, done) {
-    iterator(result, v, k, function (err, value) {
-      result = value
-      done(err)
-    })
-  }, function (err) {
-      done(err, _map(result.sort(comparator), function (x) {
-        return x.value
-      }))
-  })
-}
-
 function asyncSort (obj, iterator, done) {
-  asyncReduceSort(obj, [], function (resultObject, v, k, done) {
+  asyncReduce(obj, [], function (resultObject, v, k, done) {
     iterator(v, k, function (err, result) {
       resultObject.push({value: v, result: result})
       done(err, resultObject)
     })
-  }, done)
+  }, function (err, res) {
+    done(err, _map(res.sort(comparator), function (x) {
+      return x.value
+    }))
+  })
 }
 
 function asyncParallel (obj, done) {
@@ -176,4 +167,3 @@ exports.concat   = asyncConcat
 exports.times    = asyncTimes
 exports.sort     = asyncSort
 exports.parallel = asyncParallel
-
