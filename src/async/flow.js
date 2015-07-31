@@ -10,13 +10,14 @@ function waterfall (objs, done) {
 
     var args = arguments.length === 0
       ? [next]
-      : [].slice.call(arguments, 1).concat(next)
+      : _baseSlice(arguments, 1).concat(next)
 
     objs[idx++].apply(null, args)
   }
   next()
 }
 
+// from https://github.com/caolan/async
 function until (test, iterator, done) {
   if (!test) {
     iterator(function (err) {
@@ -30,7 +31,7 @@ function doUntil (iterator, test, done) {
   iterator (function (err) {
     if (err) return done(err)
 
-    var args = [].slice.call(arguments, 1)
+    var args = _baseSlice(arguments, 1)
     if (!test.apply(null, args)) doUntil(iterator, test, done)
     else done(null)
   })
@@ -48,10 +49,26 @@ function whilst (test, iterator, callback) {
 function doWhilst (iterator, test, callback) {
   iterator(function (err) {
     if (err) return callback(err)
-    var args = [].slice.call(arguments, 1)
+    var args = _baseSlice(arguments, 1)
     if (test.apply(null, args)) doWhilst(iterator, test, callback)
     else callback(null)
   })
+}
+
+function _baseSlice (arr, start) {
+  start = start || 0
+  var idx = -1
+  var len = arr.length
+
+  if (start) {
+    len -= start
+    len = len < 0 ? 0 : len
+  }
+  var result = Array(len)
+  while (++idx < len) {
+    result[idx] = arr[idx + start]
+  }
+  return result
 }
 
 exports.falls = waterfall
