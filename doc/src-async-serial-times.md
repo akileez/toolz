@@ -1,30 +1,10 @@
 
 ##### code listing
-```javascript
-function times (num, iterator, callback) {
-  var i = 0
-  var results = []
+code was refactored. still deciding how to handle.
 
-  function done (err, res) {
-    results[i] = res
-    i++
-
-    if (err) return callback(err, results)
-    if (i === num) return callback(err, results)
-
-    iter()
-  }
-
-  function iter () {
-    iterator(i, done)
-  }
-
-  iter()
-}
-```
 ##### example
 ```javascript
-var times = require('toolz/src/async/serial-times')
+var times = require('toolz/src/async/iterator').times
 
 times(5, function (n, done) {
   console.log('Hello World')
@@ -55,4 +35,29 @@ function crushpng (num, cb) {
     cb(null, 'crushpng')
   })
 }
+
+# calling the code
+crush.png(3, function () {
+  logger.done('All Done.')
+})
+```
+
+##### command line output
+```bash
+> rendr crush --png 3
+
+Saturday, August 1st, 2015 06:19:22 GMT-0400
+
+---------------------------------------
+  BUILD_ENV   :  development
+  BUILD_STAGE :  dev
+  RUNNING_JOB :  crush
+---------------------------------------
+
+06:19:22:856 - Info Starting pngquant ... crushing png images
+06:19:24:342 - Info pngquant run done
+06:19:24:615 - Info pngquant run done
+06:19:24:839 - Info pngquant run done
+06:19:24:840 - Done  pngquant process completed 3 times.
+06:19:24:840 - Done  All Done.
 ```
