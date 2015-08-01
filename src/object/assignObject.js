@@ -15,24 +15,21 @@ function ownEnumerableKeys(obj) {
   })
 }
 
-function assignObject () {
-  return Object.assign || function (target, source) {
-    var from
-    var keys
-    var to = toObject(target)
-    var s = 0
-    var len = arguments.length
 
-    while (++s < len) {
-      from = arguments[s]
-      keys = ownEnumerableKeys(Object(from))
+module.exports = Object.assign || function (target, source) {
+  var from
+  var keys
+  var to = toObject(target)
+  var s = 0
+  var len = arguments.length
 
-      for (var i = 0; i < keys.length; i++) {
-        to[keys[i]] = from[keys[i]]
-      }
+  while (++s < len) {
+    from = arguments[s]
+    keys = ownEnumerableKeys(Object(from))
+
+    for (var i = 0; i < keys.length; i++) {
+      to[keys[i]] = from[keys[i]]
     }
-    return to
   }
+  return to
 }
-
-module.exports = assignObject
