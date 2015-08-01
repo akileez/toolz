@@ -1,11 +1,11 @@
-var Emitter  = require('../component/Emitter')
-var assign   = require('../../src/object/extend')
-var omit     = require('../../src/object/omit')
-var oset     = require('../../src/object/set')
-var oget     = require('../../src/object/get')
-var kindOf   = require('../../src/lang/kindOf')
-var flatten  = require('../../src/array/flatten')
-var arrunion = require('../../src/array/union')
+var Emitter  = require('../util/Emitter')
+var assign   = require('../object/extend')
+var omit     = require('../object/omit')
+var oset     = require('../object/set')
+var oget     = require('../object/get')
+var kindOf   = require('../lang/kindOf')
+var flatten  = require('../array/flatten')
+var arrunion = require('../array/union')
 
 
 // Initialize a new `Config`, optionally passing an object to initialize with

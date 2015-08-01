@@ -1,8 +1,8 @@
 var path     = require('path')
-var kindOf   = require('../../src/lang/kindOf')
-var flatten  = require('../../src/array/flatten')
-var slice    = require('../../src/array/slice')
-var isStream = require('../../src/lang/isStream')
+var kindOf   = require('../lang/kindOf')
+var flatten  = require('../array/flatten')
+var slice    = require('../array/slice')
+var isStream = require('../lang/isStream')
 
 // create new instance of 'Loaders'
 function Loaders (options) {
