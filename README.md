@@ -32,21 +32,22 @@ $ npm install akileez\toolz
 ```
 
 ## Usage
-As with mout.js, each method is a separate module, so you can require only the methods you need or the entire kitchen sink if you like:
+As with mout.js, each method is a separate module, so require only the methods you need:   
+Note: the ability to require collections or the entire library has been removed. This collection
+of toolz has grown too large for loading the entire set.
 
 ```js
 // individual methods (recommended)
 var nameOfDay = require('toolz/src/date/nameOfDay')
 nameOfDay(new Date(), 2) // We (Wednesday)
 
-// a collection
-var dateUtils = require('toolz/src/date')
-dateUtils.nameOfMonth(new Date()) // June
-dateUtils.nameOfMonth(new Date(), 3) // Jun
+var nameOfMonth = require('toolz/src/date/nameOfMonth')
+nameOfMonth(new Date()) // June
+nameOfMonth(new Date(), 3) // Jun
 
-// the entire libaray
-var toolz = require('toolz')
-console.log(toolz.object.extend({}, {a: "Hello", b: "World"})) // {a: "Hello", b: "World"}
+var extend = require('toolz/src/object/extend')
+extend({}, {a: "Hello", b: "World"}) // {a: "Hello", b: "World"}
+
 ```
 There is no documentation at the moment. Only markdown files from mout and async in the doc folder. 
 
