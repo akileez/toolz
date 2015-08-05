@@ -59,9 +59,9 @@ function compose () {
   return this.iterator.call(this, fns)
 }
 
-Loaders.prototype.getStack = getStack
-Loaders.prototype.register = register
+Loaders.prototype.getStack   = getStack
+Loaders.prototype.register   = register
 Loaders.prototype.buildStack = buildStack
-Loaders.prototype.compose = compose
+Loaders.prototype.compose    = compose
 
 module.exports = Loaders
