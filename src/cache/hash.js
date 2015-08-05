@@ -7,7 +7,7 @@ var has      = require('../object/has')
 var kindOf   = require('../lang/kindOf')
 var isOr     = require('../lang/isOr')
 var flatten  = require('../array/flatten')
-var merge    = require('../object/deepMixIn')
+// var merge    = require('../object/deepMixIn')
 var arrunion = require('../array/union')
 var toFlags  = require('../string/toFlags')
 var objVisit = require('./visit')
@@ -41,22 +41,22 @@ Config.prototype.flags     = flags
 Config.prototype.visit     = visit
 
 // Static method for mixing `Config` prototype properties onto `obj`.
-Config.mixin = function (receiver, provider) {
-  provider = provider || this
+// Config.mixin = function (receiver, provider) {
+//   provider = provider || this
 
-  for (var key in provider) {
-    receiver.contructor[key] = provider[key]
-  }
+//   for (var key in provider) {
+//     receiver.contructor[key] = provider[key]
+//   }
 
-  receiver.contructor.prototype = Object.create(provider.prototype)
+//   receiver.contructor.prototype = Object.create(provider.prototype)
 
-  for (var prop in receiver) {
-    receiver.contructor.prototype[prop] = receiver[prop]
-  }
+//   for (var prop in receiver) {
+//     receiver.contructor.prototype[prop] = receiver[prop]
+//   }
 
-  receiver.contructor.__super__ = provider.prototype
-  return receiver.contructor
-}
+//   receiver.contructor.__super__ = provider.prototype
+//   return receiver.contructor
+// }
 
 // assign 'value' to 'key' or return the value of 'key'
 function setter (key, value) {
