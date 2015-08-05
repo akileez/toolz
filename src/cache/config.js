@@ -3,6 +3,7 @@ var assign   = require('../object/extend')
 var omit     = require('../object/omit')
 var oset     = require('../object/set')
 var oget     = require('../object/get')
+var has      = require('../object/has')
 var kindOf   = require('../lang/kindOf')
 var flatten  = require('../array/flatten')
 var arrunion = require('../array/union')
@@ -36,6 +37,7 @@ Config.mixin = function (receiver, provider) {
 
 Config.prototype.set = setter
 Config.prototype.get = getter
+Config.prototype.has = hasOption
 Config.prototype.constant = constant
 Config.prototype.union = union
 Config.prototype.extend = extend
@@ -53,6 +55,11 @@ function setter (key, value) {
 // return the stored value of 'key'.
 function getter (key) {
   return key ? oget(this.cache, key) : this.cache
+}
+
+function hasOption (key) {
+  if (key.indexOf('.') === -1) return this.cache.hasOwnProperty(key)
+  return has(this.cache, key)
 }
 
 // create a constant for setting and getting values
