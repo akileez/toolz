@@ -1,11 +1,15 @@
-// based from lodash internal MapCache -- see ../base/MapCache.js for lodash version.
-var get     = require('../object/get')
-
-var hasOwn =  Object.prototype.hasOwnProperty;
+var Emitter  = require('../util/Emitter')
+var set      = require('../object/set')
+var get      = require('../object/get')
+var has      = require('../object/has')
+var omit     = require('../object/omit')
 
 function MapCache () {
-  this.__data__ = {}
+  Emitter.call(this)
+  this.cache = {}
 }
+
+Emitter(MapCache.prototype)
 
 MapCache.prototype.set = setter
 MapCache.prototype.get = getter
@@ -14,23 +18,27 @@ MapCache.prototype.del = removeit
 
 // sets 'value' to 'key' of the cache
 function setter (key, value) {
-  if (key != '__proto__') this.__data__[key] = value
+  set(this.cache, key, value)
+  this.emit('set', key, value)
   return this
 }
 
 // gets the cached value for 'key' or entire cache
 function getter (key) {
-  return key ? get(this.__data__, key) : this.__data__
+  return key ? get(this.cache, key) : this.cache
 }
 
 // checks if a cached value for 'key exists'
 function hasit (key) {
-  return key != '__proto__' && hasOwn.call(this.__data__, key)
+  if (key.indexOf('.') === -1) return this.cache.hasOwnProperty(key)
+  return has(this.cache, key)
 }
 
-// removes 'key and its value from the cache'
+// remove 'keys' from the cache. if no value specified, the entire cache is reset
  function removeit (key) {
-  return this.has(key) && delete this.__data__[key]
+  this.cache = keys ? omit(this.cache, keys) : {}
+  this.emit('del', keys)
+  return this
 }
 
 module.exports = MapCache
