@@ -1,13 +1,16 @@
 var Emitter  = require('../util/Emitter')
 var assign   = require('../object/extend')
 var omit     = require('../object/omit')
-var oset     = require('../object/set')
-var oget     = require('../object/get')
+var set      = require('../object/set')
+var get      = require('../object/get')
+var has      = require('../object/has')
 var kindOf   = require('../lang/kindOf')
+var isOr     = require('../lang/isOr')
 var flatten  = require('../array/flatten')
 var merge    = require('../object/deepMixIn')
 var arrunion = require('../array/union')
 var toFlags  = require('../string/toFlags')
+var objVisit = require('./visit')
 
 
 // Initialize a new `Config`, optionally passing an object to initialize with
@@ -35,6 +38,7 @@ Config.prototype.isFalse   = isFalse
 Config.prototype.isBoolean = isBoolean
 Config.prototype.hasOption = hasOption
 Config.prototype.flags     = flags
+Config.prototype.visit     = visit
 
 // Static method for mixing `Config` prototype properties onto `obj`.
 Config.mixin = function (receiver, provider) {
@@ -57,7 +61,7 @@ Config.mixin = function (receiver, provider) {
 // assign 'value' to 'key' or return the value of 'key'
 function setter (key, value) {
   if (arguments.length === 1 && kindOf(key) === 'object') this.extend(key)
-  else oset(this.cache, key, value)
+  else set(this.cache, key, value)
 
   this.emit('set', key, value)
   return this
@@ -65,7 +69,7 @@ function setter (key, value) {
 
 // return the stored value of 'key'.
 function getter (key) {
-  return key ? oget(this.cache, key) : this.cache
+  return key ? get(this.cache, key) : this.cache
 }
 
 // create a constant for setting and getting values
@@ -128,31 +132,16 @@ function option (key, val) {
   if (arguments.length === 1 && kindOf(key) === 'string') {
     if (key.indexOf('.') === -1) return this.options[key]
 
-    return oget(this.options, key)
-  }
-  var keys = []
-
-  if (kindOf(key) === 'object') {
-    var options = {}
-    var i = -1
-    var len = arguments.length
-
-    while (++i < len) {
-      merge(options, arguments[i])
-    }
-
-    keys = Object.keys(options)
-    merge(this.options, options)
-  } else if (kindOf(val) === 'object') {
-    keys = [key]
-    oset(this.options, key, merge(this.options(key) || {}, val))
-  } else {
-    keys = [key]
-    oset(this.options, key, val)
+    return get(this.options, key)
   }
 
-  this.emit('option', keys)
-  return this
+  if (isOr(kindOf(key), 'object', 'array')) {
+    return this.visit('option', [].slice.call(arguments))
+  }
+
+  set(this.options, key, val)
+  this.emit('option', key, val)
+  return this;
 }
 
 function enable (key) {
@@ -191,6 +180,11 @@ function hasOption (key) {
 function flags (keys) {
   keys = keys || Object.keys(this.options)
   return toFlags(this.options, keys)
+}
+
+function visit (method, target) {
+  objVisit(this, method, target)
+  return this
 }
 
 // expose 'Config'
