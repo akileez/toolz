@@ -3,8 +3,8 @@ var kindOf  = require('../lang/kindOf')
 var get     = require('../object/get')
 var set     = require('../object/set')
 var has     = require('../object/has')
-var merge   = require('../object/deepMixIn')
 var toFlags = require('../string/toFlags')
+var visit   = require('./visit')
 
 function Options (options, obj) {
   Emitter.call(this)
@@ -26,29 +26,14 @@ Options.prototype.option = function (key, val) {
 
     return get(this.options, key)
   }
-  var keys = []
 
-  if (kindOf(key) === 'object') {
-    var options = {}
-    var i = -1
-    var len = arguments.length
-
-    while (++i < len) {
-      merge(options, arguments[i])
-    }
-
-    keys = Object.keys(options)
-    merge(this.options, options)
-  } else if (kindOf(val) === 'object') {
-    keys = [key]
-    set(this.options, key, merge(this.options(key) || {}, val))
-  } else {
-    keys = [key]
-    set(this.options, key, val)
+  if (kindOf(key) === 'object' || kindOf(key) === 'array') {
+    return this.visit('option', [].slice.call(arguments))
   }
 
-  this.emit('option', keys)
-  return this
+  set(this.options, key, val)
+  this.emit('option', key, val)
+  return this;
 }
 
 Options.prototype.enable = function (key) {
@@ -87,6 +72,11 @@ Options.prototype.hasOption = function (key) {
 Options.prototype.flags = function (keys) {
   keys = keys || Object.keys(this.options)
   return toFlags(this.options, keys)
+}
+
+Options.prototype.visit = function (method, target) {
+  visit(this, method, target)
+  return this
 }
 
 module.exports = Options
