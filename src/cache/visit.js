@@ -4,8 +4,6 @@
 //   collection-visit <https://github.com/jonschlinkert/collection-visit>
 // Copyright (c) 2015, Jon Schlinkert -- MIT
 
-var isObject = require('../lang/isObject')
-
 /*
     var visit = require('visit');
 
