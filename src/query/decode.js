@@ -1,5 +1,4 @@
 var typecast = require('../string/typecast')
-var isString = require('../lang/isString')
 var isArray = require('../lang/isArray')
 var hasOwn = require('../object/hasOwn')
 
@@ -7,26 +6,26 @@ var hasOwn = require('../object/hasOwn')
 
 function decode (queryStr, shouldTypecast) {
   var queryArr = (queryStr || '').replace('?', '').split('&')
-  var count = -1
-  var len = queryArr.length
+  var reg = /([^=]+)=(.+)/
+  var i = -1
   var obj = {}
-  var item
+  var equalIndex
+  var cur
   var pValue
   var pName
-  var toSet
 
-  while (++count < len) {
-    item = queryArr[count].split('=')
-    pName = item[0]
-    if (!pName || !pName.length) continue
+  while ((cur = queryArr[++i])) {
+    equalIndex = cur.indexOf('=')
+    pName = cur.substring(0, equalIndex)
+    pValue = decodeURIComponent(cur.substring(equalIndex + 1))
 
-    pValue = shouldTypecast === false ? item[1] : typecast(item[1])
-    toSet = isString(pValue) ? decodeURIComponent(pValue) : pValue
+    if (shouldTypecast !== false) pValue = typecast(pValue)
+
     if (hasOwn(obj, pName)) {
-      if (isArray(obj[pName])) obj[pName].push(toSet)
-      else obj[pName] = [obj[pName], toSet]
+      if (isArray(ob[pName])) obj[pName].push(pValue)
+      else obj[pName] = [obj[pName], pValue]
     } else {
-      obj[pName] = toSet
+      obj[pName] = pValue
     }
   }
   return obj
