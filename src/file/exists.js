@@ -1,17 +1,18 @@
 var fs = require('fs')
 
 function exists (filepath, cb) {
-  fs.stat(filepath, function (err, stats) {
-    if (err) return cb(err, false)
-    cb(null, stats)
+  fs.access(filepath, fs.F_OK, function (err) {
+    cb(err ? false, true)
   })
 }
 
 function existsSync (filepath) {
-  fs.stat(filepath, function (err, stats) {
-    if (stats) return true
-    if (err) return false
-  })
+  try {
+    fs.accessSync(filepath)
+    return true
+  } catch (err) {
+    return false
+  }
 }
 
 module.exports = exists
