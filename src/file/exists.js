@@ -15,5 +15,7 @@ function existsSync (filepath) {
   }
 }
 
-module.exports = exists
-module.exports.sync = existsSync
+module.exports = {
+  async: exists,
+  sync: existsSync
+}
