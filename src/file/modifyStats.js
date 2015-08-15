@@ -1,11 +1,13 @@
 var path = require('path')
 
 function modifyStatsObject (stats, fp) {
-  stats.path     = fp
-  stats.basename = path.basename(fp)
-  stats.dirname  = path.dirname(fp)
-  stats.extname  = path.extname(fp)
-  return stats
+  return {
+    path     : dir,
+    basename : path.basename(dir),
+    dirname  : path.dirname(dir),
+    extname  : path.extname(dir),
+    stats    : stats
+  }
 }
 
 module.exports = modifyStatsObject
