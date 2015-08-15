@@ -2,10 +2,10 @@ var path = require('path')
 
 function modifyStatsObject (stats, fp) {
   return {
-    path     : dir,
-    basename : path.basename(dir),
-    dirname  : path.dirname(dir),
-    extname  : path.extname(dir),
+    path     : fp,
+    basename : path.basename(fp),
+    dirname  : path.dirname(fp),
+    extname  : path.extname(fp),
     stats    : stats
   }
 }
