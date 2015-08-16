@@ -21,11 +21,11 @@ function readJSON (file, opts, cb) {
 function readJSONsync (file, opts) {
   opts = opts || {reviver: null, throws: false}
 
-  var shouldThrow = 'throws' in opts ? opts.throws : true
-  if (shouldThrow) return JSON.parse(readFile(file), opts.reviver)
+  // var shouldThrow = 'throws' in opts ? opts.throws : true
+  if (opts.throws) return JSON.parse(readFile(file), opts.reviver ? opts.reviver : null)
   else {
     try {
-      return JSON.parse(readFile(file), opts.reviver)
+      return JSON.parse(readFile(file), opts.reviver ? opts.reviver : null)
     } catch (err) {
       return null
     }
