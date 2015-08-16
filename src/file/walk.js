@@ -1,6 +1,6 @@
 var fs = require('fs')
 var path = require('path')
-var modifyStats = require('./modifyStats')
+var modStats = require('./modStats')
 
 function walk (fp, callback) {
   fs.lstat(fp, function(err, stats){
@@ -18,7 +18,7 @@ function walk (fp, callback) {
           }
         })
       } else {
-        callback(null, fp, stats ? modifyStats(stats, fp) : stats)
+        callback(null, fp, stats ? modStats(stats, fp) : stats)
       }
     }
   })
@@ -31,7 +31,7 @@ function walkSync (fp, callback) {
       walkSync(path.join(fp, item), callback)
     })
   else
-    callback(fp, stats ? modifyStats(stats, fp) : stats)
+    callback(fp, stats ? modStats(stats, fp) : stats)
 }
 
 module.exports = {
