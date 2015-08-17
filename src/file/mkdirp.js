@@ -89,7 +89,5 @@ function mkdirpSync (p, opts, made) {
   return made
 }
 
-module.exports = {
-  async: mkdirp,
-  sync: mkdirpSync
-}
+module.exports = mkdirp
+module.exports.sync = mkdirpSync
