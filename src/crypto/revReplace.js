@@ -1,4 +1,5 @@
-var fs = require('fs')
+var readFile  = require('../file/readFile')
+var writeFile = require('../file/writeFile')
 
 // for use with revAssets or make generic
 
@@ -10,7 +11,7 @@ function revReplace (files, manifest) {
     var matches
     var original
 
-    revision = fs.readFileSync(file, 'utf8')
+    revision = readFile(file, 'utf8')
     original = revision
 
     matches = revision.match(/url\(\s*['"]?([^'"\)]+)['"]?\s*\)/g)
@@ -29,7 +30,7 @@ function revReplace (files, manifest) {
     })
 
     if (original !== revision) {
-      return fs.writeFileSync(file, revision)
+      return writeFile(file, revision)
     }
   })
 }
