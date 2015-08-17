@@ -22,7 +22,7 @@ function writeFile (file, data, enc, cb) {
   exists(dir, function (res) {
     if (res) return fs.writeFile(file, data, enc, cb)
 
-    mkdirp.async(dir, function (err) {
+    mkdirp(dir, function (err) {
       if (err) return cb(err)
       fs.writeFile(file, data, enc, cb)
     })
