@@ -41,6 +41,26 @@ function matches (str, match) {
 }
 
 /**
+ * modify the stats object with more filepath info and content
+ * @param   {Object} stats return object from fs.lstat
+ * @param   {String} fp filepath of object to be fs.lstat
+ * @returns {Object} detailed stats with file content
+ */
+
+function modifyStats (stats, fp) {
+  return {
+    abs   : fs.realpathSync(fp),
+    rel   : fp,
+    dir   : path.dirname(fp),
+    base  : path.basename(fp),
+    file  : path.basename(fp, path.extname(fp)),
+    ext   : path.extname(fp),
+    stats : stats,
+    data  : fs.readFileSync(fp, 'utf8')
+  }
+}
+
+/**
  * read files and call a function with the contents of each file
  * @param  {String} dir path of dir containing the files to be read
  * @param  {String} encoding file encoding (default is 'utf8')
@@ -111,19 +131,34 @@ function readDir (dir, opts, cb, complete) {
           if (opts.shortName) files.push(filename)
           else files.push(file)
 
-          fs.readFile(file, opts.encoding, function (err, data) {
-            if (err) {
-              if (err.code === 'EACCES') return next()
-              return done(err)
-            }
+          if (opts.statsObj) {
+            fs.lstat(file, function (err, stats) {
+              if (err) {
+                if (err.code === 'EACCES') return next()
+                return done(err)
+              }
+              if (cb.length > 3) {
+                if (opts.shortName) cb(null, modifyStats(stats, file), filename, next)
+                else cb(null, modifyStats(stats, file), file, next)
+              } else {
+                cb(null, modifyStats(stats, file), next)
+              }
+            })
+          } else {
+            fs.readFile(file, opts.encoding, function (err, data) {
+              if (err) {
+                if (err.code === 'EACCES') return next()
+                return done(err)
+              }
 
-            if (cb.length > 3) {
-              if (opts.shortName) cb(null, data, filename, next)
-              else cb(null, data, file, next)
-            } else {
-              cb(null, data, next)
-            }
-          })
+              if (cb.length > 3) {
+                if (opts.shortName) cb(null, data, filename, next)
+                else cb(null, data, file, next)
+              } else {
+                cb(null, data, next)
+              }
+            })
+          }
         } else {
           next()
         }
