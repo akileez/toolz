@@ -8,3 +8,5 @@ function once (fn, context) {
     return result
   }
 }
+
+module.exports = once
