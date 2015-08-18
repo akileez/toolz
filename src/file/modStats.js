@@ -9,7 +9,8 @@ function modifyStatsObject (stats, fp) {
     base  : path.basename(fp),
     file  : path.basename(fp, path.extname(fp)),
     ext   : path.extname(fp),
-    stats : stats
+    stats : stats,
+    data  : fs.readFileSync(fp, 'utf8')
   }
 }
 
