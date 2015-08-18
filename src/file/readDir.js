@@ -1,45 +1,11 @@
 // adopted from: https://github.com/fshost/node-dir
 // Copyright (c) 2012 Nathan Cartwright <fshost@yahoo.com> (MIT)
 
-var fs = require('fs')
-var path = require('path')
+var fs          = require('fs')
+var path        = require('path')
 var modifyStats = require('./modStats')
-
-/**
- * merge two objects by extending target object with source object
- * @param target object to merge
- * @param source object to merge
- * @param {Boolean} [modify] whether to modify the target
- * @returns {Object} extended object
- */
-
-function extend (target, source, modify) {
-  var result = target
-    ? modify
-      ? target
-      : extend({}, target, true)
-    : {}
-
-  if (!source) return result
-  for (var key in source) {
-    if (source.hasOwnProperty(key) && source[key] !== undefined) {
-      result[key] = source[key]
-    }
-  }
-  return result
-}
-
-/**
- * determine if a string is contained within an array or matches a regular expression
- * @param   {String} str string to match
- * @param   {Array|Regex} match array or regular expression to match against
- * @returns {Boolean} whether there is a match
- */
-
-function matches (str, match) {
-  if (Array.isArray(match)) return match.indexOf(str) > -1
-  return match.test(str)
-}
+var extend      = require('../object/extend')
+var matches     = require('../collection/matches')
 
 /**
  * read files and call a function with the contents of each file
@@ -96,8 +62,8 @@ function readDir (dir, opts, cb, complete) {
         if (err) return done(err)
         if (stat && stat.isDirectory()) {
           if (opts.recursive) {
-            if (opts.matchDir && !matches(filename, opts.matchDir)) return next()
-            if (opts.excludeDir && matches(filename, opts.excludeDir)) return next()
+            if (opts.matchDir && !matches(opts.matchDir, filename)) return next()
+            if (opts.excludeDir && matches(opts.excludeDir, filename)) return next()
 
             readDir(file, opts, cb, function (err, sfiles) {
               if (err) return done(err)
@@ -106,8 +72,8 @@ function readDir (dir, opts, cb, complete) {
             })
           } else next()
         } else if (stat && stat.isFile()) {
-          if (opts.match && !matches(filename, opts.match)) return next()
-          if (opts.exclude && matches(filename, opts.exclude)) return next()
+          if (opts.match && !matches(opts.match, filename)) return next()
+          if (opts.exclude && matches(opts.exclude, filename)) return next()
           if (opts.filter && !opts.filter(filename)) return next()
           if (opts.shortName) files.push(filename)
           else files.push(file)
