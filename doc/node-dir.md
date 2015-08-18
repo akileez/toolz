@@ -24,6 +24,7 @@ Valid options are:
 - recursive: whether to recurse subdirectories when reading files (defaults to true)
 - reverse: sort files in each directory in descending order
 - shortName: whether to aggregate only the base filename rather than the full filepath
+- statsObj: Boolean to lstat a file and return object of stats and file content or default fs.readfile
 - sort: sort files in each directory in ascending order (defaults to true)
 
 A reverse sort can also be achieved by setting the sort option to 'reverse', 'desc', or 'descending' string value.
