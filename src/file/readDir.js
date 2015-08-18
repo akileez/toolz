@@ -3,6 +3,7 @@
 
 var fs = require('fs')
 var path = require('path')
+var modifyStats = require('./modStats')
 
 /**
  * merge two objects by extending target object with source object
@@ -38,26 +39,6 @@ function extend (target, source, modify) {
 function matches (str, match) {
   if (Array.isArray(match)) return match.indexOf(str) > -1
   return match.test(str)
-}
-
-/**
- * modify the stats object with more filepath info and content
- * @param   {Object} stats return object from fs.lstat
- * @param   {String} fp filepath of object to be fs.lstat
- * @returns {Object} detailed stats with file content
- */
-
-function modifyStats (stats, fp) {
-  return {
-    abs   : fs.realpathSync(fp),
-    rel   : fp,
-    dir   : path.dirname(fp),
-    base  : path.basename(fp),
-    file  : path.basename(fp, path.extname(fp)),
-    ext   : path.extname(fp),
-    stats : stats,
-    data  : fs.readFileSync(fp, 'utf8')
-  }
 }
 
 /**
