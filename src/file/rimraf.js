@@ -184,3 +184,5 @@ function rmkids(p, options, cb) {
     })
   })
 }
+
+module.exports = rimraf
