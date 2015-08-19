@@ -1,3 +1,6 @@
+// adopted from: https://github.com/fshost/node-dir
+// Copyright (c) 2012 Nathan Cartwright <fshost@yahoo.com> (MIT)
+
 var fs = require('fs')
 var path = require('path')
 

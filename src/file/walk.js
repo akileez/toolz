@@ -1,3 +1,6 @@
+// adopted from: https://github.com/futagoza/efe
+// Copyright (c) 2015 Futago-za Ryuu (MIT)
+
 var fs = require('fs')
 var path = require('path')
 var modStats = require('./modStats')

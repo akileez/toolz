@@ -1,3 +1,6 @@
+// adopted from: https://github.com/substack/node-mkdirp
+// Copyright 2010 James Halliday (mail@substack.net) (MIT/X11)
+
 var path = require('path')
 var fs = require('fs')
 
