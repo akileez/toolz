@@ -11,29 +11,33 @@ function segments (fp) {
 // the last `num` segments of a filepath. If a number
 // isn't passed for `num`, the last segment is returned
 function last (fp, num, opt) {
-  var seg = segments(fp)
-  return seg.slice(-(num || 1)).join(opt || separator)
+  return segments(fp)
+    .slice(-(num || 1))
+    .join(opt || separator)
 }
 
 // the last `num` segments removed from a filepath. If a number
 // isn't passed for `num`, the last segment is removed.
 function fromLast (fp, num, opt) {
-  var seg = segments(fp)
-  return seg.slice(0, -(num || 1)).join(opt || separator)
+  return segments(fp)
+    .slice(0, -(num || 1))
+    .join(opt || separator)
 }
 
 // the first `num` segments of a filepath. If a number
 // isn't passed for `num`, the first segment is returned
 function first (fp, num, opt) {
-  var seg = segments(fp)
-  return seg.slice(0, num || 1).join(opt || separator)
+  return segments(fp)
+    .slice(0, num || 1)
+    .join(opt || separator)
 }
 
 // the first `num` segments removed from a filepath. If a number
 // isn't passed for `num`, the first segment is removed.
 function fromFirst (fp, num, opt) {
-  var seg = segments(fp)
-  return seg.slice(num || 1).join(opt || separator)
+  return segments(fp)
+    .slice(num || 1)
+    .join(opt || separator)
 }
 
 exports.last = last
