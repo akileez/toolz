@@ -1,3 +1,5 @@
+// need to test this with no args and other ways.
+// https://github.com/aheckmann/sliced
 // an Array.prototype.slice.call(arguments) alternative
 
 function sliced (args, slice, sliceEnd) {
@@ -22,5 +24,4 @@ function sliced (args, slice, sliceEnd) {
   return res
 }
 
-// need to test this with no args and other ways.
-// https://github.com/aheckmann/sliced
+module.exports = sliced
