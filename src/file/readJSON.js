@@ -1,15 +1,20 @@
 var readFile = require('./readFile')
+var extend = require('../object/extend')
+
+var defaults = {reviver: null, throws: false}
 
 function readJSON (file, opts, cb) {
   if (typeof opts === 'function') {
     cb = opts
     opts = {reviver: null}
+  } else {
+    opts = extend(defaults, opts)
   }
 
   readFile(file, function (err, data) {
     if (err) return cb(err)
     try {
-      var json = JSON.parse(data, opts.reviver ? opts.reviver : null)
+      var json = JSON.parse(data, opts.reviver)
     } catch (err0) {
       return cb(err0)
     }
@@ -19,13 +24,14 @@ function readJSON (file, opts, cb) {
 }
 
 function readJSONsync (file, opts) {
-  opts = opts || {reviver: null, throws: false}
+  opts = opts
+    ? extend(defaults, opts)
+    : defaults
 
-  // var shouldThrow = 'throws' in opts ? opts.throws : true
-  if (opts.throws) return JSON.parse(readFile(file), opts.reviver ? opts.reviver : null)
+  if (opts.throws) return JSON.parse(readFile(file), opts.reviver)
   else {
     try {
-      return JSON.parse(readFile(file), opts.reviver ? opts.reviver : null)
+      return JSON.parse(readFile(file), opts.reviver)
     } catch (err) {
       return null
     }
