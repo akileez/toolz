@@ -1,19 +1,24 @@
 var writeFile = require('./writeFile')
+var extend = require('../object/extend')
+
+var defaults = {
+  replacer: null,
+  spaces: 2
+}
 
 function writeJSON (file, obj, opts, cb) {
   if (typeof opts === 'function') {
     cb = opts
-    opts = {
-      replacer: null,
-      spaces: 2
-    }
+    opts = defaults
+  } else {
+    opts = extend(defaults, opts)
   }
 
   try {
     var json = JSON.stringify(
       obj,
-      opts.replacer ? opts.replacer : null,
-      opts.spaces ? opts.spaces : 2
+      opts.replacer,
+      opts.spaces
     ) + '\n'
   } catch (err) {
     if (cb) return cb(err, null)
@@ -23,16 +28,15 @@ function writeJSON (file, obj, opts, cb) {
 }
 
 function writeJSONsync (file, obj, opts) {
-  opts = opts || {
-    replacer: null,
-    spaces: 2
-  }
+  opts = opts
+    ? extend(defaults, opts)
+    : defaults
 
   try {
     var json = JSON.stringify(
       obj,
-      opts.replacer ? opts.replacer : null,
-      opts.spaces ? opts.spaces : 2
+      opts.replacer,
+      opts.spaces
     ) + '\n'
   } catch (err) {
     throw err
