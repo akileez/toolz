@@ -40,7 +40,8 @@ function fromFirst (fp, num, opt) {
     .join(opt || separator)
 }
 
-exports.last = last
-exports.fromLast = fromLast
-exports.first = first
-exports.fromFirst = fromFirst
+module.exports = segments
+module.exports.last = last
+module.exports.fromLast = fromLast
+module.exports.first = first
+module.exports.fromFirst = fromFirst
