@@ -6,16 +6,16 @@ var path = require('path')
 var modStats = require('./modStats')
 
 function walk (fp, callback) {
-  fs.lstat(fp, function(err, stats){
+  fs.lstat(fp, function (err, stats) {
     if (err) {
       callback(err)
     } else {
       if (stats.isDirectory()) {
-        fs.readdir(fp, function(err, items){
+        fs.readdir(fp, function (err, items) {
           if (err) {
             callback(err)
           } else {
-            items.forEach(function(item){
+            items.forEach(function (item) {
               walk(path.join(fp, item), callback)
             })
           }
@@ -29,8 +29,8 @@ function walk (fp, callback) {
 
 function walkSync (fp, callback) {
   var stats = fs.lstatSync(fp)
-  if ( stats.isDirectory() )
-    fs.readdirSync(fp).forEach(function(item){
+  if (stats.isDirectory())
+    fs.readdirSync(fp).forEach(function (item) {
       walkSync(path.join(fp, item), callback)
     })
   else

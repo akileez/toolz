@@ -50,7 +50,7 @@ function readDir (dir, opts, cb, complete) {
 
     var i = 0
 
-    if (opts.reverse === true || (typeof opts.sort == 'string' && (/reverse|desc/i).test(opts.sort))) {
+    if (opts.reverse === true || (typeof opts.sort === 'string' && (/reverse|desc/i).test(opts.sort))) {
       list = list.reverse()
     } else if (opts.sort !== false) list = list.sort()
 

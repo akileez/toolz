@@ -4,9 +4,10 @@ var mkdirp = require('./mkdirp')
 var exists = require('./exists')
 
 function writeFile (file, data, enc, cb) {
+  var dir
   if ((arguments.length === 3 && typeof enc !== 'function') || arguments.length === 2) {
     enc = enc || 'utf8'
-    var dir = path.dirname(file)
+    dir = path.dirname(file)
     if (exists(dir)) return fs.writeFileSync.apply(fs, arguments)
 
     mkdirp.sync(dir)
@@ -18,7 +19,7 @@ function writeFile (file, data, enc, cb) {
     enc = 'utf8'
   }
 
-  var dir = path.dirname(file)
+  dir = path.dirname(file)
   exists(dir, function (res) {
     if (res) return fs.writeFile(file, data, enc, cb)
 
