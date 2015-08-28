@@ -33,7 +33,7 @@ Options.prototype.option = function (key, val) {
 
   set(this.options, key, val)
   this.emit('option', key, val)
-  return this;
+  return this
 }
 
 Options.prototype.enable = function (key) {

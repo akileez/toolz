@@ -8,7 +8,6 @@ var kindOf   = require('../lang/kindOf')
 var flatten  = require('../array/flatten')
 var arrunion = require('../array/union')
 
-
 // Initialize a new `Config`, optionally passing an object to initialize with
 function Config (cache) {
   Emitter.call(this)
@@ -86,6 +85,7 @@ function union (key/*, array*/) {
   while (++i < len) {
     args[i] = arguments[i + 1]
   }
+
   this.set(key, arrunion(arr, flatten(args)))
   this.emit('union', key)
   return this
@@ -96,9 +96,11 @@ function extend () {
   var len = arguments.length
   var args = new Array(len)
   var i = -1
+
   while (++i < len) {
     args[i] = arguments[i]
   }
+
   if (typeof args[0] === 'string') {
     var obj = this.get(args[0]) || {}
     obj = assign.apply(assign, arrunion([obj], args.slice(1)))

@@ -35,7 +35,7 @@ function hasit (key) {
 }
 
 // remove 'keys' from the cache. if no value specified, the entire cache is reset
- function removeit (key) {
+function removeit (key) {
   this.cache = key ? omit(this.cache, key) : {}
   this.emit('del', key)
   return this

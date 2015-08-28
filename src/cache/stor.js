@@ -12,7 +12,6 @@ var arrunion = require('../array/union')
 var toFlags  = require('../string/toFlags')
 var objVisit = require('./visit')
 
-
 // Initialize a new `Config`, optionally passing an object to initialize with
 function Config (cache, options) {
   Emitter.call(this)
@@ -141,7 +140,7 @@ function option (key, val) {
 
   set(this.options, key, val)
   this.emit('option', key, val)
-  return this;
+  return this
 }
 
 function enable (key) {
@@ -168,7 +167,7 @@ function isFalse (key) {
   return this.options[key] === false
 }
 
- function isBoolean (key) {
+function isBoolean (key) {
   return typeof this.options[key] === 'boolean'
 }
 
