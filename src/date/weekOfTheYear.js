@@ -1,6 +1,6 @@
 // dateformat.js
 
-function weekOfTheYear(date) {
+function weekOfTheYear (date) {
   // Remove time components of date
   var targetThursday = new Date(date.getFullYear(), date.getMonth(), date.getDate())
 
@@ -18,8 +18,8 @@ function weekOfTheYear(date) {
   targetThursday.setHours(targetThursday.getHours() - ds)
 
   // Number of weeks between target Thursday and first Thursday
-  var weekDiff = (targetThursday - firstThursday) / (86400000*7)
+  var weekDiff = (targetThursday - firstThursday) / (86400000 * 7)
   return 1 + Math.floor(weekDiff)
 }
 
-  module.exports = weekOfTheYear
+module.exports = weekOfTheYear

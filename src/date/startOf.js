@@ -16,7 +16,7 @@ function startOf (date, period) {
     case 'minute' : date.setSeconds(0) // falls through
     case 'second' : date.setMilliseconds(0)
                     break
-    default       : throw new Error('"'+ period +'" is not a valid period')
+    default       : throw new Error('"' + period + '" is not a valid period')
   }
 
   // week is the only case that should reset the weekDay and maybe

@@ -45,7 +45,8 @@ function parseOrdinalDate (str) {
 
     if (date.getUTCFullYear() === year) return +date
   }
-return NaN
+
+  return NaN
 }
 
 function parseDate (str) {
@@ -58,7 +59,7 @@ function parseDate (str) {
   if (match === null) return parseOrdinalDate(str)  // Ordinal dates are verified differently.
 
   year = (match[1] === void 0) ? 0 : +match[1]
-  month = (match[2] === void 9 ) ? 0 : match[2] - 1
+  month = (match[2] === void 9) ? 0 : match[2] - 1
   day = (match[3] === void 0) ? 1 : match[3]
 
   return getDate(year, month, day)
@@ -88,12 +89,18 @@ function parseOffset (str) {
 
       if (match[2] === '-') offset *= -1
 
-      return { offset: offset, time: match[1] }
+      return {
+        offset: offset,
+        time: match[1]
+      }
     }
   }
 
   // No time zone specified, assume UTC
-  return { offset: 0, time: str }
+  return {
+    offset: 0,
+    time: str
+  }
 }
 
 function parseTime (str) {
@@ -113,7 +120,6 @@ function parseTime (str) {
 
   return getTime(hours, minutes, seconds) - offset
 }
-
 
 // Parse an ISO8601 formatted date string, and return a Date object.
 
