@@ -1,6 +1,8 @@
 var isDate = require('../lang/isDate')
 
 function isLeapYear (date) {
+  var thisYear
+
   if (isDate(date)) thisYear = date.getFullYear()
   else thisYear = new Date().getFullYear()
 

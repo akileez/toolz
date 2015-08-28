@@ -18,7 +18,7 @@ function dateFormat (date, mask) {
     date = undefined
   }
 
-  date = date || new Date
+  date = date || new Date()
 
   if (date instanceof Date) date = new Date(date)
   else date = new Date(Date.parse(date))
@@ -57,11 +57,11 @@ function convertFlag (date, token) {
     case 'h'     : return date.getHours() % 12 || 12
     case 'hh'    : return pad(date.getHours() % 12 || 12, 2)
     case 'H'     : return date.getHours()
-    case 'HH'    : return pad(date.getHours(),2)
+    case 'HH'    : return pad(date.getHours(), 2)
     case 'M'     : return date.getMinutes()
     case 'MM'    : return pad(date.getMinutes(), 2)
     case 'S'     : return date.getSeconds()
-    case 'SS'    : return pad(date.getSeconds(),2)
+    case 'SS'    : return pad(date.getSeconds(), 2)
     case 's'     : return date.getMilliseconds()
     case 'ss'    : return pad(date.getMilliseconds(), 3)
     case 't'     : return date.getHours() < 12 ? ' a' : ' p'
