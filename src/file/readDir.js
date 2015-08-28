@@ -23,13 +23,15 @@ function readDir (dir, opts, cb, complete) {
     opts = {}
   }
 
-  if (typeof opts === 'string') opts = {
-    encoding: opts
+  if (typeof opts === 'string') {
+    opts = {
+      encoding: opts
+    }
   }
 
   opts = extend({
     recursive: true,
-    encoding: 'utf8',
+    encoding: 'utf8'
   }, opts)
 
   var files = []
@@ -52,7 +54,7 @@ function readDir (dir, opts, cb, complete) {
       list = list.reverse()
     } else if (opts.sort !== false) list = list.sort()
 
-    ;(function next() {
+    ;(function next () {
       var filename = list[i++]
       if (!filename) return done(null, files)
 

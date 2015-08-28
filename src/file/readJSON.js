@@ -19,7 +19,7 @@ function readJSON (file, opts, cb) {
       return cb(err0)
     }
 
-    cb(null, obj)
+    cb(null, json)
   })
 }
 

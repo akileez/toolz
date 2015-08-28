@@ -50,7 +50,7 @@ function toUTC (d) {
 function getMonthsDiff (start, end) {
   return getElapsedMonths(start, end)
     + getElapsedYears(start, end) * 12
-    + getElapsedMonth(start, end)
+    + getFractionalMonth(start, end)
 }
 
 function getYearsDiff (start, end) {

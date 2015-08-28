@@ -11,9 +11,8 @@ function exists (fp, cb) {
   }
 
   fs.access(fp, fs.F_OK, function (err) {
-    cb(err ? false : true)
+    cb(!(err))
   })
 }
-
 
 module.exports = exists

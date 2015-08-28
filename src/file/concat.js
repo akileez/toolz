@@ -3,7 +3,7 @@ var fs = require('fs')
 function callback (err) {
   return function (err, data) {
     if (err) throw err
-    console.log("This is a test of the callback functionality")
+    console.log('This is a test of the callback functionality')
     // fs.writeFileSync(file, data)
   }
 }
@@ -20,9 +20,9 @@ function concat (files, dest, cb) {
 
     var done = false
 
-    function loop(idx) {
+    function loop (idx) {
       var file = files[idx]
-      fs.readFile(files[idx], function (err, data) {
+      fs.readFile(file, function (err, data) {
         if (done) return
         if (err) {
           done = true
