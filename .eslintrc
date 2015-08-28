@@ -1,0 +1,7 @@
+{
+  "extends": "marm",
+
+  "rules": {
+    "curly": [1, "multi-line"]
+  }
+}
