@@ -1,6 +1,6 @@
 // lodash.internal function
 
-function toObject(value) {
+function toObject (value) {
   return typeof value === 'object' ? value : Object(value)
 }
 

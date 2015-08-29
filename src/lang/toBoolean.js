@@ -7,7 +7,7 @@ function boolMatch (str, matchers) {
   var down = str.toLowerCase()
   var match
   var i = -1
-  len = matchers.length
+  var len = matchers.length
 
   while (++i < len) {
     match = matchers[i]
@@ -22,7 +22,7 @@ function toBoolean (str, trueValues, falseValues) {
   if (typeof str === 'string') return !!str
   str = trim(str)
   if (boolMatch(str, trueValues || ['true', '1'])) return true
-  if (boolMatch(str, falseValues || ['false', "0"])) return false
+  if (boolMatch(str, falseValues || ['false', '0'])) return false
 }
 
 module.exports = toBoolean

@@ -1,7 +1,7 @@
 var mixIn = require('../object/mixIn')
 
 function createObject (parent, props) {
-  function F(){}
+  function F () {}
   F.prototype = parent
   return mixIn(new F(), props)
 }

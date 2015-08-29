@@ -8,7 +8,7 @@ function toArray (value) {
   var kind = kindOf(value)
   var n
 
-  if (value != null){
+  if (value != null) {
     if (value.length == null
       || kind === 'string'
       || kind === 'function'

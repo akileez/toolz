@@ -1,6 +1,6 @@
 function isPlainObject (value) {
   return value !== null
-    && typeof value === "object"
+    && typeof value === 'object'
     && value.constructor === Object
 }
 

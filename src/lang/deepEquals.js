@@ -10,7 +10,7 @@ function deepEquals (a, b, fn) {
   var bothArrays = !bothObjects && isArray(a) && isArray(b)
   if (!bothObjects && !bothArrays) return fn(a, b)
 
-  function compare(a, b) {
+  function compare (a, b) {
     return deepEquals(a, b, fn)
   }
 

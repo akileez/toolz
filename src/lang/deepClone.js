@@ -11,10 +11,10 @@ function deepClone (value, instanceClone) {
   }
 }
 
-function cloneDeepObject (source, instanceClone){
+function cloneDeepObject (source, instanceClone) {
   if (isPlainObject(source)) {
     var out = {}
-    forOwn(source, function(value, key) {
+    forOwn(source, function (value, key) {
       this[key] = deepClone(value, instanceClone)
     }, out)
     return out
@@ -29,7 +29,6 @@ function cloneDeepArray (arr, instanceClone) {
   var out = []
   var i = -1
   var n = arr.length
-  var value
   while (++i < n) {
     out[i] = deepClone(arr[i], instanceClone)
   }

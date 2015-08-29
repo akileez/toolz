@@ -25,7 +25,7 @@ function cloneRegExp (r) {
   return new RegExp(r.source, flags)
 }
 
-function cloneDate(date) {
+function cloneDate (date) {
   return new Date(+date)
 }
 

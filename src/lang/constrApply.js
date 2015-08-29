@@ -1,6 +1,6 @@
-function F(){}
+function F () {}
 
-function constrApply(constr, args) {
+function constrApply (constr, args) {
   F.prototype = constr.prototype
   var instance = new F()
   constr.apply(instance, args)
