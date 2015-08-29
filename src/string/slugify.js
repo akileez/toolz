@@ -13,8 +13,8 @@ function slugify (str, delimeter) {
   if (delimeter == null) delimeter = '-'
   str = replaceAccents(str)
   str = removeNonWord(str)
-  str = trim(str) //should come after removeNonWord
-    .replace(/ +/g, delimeter) //replace spaces with delimeter
+  str = trim(str) // should come after removeNonWord
+    .replace(/ +/g, delimeter) // replace spaces with delimeter
     .toLowerCase()
 
   return str

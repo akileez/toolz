@@ -1,7 +1,7 @@
 // convert time into another unit
 
 function convert (val, sourceUnitName, destinationUnitName) {
-  destinationUnitName = destinationUnitName || ms
+  destinationUnitName = destinationUnitName || 'ms'
   return (val * getUnit(sourceUnitName)) / getUnit(destinationUnitName)
 }
 
@@ -12,14 +12,14 @@ function getUnit (unitName) {
     case 's'           :
     case 'second'      : return 1000
     case 'm'           :
-    case 'minute'      : return 60000;
+    case 'minute'      : return 60000
     case 'h'           :
-    case 'hour'        : return 3600000;
+    case 'hour'        : return 3600000
     case 'd'           :
-    case 'day'         : return 86400000;
+    case 'day'         : return 86400000
     case 'w'           :
-    case 'week'        : return 604800000;
-    default            : throw new Error('"'+ unitName + '" is not a valid unit');
+    case 'week'        : return 604800000
+    default            : throw new Error('"' + unitName + '" is not a valid unit')
   }
 }
 

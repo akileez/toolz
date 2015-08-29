@@ -7,7 +7,7 @@ function normalizeLineBreaks (str, lineEnd) {
   return str
     .replace(/\r\n/g, lineEnd) // DOS
     .replace(/\r/g, lineEnd)   // Mac
-    .replace(/\n/g, lineEnd);  // Unix
+    .replace(/\n/g, lineEnd)   // Unix
 }
 
 module.exports = normalizeLineBreaks

@@ -13,7 +13,7 @@ function closeTag (type) {
   return '</' + type + '>'
 }
 
-function createElement(type, closing, attr, contents) {
+function createElement (type, closing, attr, contents) {
   return openTag(type, closing, attr)
     + (closing ? (contents || '')
     + closeTag(type) : '')

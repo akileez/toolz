@@ -8,7 +8,6 @@ function toSlugCase (str) {
 
 module.exports = toSlugCase
 
-
 /*
     var slug = require('to-slug-case');
 

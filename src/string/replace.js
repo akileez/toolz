@@ -1,7 +1,7 @@
 var toString = require('../lang/toString')
 var toArray = require('../lang/toArray')
 
-//replace string(s) with the replacement(s) in the source
+// replace string(s) with the replacement(s) in the source
 
 function replace (str, search, replacements) {
   str = toString(str)

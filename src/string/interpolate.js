@@ -1,7 +1,7 @@
 var toString = require('../lang/toString')
 var get = require('../object/get')
 
-var stache = /\{\{([^\}]+)\}\}/g; //mustache-like
+var stache = /\{\{([^\}]+)\}\}/g // mustache-like
 
 function interpolate (template, replacements, syntax) {
   template = toString(template)

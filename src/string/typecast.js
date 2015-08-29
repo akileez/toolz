@@ -8,8 +8,8 @@ function typecast (value) {
   else if (value === 'true') results = true
   else if (value === 'false') results = false
   else if (value === UNDEF || value === 'undefined') results = UNDEF
-  else if (value === '' || isNaN(value)) results = value  //isNaN('') returns false
-  else results = parseFloat(value)  //parseFloat(null || '') returns NaN
+  else if (value === '' || isNaN(value)) results = value  // isNaN('') returns false
+  else results = parseFloat(value)  // parseFloat(null || '') returns NaN
 
   return results
 }
