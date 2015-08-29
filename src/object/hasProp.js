@@ -1,12 +1,12 @@
-var baseGet = require('../base/baseGet'),
-var baseSlice = require('../base/baseSlice'),
-var isArguments = require('../lang/isArguments'),
-var isArray = require('../lang/isArray'),
-var isIndex = require('../lang/isIndex'),
-var isKey = require('../lang/isKey'),
-var isLength = require('../lang/isLength'),
-var last = require('../array/last'),
-var toPath = require('../string/toPath');
+var baseGet = require('../base/baseGet')
+var baseSlice = require('../base/baseSlice')
+var isArguments = require('../lang/isArguments')
+var isArray = require('../lang/isArray')
+var isIndex = require('../lang/isIndex')
+var isKey = require('../lang/isKey')
+var isLength = require('../lang/isLength')
+var last = require('../array/last')
+var toPath = require('../string/toPath')
 var hasOwn = require('./hasOwn')
 
 // Checks if `path` is a direct property.
