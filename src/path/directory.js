@@ -21,7 +21,7 @@ function files (dir, type, cb, ignoreType) {
       if (stat && stat.isDirectory() && stat.mode !== 17115) {
         if (type !== 'file') results.dirs.push(statPath)
 
-        files(statPath, type, function(err, res) {
+        files(statPath, type, function (err, res) {
           if (err) return cb(err)
           if (type === 'all') {
             results.files = results.files.concat(res.files)
@@ -65,7 +65,7 @@ function files (dir, type, cb, ignoreType) {
 }
 
 function paths (dir, combine, cb) {
-  var type
+  // var type
 
   if (typeof combine === 'function') {
     cb = combine

@@ -1,6 +1,6 @@
 // underscore.string numberFormat.js
 
-function numberFormat (number, dec, desp, tsep) {
+function numberFormat (number, dec, dsep, tsep) {
   if (isNaN(number) || number == null) return ''
 
   number = number.toFixed(~~dec)
