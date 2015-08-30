@@ -1,6 +1,6 @@
 var makeIterator = require('../function/makeIterator_')
 
-function findIndex (arr, iter, thisObj){
+function findIndex (arr, iter, thisObj) {
   iter = makeIterator(iter, thisObj)
   if (arr == null) return -1
   var i = -1
@@ -8,7 +8,7 @@ function findIndex (arr, iter, thisObj){
   while (++i < len) {
     if (iter(arr[i], i, arr)) return i
   }
-return -1
+  return -1
 }
 
 module.exports = findIndex

@@ -4,7 +4,7 @@
 var filter = require('./filter')
 
 function compact (arr) {
-  return filter(arr, function(value) {
+  return filter(arr, function (value) {
     return (value)
   })
 }

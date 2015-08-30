@@ -1,4 +1,5 @@
 var makeIterator = require('../function/makeIterator_')
+var append = require('./append')
 
 function collect (arr, fn, thisObj) {
   fn = makeIterator(fn, thisObj)

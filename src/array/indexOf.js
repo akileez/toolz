@@ -1,4 +1,4 @@
-function indexOf(arr, item, fromIndex) {
+function indexOf (arr, item, fromIndex) {
   fromIndex = fromIndex || 0
   if (arr == null) return -1
   var len = arr.length
