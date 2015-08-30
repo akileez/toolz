@@ -118,7 +118,7 @@ function asyncTimes (num, limit, iterator, done) {
 
 function asyncParallel (obj, limit, done) {
   asyncReduce(obj, limit, [], function (resultObject, v, k, done) {
-    v.call(null, function (err, res) {
+    v(function (err, res) {
       resultObject.push(res)
       done(null, resultObject)
     })

@@ -152,7 +152,7 @@ function asyncApply (fns /* an array or object of functions */) {
 
 function asyncParallel (obj, done) {
   asyncReduce(obj, [], function (resultObject, v, k, done) {
-    v.call(null, function (err, res) {
+    v(function (err, res) {
       resultObject.push(res)
       done(null, resultObject)
     })
