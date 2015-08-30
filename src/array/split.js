@@ -16,7 +16,7 @@ function split (arr, segments) {
     segmentLength = minLength
     if (segmentIndex < remainder) segmentLength++
 
-    result.push(arr.slice(i, i + segmentLength))
+    results.push(arr.slice(i, i + segmentLength))
     segmentIndex++
     i += segmentLength
   }

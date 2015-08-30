@@ -18,12 +18,12 @@ function first (arr, num) {
 
 // Returns the last item, or lsat `n` items of an array.
 function last (arr, num) {
-  return slice(arr, -num || arr.length -1)
+  return slice(arr, -num || arr.length - 1)
 }
 
 // Removes the last item or last `n` items before the end of an array
 function before (arr, num) {
-  return slice(arr, 0, -num || arr.length -1)
+  return slice(arr, 0, -num || arr.length - 1)
 }
 
 // Removes the first item or first `n` items after the start of an array

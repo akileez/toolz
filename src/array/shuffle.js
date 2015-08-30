@@ -10,7 +10,7 @@ function shuffle (arr) {
 
   var i = -1
   var len = arr.length
-  var value
+
   while (++i < len) {
     if (!i) results[0] = arr[0]
     else {

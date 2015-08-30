@@ -1,4 +1,5 @@
-var countSteps = require('../math/countSteps')
+// not actually used. mout.js
+// var countSteps = require('../math/countSteps')
 
 // returns an Array of numbers inside range
 
@@ -9,7 +10,7 @@ function range (start, stop, step) {
   }
   step = step || 1
   var result = []
-  var nSteps = countSteps(stop - start, step)
+  // var nSteps = countSteps(stop - start, step)
   var i = start
 
   while (i <= stop) {

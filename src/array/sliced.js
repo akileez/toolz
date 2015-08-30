@@ -6,7 +6,7 @@ function sliced (args, slice, sliceEnd) {
   var res = []
   var len = args.length
 
-  if (0 === len) return res
+  if (len === 0) return res
 
   var strt = slice < 0
     ? Math.max(0, slice + len)

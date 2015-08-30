@@ -13,11 +13,11 @@ function pick (arr, nItems) {
     }
     return result
   }
-  return (arr && arr.length) ? pickOne(arr) : void(0)
+  return (arr && arr.length) ? pickOne(arr) : void (0)
 }
 
 function pickOne (arr) {
-  var idx = randInt(0, arr.length -1)
+  var idx = randInt(0, arr.length - 1)
   return arr.splice(idx, 1)[0]
 }
 
