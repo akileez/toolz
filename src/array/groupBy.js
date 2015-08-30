@@ -7,9 +7,9 @@ function groupBy (arr, categorize, thisObj) {
   else categorize = identity
 
   var buckets = {}
-  forEach(arr, function(element) {
+  forEach(arr, function (element) {
     var bucket = categorize(element)
-    if (!bucket in buckets) buckets[bucket] = []
+    if (!(bucket in buckets)) buckets[bucket] = []
 
     buckets[bucket].push(element)
   })
