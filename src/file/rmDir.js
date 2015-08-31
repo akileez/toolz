@@ -1,25 +1,31 @@
-var exists  = require('./exists')
-var rmFile  = require('./rmFile')
-var dir     = require('../path/directory')
-var forEach = require('../array/forEach')
-var fs      = require('fs')
-var path    = require('path')
+var exists    = require('./exists')
+var rmFile    = require('./rmFile')
+var dir       = require('../path/directory')
+var eachAsync = require('../async/iterate').each
+var fs        = require('fs')
+var path      = require('path')
 
-// make async version
 function rmdir (dirName, cb) {
   exists(dirName, function (res) {
     if (!res) {
-      cb('Directory does not exist.')
+      cb('Directory ' + dirName + ' does not exist.')
     } else {
       dir.files(dirName, 'all', function (err, res) {
-        forEach(res.files, function (val, key, arr) {
-          rmFile(val)
+        eachAsync(res.files, function (val, key, done) {
+          rmFile(val, function (res) {
+            done(null, val)
+          })
+        }, function (err, results) {
+          eachAsync(res.dirs, function (val, key, done) {
+            fs.rmdir(val, function (res) {
+              done(null, val)
+            })
+          }, function (err, results) {
+            fs.rmdir(dirName, function (res) {
+              return cb('Directory ' + dirName + ' removed')
+            })
+          })
         })
-        forEach(res.dirs, function (val, key, arr) {
-          fs.rmdirSync(val)
-        })
-        fs.rmdirSync(dirName)
-        cb(null, 'All done')
       })
     }
   })
