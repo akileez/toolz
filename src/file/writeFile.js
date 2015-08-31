@@ -2,6 +2,7 @@ var path   = require('path')
 var fs     = require('fs')
 var mkdirp = require('./mkdirp')
 var exists = require('./exists')
+var assert = require('assert')
 
 function writeFile (file, data, enc, cb) {
   var dir
@@ -30,4 +31,12 @@ function writeFile (file, data, enc, cb) {
   })
 }
 
+function writeStream (file, options) {
+  mkdirp(path.dirname(file), function (err) {
+    assert.ifError(err)
+    fs.createWriteStream(file, options)
+  })
+}
+
 module.exports = writeFile
+module.exports.stream = writeStream
