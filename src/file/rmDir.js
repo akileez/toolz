@@ -19,7 +19,7 @@ function rmdir (dirName, cb) {
           })
         }, function (err, results) {
           assert.ifError(err)
-          eachAsync(res.dirs, function (dirs, key, done) {
+          eachAsync(res.dirs.reverse(), function (dirs, key, done) {
             fs.rmdir(dirs, function (err) {
               assert.ifError(err)
               done(null, dirs)
