@@ -28,9 +28,15 @@
 */
 
 function objVisit (thisArg, method, target) {
-  for (var key in target) {
-    if (target.hasOwnProperty(key)) thisArg[method](key, target[key])
-  }
+  // for (var key in target) {
+  //   if (target.hasOwnProperty(key)) thisArg[method](key, target[key])
+  // }
+  // want to stop using for-in loops
+
+  Object.keys(target).forEach(function (val, idx, arr) {
+    if (target.hasOwnProperty(val)) thisArg[method](val, target[val])
+  })
+
   return thisArg
 }
 
