@@ -1,6 +1,6 @@
 {
   "name": "toolz",
-  "version": "0.1.124",
+  "version": "0.1.125",
   "description": "basic javascript utils for working with arrays, objects, functions, types and other",
   "main": "index.js",
   "scripts": {
