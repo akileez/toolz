@@ -7,10 +7,9 @@ var exists = require('./exists')
 function rmFile (file, cb) {
   exists(file, function (res) {
     if (!res) return cb('File does not exist')
-    // figure out callback parameters for fs.unlink. don't think its err, res
-    fs.unlink(file, function (err, result) {
+    fs.unlink(file, function (err) {
       assert.ifError(err)
-      cb('File removed successfully.')
+      cb('File ' + file + ' successfully removed.')
     })
   })
 }
