@@ -1,5 +1,4 @@
 var exists    = require('./exists')
-var rmFile    = require('./rmFile')
 var dir       = require('../path/directory')
 var eachAsync = require('../async/iterate').each
 var assert    = require('assert')
@@ -13,16 +12,17 @@ function rmdir (dirName, cb) {
     } else {
       dir.files(dirName, 'all', function (err, res) {
         assert.ifError(err)
-        eachAsync(res.files, function (val, key, done) {
-          rmFile(val, function (res) {
-            done(null, val)
+        eachAsync(res.files, function (file, key, done) {
+          fs.unlink(file, function (err) {
+            assert.ifError(err)
+            done(null, file)
           })
         }, function (err, results) {
           assert.ifError(err)
-          eachAsync(res.dirs, function (val, key, done) {
-            fs.rmdir(val, function (err) {
+          eachAsync(res.dirs, function (dirs, key, done) {
+            fs.rmdir(dirs, function (err) {
               assert.ifError(err)
-              done(null, val)
+              done(null, dirs)
             })
           }, function (err, results) {
             assert.ifError(err)
