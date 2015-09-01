@@ -1,14 +1,17 @@
 var exists = require('./exists')
+var assert = require('assert')
 var path   = require('path')
 var fs     = require('fs')
 
 // clean up callbacks, add options, protection and checks for specific errors
 function mkdir (dirName, callback) {
   exists(dirName, function (result) {
-    if (result) return callback(null, "somethingHere")
+    if (result) return callback(null, 'somethingHere')
     mkdir(path.dirname(dirName), function (err, data) {
+      assert.ifError(err)
       fs.mkdir(dirName, function (err) {
-        return callback(null, "done")
+        assert.ifError(err)
+        return callback(null, 'done')
       })
     })
   })
