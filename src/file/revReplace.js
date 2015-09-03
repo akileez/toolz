@@ -1,5 +1,5 @@
-var readFile  = require('../file/readFile')
-var writeFile = require('../file/writeFile')
+var readFile  = require('./readFile')
+var writeFile = require('./writeFile')
 
 // for use with revAssets or make generic
 
