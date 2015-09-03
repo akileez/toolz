@@ -13,9 +13,13 @@ function copy (files, dest, cb) {
   eachAsync(files, function (file, key, done) {
     readFile(file, function (err, data) {
       assert.ifError(err)
-      writeFile(path.resolve(dest, segments.fromFirst(file)), data, function (err) {
+
+      var filepath = segments.fromFirst(file)
+      var destination = path.resolve(dest, filepath)
+
+      writeFile(destination, data, function (err) {
         assert.ifError(err)
-        done(null, 'File ' + file + ' copied to ' + dest)
+        done(null, 'File ' + file + ' copied to ' + [dest, filepath].join('/'))
       })
     })
   }, function (err, res) {
