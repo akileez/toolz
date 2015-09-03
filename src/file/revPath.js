@@ -1,4 +1,4 @@
-var rename = require('./rename')
+var rename = require('./renameFile')
 
 function revPath (fp, hash) {
   return rename(fp, function (filename, ext) {
