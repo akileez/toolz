@@ -1,5 +1,6 @@
 var path      = require('path')
 var assert    = require('assert')
+var stat      = require('./stat')
 var exists    = require('./exists')
 var revFile   = require('./revFile')
 var readFile  = require('./readFile')
@@ -10,7 +11,7 @@ var eachAsync = require('../async/iterate').map
 // THIS NEEDS WORK!!
 // options: flatten, preserve [dir structure], noclobber.
 function copy (files, dest, opts, cb) {
-  var defaults = {flatten: false, noclobber: false, rename: false}
+  var defaults = {flatten: false, noclobber: false}
 
   if (typeof opts === 'function') {
     cb = opts
@@ -35,11 +36,11 @@ function copy (files, dest, opts, cb) {
       filepath = segments[method](file)
       destination = path.resolve(dest, filepath)
 
-      if (exists(destination) && opts.noclobber) {
-        if (opts.rename) {
-          destination = revFile(destination)
-        } else {
+      if (opts.noclobber && exists(destination)) {
+        if (stat(destination).content === stat(file).content) {
           return done(null, file)
+        } else {
+          destination = revFile(destination)
         }
       }
 
