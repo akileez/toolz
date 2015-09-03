@@ -5,7 +5,12 @@ var assert    = require('assert')
 var fs        = require('fs')
 var path      = require('path')
 
-function rmdir (dirName, cb) {
+function rmdir (dirName, opts, cb) {
+  if (typeof opts === 'function') {
+    cb = opts
+    opts = {empty: false}
+  }
+
   exists(dirName, function (res) {
     if (!res) {
       cb('Directory ' + dirName + ' does not exist.')
@@ -29,10 +34,13 @@ function rmdir (dirName, cb) {
           }, function (err, results) {
             assert.ifError(err)
 
-            fs.rmdir(dirName, function (err) {
-              assert.ifError(err)
-              return cb('Directory ' + dirName + ' removed')
-            })
+            if (!opts.empty)
+              fs.rmdir(dirName, function (err) {
+                assert.ifError(err)
+                return cb('Directory ' + dirName + ' removed')
+              })
+            else return cb('Directory ' + dirName + ' emptied')
+
           })
         })
       })
