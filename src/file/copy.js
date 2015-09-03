@@ -11,7 +11,7 @@ var eachAsync = require('../async/iterate').map
 function copy (files, dest, opts, cb) {
   if (typeof opts === 'function') {
     cb = opts
-    opts = {flatten: false, noclobber: false}
+    opts = {flatten: false, noclobber: false, rename: false}
   }
 
   files = Array.isArray(files) ? files : [files]
@@ -30,8 +30,12 @@ function copy (files, dest, opts, cb) {
       filepath = segments[method](file)
       destination = path.resolve(dest, filepath)
 
-      if (exists(destination) && opts.noclobber === true) {
-        // code here for renaming file.
+      if (exists(destination) && opts.noclobber) {
+        if (opts.rename) {
+          return done(null, 'file renamed') // file rename code here
+        } else {
+          return done(null, 'File ' + file + ' exists at ' + [dest, filepath].join('/') + ' NOT copied')
+        }
       }
 
       writeFile(destination, data, function (err) {
