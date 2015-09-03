@@ -12,6 +12,7 @@ function rmdir (dirName, cb) {
     } else {
       dir.files(dirName, 'all', function (err, res) {
         assert.ifError(err)
+
         eachAsync(res.files, function (file, key, done) {
           fs.unlink(file, function (err) {
             assert.ifError(err)
@@ -19,6 +20,7 @@ function rmdir (dirName, cb) {
           })
         }, function (err, results) {
           assert.ifError(err)
+
           eachAsync(res.dirs.reverse(), function (dirs, key, done) {
             fs.rmdir(dirs, function (err) {
               assert.ifError(err)
@@ -26,6 +28,7 @@ function rmdir (dirName, cb) {
             })
           }, function (err, results) {
             assert.ifError(err)
+
             fs.rmdir(dirName, function (err) {
               assert.ifError(err)
               return cb('Directory ' + dirName + ' removed')
