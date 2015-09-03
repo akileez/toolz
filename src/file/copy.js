@@ -1,5 +1,6 @@
 var path      = require('path')
 var assert    = require('assert')
+var exists    = require('./exists')
 var readFile  = require('./readFile')
 var writeFile = require('./writeFile')
 var segments  = require('../path/segments')
@@ -28,6 +29,10 @@ function copy (files, dest, opts, cb) {
 
       filepath = segments[method](file)
       destination = path.resolve(dest, filepath)
+
+      if (exists(destination) && opts.noclobber === true) {
+        // code here for renaming file.
+      }
 
       writeFile(destination, data, function (err) {
         assert.ifError(err)
