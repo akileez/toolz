@@ -17,4 +17,9 @@ function readFile (fp, opts, cb) {
   })
 }
 
+function readStream (fp, opts) {
+  return fs.createReadStream(fp, opts)
+}
+
 module.exports = readFile
+module.exports.stream = readStream
