@@ -53,7 +53,8 @@ function stripJSON (str) {
     ret += currentChar
   }
 
-  return ret
+  // remove new line character when proceeded by one or more spaces
+  return ret.replace(/( ){1,}(\r\n|\n){1,}/g, '')
 }
 
 module.exports = stripJSON
