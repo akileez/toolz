@@ -3,12 +3,13 @@ var slice = require('./sliced')
 /**
  *  var arr = [1,2,3,4,5,6,7,8]
  *
- *  pick.first(arr)     // [ 0 ]
+ *  pick.first(arr)     // [ 1 ]
  *  pick.first(arr, 3)  // [ 1, 2, 3 ]
  *  pick.last(arr)      // [ 8 ]
  *  pick.last(arr, 3)   // [ 6, 7, 8 ]
  *  pick.before(arr, 4) // [ 1, 2, 3, 4 ]
  *  pick.after(arr, 3)  // [ 4, 5, 6, 7, 8 ]
+ *  pick.between(arr, 1, 3) // [ 2, 3 ]
  */
 
 // Returns the first item, or first `n` items of an array.
@@ -31,7 +32,13 @@ function after (arr, num) {
   return slice(arr, num || 1)
 }
 
-exports.first = first
-exports.last = last
-exports.before = before
-exports.after = after
+// Returns array between start and end indices
+function between (arr, strt, end) {
+  return slice(arr, strt || 0, end || arr.length - 1)
+}
+
+exports.first   = first
+exports.last    = last
+exports.before  = before
+exports.after   = after
+exports.between = between
