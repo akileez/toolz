@@ -11,14 +11,14 @@ function rmdir (dirName, opts, cb) {
     opts = {empty: false}
   }
 
-  exists(dirName, function (res) {
-    if (!res) {
+  exists(dirName, function (dirExists) {
+    if (!dirExists) {
       cb('Directory ' + dirName + ' does not exist.')
     } else {
-      dir.files(dirName, 'all', function (err, res) {
+      dir.files(dirName, 'all', function (err, collectionOf) {
         assert.ifError(err)
 
-        eachAsync(res.files, function (file, key, done) {
+        eachAsync(collectionOf.files, function (file, key, done) {
           fs.unlink(file, function (err) {
             assert.ifError(err)
             done(null, file)
@@ -26,7 +26,7 @@ function rmdir (dirName, opts, cb) {
         }, function (err, results) {
           assert.ifError(err)
 
-          eachAsync(res.dirs.reverse(), function (dirs, key, done) {
+          eachAsync(collectionOf.dirs.reverse(), function (dirs, key, done) {
             fs.rmdir(dirs, function (err) {
               assert.ifError(err)
               done(null, dirs)
