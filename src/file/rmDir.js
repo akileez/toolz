@@ -40,7 +40,6 @@ function rmdir (dirName, opts, cb) {
                 return cb('Directory ' + dirName + ' removed')
               })
             else return cb('Directory ' + dirName + ' emptied')
-
           })
         })
       })
