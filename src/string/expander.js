@@ -12,12 +12,20 @@ function expand (val, data, opts) {
 }
 
 function resolve (val, data, opts) {
-  switch(kindOf(val)) {
-    case 'string': return resolveString(val, data, opts)
+  switch (kindOf(val)) {
+    case 'array' :
     case 'object': return resolveObject(val, data, opts)
-    case 'array' : return resolveArray(val, data, opts)
+    case 'string': return resolveString(val, data, opts)
     default      : return val
   }
+}
+
+function resolveObject (obj, data, opts) {
+  Object.keys(obj).forEach(function (key, idx, arr) {
+    obj[key] = resolve(obj[key], data, opts)
+  })
+
+  return obj
 }
 
 function resolveString (str, data, opts) {
@@ -45,8 +53,10 @@ function resolveString (str, data, opts) {
       var firstparens = prop.indexOf('(')
       var lastparens = prop.indexOf(')')
       var exp = prop.slice(0, firstparens)
-      var expResult = prop.slice(firstparens + 1, prop.length -1)
-      val = data[exp](data[expResult])
+      var expResult = prop.slice(firstparens + 1, lastparens)
+      val = typeof data[exp] === 'function'
+        ? data[exp](data[expResult])
+        : resolve('{{' + exp + '}}', data, opts)(expResult)
     } else {
       val = data[prop] || get(data, prop)
     }
@@ -74,25 +84,6 @@ function resolveString (str, data, opts) {
   })
 
   return result
-}
-
-function resolveObject (obj, data, opts) {
-  Object.keys(obj).forEach(function (key, idx, arr) {
-    obj[key] = resolve(obj[key], data, opts)
-  })
-
-  return obj
-}
-
-function resolveArray (arr, data, opts) {
-  var len = arr.length
-  var i = - 1
-
-  while (++i < len) {
-    arr[i] = resolve(arr[i], data, opts)
-  }
-
-  return arr
 }
 
 function trim (str) {
