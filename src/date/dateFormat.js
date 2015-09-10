@@ -11,6 +11,9 @@ var weekOfTheYear      = require('./weekOfTheYear')
 var timezoneOffset     = require('./timezoneOffset')
 var totalDaysThisMonth = require('./totalDaysThisMonth')
 var totalDaysThisYear  = require('./totalDaysThisYear')
+var daysLeftThisWeek   = require('./daysLeftThisWeek')
+var daysLeftThisMonth  = require('./daysLeftThisMonth')
+var daysLeftThisYear   = require('./daysLeftThisYear')
 
 function dateFormat (date, mask) {
   if (arguments.length === 1 && kindOf(date) === 'string' && !/\d/.test(date)) {
@@ -88,18 +91,6 @@ function convertFlag (date, token) {
 function antiPattern (mask, token) {
   if (!token.test(mask)) return mask
   return false
-}
-
-function daysLeftThisWeek (date) {
-  return 6 - date.getDay()
-}
-
-function daysLeftThisMonth (date) {
-  return totalDaysThisMonth(date) - date.getDate()
-}
-
-function daysLeftThisYear (date) {
-  return totalDaysThisYear(date) - dayOfTheYear(date)
 }
 
 module.exports = dateFormat
