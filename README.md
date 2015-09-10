@@ -1,6 +1,6 @@
 # toolz
 [![NPM version][npm-image]][npm-url]
-[![js-standard-style][standard-image]][standard-url]
+[![schoolmarm-standard-style][marm-image]][marm-url]
 [![experimental][stability-image]][stability-url]
 [![ISC license][license-img]][license-url]
 
@@ -62,8 +62,8 @@ There is no documentation at the moment. Only markdown files from mout and async
 
 [npm-image]: https://img.shields.io/npm/v/toolz.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/toolz
-[standard-image]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
-[standard-url]: https://github.com/feross/standard
+[marm-image]: https://img.shields.io/badge/code%20style-marm-brightgreen.svg?style=flat-square
+[marm-url]: https://github.com/akileez/eslint-config-marm
 [stability-image]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [stability-url]: https://github.com/akileez/toolz
 [license-img]: https://img.shields.io/badge/license-ISC-blue.svg?style=flat-square
