@@ -1,3 +1,6 @@
+// adopted from: https://github.com/jonschlinkert/to-flags
+// Copyright (c) 2015, Jon Schlinkert. (MIT)
+
 var isPlainObject = require('../lang/isPlainObject')
 var toArg = require('./toArg')
 

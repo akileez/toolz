@@ -1,3 +1,6 @@
+// adopted from: to-flag <https://github.com/jonschlinkert/to-flag>
+// Copyright (c) 2015, Jon Schlinkert. (MIT)
+
 var dashify = require('./dashCase')
 var isPrimitive = require('../lang/isPrimitive')
 
