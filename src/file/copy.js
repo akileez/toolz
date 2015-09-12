@@ -45,10 +45,10 @@ function copy (files, dest, opts, cb) {
           // destination = revFile(destination)
           var fn = rename()(':dest/:file:bkup:ext')
           destination = fn({
-            dest: name.dirname(destination),
-            file: name.filename(destination),
-            ext: name.extname(destination),
-            bkup: //something goes here
+            dest: name.dir(destination),
+            file: name.file(destination),
+            ext: name.ext(destination),
+            bkup: 'hello'//something goes here
           })
         }
       }
