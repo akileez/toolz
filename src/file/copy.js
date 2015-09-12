@@ -2,11 +2,13 @@ var path      = require('path')
 var assert    = require('assert')
 var stat      = require('./stat')
 var exists    = require('./exists')
-var revFile   = require('./revFile')
+// var revFile   = require('./revFile')
 var readFile  = require('./readFile')
 var writeFile = require('./writeFile')
+var name      = require('../path/name')
 var segments  = require('../path/segments')
 var eachAsync = require('../async/iterate').map
+var rename    = require('../string/placeholders')
 
 // THIS NEEDS WORK!!
 // options: flatten, preserve [dir structure], noclobber.
@@ -40,7 +42,14 @@ function copy (files, dest, opts, cb) {
         if (stat(destination).content === stat(file).content) {
           return done(null, file)
         } else {
-          destination = revFile(destination)
+          // destination = revFile(destination)
+          var fn = rename()(':dest/:file:bkup:ext')
+          destination = fn({
+            dest: name.dirname(destination),
+            file: name.filename(destination),
+            ext: name.extname(destination),
+            bkup: //something goes here
+          })
         }
       }
 
