@@ -2,16 +2,17 @@ var path      = require('path')
 var assert    = require('assert')
 var stat      = require('./stat')
 var exists    = require('./exists')
-// var revFile   = require('./revFile')
 var readFile  = require('./readFile')
 var writeFile = require('./writeFile')
 var name      = require('../path/name')
 var segments  = require('../path/segments')
 var eachAsync = require('../async/iterate').map
+var randHex   = require('../random/randHex')
 var rename    = require('../string/placeholders')
 
-// THIS NEEDS WORK!!
-// options: flatten, preserve [dir structure], noclobber.
+// THIS STILL NEEDS WORK!!
+// optional rename function or parent path segment instead of randHex.
+// better error handling.
 function copy (files, dest, opts, cb) {
   var defaults = {flatten: false, noclobber: false}
 
@@ -42,13 +43,12 @@ function copy (files, dest, opts, cb) {
         if (stat(destination).content === stat(file).content) {
           return done(null, file)
         } else {
-          // destination = revFile(destination)
-          var fn = rename()(':dest/:file:bkup:ext')
+          var fn = rename()(':dest/:file:vers:ext')
           destination = fn({
-            dest: name.dir(destination),
-            file: name.file(destination),
-            ext: name.ext(destination),
-            bkup: 'hello'//something goes here
+            dest : name.dir(destination),
+            file : name.file(destination),
+            ext  : name.ext(destination),
+            vers : '-' + randHex(4)
           })
         }
       }
