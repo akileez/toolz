@@ -36,7 +36,7 @@ function copy (files, dest, opts, cb) {
       if (opts.flatten) method = 'last'
       else method = 'fromFirst'
 
-      filepath = segments[method](file)
+      filepath = segments[method](file) || file
       destination = path.resolve(dest, filepath)
 
       if (opts.noclobber && exists(destination)) {
