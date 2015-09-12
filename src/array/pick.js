@@ -15,22 +15,22 @@ var randInt = require('../random/randInt')
  *  pick.rand(arr, 3)   // [ 8, 3, 6 ]
  */
 
-// Returns the first item, or first `n` items of an array.
+// Returns the first item, or first `num` items of an array.
 function first (arr, num) {
   return slice(arr, 0, num || 1)
 }
 
-// Returns the last item, or lsat `n` items of an array.
+// Returns the last item, or last `num` items of an array.
 function last (arr, num) {
   return slice(arr, -num || arr.length - 1)
 }
 
-// Removes the last item or last `n` items before the end of an array
+// Removes the last item or last `num` items before the end of an array
 function before (arr, num) {
   return slice(arr, 0, -num || arr.length - 1)
 }
 
-// Removes the first item or first `n` items after the start of an array
+// Removes the first item or first `num` items after the start of an array
 function after (arr, num) {
   return slice(arr, num || 1)
 }
@@ -40,6 +40,7 @@ function between (arr, strt, end) {
   return slice(arr, strt || 0, end || arr.length - 1)
 }
 
+// Returns a random item or `num` items from an array
 function rand (arr, num) {
   if (num != null) {
     var result = []
@@ -62,6 +63,7 @@ function pickOne (arr) {
 exports.first   = first
 exports.last    = last
 exports.before  = before
+exports.initial = before
 exports.after   = after
 exports.between = between
 exports.rand    = rand
