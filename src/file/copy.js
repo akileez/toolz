@@ -13,6 +13,7 @@ var rename    = require('../string/placeholders')
 // THIS STILL NEEDS WORK!!
 // optional rename function or parent path segment instead of randHex.
 // better error handling and preserving timestamps
+// what if you are copying dir to dir??? didn't handle that case!
 function copy (files, dest, opts, cb) {
   var defaults = {flatten: false, noclobber: false}
 
