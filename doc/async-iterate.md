@@ -3,10 +3,10 @@ async-iterate
 
 lightweight iterators (reduce, map, each) of collections (array, plain object) with async callbacks
 
-## iterate::each(object, iterator, done)
-**object** - array/object for iteration
-**iterator** - function(value, key, done)
-**done** - function(error)
+#### `iterate::each(object, iterator, done)` 
+**object** - array/object for iteration  
+**iterator** - function(value, key, done)  
+**done** - function(error)  
 
 ```js
 var iterate = require('async-iterate');
