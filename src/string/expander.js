@@ -55,7 +55,7 @@ function expand (opts) {
 
       // if no value was retured from `look` or `resolveFunc`,
       // reset the value to `match`
-      val = val || match
+      if (val == null) val = match
 
 
       if (typeof val === 'object') {
