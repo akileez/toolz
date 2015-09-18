@@ -35,7 +35,8 @@ function expand (opts) {
   function resolveString (str, data) {
     var m
 
-    while (m = regex.exec(str)) {
+    while (regex.exec(str)) {
+      m = regex.exec(str)
       var orig = str
       var prop = (m[1] || m[2] || '').trim()
       var match = m[0]
@@ -56,7 +57,6 @@ function expand (opts) {
       // if no value was retured from `look` or `resolveFunc`,
       // reset the value to `match`
       if (val == null) val = match
-
 
       if (typeof val === 'object') {
         // if the value is an object, recurse to resolve
