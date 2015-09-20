@@ -6,35 +6,35 @@ var omit     = require('../object/omit')
 var kindOf   = require('../lang/kindOf')
 var isOr     = require('../lang/isOr')
 var toFlags  = require('../string/toFlags')
-var objVisit = require('./visit')
+var visit    = require('./visit')
 
-function Base () {
+function App () {
   Emitter.call(this)
   this.cache = {}
   this.options = this.cache.options = {}
 }
 
-Emitter(Base.prototype)
+Emitter(App.prototype)
 
-Base.prototype.set       = setter
-Base.prototype.get       = getter
-Base.prototype.has       = hasit
-Base.prototype.del       = removeit
-Base.prototype.option    = option
-Base.prototype.enable    = enable
-Base.prototype.disable   = disable
-Base.prototype.isEnabled = enabled
-Base.prototype.isDisabled = disabled
-Base.prototype.isTrue    = isTrue
-Base.prototype.isFalse   = isFalse
-Base.prototype.isBoolean = isBoolean
-Base.prototype.hasOption = hasOption
-Base.prototype.flags     = flags
-Base.prototype.visit     = visitor
+App.prototype.set       = setter
+App.prototype.get       = getter
+App.prototype.has       = hasit
+App.prototype.del       = removeit
+App.prototype.option    = option
+App.prototype.enable    = enable
+App.prototype.disable   = disable
+App.prototype.isEnabled = enabled
+App.prototype.isDisabled = disabled
+App.prototype.isTrue    = isTrue
+App.prototype.isFalse   = isFalse
+App.prototype.isBoolean = isBoolean
+App.prototype.hasOption = hasOption
+App.prototype.flags     = flags
+App.prototype.vis       = visitor
 
 // sets 'value' to 'key' of the cache
 function setter (key, value) {
-  if (arguments.length === 1 && typeof key === 'object') this.visit('set', key, value)
+  if (arguments.length === 1 && typeof key === 'object') this.vis('set', key, value)
   else set(this.cache, key, value)
   this.emit('set', key, value)
   return this
@@ -66,7 +66,7 @@ function option (key, val) {
   }
 
   if (isOr(kindOf(key), 'object', 'array')) {
-    return this.visit('option', [].slice.call(arguments))
+    return this.vis('option', [].slice.call(arguments))
   }
 
   set(this.options, key, val)
@@ -113,8 +113,8 @@ function flags (keys) {
 }
 
 function visitor (method, target) {
-  objVisit(this, method, target)
+  visit(this, method, target)
   return this
 }
 
-module.exports = Base
+module.exports = App
