@@ -1,67 +1,120 @@
-// adopted from: app-base <https://github.com/jonschlinkert/app-base
-// Copyright (c) 2015, Jon Schlinkert (MIT)
+var Emitter  = require('../util/Emitter')
+var set      = require('../object/set')
+var get      = require('../object/get')
+var has      = require('../object/has')
+var omit     = require('../object/omit')
+var kindOf   = require('../lang/kindOf')
+var isOr     = require('../lang/isOr')
+var toFlags  = require('../string/toFlags')
+var objVisit = require('./visit')
 
-var util = require('util')
-var set = require('../object/set')
-var get = require('../object/get')
-var del = require('../object/unset')
-var define = require('../lang/defineProperty')
-
-function App (options) {
-  if (!(this instanceof App)) return new App(options)
-  if (typeof options === 'object') this.visit('set', options)
+function Base () {
+  Emitter.call(this)
+  this.cache = {}
+  this.options = this.cache.options = {}
 }
 
-App.prototype = {
-  constructor: App,
-  set: setter,
-  get: getter,
-  del: unset,
-  define: demarcate,
-  visit: visitor
-}
+Emitter(Base.prototype)
 
-App.extend = function (Ctor, proto) {
-  util.inherits(Ctor, App)
-  var key
-  for (key in App) {
-    Ctor[key] = App[key]
-  }
+Base.prototype.set       = setter
+Base.prototype.get       = getter
+Base.prototype.has       = hasit
+Base.prototype.del       = removeit
+Base.prototype.option    = option
+Base.prototype.enable    = enable
+Base.prototype.disable   = disable
+Base.prototype.isEnabled = enabled
+Base.prototype.isDisabled = disabled
+Base.prototype.isTrue    = isTrue
+Base.prototype.isFalse   = isFalse
+Base.prototype.isBoolean = isBoolean
+Base.prototype.hasOption = hasOption
+Base.prototype.flags     = flags
+Base.prototype.visit     = visitor
 
-  if (typeof proto === 'object') {
-    var obj = Object.create(proto)
-    var k
-    for (k in obj) {
-      Ctor.prototype[k] = obj[k]
-    }
-  }
-}
-
+// sets 'value' to 'key' of the cache
 function setter (key, value) {
-  if (typeof key === 'object') this.visit('set', key, value)
-  else set(this, key, value)
+  if (arguments.length === 1 && typeof key === 'object') this.visit('set', key, value)
+  else set(this.cache, key, value)
+  this.emit('set', key, value)
   return this
 }
 
+// gets the cached value for 'key' or entire cache
 function getter (key) {
-  return key ? get(this, key) : this
+  return key ? get(this.cache, key) : this.cache
 }
 
-function unset (key) {
-  if (typeof key === 'object') this.visit('del', key)
-  else del(this, key)
+// checks if a cached value for 'key exists'
+function hasit (key) {
+  if (key.indexOf('.') === -1) return this.cache.hasOwnProperty(key)
+  return has(this.cache, key)
+}
+
+// remove 'keys' from the cache. if no value specified, the entire cache is reset
+function removeit (key) {
+  this.cache = key ? omit(this.cache, key) : {}
+  this.emit('del', key)
   return this
 }
 
-function demarcate (key, value) {
-  define(this, key, value)
+function option (key, val) {
+  if (arguments.length === 1 && kindOf(key) === 'string') {
+    if (key.indexOf('.') === -1) return this.options[key]
+
+    return get(this.options, key)
+  }
+
+  if (isOr(kindOf(key), 'object', 'array')) {
+    return this.visit('option', [].slice.call(arguments))
+  }
+
+  set(this.options, key, val)
+  this.emit('option', key, val)
   return this
 }
 
-function visitor (methos, val) {
-  if (Array.isArray(val)) return val.forEach(this.visit.bind(this, methos))
-  for (var key in val) this[methos](key, val[key])
+function enable (key) {
+  return this.option(key, true)
+}
+
+function disable (key) {
+  this.option(key, false)
+}
+
+function enabled (key) {
+  return Boolean(this.options[key])
+}
+
+function disabled (key) {
+  return !Boolean(this.options[key])
+}
+
+function isTrue (key) {
+  return this.options[key] === true
+}
+
+function isFalse (key) {
+  return this.options[key] === false
+}
+
+function isBoolean (key) {
+  return typeof this.options[key] === 'boolean'
+}
+
+function hasOption (key) {
+  if (key.indexOf('.') === -1) return this.options.hasOwnProperty(key)
+  return has(this.options, key)
+}
+
+function flags (keys) {
+  keys = keys || Object.keys(this.options)
+  return toFlags(this.options, keys)
+}
+
+function visitor (method, target) {
+  objVisit(this, method, target)
   return this
 }
 
-module.exports = App
+module.exports = Base
