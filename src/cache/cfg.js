@@ -3,7 +3,7 @@ var set      = require('../object/set')
 var look     = require('../object/look')
 var has      = require('../object/has')
 var omit     = require('../object/omit')
-var visit    = require('./visit')
+var visit    = require('../object/visit')
 
 function Cfg () {
   Emitter.call(this)

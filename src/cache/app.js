@@ -1,12 +1,13 @@
 var Emitter  = require('../util/Emitter')
 var set      = require('../object/set')
-var get      = require('../object/get')
+var get      = require('../object/look')
 var has      = require('../object/has')
 var omit     = require('../object/omit')
-var kindOf   = require('../lang/kindOf')
+var visit    = require('../object/visit')
 var isOr     = require('../lang/isOr')
+var kindOf   = require('../lang/kindOf')
 var toFlags  = require('../string/toFlags')
-var visit    = require('./visit')
+
 
 function App () {
   Emitter.call(this)
