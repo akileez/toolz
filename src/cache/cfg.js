@@ -20,7 +20,8 @@ Cfg.prototype.vis = visitor
 
 // sets 'value' to 'key' of the cache
 function setter (key, value) {
-  if (arguments.length === 1 && typeof key === 'object') this.vis('set', key, value)
+  if (arguments.length === 1 && typeof key === 'object')
+    this.vis('set', key, value)
   else set(this.cache, key, value)
   this.emit('set', key, value)
   return this
