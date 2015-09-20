@@ -4,15 +4,15 @@
 // enhance this!!!
 
 function matter (str) {
-  var basePattern = /^---[\s]+([\s\S]*?)[\s]+---([\s\S]*?)$/
-  var fmPattern   = /(.*?)\s*:\s*(?:(?:\[\s*(.*?)(?=\s*\]))|(.*))/g
+  var basePattern = /^---$([\s\S]*)^---\s/m
+  var fmPattern   = /(.*?)\s*:\s*(?:(?:\[\s*(.*?)(?=\s*\]))|(.*)|(\/.*\/[gimuy]+))/g
   var arrPattern  =  /\s?,\s?/g
 
   var results = basePattern.exec(str) || [null, null, str]
   var temp
   var fm = {
     data: {},
-    content: results[2].trim
+    content: str.replace(results[0], '') //results[2].trim
   }
 
   while (temp = fmPattern.exec(results[1]), temp) {
