@@ -12,10 +12,10 @@ function matter (str) {
   var temp
   var fm = {
     data: {},
-    content: str.replace(results[0], '') //results[2].trim
+    content: str.replace(results[0], '')
   }
 
-  while (temp = fmPattern.exec(results[1]), temp) {
+  while ((temp = fmPattern.exec(results[1]))) {
     fm.data[temp[1]] = temp[2] ? temp[2].split(arrPattern) : temp[3]
   }
 
