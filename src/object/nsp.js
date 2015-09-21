@@ -12,8 +12,6 @@ function nsp (obj, key, val) {
     obj = {}
   }
 
-  if (obj === undefined) obj = {}
-
   if (key.indexOf('.') > -1) {
     set(obj, key, val)
   } else {
