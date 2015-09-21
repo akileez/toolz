@@ -1,10 +1,13 @@
 // namespace a value and assign to a given object.
 // convenience function. I tend to do this often.
-// enhance as necessary.
+
+// set a top-level (flatten) object property
+// differs from `set` in that `obj` is optional and does
+// not create nested properties
 
 function nsp (obj, key, val) {
   if (!key && !val) return obj
-  if (arguments.length === 2 && val == null) {
+  if (val == null) {
     val = key
     key = obj
     obj = {}
