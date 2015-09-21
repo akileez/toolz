@@ -35,8 +35,7 @@ function expand (opts) {
   function resolveString (str, data) {
     var m
 
-    while (regex.exec(str)) {
-      m = regex.exec(str)
+    while ((m = regex.exec(str))) {
       var orig = str
       var prop = (m[1] || m[2] || '').trim()
       var match = m[0]
