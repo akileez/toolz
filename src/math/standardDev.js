@@ -1,17 +1,19 @@
-var sum = require('./add')
-var mean = require('./mean')
+// adopted from: array-std <https://github.com/doowb/array-std>
+// Copyright (c) 2015, Brian Woodward (MIT)
+
+var mean  = require('./mean')
+var map   = require('../array/map')
+var clean = require('./clean')
 
 function standardDev (arr) {
-  var count = arr.length
-  var statsmean = mean(arr)
-  var squaredArr = []
-  var i = -1
+  arr = clean(arr)
 
-  while (++i < count) {
-    squaredArr[i] = Math.pow((arr[i] - statsmean), 2)
-  }
+  var average = mean(arr)
+  var squares = map(arr, function (item) {
+    return Math.pow((item - average), 2)
+  })
 
-  return Math.sqrt((1 / count) * sum(squaredArr))
+  return Math.sqrt(mean(squares))
 }
 
 module.exports = standardDev
