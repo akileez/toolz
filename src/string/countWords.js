@@ -8,7 +8,7 @@ function countWords (data) {
 
   var count = 0
 
-  if( m === null ) return count
+  if (m === null) return count
 
   var i = -1
   var len = m.length
