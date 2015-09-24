@@ -1,5 +1,6 @@
 // removes all non essential items from an array for statistical anaylsis
-// ensures the array length is correct when doing calculations
+// ensures the array length is equal to the number of items
+// being used in calculations
 
 var isNumber = require('../number/isNumber')
 
