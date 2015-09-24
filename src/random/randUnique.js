@@ -14,7 +14,9 @@ function randUnique (min, max) {
   var prev
   return function rand () {
     var num = Math.floor(random() * (max - min + 1) + min)
-    return prev = num === prev && min !== max ? rand() : num
+    prev = num === prev && min !== max ? rand() : num
+
+    return prev
   }
 }
 

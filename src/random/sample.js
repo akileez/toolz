@@ -30,5 +30,4 @@ function sample (lower, upper, num, precision) {
   }
 }
 
-
 module.exports = sample

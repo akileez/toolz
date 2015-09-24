@@ -7,3 +7,5 @@ function randFloat (min, max) {
   }
   return random() * (max - min) + min
 }
+
+module.exports = randFloat

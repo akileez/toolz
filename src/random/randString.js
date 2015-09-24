@@ -9,7 +9,7 @@ function randomString (length, dictionary) {
   if (!isString(dictionary) || dictionary.length < 1) dictionary = defaultDict
 
   var result = ''
-  var domain = dictionary.length -1
+  var domain = dictionary.length - 1
   while (length--) {
     result += dictionary[randInt(0, domain)]
   }
