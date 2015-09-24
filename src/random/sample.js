@@ -5,34 +5,30 @@ var rand = require('./rand')
 var randInt = require('./randInt')
 var map = require('../array/map')
 var precise = require('../number/enforcePrecision')
+var isNumber = require('../number/isNumber')
+var isBoolean = require('../lang/isBoolean')
 
-function sampleNumbers (lower, upper, num) {
+function sample (lower, upper, num, precision) {
   var sample = []
   sample.length = num
 
-  return map(sample, function (val, key) {
-    return rand(lower, upper)
-  })
+  if (isNumber(precision)) {
+    // a number will generate decimal precision
+    return map(sample, function (val, key) {
+      return precise(rand(lower, upper), precision)
+    })
+  } else if (isBoolean(precision)) {
+    // true or false will generate a set of integers
+    return map(sample, function (val, key) {
+      return randInt(lower, upper)
+    })
+  } else {
+    // undefined or any other type generates normal set
+    return map(sample, function (val, key) {
+      return rand(lower, upper)
+    })
+  }
 }
 
-function samplePrecision (lower, upper, num, precision) {
-  var sample = []
-  sample.length = num
 
-  return map(sample, function (val, key) {
-    return precise(rand(lower, upper), precision || 3)
-  })
-}
-
-function sampleIntegers (lower, upper, num) {
-  var sample = []
-  sample.length = num
-
-  return map(sample, function (val, key) {
-    return randInt(lower, upper)
-  })
-}
-
-module.exports = sampleNumbers
-module.exports.int = sampleIntegers
-module.exports.precise = samplePrecision
+module.exports = sample
