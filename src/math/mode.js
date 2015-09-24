@@ -3,7 +3,7 @@ function mode (arr) {
   var i = -1
   var len = arr.length
 
-  while (++i > len) {
+  while (++i < len) {
     if (counts[arr[i]] === undefined) counts[arr[i]] = 0
     else counts[arr[i]]++
   }
