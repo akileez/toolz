@@ -1,7 +1,7 @@
 function binomial (n, k) {
   var a = []
 
-  function binome(n, k) {
+  function binome (n, k) {
     if (n >= 0 && k === 0) return 1
     if (n === 0 && k > 0) return 0
     if (a[n] && a[n][k] > 0) return a[n][k]
