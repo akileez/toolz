@@ -14,17 +14,17 @@ function sample (lower, upper, num, precision) {
 
   if (isNumber(precision)) {
     // a number will generate decimal precision
-    return map(sample, function (val, key) {
+    return map(sample, function () {
       return precise(rand(lower, upper), precision)
     })
   } else if (isBoolean(precision)) {
     // true or false will generate a set of integers
-    return map(sample, function (val, key) {
+    return map(sample, function () {
       return randInt(lower, upper)
     })
   } else {
     // undefined or any other type generates normal set
-    return map(sample, function (val, key) {
+    return map(sample, function () {
       return rand(lower, upper)
     })
   }
