@@ -1,7 +1,7 @@
-var clean = require('./clean')
+var scrub = require('./scrub')
 
 function sub (arr) {
-  return clean(arr)
+  return scrub(arr)
     .reduce(function (diff, item, key) {
       if (key === 0) return diff = item
       return diff -= item

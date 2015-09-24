@@ -2,10 +2,10 @@ var mean = require('./mean')
 var median = require('./median')
 var quantile = require('./quantile')
 var stdDev = require('./standardDev')
-var clean = require('./clean')
+var scrub = require('./scrub')
 
 function report (arr) {
-  arr = clean(arr)
+  arr = scrub(arr)
   return {
     mean: mean(arr),
     firstQuartile: quantile(arr, 1, 4),

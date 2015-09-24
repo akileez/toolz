@@ -3,10 +3,10 @@
 
 var mean  = require('./mean')
 var map   = require('../array/map')
-var clean = require('./clean')
+var scrub = require('./scrub')
 
 function standardDev (arr) {
-  arr = clean(arr)
+  arr = scrub(arr)
 
   var average = mean(arr)
   var squares = map(arr, function (item) {

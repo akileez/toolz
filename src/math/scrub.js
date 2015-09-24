@@ -3,12 +3,12 @@
 
 var isNumber = require('../number/isNumber')
 
-function clean (arr) {
-  if (!Array.isArray(arr)) throw new Error('math/clean.js Expects an array')
+function scrub (arr) {
+  if (!Array.isArray(arr)) throw new Error('math/scrub.js Expects an array')
 
   return arr.filter(function (value) {
     return isNumber(value) && (value != null)
   })
 }
 
-module.exports = clean
+module.exports = scrub

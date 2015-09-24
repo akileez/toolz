@@ -1,7 +1,7 @@
-var clean = require('./clean')
+var scrub = require('./scrub')
 
 function add (arr) {
-  return clean(arr)
+  return scrub(arr)
     .reduce(function (sum, item) {
       return sum += item
     })

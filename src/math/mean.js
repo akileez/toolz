@@ -1,5 +1,5 @@
 var add   = require('./add')
-var reset = require('./clean')
+var reset = require('./scrub')
 
 function mean (arr) {
   var sum   = add(arr)
