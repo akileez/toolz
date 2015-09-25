@@ -8,7 +8,7 @@ function mapKeys (obj, fn, thisObj) {
   fn = makeIterator(fn, thisObj)
   var output = {}
 
-  forOwn(obj, function(val, key, obj) {
+  forOwn(obj, function (val, key, obj) {
     output[fn(val, key, obj)] = val
   })
   return output

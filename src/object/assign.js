@@ -7,14 +7,17 @@ var get = require('./get')
 var set = require('./set')
 
 function assignValue (obj, prop, value) {
-  if (!isObject(obj))
+  if (!isObject(obj)) {
     throw new TypeError('assignValue expects first arg to be an object')
+  }
 
-  if (typeof prop === 'undefined' && typeof value === 'undefined')
+  if (typeof prop === 'undefined' && typeof value === 'undefined') {
     return obj
+  }
 
-  if (typeof value === 'undefined' && isObject(prop))
+  if (typeof value === 'undefined' && isObject(prop)) {
     return extend(obj, prop)
+  }
 
   set(obj, prop, extend({}, get(obj, prop), value))
 

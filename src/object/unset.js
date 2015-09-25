@@ -6,7 +6,7 @@ function unset (obj, prop) {
   if (has(obj, prop)) {
     var parts = prop.split('.')
     var last = parts.pop()
-    while (prop = parts.shift()) {
+    while ((prop = parts.shift())) {
       obj = obj[prop]
     }
     return (delete obj[last])

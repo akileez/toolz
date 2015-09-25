@@ -9,7 +9,7 @@ function pick (obj, var_keys) {
   var i = 0
   var key
 
-  while (key = keys[i++]) {
+  while ((key = keys[i++])) {
     out[key] = obj[key]
   }
   return out

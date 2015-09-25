@@ -26,7 +26,7 @@ function keysIn (obj) {
     result[idx] = (idx + '')
   }
   for (var key in obj) {
-    if (!(skipIndexes && isIndex(key, len)) && !(key == 'constructor' && (isProto || hasOwn(obj, key)))) {
+    if (!(skipIndexes && isIndex(key, len)) && !(key === 'constructor' && (isProto || hasOwn(obj, key)))) {
       result.push(key)
     }
   }

@@ -5,16 +5,16 @@ var toObject = require('../lang/toObject')
 
 var propIsEnumerable = Object.prototype.propertyIsEnumerable
 
-function ownEnumerableKeys(obj) {
+function ownEnumerableKeys (obj) {
   var keys = Object.getOwnPropertyNames(obj)
-  if (Object.getOwnPropertySymbols)
+  if (Object.getOwnPropertySymbols) {
     keys = keys.concat(Object.getOwnPropertySymbols(obj))
+  }
 
   return keys.filter(function (key) {
     return propIsEnumerable.call(obj, key)
   })
 }
-
 
 module.exports = Object.assign || function (target, source) {
   var from

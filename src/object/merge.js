@@ -15,7 +15,7 @@ function merge () {
   // objects are pass by reference
   target = deepClone(arguments[0])
 
-  while (obj = arguments[i++]) {
+  while ((obj = arguments[i++])) {
     for (key in obj) {
       if (!hasOwn(obj, key)) continue
 

@@ -20,7 +20,7 @@ function setValue (obj, path, value) {
   while (nested != null && ++idx < len) {
     var key = path[idx]
     if (isObject(nested)) {
-      if (idx == lastIdx) nested[key] = value
+      if (idx === lastIdx) nested[key] = value
       else if (nested[key] == null) nested[key] = isIndex(path[idx + 1]) ? [] : {}
     }
     nested = nested[key]
