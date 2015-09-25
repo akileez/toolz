@@ -26,15 +26,17 @@ function fileShouldBeIncluded (relativePath, include, exclude) {
 
   // exclude expression passed
   if (exclude) {
-    if (!(exclude instanceof RegExp)) throw new Error("pass a RegExp")
+    if (!(exclude instanceof RegExp)) throw new Error('pass a RegExp')
     excluded = exclude.test(relativePath)
   }
 
   // include expression passed
   if (include) {
-    if (!(include instanceof RegExp)) throw new Error("pass a RegExp")
+    if (!(include instanceof RegExp)) throw new Error('pass a RegExp')
     included = include.test(relativePath)
   }
 
   return included && !excluded
 }
+
+module.exports = expandFileList

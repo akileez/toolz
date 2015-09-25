@@ -1,6 +1,5 @@
 function extend (target) {
   var arg
-  var key
   var len = arguments.length
   var i = 0
 

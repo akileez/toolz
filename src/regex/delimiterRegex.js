@@ -22,11 +22,11 @@ function delimiters (open, close, options) {
     close = syntax[1]
   }
 
-  var opts = extend ({flags: ''}, options)
+  var opts = extend({flags: ''}, options)
   var body = '([\\s\\S]+?)'
 
-  open = open ? open : '\\${'
-  close = close ? close : '}'
+  open = open || '\\${'
+  close = close || '}'
 
   return new RegExp(open + body + close, opts.flags)
 }

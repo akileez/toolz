@@ -12,8 +12,9 @@ var flags = {
 function regexFlags (regex) {
   var res = ''
   Object.keys(flags).forEach(function (flag) {
-    if (flags.hasOwnProperty(flag) && regex[flag])
+    if (flags.hasOwnProperty(flag) && regex[flag]) {
       res += flags[flag]
+    }
   })
   return res
 }
