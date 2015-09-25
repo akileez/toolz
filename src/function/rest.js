@@ -3,10 +3,18 @@
 
 // NOTE: This method is based on the [rest paramter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters)
 
+// var say = rest(function(what, names) {
+//   return what + ' ' + _.initial(names).join(', ') +
+//     (_.size(names) > 1 ? ', & ' : '') + _.last(names);
+// });
+//
+// say('hello', 'fred', 'barney', 'pebbles');
+// => 'hello fred, barney, & pebbles'
+
 function rest (func, strt) {
   if (typeof func != 'function') throw new TypeError('Expected a function')
 
-  strt = Math.max(strt === undefined ? (func.length -1) : (+strt || 0), 0)
+  strt = Math.max(strt === undefined ? (func.length - 1) : (+strt || 0), 0)
   return function () {
     var args = arguments
     var idx = -1
@@ -22,7 +30,7 @@ function rest (func, strt) {
       case 2: return func.call(this, args[0], args[1], params)
     }
     var otherArgs = Array(strt + 1)
-    var idx = -1
+    idx = -1
     while (++idx < strt) {
       otherArgs[idx] = args[idx]
     }
@@ -32,11 +40,3 @@ function rest (func, strt) {
 }
 
 module.exports = rest
-
-// var say = rest(function(what, names) {
-//   return what + ' ' + _.initial(names).join(', ') +
-//     (_.size(names) > 1 ? ', & ' : '') + _.last(names);
-// });
-//
-// say('hello', 'fred', 'barney', 'pebbles');
-// => 'hello fred, barney, & pebbles'
