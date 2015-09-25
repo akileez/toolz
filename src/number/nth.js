@@ -1,7 +1,7 @@
 // code from dateforate.js
 // gotta love the eloquence
 function nth (i) {
-  return ['th', 'st', 'nd', 'rd'][i % 10 > 3 ? 0 : (i % 100 - i % 10 != 10) * i % 10]
+  return ['th', 'st', 'nd', 'rd'][i % 10 > 3 ? 0 : (i % 100 - i % 10 !== 10) * i % 10]
 }
 
 module.exports = nth

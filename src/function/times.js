@@ -7,3 +7,5 @@ function times (n, fn, thisObj) {
   }
   return times
 }
+
+module.exports = times

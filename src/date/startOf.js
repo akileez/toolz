@@ -14,8 +14,7 @@ function startOf (date, period) {
     case 'day'    : date.setHours(0)   // falls through
     case 'hour'   : date.setMinutes(0) // falls through
     case 'minute' : date.setSeconds(0) // falls through
-    case 'second' : date.setMilliseconds(0)
-                    break
+    case 'second' : date.setMilliseconds(0); break
     default       : throw new Error('"' + period + '" is not a valid period')
   }
 

@@ -64,7 +64,7 @@ function hasOption (key) {
 // create a constant for setting and getting values
 function constant (key, value, namespace) {
   var getter
-  if (typeof value !== 'function') getter = function () {return value}
+  if (typeof value !== 'function') getter = function () { return value }
   else getter = value
 
   namespace = namespace || 'cache'

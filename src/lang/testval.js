@@ -30,7 +30,6 @@ function testValue (val, test) {
 
       return isNegated ? !result : result
     })
-
   } else if (Array.isArray(test)) {
     var tests = test
     if (!Array.isArray(val)) val = [val]
@@ -40,16 +39,13 @@ function testValue (val, test) {
         return testValue(value, test)
       })
     })
-
   } else if (test instanceof RegExp) {
     // regexes queries will always return `false` for `null`, `undefined`, `NaN`.
     // This is to prevent a query like `/.+/` matching the string `undefined`.
     if (['boolean', 'string', 'number'].indexOf(typeof val) === -1) return false
     else return test.test(val)
-
   } else if (typeof test === 'function') {
     return test(val)
-
   } else {
     return test === val
   }

@@ -4,7 +4,7 @@ var deepMatches = require('../object/deepMatches')
 
 function makeIterator (src, thisObj) {
   if (src == null) return identity
-  switch(typeof src) {
+  switch (typeof src) {
     case 'function' :
       return (typeof thisObj !== 'undefined') ? function (value, idx, arr) {
         return src.call(thisObj, value, idx, arr)

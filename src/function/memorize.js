@@ -30,7 +30,7 @@ function memorize (func, resolver) {
     memorized.cache = cache.set(key, result)
     return result
   }
-  memorized.cache = new memorize.Cache
+  memorized.cache = new memorize.Cache()
 
   return memorized
 }

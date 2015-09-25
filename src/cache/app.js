@@ -8,7 +8,6 @@ var isOr     = require('../lang/isOr')
 var kindOf   = require('../lang/kindOf')
 var toFlags  = require('../string/toFlags')
 
-
 function App () {
   Emitter.call(this)
   this.cache = {}
