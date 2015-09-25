@@ -4,7 +4,7 @@ function getValue (obj, prop) {
   var parts = prop.split('.')
   var last = parts.pop()
 
-  while (prop = parts.shift()) {
+  while ((prop = parts.shift())) {
     obj = obj[prop]
     if (obj == null) return
   }
