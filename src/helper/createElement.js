@@ -32,7 +32,7 @@ function closeTag (type) {
 }
 
 function createElement(type, attr, contents) {
-  var closing = emptyTags.indexOf(type) === -1 ? true : false
+  var closing = (emptyTags.indexOf(type) === -1)
 
   return openTag(type, closing, attr) + (closing ? (contents || '') + closeTag(type) : '')
 }
