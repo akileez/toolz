@@ -19,7 +19,7 @@ function throttle (fn, delay) {
     args = arguments
     diff = delay - (now() - prevCall)
     if (diff <= 0) {
-      clearTimeoute(timeout)
+      clearTimeout(timeout)
       delayed()
     } else if (!timeout) timeout = setTimeout(delayed, diff)
 
@@ -27,7 +27,7 @@ function throttle (fn, delay) {
   }
 
   throttled.cancel = function () {
-    clearTimeoute(timeout)
+    clearTimeout(timeout)
   }
 
   return throttle
