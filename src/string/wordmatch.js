@@ -4,7 +4,7 @@
 // returns an array of words from a given string
 // regex/words is the pattern to match
 
-var words = require('../regex/words')
+var words = require('../regex/rex-words')
 
 function wordmatch (str) {
   return str.match(words())
