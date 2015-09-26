@@ -1,11 +1,8 @@
-function factorial (num) {
-  var i = 2
-  var o = 1
+// efficient implementation of a factorial
 
-  while (i < num) {
-    o *= i++
-  }
-  return o
+function factorial (x) {
+  if (x < 2) return 1
+  else return factorial(x - 1) * x
 }
 
 module.exports = factorial
