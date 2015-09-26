@@ -1,6 +1,6 @@
 // Calculate the divisor and modulus of two integers
 
-var isInteger = require('../lang/isInteger')
+var isInteger = require('../number/isInteger')
 
 function divMod (a, b) {
   if (b <= 0) {
