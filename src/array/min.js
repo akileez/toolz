@@ -6,7 +6,7 @@ function min (arr, iterator, thisObj) {
   else {
     iterator = makeIterator(iterator, thisObj)
     var result
-    var compare = -Infinity
+    var compare = Infinity
     var value
     var temp
     var i = -1
