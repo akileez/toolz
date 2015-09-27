@@ -4,3 +4,5 @@ function isFinite (num) {
     && num !== Infinity
     && num !== -Infinity
 }
+
+module.exports = isFinite
