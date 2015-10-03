@@ -1,27 +1,37 @@
-// adopted from: <https://github.com/jonschlinkert/assign-value>
-// Copyright (c) 2015, Jon Schlinkert. (MIT)
+// adopted from: sindresorhus/object-assign
+// Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT)
 
-var isObject = require('../lang/isObject')
-var extend = require('./extend')
-var get = require('./get')
-var set = require('./set')
+var toObject = require('../lang/toObject')
 
-function assignValue (obj, prop, value) {
-  if (!isObject(obj)) {
-    throw new TypeError('assignValue expects first arg to be an object')
+var propIsEnumerable = Object.prototype.propertyIsEnumerable
+
+function ownEnumerableKeys (obj) {
+  var keys = Object.getOwnPropertyNames(obj)
+  if (Object.getOwnPropertySymbols) {
+    keys = keys.concat(Object.getOwnPropertySymbols(obj))
   }
 
-  if (typeof prop === 'undefined' && typeof value === 'undefined') {
-    return obj
-  }
-
-  if (typeof value === 'undefined' && isObject(prop)) {
-    return extend(obj, prop)
-  }
-
-  set(obj, prop, extend({}, get(obj, prop), value))
-
-  return obj
+  return keys.filter(function (key) {
+    return propIsEnumerable.call(obj, key)
+  })
 }
 
-module.exports = assignValue
+function assign (target, source) {
+  var from
+  var keys
+  var to = toObject(target)
+  var s = 0
+  var len = arguments.length
+
+  while (++s < len) {
+    from = arguments[s]
+    keys = ownEnumerableKeys(Object(from))
+
+    for (var i = 0; i < keys.length; i++) {
+      to[keys[i]] = from[keys[i]]
+    }
+  }
+  return to
+}
+
+module.exports = Object.assign || assign
