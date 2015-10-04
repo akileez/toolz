@@ -1,31 +1,43 @@
 // adeopted from: https://github.com/75lb/byte-size
 // Copyright (c) 2015 Lloyd Brookes <75pound@gmail.com> (MIT)
+// default values are IEC (International Electrotechnical Commission)
 
-function bytesConvert (bytes, precision) {
-  precision = precision || 2
-  var kilo = 1024
-  var mega = kilo * 1024
-  var giga = mega * 1024
-  var tera = giga * 1024
+function bytesConvert (bytes, opts) {
+  var defs = {units: 'iec', precision: 2}
 
-  // start doing this instead of "switch statment"
-  if ((bytes >= 0) && (bytes < kilo))
-    return bytes + ' B'
+  opts = opts || {}
+  opts.units = opts.units || defs.units
+  opts.precision = opts.precision || defs.precision
 
-  else if ((bytes >= kilo) && (bytes < mega))
-    return (bytes / kilo).toFixed(precision) + ' KB'
+  var matrix = [
+    {from: 0, to: 1, metric: 'B', iec: 'B'},
+    {from: 1, to: 2, metric: 'kB', iec: 'KiB'},
+    {from: 2, to: 3, metric: 'MB', iec: 'MiB'},
+    {from: 3, to: 4, metric: 'GB', iec: 'GiB'},
+    {from: 4, to: 5, metric: 'TB', iec: 'TiB'},
+    {from: 5, to: 6, metric: 'PB', iec: 'PiB'},
+    {from: 6, to: 7, metric: 'EB', iec: 'EiB'},
+    {from: 7, to: 8, metric: 'ZB', iec: 'ZiB'},
+    {from: 8, to: 9, metric: 'YB', iec: 'YiB'}
+  ]
 
-  else if ((bytes >= mega) && (bytes < giga))
-    return (bytes / mega).toFixed(precision) + ' MB'
+  var base = opts.units === 'iec' ? 1024 : 1000
+  var i = -1
+  var len = matrix.length
 
-  else if ((bytes >= giga) && (bytes < tera))
-    return (bytes / giga).toFixed(precision) + ' GB'
+  while (++i < len) {
+    var lower = Math.pow(base, matrix[i].from)
+    var upper = Math.pow(base, matrix[i].to)
 
-  else if (bytes >= tera)
-    return (bytes / tera).toFixed(precision) + ' TB'
+    if (bytes >= lower && bytes < upper) {
+      var units = matrix[i][opts.units]
 
-  else
-    return bytes + ' B'
+      if (i === 0) return bytes + ' ' + units
+      else return (bytes / lower).toFixed(opts.precision) + ' ' + units
+    }
+  }
+
+  return bytes
 }
 
 module.exports = bytesConvert
