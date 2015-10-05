@@ -1,7 +1,7 @@
 var toFixed = require('./toFixed')
 
-function toPercent (n, i, l) {
-  return toFixed(n * 100, i, l-1) + '%'
+function toPercent (num, precision, padding) {
+  return toFixed(n * 100, precision, padding) + '%'
 }
 
 module.exports = toPercent
