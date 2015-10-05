@@ -1,43 +1,48 @@
-// adeopted from: https://github.com/75lb/byte-size
+// adeopted from: byte-size <https://github.com/75lb/byte-size> and
+// pretty-bytes <https://github.com/sindresorhus/pretty-bytes>
+
 // Copyright (c) 2015 Lloyd Brookes <75pound@gmail.com> (MIT)
+// Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT
+// respectively.)
+
 // default values are IEC (International Electrotechnical Commission)
 
-function bytesConvert (bytes, opts) {
-  var defs = {units: 'iec', precision: 2}
-
+function bytes (num, opts) {
   opts = opts || {}
+
+  var defs = {
+    units: 'iec',
+    precision: 2,
+    metric: ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+    iec: ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+  }
+
   opts.units = opts.units || defs.units
   opts.precision = opts.precision || defs.precision
 
-  var matrix = [
-    {from: 0, to: 1, metric: 'B', iec: 'B'},
-    {from: 1, to: 2, metric: 'kB', iec: 'KiB'},
-    {from: 2, to: 3, metric: 'MB', iec: 'MiB'},
-    {from: 3, to: 4, metric: 'GB', iec: 'GiB'},
-    {from: 4, to: 5, metric: 'TB', iec: 'TiB'},
-    {from: 5, to: 6, metric: 'PB', iec: 'PiB'},
-    {from: 6, to: 7, metric: 'EB', iec: 'EiB'},
-    {from: 7, to: 8, metric: 'ZB', iec: 'ZiB'},
-    {from: 8, to: 9, metric: 'YB', iec: 'YiB'}
-  ]
+  var exp
+  var base
+  var unit
+  var units
 
-  var base = opts.units === 'iec' ? 1024 : 1000
-  var i = -1
-  var len = matrix.length
-
-  while (++i < len) {
-    var lower = Math.pow(base, matrix[i].from)
-    var upper = Math.pow(base, matrix[i].to)
-
-    if (bytes >= lower && bytes < upper) {
-      var units = matrix[i][opts.units]
-
-      if (i === 0) return bytes + ' ' + units
-      else return (bytes / lower).toFixed(opts.precision) + ' ' + units
-    }
+  if (opts.units === 'metric') {
+    base = 1000
+    units = defs.metric
+  } else {
+    base = 1024
+    units = defs.iec
   }
 
-  return bytes
+  var neg = num < 0
+
+  if (neg) num = -num
+  if (num < 1) return (neg ? '-' : '') + num + ' B'
+
+  exp = Math.min(Math.floor(Math.log(num) / Math.log(base)), units.length - 1)
+  num = (num / Math.pow(base, exp)).toFixed(opts.precision) * 1
+  unit = units[exp]
+
+  return (neg ? '-' : '') + num + ' ' + unit
 }
 
-module.exports = bytesConvert
+module.exports = bytes
