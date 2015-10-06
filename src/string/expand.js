@@ -1,5 +1,5 @@
-// really basic version of ./expander.js. focused solely
-// on string replacements within objects/arrays/strings.
+// basic version of ./expander.js but enhanced version of ./interpolate.js
+// focused solely on string replacements within objects/arrays/strings.
 
 var kindOf = require('../lang/kindOf')
 var look   = require('../object/look')
