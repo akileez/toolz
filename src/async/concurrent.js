@@ -154,7 +154,7 @@ function asyncParallel (obj, done) {
   asyncReduce(obj, [], function (resultObject, v, k, done) {
     v(function (err, res) {
       resultObject.push(res)
-      done(null, resultObject)
+      done(err, resultObject)
     })
   }, done)
 }
