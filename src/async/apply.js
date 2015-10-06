@@ -1,4 +1,4 @@
-var rest = require('../src/function/rest')
+var rest = require('../function/rest')
 
 // adopted from async.apply
 
