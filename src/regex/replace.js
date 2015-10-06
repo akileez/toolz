@@ -1,4 +1,4 @@
-function replace (re, replacement, str) {
+function replace (str, re, replacement) {
   return str.replace(re, replacement)
 }
 
