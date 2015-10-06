@@ -13,7 +13,7 @@ function stripIndent (str) {
   var re = new RegExp('^[ \\t]{' + indent + '}', 'gm')
 
   return indent > 0
-    ? replace(re, '', str)
+    ? replace(str, re, '')
     : str
 }
 

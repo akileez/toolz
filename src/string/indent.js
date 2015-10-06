@@ -15,7 +15,7 @@ function indent (str, char, num) {
 
   var re = /^(?!\s*$)/mg
 
-  return replace(re, char, str)
+  return replace(str, re, char)
 }
 
 module.exports = indent
