@@ -1,4 +1,4 @@
-var replace = require('../regex/replace2')
+var replace = require('../regex/replace')
 
 function doubleQuotes (str) {
   var re = /(?:\\*)?'([^'\\]*\\.)*[^']*'/g

@@ -2,7 +2,7 @@
 // Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT)
 // Similar to String#trim() but removes only whitespace on the left
 
-var replace = require('../regex/replace2')
+var replace = require('../regex/replace')
 
 function trimLeft (str) {
   var re = /^[\s\uFEFF\u00A0]+/

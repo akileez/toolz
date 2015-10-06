@@ -1,4 +1,4 @@
-var replace = require('../regex/replace2')
+var replace = require('../regex/replace')
 
 function singleQuotes (str) {
   var re = /(?:\\*)?"([^"\\]*\\.)*[^"]*"/g
