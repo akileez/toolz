@@ -6,10 +6,8 @@ function asyncEachArray (arr, iterator, done) {
   if (!arr || !arr.length) return done()
 
   var idx = -1
-  var len
-  var lastIdx
-
-  lastIdx = len = arr.length
+  var len = arr.length
+  var lastIdx = arr.length
 
   while (++idx < lastIdx) {
     iterator(arr[idx], idx, next)
