@@ -5,20 +5,11 @@
 // Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT
 // respectively.)
 
-// default values are IEC (International Electrotechnical Commission)
+// default values are (ISO/IEC 80000) (International Electrotechnical Commission)
+// reference: http://pacoup.com/2009/05/26/kb-kb-kib-whats-up-with-that/
 
 function bytes (num, opts) {
-  opts = opts || {}
-
-  var defs = {
-    units: 'iec',
-    precision: 2,
-    metric: ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
-    iec: ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
-  }
-
-  opts.units = opts.units || defs.units
-  opts.precision = opts.precision || defs.precision
+  opts = defaultOps(opts)
 
   var exp
   var base
@@ -27,14 +18,15 @@ function bytes (num, opts) {
 
   if (opts.units === 'metric') {
     base = 1000
-    units = defs.metric
+    units = opts.metric
   } else {
     base = 1024
-    units = defs.iec
+    units = opts.iec
   }
 
   var neg = num < 0
 
+  // convert negative num to positive
   if (neg) num = -num
   if (num < 1) return (neg ? '-' : '') + num + ' B'
 
@@ -43,6 +35,16 @@ function bytes (num, opts) {
   unit = units[exp]
 
   return (neg ? '-' : '') + num + ' ' + unit
+}
+
+function defaultOps (opts) {
+  opts = opts || {}
+  opts.units = opts.units || 'iec'
+  opts.precision = opts.precision || 2
+  opts.metric = ['B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+  opts.iec = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+
+  return opts
 }
 
 module.exports = bytes
