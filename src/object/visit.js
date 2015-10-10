@@ -4,9 +4,6 @@
 //   collection-visit <https://github.com/jonschlinkert/collection-visit>
 // Copyright (c) 2015, Jon Schlinkert -- MIT
 
-// var forOwn = require('./forOwn')
-// var forEach = require('../array/forEach')
-
 /*
     var visit = require('visit');
 
@@ -31,28 +28,15 @@
 */
 
 function objVisit (thisArg, method, target) {
-  // for (var key in target) {
-  //   if (target.hasOwnProperty(key)) thisArg[method](key, target[key])
-  // }
-  // want to stop using for-in loops
-
-  Object.keys(target).forEach(function (val, idx, arr) {
-    if (target.hasOwnProperty(val)) thisArg[method](val, target[val])
-  })
-
-  // new code awaiting test results:
-  // forOwn(target, function (val, key) {
-  //   thisArg[method](val, target[val])
-  // })
+  for (var key in target) {
+    if (target.hasOwnProperty(key)) thisArg[method](key, target[key])
+  }
 
   return thisArg
 }
 
 function arrVisit (thisArg, method, array) {
-  // new code awaiting test results:
-  // forEach(array, function (val) {
-  //   objVisit(thisArg, method, val)
-  // })
+
   array.forEach(function (obj) {
     objVisit(thisArg, method, obj)
   })
