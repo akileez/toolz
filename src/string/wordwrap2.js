@@ -8,6 +8,7 @@
 // slower than https://github.com/jonschlinkert/word-wrap by a factor
 // of approximately 1
 
+var forEach = require('toolz/src/array/forEach')
 var toArray = require('../lang/toArray')
 
 function wrap (text, opts) {
@@ -23,7 +24,7 @@ function wrapLines (text, opts) {
   var lines = []
   var line = ''
 
-  words.forEach(function (word) {
+  forEach(words, function (word) {
     var wordLength = opts.ignore
       ? replaceIgnored(word, opts.ignore).length
       : word.length
