@@ -8,7 +8,7 @@
 // slower than https://github.com/jonschlinkert/word-wrap by a factor
 // of approximately 1
 
-var forEach = require('toolz/src/array/forEach')
+var forEach = require('../array/forEach')
 var toArray = require('../lang/toArray')
 
 function wrap (text, opts) {
