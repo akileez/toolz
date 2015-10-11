@@ -1,11 +1,13 @@
-var forOwn = require('./forOwn')
+function keys (obj) {
+  var result = []
+  var key
 
-var keys = Object.keys || function (obj) {
-  var keys = []
-  forOwn(obj, function (value, key) {
-    keys.push(key)
-  })
-  return keys
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      result.push(key)
+    }
+  }
+  return result
 }
 
 module.exports = keys
