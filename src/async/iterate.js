@@ -26,7 +26,7 @@ function asyncEach (obj, iterator, done) {
     return
   }
 
-  asyncEachArray(obj && Object.keys(obj), function (key, index, done) {
+  asyncEachArray(obj && keys(obj), function (key, index, done) {
     iterator(obj[key], key, done)
   }, done)
 }
@@ -183,6 +183,18 @@ function _baseSlice (arr, start) {
   var result = Array(len)
   while (++idx < len) {
     result[idx] = arr[idx + start]
+  }
+  return result
+}
+
+function keys (obj) {
+  var result = []
+  var key
+
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      result.push(key)
+    }
   }
   return result
 }
