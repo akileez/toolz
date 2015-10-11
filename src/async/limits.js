@@ -33,7 +33,7 @@ function asyncEach (obj, limit, iterator, done) {
     return
   }
 
-  asyncEachArray(obj && Object.keys(obj), limit, function (key, index, done) {
+  asyncEachArray(obj && keys(obj), limit, function (key, index, done) {
     iterator(obj[key], key, done)
   }, done)
 }
@@ -131,6 +131,18 @@ function once (fn) {
     fn = noop
     return ret
   }
+}
+
+function keys (obj) {
+  var result = []
+  var key
+
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      result.push(key)
+    }
+  }
+  return result
 }
 
 function noop () {}
