@@ -1,16 +1,13 @@
-var forOwn = require('./forOwn')
-var makeIterator = require('../function/makeIterator_')
+function filter (obj, fn) {
+  var result = {}
+  var key
 
-// creates a new object with all the properties where the
-// callback returns true.
-
-function filterValues (obj, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
-  var output = {}
-  forOwn(obj, function (value, key, obj) {
-    if (fn(value, key, obj)) output[key] = value
-  })
-  return output
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (fn(obj[key], key, obj)) result[key] = obj[key]
+    }
+  }
+  return result
 }
 
-module.exports = filterValues
+module.exports = filter
