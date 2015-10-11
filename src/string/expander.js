@@ -4,14 +4,12 @@
 var kindOf = require('../lang/kindOf')
 var look   = require('../object/look')
 
-// Curried function:
-// var expand = require('expand') or require('expand')()
-// var fn = expand({regex: /abc/})
-// fn('{{a}}', {a: 'apple'}) or expand('{{a}}', {a: 'apple'})
+// Removed curried function:
+// var expand = require('expand')
+// expand('{{a}}', {a: 'apple'}, regex)
 
-function expand (opts) {
-  opts = opts || {}
-  var regex = opts.regex || /\{\{([^\}]+)\}\}/
+function expand (val, data, opts) {
+  opts = defaultOpts(opts)
 
   function resolve (val, data) {
     data = data || val
@@ -25,14 +23,16 @@ function expand (opts) {
   }
 
   function resolveObject (obj, data) {
-    Object.keys(obj).forEach(function (key, idx, arr) {
-      obj[key] = resolve(obj[key], data)
-    })
+    var key
+    for (key in obj) {
+      if (obj.hasOwnProperty(key)) obj[key] = resolve(obj[key], data)
+    }
 
     return obj
   }
 
   function resolveString (str, data) {
+    var regex = opts
     var m
 
     while ((m = regex.exec(str))) {
@@ -102,7 +102,14 @@ function expand (opts) {
       : resolve('{{' + expr + '}}', data)(exprParam)
   }
 
-  return resolve
+  return resolve(val, data)
+}
+
+function defaultOpts (opts) {
+  // in the event options expand
+  // this functin exists.
+  opts = opts || /\{\{([^\}]+)\}\}/
+  return opts
 }
 
 module.exports = expand
