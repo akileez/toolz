@@ -1,7 +1,8 @@
-function forIn (obj, fn, thisObj) {
+function forIn (obj, fn) {
   var key
+
   for (key in obj) {
-    if (fn.call(thisObj, obj[key], key, obj) === false) break
+    if (fn(obj[key], key, obj) === false) break
   }
 }
 
