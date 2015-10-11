@@ -1,12 +1,13 @@
-var forOwn = require('./forOwn')
-
 // get object size
 
 function size (obj) {
   var count = 0
-  forOwn(obj, function () {
-    count++
-  })
+  var key
+
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) count++
+  }
+
   return count
 }
 
