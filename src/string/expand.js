@@ -17,9 +17,11 @@ function interpolate (template, replacements, syntax) {
   }
 
   function resolveObject (obj, data, opts) {
-    Object.keys(obj).forEach(function (key, idx, arr) {
-      obj[key] = resolve(obj[key], data, opts)
-    })
+    var key
+    for (key in obj) {
+      if (obj.hasOwnProperty(key)) obj[key] = resolve(obj[key], data, opts)
+    }
+
     return obj
   }
 
