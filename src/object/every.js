@@ -1,17 +1,15 @@
-var forOwn = require('./forOwn')
-var makeIterator = require('../function/makeIterator_')
-
-function every (obj, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
+function every (obj, fn) {
   var result = true
-  forOwn(obj, function (value, key) {
-    // we consider any falsy values as false on purpose so shorthand
-    // syntax can be used to check property existence
-    if (!fn(value, key, obj)) {
-      result = false
-      return false // break
+  var key
+
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (!fn(obj[key], key, obj)) {
+        result = false
+        break
+      }
     }
-  })
+  }
   return result
 }
 
