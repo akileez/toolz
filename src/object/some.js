@@ -1,18 +1,17 @@
-var forOwn = require('./forOwn')
-var makeIterator = require('../function/makeIterator_')
-
-// object some
-
-function some (obj, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
+function some (obj, fn) {
   var result = false
-  forOwn(obj, function (val, key) {
-    if (fn(val, key, obj)) {
-      result = true
-      return false // break
+  var key
+
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (fn(obj[key], key, obj)) {
+        result = true
+        break
+      }
     }
-  })
+  }
   return result
 }
 
 module.exports = some
+
