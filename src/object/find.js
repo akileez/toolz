@@ -1,14 +1,11 @@
 var some = require('./some')
-var makeIterator = require('../function/makeIterator_')
 
-// returns first item that matches criteria
-
-function find (obj, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
+function find (obj, fn) {
   var result
-  some(obj, function (value, key, obj) {
-    if (fn(value, key, obj)) {
-      result = value
+
+  some(obj, function (val, key, obj) {
+    if (fn(val, key, obj)) {
+      result = val
       return true // break
     }
   })
