@@ -1,13 +1,14 @@
 // get nested object property
 
 function getValue (obj, prop) {
-  var parts = prop.split('.')
-  var last = parts.pop()
+  var segs = prop.split('.')
+  var last = segs.pop()
 
-  while ((prop = parts.shift())) {
-    obj = obj[prop]
+  while (segs.length) {
+    obj = obj[segs.shift()]
     if (obj == null) return
   }
+
   return obj[last]
 }
 
