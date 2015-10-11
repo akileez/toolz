@@ -1,17 +1,12 @@
-var forOwn = require('./forOwn')
-var makeIterator = require('../function/makeIterator_')
+function mapKeys (obj, fn) {
+  var result = {}
+  var key
 
-// creates a new object where all the keys are the
-// result of calling callback
-
-function mapKeys (obj, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
-  var output = {}
-
-  forOwn(obj, function (val, key, obj) {
-    output[fn(val, key, obj)] = val
-  })
-  return output
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      result[fn(obj[key], key, obj)] = obj[key]
+    }
+  }
 }
 
 module.exports = mapKeys
