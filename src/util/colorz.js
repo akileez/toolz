@@ -1,8 +1,10 @@
 var styles = require('../string/ansiStyles')
+var keys = require('../object/keys')
+var forEach = require('../array/forEach')
 
 var ansi = {}
 
-Object.keys(styles).forEach(function (style) {
+forEach(keys(styles), function (style) {
   var open = ['\u001b[', styles[style][0], 'm'].join('')
   var clos = ['\u001b[', styles[style][1], 'm'].join('')
 
