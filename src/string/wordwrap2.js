@@ -5,8 +5,8 @@
 // removing os.EOL setting (using a string) and declaring a wrapLines function
 // as opposed to variable assignment.
 
-// slower than https://github.com/jonschlinkert/word-wrap by a factor
-// of approximately 1
+// slower than https://github.com/jonschlinkert/word-wrap
+// previous version approx 85% slower, now approx 30% slower
 
 var forEach = require('../array/forEach')
 var toArray = require('../lang/toArray')
