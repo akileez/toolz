@@ -1,9 +1,8 @@
-var isFunction = require('../lang/isFunction')
-
 function result (obj, prop) {
   var property = obj[prop]
   if (property === undefined) return
-  return isFunction(property)
+
+  return typeof property === 'function'
     ? property.call(obj)
     : property
 }
