@@ -1,13 +1,13 @@
-var filter = require('./filter')
-var makeIterator = require('../function/makeIterator_')
+function reject (obj, fn) {
+  var result = {}
+  var key
 
-// object reject
-
-function reject (obj, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
-  return filter(obj, function (val, idx, obj) {
-    return !fn(val, idx, obj)
-  }, thisObj)
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      if (!fn(obj[key], key, obj)) result[key] = obj[key]
+    }
+  }
+  return result
 }
 
 module.exports = reject
