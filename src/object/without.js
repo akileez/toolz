@@ -4,11 +4,12 @@
 var kindOf = require('../lang/kindOf')
 var clone  = require('../lang/clone')
 var slice  = require('../array/sliced')
+var keys   = require('../object/keys')
 
 function without (obj, props) {
   switch (kindOf(props)) {
     case 'object' :
-      props = Object.keys(props)
+      props = keys(props)
       break
     case 'array' :
       props = props
