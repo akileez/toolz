@@ -1,9 +1,11 @@
-function forEach (arr, fn, thisObj) {
+function forEach (arr, fn) {
   if (arr == null) return
+
   var i = -1
   var len = arr.length
+
   while (++i < len) {
-    if (fn.call(thisObj, arr[i], i, arr) === false) break
+    if (fn(arr[i], i, arr) === false) break
   }
 }
 
