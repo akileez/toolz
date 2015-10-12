@@ -1,5 +1,6 @@
 function slice (arr, start, end) {
   var len = arr.length
+
   if (start == null) start = 0
   else if (start < 0) start = Math.max(len + start, 0)
   else start = Math.min(start, len)
@@ -9,9 +10,11 @@ function slice (arr, start, end) {
   else end = Math.min(end, len)
 
   var result = []
+
   while (start < end) {
     result.push(arr[start++])
   }
+
   return result
 }
 
