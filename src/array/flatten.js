@@ -7,9 +7,11 @@ function flattenTo (arr, result, level) {
     append(result, arr)
     return result
   }
+
   var value
   var i = -1
   var len = arr.length
+
   while (++i < len) {
     value = arr[i]
     if (isArray(value)) flattenTo(value, result, level - 1)
