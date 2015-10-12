@@ -21,6 +21,7 @@ function defaultCompare (a, b) {
 
 function merge (left, right, compareFn) {
   var result = []
+
   while (left.length && right.length) {
     if (compareFn(left[0], right[0]) <= 0) result.push(left.shift())
     else result.push(right.shift())
