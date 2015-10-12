@@ -1,10 +1,14 @@
 // can be achieved with the following:
 // values(obj).forEach(callback)
 
-function foreach (obj, cb) {
-  Object.keys(obj).forEach(function (key) {
-    cb(obj[key], key)
-  })
+function foreach (obj, fn) {
+  var key
+
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      fn(obj[key], key, obj)
+    }
+  }
 }
 
 module.exports = foreach
