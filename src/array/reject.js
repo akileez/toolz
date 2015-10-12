@@ -1,18 +1,17 @@
-var makeIterator = require('../function/makeIterator_')
-
-function reject (arr, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
-  var results = []
-  if (arr == null) return results
+function reject (arr, fn) {
+  var result = []
+  if (arr == null) return result
 
   var i = -1
   var len = arr.length
-  var value
+  var val
+
   while (++i < len) {
-    value = arr[i]
-    if (!fn(value, i, arr)) results.push(value)
+    val = arr[i]
+    if (!fn(val, i, arr)) result.push(val)
   }
-  return results
+
+  return result
 }
 
 module.exports = reject
