@@ -1,15 +1,11 @@
-var makeIterator = require('../function/makeIterator_')
-
-function max (arr, iterator, thisObj) {
+function max (arr, fn) {
   if (arr == null || !arr.length) {
     return Infinity
   }
 
-  if (arr.length && !iterator) {
+  if (arr.length && !fn) {
     return Math.max.apply(Math, arr)
   }
-
-  iterator = makeIterator(iterator, thisObj)
 
   var compare = -Infinity
   var value
@@ -21,7 +17,7 @@ function max (arr, iterator, thisObj) {
 
   while (i++ < len) {
     value = arr[i]
-    temp = iterator(value, i, arr)
+    temp = fn(value, i, arr)
 
     if (temp > compare) {
       compare = temp
