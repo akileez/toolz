@@ -1,10 +1,8 @@
-var makeIterator = require('../function/makeIterator_')
-
-function findLastIndex (arr, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
+function findLastIndex (arr, fn) {
   if (arr == null) return -1
 
   var len = arr.length
+
   while (--len >= 0) {
     if (fn(arr[len], len, arr)) return len
   }
