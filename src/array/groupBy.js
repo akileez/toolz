@@ -1,12 +1,11 @@
 var identity = require('../function/identity')
-var forEach = require('./forEach')
-var makeIterator = require('../function/makeIterator_')
+var forEach  = require('./forEach')
 
-function groupBy (arr, categorize, thisObj) {
-  if (categorize) categorize = makeIterator(categorize, thisObj)
-  else categorize = identity
+function groupBy (arr, categorize) {
+  if (!categorize) categorize = identity
 
   var buckets = {}
+
   forEach(arr, function (element) {
     var bucket = categorize(element)
     if (!(bucket in buckets)) buckets[bucket] = []
