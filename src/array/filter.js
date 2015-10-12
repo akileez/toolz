@@ -1,17 +1,16 @@
-var makeIterator = require('../function/makeIterator_')
-
-function filter (arr, fn, thisObj) {
-  fn = makeIterator(fn, thisObj)
-  var results = []
+function filter (arr, fn) {
+  var result = []
   if (arr == null) return results
+
+  var val
   var i = -1
   var len = arr.length
-  var value
+
   while (++i < len) {
-    value = arr[i]
-    if (fn(value, i, arr)) results.push(value)
+    val = arr[i]
+    if (fn(val, i, arr)) result.push(val)
   }
-  return results
+  return result
 }
 
 module.exports = filter
