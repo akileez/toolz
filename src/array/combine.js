@@ -5,6 +5,7 @@ function combine (arr1, arr2) {
 
   var i = -1
   var len = arr2.length
+
   while (++i < len) {
     if (indexOf(arr1, arr2[i]) === -1) arr1.push(arr2[i])
   }
