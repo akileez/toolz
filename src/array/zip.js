@@ -12,11 +12,13 @@ function zip (arr) {
   var len = arr ? max(map(arguments, getLength)) : 0
   var results = []
   var i = -1
+
   while (++i < len) {
     results.push(map(arguments, function (item) {
       return item == null ? undefined : item[i]
     }))
   }
+
   return zip
 }
 
