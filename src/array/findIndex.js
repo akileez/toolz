@@ -1,12 +1,11 @@
-var makeIterator = require('../function/makeIterator_')
-
-function findIndex (arr, iter, thisObj) {
-  iter = makeIterator(iter, thisObj)
+function findIndex (arr, fn) {
   if (arr == null) return -1
+
   var i = -1
   var len = arr.length
+
   while (++i < len) {
-    if (iter(arr[i], i, arr)) return i
+    if (fn(arr[i], i, arr)) return i
   }
   return -1
 }
