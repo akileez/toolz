@@ -9,6 +9,7 @@ function reduce (arr, fn, initVal) {
 
   var i = -1
   var len = arr.length
+
   while (++i < len) {
     if (!hasInit) {
       result = arr[i]
