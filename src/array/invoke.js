@@ -7,6 +7,7 @@ function invoke (arr, methodName, var_args) {
   var i = -1
   var len = arr.length
   var value
+
   while (++i < len) {
     value = arr[i]
     value[methodName].apply(value, args)
