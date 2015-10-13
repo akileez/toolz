@@ -1,10 +1,11 @@
 // like omit but with the ability to use an object
 // array or strings.
 
-var kindOf = require('../lang/kindOf')
-var clone  = require('../lang/clone')
-var slice  = require('../array/sliced')
-var keys   = require('../object/keys')
+var kindOf  = require('../lang/kindOf')
+var clone   = require('../lang/clone')
+var slice   = require('../array/sliced')
+var forEach = require('../array/forEach')
+var keys    = require('../object/keys')
 
 function without (obj, props) {
   switch (kindOf(props)) {
@@ -20,7 +21,8 @@ function without (obj, props) {
   }
 
   var output = clone(obj)
-  props.forEach(function (omit) {
+
+  forEach(props, function (omit) {
     delete output[omit]
   })
 
