@@ -1,3 +1,5 @@
+// Creates a new array with all elements that pass the callback test.
+
 function filter (arr, fn) {
   var result = []
   if (arr == null) return results
