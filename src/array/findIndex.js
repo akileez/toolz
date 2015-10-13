@@ -1,3 +1,6 @@
+// Loops through all the items in the Array (starting from last item)
+// and returns the first one that passes a truth test (callback).
+
 function findIndex (arr, fn) {
   if (arr == null) return -1
 
