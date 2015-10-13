@@ -1,3 +1,7 @@
+// Combines an array with all the items of another.
+// The first array will be modified and will contain the combined items.
+// Does not allow duplicates and is case and type sensitive.
+
 var indexOf = require('./indexOf')
 
 function combine (arr1, arr2) {
