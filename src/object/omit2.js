@@ -1,5 +1,6 @@
-var extend = require('./extend')
-var slice  = require('../array/sliced')
+var extend  = require('./extend')
+var slice   = require('../array/sliced')
+var forEach = require('../array/forEach')
 
 function omit (obj, toOmit) {
   toOmit = Array.isArray(toOmit)
@@ -8,7 +9,7 @@ function omit (obj, toOmit) {
 
   var output = extend({}, obj)
 
-  toOmit.forEach(function (omit) {
+  forEach(toOmit, function (omit) {
     delete output[omit]
   })
   return output
