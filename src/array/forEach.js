@@ -1,3 +1,6 @@
+// executes a provided function once per array element
+// It allows exiting the iteration early by returning false on the callback.
+
 function forEach (arr, fn) {
   if (arr == null) return
 
