@@ -1,5 +1,14 @@
+// Recursively flattens an array.
+// A new array containing all the elements is returned.
+// If level is specified, it will only flatten up to that level.
+
 var isArray = require('../lang/isArray')
 var append = require('./append')
+
+function flatten (arr, level) {
+  level = level == null ? -1 : level
+  return flattenTo(arr, [], level)
+}
 
 function flattenTo (arr, result, level) {
   if (arr == null) return result
@@ -18,11 +27,6 @@ function flattenTo (arr, result, level) {
     else result.push(value)
   }
   return result
-}
-
-function flatten (arr, level) {
-  level = level == null ? -1 : level
-  return flattenTo(arr, [], level)
 }
 
 module.exports = flatten
