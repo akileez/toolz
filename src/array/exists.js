@@ -3,9 +3,10 @@
 // can be a string, regex, array, plain object, number
 
 var testval = require('../lang/testval')
+var some    = require('./some')
 
 function exists (arr, query) {
-  return arr.some(function (item) {
+  return some(arr, function (item) {
     return testval(item, query)
   })
 }
