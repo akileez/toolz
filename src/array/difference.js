@@ -1,3 +1,6 @@
+// Return a new Array with elements that aren't present
+// in the other Arrays besides the first one
+
 var slice = require('./slice')
 var filter = require('./filter')
 var unique = require('./unique')
