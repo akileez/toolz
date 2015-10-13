@@ -1,12 +1,18 @@
 var clone   = require('../lang/clone')
 var slice   = require('../array/sliced')
+var forEach = require('../array/forEach')
 
 function omit (obj, toOmit) {
-  toOmit = Array.isArray(toOmit) ? toOmit : slice(arguments, 1)
+  toOmit = Array.isArray(toOmit)
+    ? toOmit
+    : slice(arguments, 1)
+
   var output = clone(obj)
-  toOmit.forEach(function (omit) {
+
+  forEach(toOmit, function (omit) {
     delete output[omit]
   })
+
   return output
 }
 
