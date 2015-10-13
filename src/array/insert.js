@@ -1,3 +1,6 @@
+// Push items into array only if they aren't contained by it.
+// Returns the new length of the array.
+
 var difference = require('./difference')
 var slice = require('./slice')
 
