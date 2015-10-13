@@ -2,7 +2,7 @@
 
 function filter (arr, fn) {
   var result = []
-  if (arr == null) return results
+  if (arr == null) return result
 
   var val
   var i = -1
