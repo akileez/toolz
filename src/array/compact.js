@@ -1,4 +1,6 @@
-// mout.js
+// Returns a new Array without any null or undefined values.
+// Note that it will keep empty strings and other falsy values
+
 var filter = require('./filter')
 
 function compact (arr) {
