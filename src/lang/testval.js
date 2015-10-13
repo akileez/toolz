@@ -4,10 +4,13 @@
 var toArray       = require('./toArray')
 var isObject      = require('./isObject')
 var isPlainObject = require('./isPlainObject')
+var every         = require('../array/every')
+var some          = require('../array/some')
+var keys          = require('../object/keys')
 
 function testValue (val, test) {
   if (isPlainObject(test) && isObject(val)) {
-    return Object.keys(test).every(function (prop) {
+    return every(keys(test), function (prop) {
       var queryValue = test[prop]
 
       var isNegated = false
@@ -34,8 +37,8 @@ function testValue (val, test) {
     var tests = test
     if (!Array.isArray(val)) val = [val]
 
-    return val.some(function (value) {
-      return tests.some(function (test) {
+    return some(val, function (valule) {
+      return some(tests, function (test) {
         return testValue(value, test)
       })
     })
