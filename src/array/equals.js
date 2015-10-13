@@ -1,3 +1,5 @@
+// Checks if both arrays are equal
+
 var isArray = require('../lang/isArray')
 var is      = require('../lang/is')
 var every   = require('./every')
