@@ -1,8 +1,12 @@
+// Groups array elements by the key returned from the categorize function
+
+var makeIterator = require('../function/makeIterator_')
 var identity = require('../function/identity')
 var forEach  = require('./forEach')
 
-function groupBy (arr, categorize) {
-  if (!categorize) categorize = identity
+function groupBy (arr, categorize, thisObj) {
+  if (categorize) categorize = makeIterator(categorize, thisObj)
+  else categorize = identity
 
   var buckets = {}
 
