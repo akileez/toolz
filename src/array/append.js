@@ -1,3 +1,6 @@
+// Appends an array to the end of the other.
+// The first array will be modified and will contain the appended items.
+
 function append (arr1, arr2) {
   if (arr2 == null) return arr1
 
