@@ -1,15 +1,17 @@
 var slice = require('../array/sliced')
+var every = require('../array/every')
+var some = require('../array/some')
 
 function and (ans) {
   var args = slice(arguments, 1)
-  return args.every(function (question) {
+  return every(args, function (question) {
     return question === ans
   })
 }
 
 function or (ans) {
   var args = slice(arguments, 1)
-  return args.some(function (question) {
+  return some(args, function (question) {
     return question === ans
   })
 }
