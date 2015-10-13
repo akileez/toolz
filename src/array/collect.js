@@ -1,3 +1,5 @@
+// Maps the items in arr and concatenates the resulting arrays
+
 var append = require('./append')
 
 function collect (arr, fn) {
