@@ -1,3 +1,6 @@
+// Tests whether all elements in the array pass the test implemented
+// by the provided function
+
 function every (arr, fn) {
   var result = true
   if (arr == null) return result
