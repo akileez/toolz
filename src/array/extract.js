@@ -1,12 +1,14 @@
-// Removes items from `array` which satisfy the query. Modifies the input array, returns the extracted
+// Removes items from `array` which satisfy the query.
+// Modifies the input array, returns the extracted
 
 var testval = require('../lang/testval')
+var forEach = require('./forEach')
 
 function extract (arr, query) {
   var result = []
   var toSplice = []
 
-  arr.forEach(function (item, idx) {
+  forEach(arr, function (item, idx) {
     if (testval(item, query)) {
       result.push(item)
       toSplice.push(idx)
