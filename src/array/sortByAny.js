@@ -27,16 +27,14 @@ function sortBy (data) {
       var x = a[property]
       var y = b[property]
 
-      if (typeof x === 'undefined' && typeof y !== 'undefined')
-        result = -1
-      else if (typeof x !== 'undefined' && typeof y === 'undefined')
-        result = 1
-      else if (typeof x === 'undefined' && typeof y === 'undefined')
-        result = 0
-      else if (customOrder && customOrder[property])
+      if (typeof x === 'undefined' && typeof y !== 'undefined') result = -1
+      else if (typeof x !== 'undefined' && typeof y === 'undefined') result = 1
+      else if (typeof x === 'undefined' && typeof y === 'undefined') result = 0
+      else if (customOrder && customOrder[property]) {
         result = customOrder[property].indexOf(x) - customOrder[property].indexOf(y)
-      else
+      } else {
         result = x < y ? -1 : x > y ? 1 : 0
+      }
 
       if (result === 0) {
         if (props.length) {
