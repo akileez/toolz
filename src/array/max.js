@@ -1,3 +1,6 @@
+// Returns maximum value inside array or use a custom iterator
+// to define how items should be compared.
+
 function max (arr, fn) {
   if (arr == null || !arr.length) {
     return Infinity
