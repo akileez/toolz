@@ -1,12 +1,16 @@
+// Creates a new array with the results of calling a provided function
+// on every element in this array. specialized version or arrays
+// without support for callback shorthands and "this" binding
+
 function map (arr, fn) {
   var results = []
   if (arr == null) return results
 
-  var idx = -1
+  var i = -1
   var len = arr.length
 
-  while (++idx < len) {
-    results[idx] = fn(arr[idx], idx, arr)
+  while (++i < len) {
+    results[i] = fn(arr[i], i, arr)
   }
   return results
 }
