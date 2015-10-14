@@ -7,7 +7,7 @@
 var words = require('../regex/rex-words')
 
 function wordmatch (str) {
-  return str.match(words())
+  return str.match(words)
 }
 
 module.exports = wordmatch
