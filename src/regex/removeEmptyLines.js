@@ -5,7 +5,7 @@ var emptylines = require('./rex-emptylines')
 var replace = require('./replace')
 
 function removeEmptyLines (str) {
-  return replace(str, emptylines(), '')
+  return replace(str, emptylines, '')
 }
 
 module.exports = removeEmptyLines
