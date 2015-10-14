@@ -1,7 +1,10 @@
-var slice = require('./slice')
+// Alias for pick.before().
+// Returns all elements of the array except the last element
+
+var pick = require('./pick').initial
 
 function initial (arr) {
-  return slice(arr, 0, -1)
+  return pick(arr)
 }
 
 module.exports = initial
