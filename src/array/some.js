@@ -1,18 +1,16 @@
-function some (arr, fn) {
-  var result = false
-  if (arr == null) return result
+// Tests whether some element in the array passes the test
+// implemented by the provided function. specialized version
+// without support for callback shorthands and `this` binding.
 
+function some (arr, fn) {
   var i = -1
   var len = arr.length
 
   while (++i < len) {
-    if (fn(arr[i], i, arr)) {
-      result = true
-      break
-    }
+    if (fn(arr[i], i, arr)) return true
   }
 
-  return result
+  return false
 }
 
 module.exports = some
