@@ -1,3 +1,5 @@
+// Returns a new Array with items randomly sorted (shuffled).
+
 var randInt = require('../random/randInt')
 
 // shuffle array items

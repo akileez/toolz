@@ -1,3 +1,8 @@
+// Groups the elements of each array at their corresponding indexes.
+// Useful for separate data sources that are coordinated through
+// matching array indexes. For a matrix of nested arrays,
+// zip.apply(...) can transpose the matrix in a similar fashion.
+
 var max = require('./max')
 var map = require('./map')
 

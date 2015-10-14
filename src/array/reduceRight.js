@@ -1,3 +1,6 @@
+// Apply a function simultaneously against two values of the array
+// (from right-to-left) as to reduce it to a single value.
+
 function reduceRight (arr, fn, initVal) {
   var hasInit = arguments.length > 2
 

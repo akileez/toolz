@@ -1,3 +1,9 @@
+// Returns a sorted Array using the Merge Sort [https://en.wikipedia.org/wiki/Merge_sort]
+// algorithm (stable sort).
+
+// Important: It does logical comparisson by default (greater/less than)
+// and not a string comparisson like the native Array#sort.
+
 function mergeSort (arr, compareFn) {
   if (arr == null) return []
   else if (arr.length < 2) return arr

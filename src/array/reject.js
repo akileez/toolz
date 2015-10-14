@@ -1,3 +1,6 @@
+// Creates a new array with all the elements that do not pass
+// the truth test. Opposite of filter().
+
 function reject (arr, fn) {
   var result = []
   if (arr == null) return result

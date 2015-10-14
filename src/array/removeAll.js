@@ -1,3 +1,5 @@
+// Remove all instances of an item from the array.
+
 var indexOf = require('./indexOf')
 
 function removeAll (arr, item) {

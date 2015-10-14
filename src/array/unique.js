@@ -1,3 +1,6 @@
+// Return a new Array of unique items.
+// IMPORTANT: duplicates are removed starting from begining of array.
+
 var filter = require('./filter')
 
 function unique (arr, compare) {

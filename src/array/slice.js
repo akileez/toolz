@@ -1,3 +1,12 @@
+// Returns a new array containing the items from arr
+// from the start index to the end index.
+
+// If start is omitted, it will start at 0.
+// If end is omitted, it will used the last index of the array.
+// If start or end is negative, it is used as an offset from the end of the array.
+
+// It will also convert array-like objects to arrays.
+
 function slice (arr, start, end) {
   var len = arr.length
 

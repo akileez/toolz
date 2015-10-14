@@ -1,5 +1,5 @@
-// iterates over a callback a set amount of times
-// returning the results
+// Builds a new array based on the returned values
+// from the given callback
 
 function take (n, fn, thisObj) {
   var i = -1

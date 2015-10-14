@@ -1,3 +1,5 @@
+// Concat multiple arrays removing duplicates.
+
 var unique = require('./unique')
 var append = require('./append')
 
