@@ -1,3 +1,5 @@
+// Call methodName on each item of the array passing custom arguments if needed.
+
 var slice = require('./slice')
 
 function invoke (arr, methodName, var_args) {
