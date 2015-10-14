@@ -1,3 +1,6 @@
+// Return a new Array with elements common to all Arrays
+// It will remove duplicates.
+
 var slice = require('./slice')
 var filter = require('./filter')
 var unique = require('./unique')
