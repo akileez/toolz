@@ -5,10 +5,12 @@
 
 var toArray = require('../lang/toArray')
 var testval = require('../lang/testval')
+var filter  = require('./filter')
 
 function where (arr, query) {
   arr = toArray(arr)
-  return arr.filter(function (item) {
+
+  return filter(arr, function (item) {
     return testval(item, query)
   })
 }
