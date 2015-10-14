@@ -5,7 +5,7 @@ var separator = '/'
 
 // return an array of path segments
 function segments (fp) {
-  return fp.split(/[\/]/g)
+  return fp.split(/[\\\/]/g)
 }
 
 // the last `num` segments of a filepath. If a number
