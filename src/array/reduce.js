@@ -1,3 +1,6 @@
+// Apply a function against an accumulator and each value of the array
+// (from left-to-right) as to reduce it to a single value.
+
 function reduce (arr, fn, initVal) {
   var hasInit = arguments.length > 2
   var result = initVal
@@ -18,6 +21,7 @@ function reduce (arr, fn, initVal) {
       result = fn(result, arr[i], i, arr)
     }
   }
+
   return result
 }
 
