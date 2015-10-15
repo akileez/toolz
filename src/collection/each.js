@@ -1,19 +1,20 @@
-var kindOf = require('../lang/kindOf')
-var toFunction = require('../function/toFunction')
+// var kindOf = require('../lang/kindOf')
+// var toFunction = require('../function/toFunction')
 var hasOwn = require('../object/hasOwn')
+var make = require('./_make')
 
 // component/each
 
-function each (obj, fn, ctx) {
-  fn = toFunction(fn)
-  ctx = ctx || this
+// function each (obj, fn, ctx) {
+//   fn = toFunction(fn)
+//   ctx = ctx || this
 
-  switch (kindOf(obj)) {
-    case 'array' : return array(obj, fn, ctx)
-    case 'object' : return object(obj, fn, ctx)
-    case 'string' : return string(obj, fn, ctx)
-  }
-}
+//   switch (kindOf(obj)) {
+//     case 'array' : return array(obj, fn, ctx)
+//     case 'object' : return object(obj, fn, ctx)
+//     case 'string' : return string(obj, fn, ctx)
+//   }
+// }
 
 function string (obj, fn, ctx) {
   var i = -1
@@ -40,4 +41,4 @@ function array (obj, fn, ctx) {
   }
 }
 
-module.exports = each
+module.exports = make(array, object, string)
