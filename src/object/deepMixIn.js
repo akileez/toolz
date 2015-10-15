@@ -1,7 +1,7 @@
 var forOwn = require('./forOwn')
 var isPlainObject = require('../lang/isPlainObject')
 
-// mixes objexts into target object, recursively mixing
+// mixes objects into target object, recursively mixing
 // existing child objects
 
 function deepMixIn (target, objects) {
