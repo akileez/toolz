@@ -34,5 +34,4 @@ function strForEach (str, fn, thisObj) {
   }
 }
 
-
 module.exports = make(arrForEach, objForEach, strForEach)
