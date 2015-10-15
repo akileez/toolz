@@ -20,6 +20,11 @@ function wrap (text, opts) {
 
 function wrapLines (text, opts) {
   var words = text.split(/\s+/)
+
+  if (words.length === 1) {
+    if (opts.width < text.length) return [text]
+  }
+
   var lineLength = 0
   var lines = []
   var line = ''
