@@ -18,7 +18,7 @@ function arrFilter (arr, fn, thisObj) {
   return result
 }
 
-function filter (obj, fn, thisObj) {
+function objFilter (obj, fn, thisObj) {
   fn = makeIterator(fn, thisObj)
   var result = {}
   var key
