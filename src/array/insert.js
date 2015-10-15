@@ -1,17 +1,20 @@
 // Push items into array only if they aren't contained by it.
-// Returns the new length of the array.
+// Returns an array of the the new length of the array and modified array.
 
 var difference = require('./difference')
-var slice = require('./slice')
+var slice      = require('./slice')
+var push       = require('./push')
 
 function insert (arr, items) {
-  var diff = difference(slice(arguments, 1), arr)
+  items = Array.isArray(items)
+    ? items
+    : slice(arguments, 1)
 
-  if (diff.length) {
-    Array.prototype.push.apply(arr, diff)
-  }
+  var diff = difference(items, arr)
 
-  return arr.length
+  if (diff.length) push(arr, diff)
+
+  return [arr.length, arr]
 }
 
 module.exports = insert
