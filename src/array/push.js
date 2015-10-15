@@ -5,11 +5,9 @@
 var slice = require('./sliced')
 
 function push (arr, args) {
-  if (arguments.length < 3) {
-    args = Array.isArray(args) ? args : [args]
-  } else {
-    args = slice(arguments, 1)
-  }
+  args = Array.isArray(args)
+    ? args
+    : slice(arguments, 1)
 
   var i = -1
   var len1 = arr.length
