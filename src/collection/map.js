@@ -2,7 +2,7 @@ var make = require('./make_')
 var makeIterator = require('../function/makeIterator_')
 
 function arrMap (arr, fn, thisObj) {
-  fn = makeIterator(callback, thisObj)
+  fn = makeIterator(fn, thisObj)
 
   var results = []
   if (arr == null) return results
@@ -17,7 +17,7 @@ function arrMap (arr, fn, thisObj) {
 }
 
 function objMap (obj, fn, thisObj) {
-  fn = makeIterator(callback, thisObj)
+  fn = makeIterator(fn, thisObj)
   var result = {}
   var key
 
