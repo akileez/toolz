@@ -37,7 +37,7 @@ function testValue (val, test) {
     var tests = test
     if (!Array.isArray(val)) val = [val]
 
-    return some(val, function (valule) {
+    return some(val, function (value) {
       return some(tests, function (test) {
         return testValue(value, test)
       })
