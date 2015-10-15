@@ -113,7 +113,7 @@ function asyncTimes (num, iterator, done) {
   asyncReduce(obj, [], function (resultObject, v, k, done) {
     iterator(num, function (err, res) {
       resultObject.push(res)
-      done(null, resultObject)
+      done(err, resultObject)
     })
   }, done)
 }
@@ -122,7 +122,7 @@ function asyncSeries (obj, done) {
   asyncReduce(obj, [], function (resultObject, v, k, done) {
     v(function (err, res ) {
       resultObject.push(res)
-      done(null, resultObject)
+      done(err, resultObject)
     })
   }, done)
 }
