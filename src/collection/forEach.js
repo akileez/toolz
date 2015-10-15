@@ -1,4 +1,4 @@
-var make = require('./make_')
+var make = require('./_make')
 var makeIterator = require('../function/makeIterator_')
 
 function arrForEach (arr, fn, thisObj) {
@@ -24,5 +24,15 @@ function objForEach (obj, fn, thisObj) {
   }
 }
 
+function strForEach (str, fn, thisObj) {
+  fn = makeIterator(fn, thisObj)
+  var i = -1
+  var len = str.length
 
-module.exports = make(arrForEach, objForEach)
+  while (++i < len) {
+    fn(str.charAt(i), i, str)
+  }
+}
+
+
+module.exports = make(arrForEach, objForEach, strForEach)
