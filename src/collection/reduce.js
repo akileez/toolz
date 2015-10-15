@@ -1,4 +1,4 @@
-var make = require('./make_')
+var make = require('./_make')
 var arrReduce = require('../array/reduce')
 var objReduce = require('../object/reduce')
 
