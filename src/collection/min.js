@@ -13,7 +13,7 @@ function arrMin (arr, fn, thisObj) {
     return Math.min.apply(Math, arr)
   }
 
-  fn = makeIterator(iterator, thisObj)
+  fn = makeIterator(fn, thisObj)
   var compare = Infinity
   var value
   var temp
