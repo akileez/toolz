@@ -11,7 +11,6 @@ function push (arr, args) {
     args = slice(arguments, 1)
   }
 
-
   var i = -1
   var len1 = arr.length
   var len2 = args.length
