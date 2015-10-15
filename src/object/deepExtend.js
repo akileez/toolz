@@ -12,8 +12,12 @@ function deepExtend (target) {
 
     forOwn(arg, function (val, key) {
       var currVal = target[key]
-      if (isPlainObject(val) && isPlainObject(currVal)) deepExtend(currVal, val)
-      else target[key] = val
+
+      if (isPlainObject(val) && isPlainObject(currVal)) {
+        deepExtend(currVal, val)
+      } else {
+        target[key] = val
+      }
     })
   }
   return target
