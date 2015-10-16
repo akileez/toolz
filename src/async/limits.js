@@ -12,6 +12,7 @@ function asyncEachArray (arr, limit, iterator, done) {
   var i = -1
 
   function next (err) {
+    if (err) return once(done(err))
     if (--len === -1) return once(done(null))
 
     while (running < limit && ++i < lastIdx) {
@@ -45,7 +46,7 @@ function asyncReduce (obj, limit, result, iterator, done) {
       done(err)
     })
   }, function (err) {
-      done(err, result)
+    done(err, result)
   })
 }
 
@@ -111,7 +112,7 @@ function asyncTimes (num, limit, iterator, done) {
   asyncReduce(obj, limit, [], function (resultObject, v, k, done) {
     iterator(num, function (err, res) {
       resultObject.push(res)
-      done(null, resultObject)
+      done(err, resultObject)
     })
   }, done)
 }
@@ -120,7 +121,7 @@ function asyncParallel (obj, limit, done) {
   asyncReduce(obj, limit, [], function (resultObject, v, k, done) {
     v(function (err, res) {
       resultObject.push(res)
-      done(null, resultObject)
+      done(err, resultObject)
     })
   }, done)
 }
