@@ -1,6 +1,5 @@
 function iterator (tasks) {
   function makeCallback (index) {
-
     function fn () {
       if (tasks.length)
         tasks[index].apply(null, arguments)
