@@ -15,7 +15,7 @@ function expand (val, data, opts) {
     data = data || val
 
     switch (kindOf(val)) {
-      case 'array'  :
+      case 'array'  : return resolveArray(val, data)
       case 'object' : return resolveObject(val, data)
       case 'string' : return resolveString(val, data)
       default       : return val
@@ -25,10 +25,21 @@ function expand (val, data, opts) {
   function resolveObject (obj, data) {
     var key
     for (key in obj) {
-      if (obj.hasOwnProperty(key)) obj[key] = resolve(obj[key], data)
+      if (obj.hasOwnProperty(key)) {
+        obj[key] = resolve(obj[key], data)
+      }
     }
-
     return obj
+  }
+
+  function resolveArray (arr, data, opts) {
+    var len = arr.length
+    var i = -1
+
+    while (++i < len) {
+      arr[i] = resolve(arr[i], data, opts)
+    }
+    return arr
   }
 
   function resolveString (str, data) {
