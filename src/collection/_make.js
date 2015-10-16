@@ -4,7 +4,7 @@ function makeCollectionMethod (arr, obj, str, rex, def) {
   return function (list) {
     // this will be an excellent use of the spread operator.
     // will be able to get rid of apply
-    if (list == null) return defaultReturn
+    if (list == null) return def
     if (typeof list === 'string') return str.apply(null, arguments)
     if (list instanceof RegExp) return rex.apply(null, arguments)
 
