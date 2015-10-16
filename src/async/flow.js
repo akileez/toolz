@@ -28,7 +28,7 @@ function until (test, iterator, done) {
 }
 
 function doUntil (iterator, test, done) {
-  iterator (function (err) {
+  iterator(function (err) {
     if (err) return done(err)
 
     var args = _baseSlice(arguments, 1)
