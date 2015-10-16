@@ -5,7 +5,7 @@ var fs          = require('fs')
 var path        = require('path')
 var modifyStats = require('./modStats')
 var extend      = require('../object/extend')
-var matches     = require('../collection/matches')
+var matches     = require('../collection/contains')
 
 /**
  * read files and call a function with the contents of each file
