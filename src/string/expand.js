@@ -9,7 +9,7 @@ function interpolate (template, replacements, syntax) {
 
   function resolve (template, data, opts) {
     switch (kindOf(template)) {
-      case 'array' :
+      case 'array' : return resolveArray(template, data, opts)
       case 'object': return resolveObject(template, data, opts)
       case 'string': return resolveString(template, data, opts)
       default      : return template
@@ -19,10 +19,21 @@ function interpolate (template, replacements, syntax) {
   function resolveObject (obj, data, opts) {
     var key
     for (key in obj) {
-      if (obj.hasOwnProperty(key)) obj[key] = resolve(obj[key], data, opts)
+      if (obj.hasOwnProperty(key)) {
+        obj[key] = resolve(obj[key], data, opts)
+      }
     }
-
     return obj
+  }
+
+  function resolveArray (arr, data, opts) {
+    var len = arr.length
+    var i = -1
+
+    while (++i < len) {
+      arr[i] = resolve(arr[i], data, opts)
+    }
+    return arr
   }
 
   function resolveString (str, data, opts) {
