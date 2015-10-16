@@ -1,7 +1,7 @@
 var rest = require('../function/rest')
 
 function ensureAsync (fn) {
-  return rest(function(args) {
+  return rest(function (args) {
     var callback = args.pop()
 
     args.push(function () {
