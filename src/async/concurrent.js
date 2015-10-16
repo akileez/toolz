@@ -37,7 +37,7 @@ function asyncReduce (obj, result, iterator, done) {
       done(err)
     })
   }, function (err) {
-      done(err, result)
+    done(err, result)
   })
 }
 
