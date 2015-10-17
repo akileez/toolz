@@ -12,7 +12,7 @@ var countFail  = 0
 
 const nl = '\n'
 const s1 = ' '
-const s5 = '     '
+const s4 = '    '
 const succ = '  ✔  '
 const fail = '  ✖  '
 
@@ -46,7 +46,7 @@ function report (name, fn) {
     countFail += 1
     process.stdout.write(red(fail) + mag(name) + s1)
     console.log(red('FAILED'), blu(line + ':' + char))
-    console.log(red(s5 + err.message))
+    console.log(s4, red(err.message))
     console.error(gry(err.stack), nl)
   }
 }
