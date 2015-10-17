@@ -1,7 +1,5 @@
-var kindOf = require('./kindOf')
-
 function isRegExp (value) {
-  return kindOf(value) === 'regexp'
+  return Object.prototype.toString.call(value) === '[object RegExp]'
 }
 
 module.exports = isRegExp
