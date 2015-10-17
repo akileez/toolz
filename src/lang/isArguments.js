@@ -1,7 +1,5 @@
-var kindOf = require('./kindOf')
-
 function isArguments (value) {
-  return kindOf(value) === 'arguments'
+  return Object.prototype.toString.call(value) === '[object Arguments]'
 }
 
 module.exports = isArguments
