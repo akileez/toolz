@@ -1,7 +1,5 @@
-var kindOf = require('./kindOf')
-
 function isArray (value) {
-  return Array.isArray(value) || kindOf(value) === 'array'
+  return Object.prototype.toString.call(value) === '[object Array]'
 }
 
 module.exports = isArray
