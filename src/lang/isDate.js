@@ -1,7 +1,5 @@
-var kindOf = require('./kindOf')
-
 function isDate (value) {
-  return kindOf(value) === 'date'
+  return Object.prototype.toString.call(value) === '[object Date]'
 }
 
 module.exports = isDate
