@@ -36,7 +36,7 @@ function notOk (val, msg) {
   test(!val, create(val, true, '==', msg, notOk))
 }
 
-function istrue (val, msg) {
+function isTrue (val, msg) {
   test(val === true, create(val, true, '===', msg, istrue))
 }
 
@@ -106,7 +106,7 @@ module.exports = {
   ok: ok,
   assert: ok,
   notOk: notOk,
-  istrue: istrue,
+  isTrue: isTrue,
   isFalse: isFalse,
   eq: eq,
   ne: ne,
