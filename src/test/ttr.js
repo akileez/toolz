@@ -1,7 +1,9 @@
 // adopted from: tesuto <https://github.com/dgellow/tesuto>
 // copyright (c) Samuel El-Borai <samuel.elborai@gmail.com> (MIT)
 
-// tiny test reporting
+// ttr -- tiny test reporting
+
+// async functions? promise functions?
 
 var clrz = require('../util/colorz')
 var assert = require('./assert')
@@ -24,9 +26,7 @@ const grn = clrz.green
 const mag = clrz.magenta
 const gry = clrz.grey
 
-
 console.log(nl, udl(yel('Tests:')), nl)
-
 
 function report (name, fn) {
   assert(typeof name === 'string', 'The description must be a string')
@@ -46,6 +46,8 @@ function report (name, fn) {
     countFail += 1
     process.stdout.write(red(fail) + mag(name) + s1)
     console.log(red('FAILED'), blu(line + ':' + char))
+    // if err.message is multiple lines, you must deal with the formatting
+    // of the message. cross that bridge when I come to it.
     console.log(s4, red(err.message))
     console.error(gry(err.stack), nl)
   }
