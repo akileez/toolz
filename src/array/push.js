@@ -10,13 +10,13 @@ var isPrimitive = require('../lang/isPrimitive')
 var isArray = require('../lang/isArray')
 
 function push (arr, args) {
-  if (!args) return arr
+  if (!args) return arr.length
   var len = arr.length
 
   if (arguments.length === 2) {
     if (isPrimitive(args) || !isArray(args)) {
       arr[len] = args
-      return arr
+      return arr.length
     } else {
       var len2 = args.length
     }
