@@ -44,6 +44,14 @@ function isFalse (val, msg) {
   test(val === false, create(val, false, '===', msg, isFalse))
 }
 
+function eq (val, expected, msg) {
+  test(val == expected, create(val, expected, '==', msg, eq))
+}
+
+function ne (val, expected, msg) {
+  test(val != expected, create(val, expected, '!=', msg, ne))
+}
+
 function is (val, expected, msg) {
   test(val === expected, create(val, expected, '===', msg, is))
 }
@@ -100,6 +108,8 @@ module.exports = {
   notOk: notOk,
   istrue: istrue,
   isFalse: isFalse,
+  eq: eq,
+  ne: ne,
   is: is,
   not: not,
   same: same,
