@@ -37,7 +37,7 @@ function notOk (val, msg) {
 }
 
 function isTrue (val, msg) {
-  test(val === true, create(val, true, '===', msg, istrue))
+  test(val === true, create(val, true, '===', msg, isTrue))
 }
 
 function isFalse (val, msg) {
