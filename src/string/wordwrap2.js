@@ -1,9 +1,13 @@
 // adopted from: wordwrapjs <https://github.com/75lb/wordwrapjs>
 // Copyright (c) 2015 Lloyd Brookes <75pound@gmail.com> (MIT)
 
-// differs by adding indent option, removing option setting inside functions,
-// removing os.EOL setting (using a string) and declaring a wrapLines function
-// as opposed to variable assignment. Also no input text validation.
+// differs from orginal by:
+// adding indent option,
+// declaring a wrapLines function as opposed to variable assignment,
+// removing option settings inside wrapLines function,
+// removing os.EOL setting (using a string),
+// no input text validation,
+// no preserving original line breaks.
 
 // [opts] {object} -- optional config
 // [opts.width=50] {number} -- max column width in characters
@@ -52,25 +56,19 @@ function wrapLines (text, opts) {
   }
 
   forEach(words, function (word) {
-    if (/^(\r\n?|\n)$/.test(word)) {
-      lines.push(line || '')
-      line = ''
-      lineLength = 0
+    var wordLength = opts.ignore
+      ? replaceIgnored(word, opts.ignore).length
+      : word.length
+
+    lineLength += wordLength + (line ? 1 : 0)
+
+    if (lineLength > opts.width) {
+      // Can't fit word on line, cache line and create new one
+      lines.push(opts.indent + line)
+      line = word
+      lineLength = wordLength
     } else {
-      var wordLength = opts.ignore
-        ? replaceIgnored(word, opts.ignore).length
-        : word.length
-
-      lineLength += wordLength + (line ? 1 : 0)
-
-      if (lineLength > opts.width) {
-        // Can't fit word on line, cache line and create new one
-        lines.push(opts.indent + line)
-        line = word
-        lineLength = wordLength
-      } else {
-        line += (line ? ' ' : '') + word
-      }
+      line += (line ? ' ' : '') + word
     }
   })
 
