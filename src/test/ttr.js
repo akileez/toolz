@@ -3,7 +3,10 @@
 
 // ttr -- tiny test reporting
 
-// async functions? promise functions?
+// async functions? maybe. but doubt it if everything runs well inside present setup
+// promise functions? same as above.
+// enhanced output for errors? certainly.
+// use process.stdout.write everywhere? maybe
 
 var clrz = require('../util/colorz')
 var assert = require('./assert')
