@@ -5,31 +5,35 @@
 
 // async functions? maybe. but doubt it if everything runs well inside present setup
 // promise functions? same as above.
-// enhanced output for errors? certainly.
-// use process.stdout.write everywhere? maybe
 
 var clrz = require('../util/colorz')
 var assert = require('./assert')
+var slice = require('../array/slice')
 
 var countTotal = 0
 var countSucc  = 0
 var countFail  = 0
 
-const nl = '\n'
-const s1 = ' '
-const s4 = '    '
-const succ = '  ✔  '
-const fail = '  ✖  '
+var nl = '\n'
+var s1 = ' '
+var s4 = '    '
+var succ = '  ✔ '
+var fail = '  ✖ '
 
-const udl = clrz.underline
-const yel = clrz.yellow
-const red = clrz.red
-const blu = clrz.blue
-const grn = clrz.green
-const mag = clrz.magenta
-const gry = clrz.grey
+var udl = clrz.underline
+var yel = clrz.yellow
+var red = clrz.red
+var blu = clrz.blue
+var grn = clrz.green
+var mag = clrz.magenta
+var gry = clrz.grey
 
-console.log(nl, udl(yel('Tests:')), nl)
+function log () {
+  var args = slice(arguments).join(' ') + '\n'
+  process.stdout.write(args)
+}
+
+log(nl, udl(yel('Tests:')), nl)
 
 function report (name, fn) {
   assert(typeof name === 'string', 'The description must be a string')
@@ -38,7 +42,7 @@ function report (name, fn) {
   try {
     countTotal += 1
     fn()
-    process.stdout.write(grn(succ) + mag(name) + nl)
+    log(grn(succ), mag(name))
     countSucc += 1
   } catch (err) {
     var match = err.stack.match(new RegExp(
@@ -47,20 +51,19 @@ function report (name, fn) {
     var line = match[1]
     var char = match[2]
     countFail += 1
-    process.stdout.write(red(fail) + mag(name) + s1)
-    console.log(red('FAILED'), blu(line + ':' + char))
+    log(red(fail), mag(name), red('FAILED'), blu(line + ':' + char))
     // if err.message is multiple lines, you must deal with the formatting
     // of the message. cross that bridge when I come to it.
-    console.log(s4, red(err.message))
-    console.error(gry(err.stack), nl)
+    log(s4, red(err.message))
+    log(gry(err.stack), nl)
   }
 }
 
 function result () {
-  console.log(nl, udl(yel('Result:')), nl)
-  console.log(s1, mag(countTotal), 'total')
-  console.log(s1, grn(countSucc), 'passed')
-  console.log(s1, (countFail == 0 ? grn(countFail) : red(countFail)), 'failed')
+  log(nl, udl(yel('Result:')), nl)
+  log(s1, mag(countTotal), 'total')
+  log(s1, grn(countSucc), 'passed')
+  log(s1, (countFail == 0 ? grn(countFail) : red(countFail)), 'failed')
 }
 
 module.exports = report
