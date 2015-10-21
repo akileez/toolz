@@ -28,11 +28,6 @@ var grn = clrz.green
 var mag = clrz.magenta
 var gry = clrz.grey
 
-function log () {
-  var args = slice(arguments).join(' ') + '\n'
-  process.stdout.write(args)
-}
-
 log(nl, udl(yel('Tests:')), nl)
 
 function report (name, fn) {
@@ -64,6 +59,11 @@ function result () {
   log(s1, mag(countTotal), 'total')
   log(s1, grn(countSucc), 'passed')
   log(s1, (countFail == 0 ? grn(countFail) : red(countFail)), 'failed')
+}
+
+function log () {
+  var args = slice(arguments).join(' ') + '\n'
+  process.stdout.write(args)
 }
 
 module.exports = report
