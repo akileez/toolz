@@ -5,7 +5,7 @@
 // Not as fast as [].prototype.push but it has the ability to parse arrays
 // without using call/apply
 
-var slice = require('./sliced')
+var slice = require('./slice')
 var isPrimitive = require('../lang/isPrimitive')
 var isArray = require('../lang/isArray')
 
