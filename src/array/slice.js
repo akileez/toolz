@@ -19,9 +19,10 @@ function slice (arr, start, end) {
   else end = Math.min(end, len)
 
   var result = []
+  var j = -1
 
   while (start < end) {
-    result.push(arr[start++])
+    result[++j] = arr[start++]
   }
 
   return result
