@@ -1,4 +1,4 @@
-var slice = require('./sliced')
+var slice = require('./slice')
 var randInt = require('../random/randInt')
 
 /**
