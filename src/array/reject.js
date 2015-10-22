@@ -6,12 +6,13 @@ function reject (arr, fn) {
   if (arr == null) return result
 
   var i = -1
+  var j = -1
   var len = arr.length
   var val
 
   while (++i < len) {
     val = arr[i]
-    if (!fn(val, i, arr)) result.push(val)
+    if (!fn(val, i, arr)) result[++j] = val
   }
 
   return result
