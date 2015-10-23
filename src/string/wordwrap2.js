@@ -7,7 +7,6 @@
 // removing option settings inside wrapLines function,
 // removing os.EOL setting (using a string),
 // no input text validation,
-// no preserving original line breaks.
 
 // [opts] {object} -- optional config
 // [opts.width=50] {number} -- max column width in characters
@@ -40,7 +39,11 @@ function wrapLines (text, opts) {
   if (opts.break) {
     var broken = []
     forEach(words, function (word) {
-      if (word.length > opts.width) {
+      var wordLength = opts.ignore
+        ? replaceIgnored(word, opts.ignore).length
+        : word.length
+
+      if (wordLength > opts.width) {
         var letters = word.split('')
         var section
 
@@ -56,19 +59,25 @@ function wrapLines (text, opts) {
   }
 
   forEach(words, function (word) {
-    var wordLength = opts.ignore
-      ? replaceIgnored(word, opts.ignore).length
-      : word.length
-
-    lineLength += wordLength + (line ? 1 : 0)
-
-    if (lineLength > opts.width) {
-      // Can't fit word on line, cache line and create new one
-      lines.push(opts.indent + line)
-      line = word
-      lineLength = wordLength
+    if (/^(\r\n?|\n)$/.test(word)) {
+      lines.push(line ? opts.indent + line : '')
+      line = ''
+      lineLength = 0
     } else {
-      line += (line ? ' ' : '') + word
+      var wordLength = opts.ignore
+        ? replaceIgnored(word, opts.ignore).length
+        : word.length
+
+      lineLength += wordLength + (line ? 1 : 0)
+
+      if (lineLength > opts.width) {
+        // Can't fit word on line, cache line and create new one
+        lines.push(opts.indent + line)
+        line = word
+        lineLength = wordLength
+      } else {
+        line += (line ? ' ' : '') + word
+      }
     }
   })
 
