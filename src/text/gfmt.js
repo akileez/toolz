@@ -26,6 +26,14 @@ var rpad     = require('../string/rpad')
     ])
 
     console.log(table)
+
+    | date        | downloads |
+    | ----------- | --------- |
+    | 10 Jun 2015 | 100       |
+    | 11 Jun 2015 | 120       |
+    | 12 Jun 2015 | 150       |
+    | 13 Jun 2015 | 120       |
+    | 14 Jun 2015 | 110       |
  */
 
 function gfmt (input) {
