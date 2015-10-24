@@ -9,6 +9,7 @@ function repeat (str, n) {
   n = toInt(n)
 
   if (n < 1) return ''
+
   while (n > 0) {
     if (n % 2) result += str
     n = Math.floor(n / 2)
