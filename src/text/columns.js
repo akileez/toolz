@@ -1,7 +1,7 @@
 // adopted from: column-layout <https://github.com/75lb/column-layout> v1.05
 // Copyright (c) 2015 Lloyd Brookes <75pound@gmail.com> (MIT)
 
-var wrap        = require('../string/wordwrap2')
+var wrap        = require('./wordwrap')
 var padRight    = require('../string/rpad')
 var extend      = require('../object/extend')
 var foreach     = require('../object/forEach')
