@@ -1,7 +1,7 @@
 // concept adopted from: https://github.com/lepture/editor/blob/master/src/intro.js#L343
 // and Jon Schlinkert -- wordcount <https://github.com/jonschlinkert/wordcount>
 
-var matches = require('./wordmatch')
+var matches = require('../string/wordmatch')
 
 function wordcount (str) {
   var n = matches(str)
