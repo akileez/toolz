@@ -11,6 +11,8 @@
 var colorz = require('../util/colorz')
 
 function useColorProvider (str, style) {
+  if (!style) return str
+
   if (Array.isArray(style) && style.length > 1) {
     return useColorProvider(colorz[style[0]](str), style.slice(1))
   } else {
