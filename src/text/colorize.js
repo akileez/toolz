@@ -16,8 +16,6 @@ function useColorProvider (str, style) {
   } else {
     return colorz[Array.isArray(style) ? style[0] : style](str)
   }
-
-  return str
 }
 
 module.exports = useColorProvider
