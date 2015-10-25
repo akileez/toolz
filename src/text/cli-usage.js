@@ -2,6 +2,7 @@
 // Copyright (c) 2015 Lloyd Brookes <75pound@gmail.com> (MIT)
 
 // Still a WIP.
+// make an option for no colors
 
 var columnLayout  = require('./columns')
 var colorize      = require('./colorize')
@@ -12,6 +13,7 @@ var isString      = require('../lang/isString')
 var filter        = require('../array/filter')
 var forEach       = require('../array/forEach')
 var contains      = require('../array/contains')
+var where         = require('../array/where')
 var each          = require('../object/foreach')
 
 function getUsage (defs, opts) {
@@ -31,7 +33,7 @@ function getUsage (defs, opts) {
   addEmpty(lines)
 
   if (opts.title) {
-    addLine(lines, getText(opts.title, ['underline', 'bold']))
+    addLine(lines, getText(opts.title, ['cyan', 'bold']))
   }
 
   // is this needed yet?
@@ -42,7 +44,7 @@ function getUsage (defs, opts) {
     forEach(arrayify(opts.description), function (desc) {
       addLine(lines, desc)
     })
-    addEmpty(lines)
+    // addEmpty(lines)
     // output += rendr(lines)
   }
 
@@ -51,6 +53,7 @@ function getUsage (defs, opts) {
   if (opts.synopsis) {
     opts.synopsis = arrayify(opts.synopsis)
     addLine(lines, colorize('Synopsis', ['underline', 'bold']))
+    addEmpty(lines)
 
     forEach(opts.synopsis, function (form) {
       addLine(lines, getText(form, 'white'))
@@ -74,6 +77,7 @@ function getUsage (defs, opts) {
           throw new Error('Unexpected group config structure')
         }
         addLine(lines, getText(title, ['underline', 'bold']))
+        addEmpty(lines)
         if (description) {
           addLine(lines, getText(description))
           addEmpty(lines)
@@ -163,7 +167,7 @@ function addLine (lines, line, style) {
 function addRow (lines, definition) {
   // console.log('lines: ', lines, 'definition: ', definition)
   lines.push({
-    col1: getOptionNames(definition, ['bold', 'green']),
+    col1: getOptionNames(definition, ['bold', 'magenta']),
     col2: getText(definition.description, ['white'])
   })
 }
