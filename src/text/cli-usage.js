@@ -56,7 +56,7 @@ function getUsage (defs, opts) {
     addEmpty(lines)
 
     forEach(opts.synopsis, function (form) {
-      addLine(lines, getText(form, 'white'))
+      addLine(lines, getText(form))
     })
 
     addEmpty(lines)
@@ -149,7 +149,7 @@ function getText (text, styleArray) {
   }
 }
 
-function addLine (lines, line, style) {
+function addLine (lines, line) {
   // lines must be an array
   if (isPlainObject(line)) {
     var prop
@@ -160,7 +160,7 @@ function addLine (lines, line, style) {
     lines.push(line)
   } else {
     // console.log('this is the line: ', line)
-    lines.push(typeof line === 'string' ? getText(line, [style || 'white']) : '')
+    lines.push(typeof line === 'string' ? getText(line) : '')
   }
 }
 
@@ -168,7 +168,7 @@ function addRow (lines, definition) {
   // console.log('lines: ', lines, 'definition: ', definition)
   lines.push({
     col1: getOptionNames(definition, ['bold', 'magenta']),
-    col2: getText(definition.description, ['white'])
+    col2: getText(definition.description)
   })
 }
 
