@@ -6,9 +6,9 @@
 // async functions? maybe. but doubt it if everything runs well inside present setup
 // promise functions? same as above.
 
-var clrz = require('../util/colorz')
-var assert = require('./assert')
-var slice = require('../array/slice')
+var slice  = require('../array/slice')
+var clrz   = require('../util/colorz')
+var t      = require('./tta')
 
 var countTotal = 0
 var countSucc  = 0
@@ -31,12 +31,12 @@ var gry = clrz.grey
 log(nl, udl(yel('Tests:')), nl)
 
 function report (name, fn) {
-  assert(typeof name === 'string', 'The description must be a string')
-  assert(typeof fn === 'function', 'The test must be a function')
+  t.assert(typeof name === 'string', 'The description must be a string')
+  t.assert(typeof fn === 'function', 'The test must be a function')
 
   try {
     countTotal += 1
-    fn()
+    fn(t)
     log(grn(succ), mag(name))
     countSucc += 1
   } catch (err) {
@@ -59,6 +59,8 @@ function result () {
   log(s1, mag(countTotal), 'total')
   log(s1, grn(countSucc), 'passed')
   log(s1, (countFail == 0 ? grn(countFail) : red(countFail)), 'failed')
+  process.exit(countFail)
+  return
 }
 
 function log () {
