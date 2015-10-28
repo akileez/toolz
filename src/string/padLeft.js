@@ -1,12 +1,8 @@
-var fill = require('./fill')
+var repeat = require('./repeat')
 
 function padLeft (str, width, ch) {
-  str = String(str)
   ch = ch  || ' '
-
-  return (str.length < width)
-    ? fill(ch, width - str.length) + str
-    : str
+  return repeat(ch, width - str.length) + str
 }
 
 module.exports = padLeft
