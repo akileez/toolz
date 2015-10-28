@@ -1,4 +1,4 @@
-var make = require('./make_')
+var make = require('./_make')
 var makeIterator = require('../function/makeIterator_')
 
 function arrMap (arr, fn, thisObj) {

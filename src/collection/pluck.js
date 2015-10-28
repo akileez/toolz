@@ -1,4 +1,4 @@
-var make = require('./make_')
+var make = require('./_make')
 var arrPluck = require('../array/pluck')
 var objPluck = require('../object/pluck')
 

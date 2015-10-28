@@ -1,5 +1,5 @@
 var values = require('../object/values')
-var make = require('./make_')
+var make = require('./_make')
 var makeIterator = require('../function/makeIterator_')
 
 // Get maximum value inside collection
