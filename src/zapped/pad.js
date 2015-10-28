@@ -3,10 +3,10 @@
 
 // Create a new string filled with the supplied character
 
-function fill (str, len) {
+function pad (str, len) {
   var buffer = new Buffer(len)
   buffer.fill(str)
   return buffer.toString()
 }
 
-module.exports = fill
+module.exports = pad
