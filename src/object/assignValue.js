@@ -7,7 +7,7 @@ var isString    = require('../lang/isString')
 var kindOf      = require('../lang/kindOf')
 var yoda        = require('../lang/yoda')
 var extend      = require('./extend')
-var look        = require('./look')
+var get         = require('./get')
 var set         = require('./set')
 var assert      = require('assert')
 
@@ -23,7 +23,7 @@ function assignValue (obj, prop, value) {
     return obj
   }
 
-  var curr = look(obj, prop)
+  var curr = get(obj, prop)
   var rest = extend({}, curr, value)
   set(obj, prop, rest)
   return obj
