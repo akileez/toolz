@@ -1,6 +1,6 @@
 var Emitter  = require('../util/Emitter')
 var set      = require('../object/set')
-var get      = require('../object/look')
+var get      = require('../object/get')
 var has      = require('../object/has')
 var omit     = require('../object/omit')
 
