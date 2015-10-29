@@ -1,5 +1,6 @@
-// in lieu of the spread operator until I upgrade
-// to ES6 !!NOT TESTED!!
+// in lieu of the spread operator until I upgrade to ES6
+// returns an array of arguments passed.
+
 var slice = require('./slice')
 var map = require('../object/map')
 var foreach = require('../object/foreach')
