@@ -4,7 +4,7 @@
 var isObject = require('../lang/isObject')
 var isString = require('../lang/isString')
 var omit     = require('./omit')
-var look     = require('./look')
+var get      = require('./get')
 var set      = require('./set')
 var assert   = require('assert')
 
@@ -14,7 +14,7 @@ function omitValue (obj, prop, keys) {
 
   if (typeof keys === undefined) return omit(obj, prop)
 
-  var val = look(obj, prop)
+  var val = get(obj, prop)
   set(obj, prop, omit(val, keys))
   return obj
 }
