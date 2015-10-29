@@ -3,7 +3,7 @@
 
 var kindOf  = require('../lang/kindOf')
 var clone   = require('../lang/clone')
-var slice   = require('../array/sliced')
+var slice   = require('../array/slice')
 var forEach = require('../array/forEach')
 var keys    = require('../object/keys')
 
