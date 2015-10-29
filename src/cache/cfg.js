@@ -1,6 +1,6 @@
 var Emitter  = require('../util/Emitter')
 var set      = require('../object/set')
-var look     = require('../object/look')
+var get      = require('../object/get')
 var has      = require('../object/has')
 var omit     = require('../object/omit')
 var visit    = require('../object/visit')
@@ -29,7 +29,7 @@ function setter (key, value) {
 
 // gets the cached value for 'key' or entire cache
 function getter (key) {
-  return key ? look(this.cache, key) : this.cache
+  return key ? get(this.cache, key) : this.cache
 }
 
 // checks if a cached value for 'key exists'
