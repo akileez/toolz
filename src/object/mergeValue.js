@@ -7,7 +7,7 @@ var isStr   = require('../lang/isString')
 var kindOf  = require('../lang/kindOf')
 var yoda    = require('../lang/yoda')
 var merge   = require('./merge')
-var look    = require('./look')
+var get     = require('./get')
 var set     = require('./set')
 var assert  = require('assert')
 
@@ -23,7 +23,7 @@ function mergeValue (obj, prop, val) {
     return obj
   }
 
-  var curr = look(obj, prop)
+  var curr = get(obj, prop)
   var rest = merge({}, curr, val)
   set(obj, prop, rest)
   return obj
