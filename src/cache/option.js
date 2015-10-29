@@ -1,6 +1,6 @@
 var Emitter = require('../util/Emitter')
 var kindOf  = require('../lang/kindOf')
-var get     = require('../object/look')
+var get     = require('../object/get')
 var set     = require('../object/set')
 var has     = require('../object/has')
 var toFlags = require('../string/toFlags')
