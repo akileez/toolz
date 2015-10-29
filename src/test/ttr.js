@@ -33,11 +33,19 @@ log(nl, udl(yel('Tests:')), nl)
 function report (name, fn) {
   t.assert(typeof name === 'string', 'The description must be a string')
   t.assert(typeof fn === 'function', 'The test must be a function')
+  t.comment = false
+  t.end = next
+
+  function next (msg) {
+    t.comment = true
+    log(grn(succ), mag(name))
+    if (msg) log('     #', msg.replace(/^#\s*/, ''))
+  }
 
   try {
     countTotal += 1
     fn(t)
-    log(grn(succ), mag(name))
+    if (!t.comment) log(grn(succ), mag(name))
     countSucc += 1
   } catch (err) {
     var match = err.stack.match(new RegExp(
