@@ -1,4 +1,10 @@
-// can be achieved with the following:
+// replication of Object.keys(obj).forEach()
+
+// I had been doing forEach(keys(obj), function (prop, key, obj) {
+//  something done here.
+// })
+
+// can also be achieved with the following:
 // values(obj).forEach(callback)
 
 function foreach (obj, fn) {
