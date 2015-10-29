@@ -1,7 +1,7 @@
-var look = require('./look')
+var get = require('./get')
 
 function has (obj, prop) {
-  return look(obj, prop) !== undefined
+  return get(obj, prop) !== undefined
 }
 
 module.exports = has
