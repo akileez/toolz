@@ -1,5 +1,5 @@
 var extend  = require('./extend')
-var slice   = require('../array/sliced')
+var slice   = require('../array/slice')
 var forEach = require('../array/forEach')
 
 function omit (obj, toOmit) {
