@@ -2,7 +2,7 @@
 // focused solely on string replacements within objects/arrays/strings.
 
 var kindOf = require('../lang/kindOf')
-var look   = require('../object/look')
+var get    = require('../object/get')
 
 function interpolate (template, replacements, syntax) {
   return resolve(template, replacements || template, syntax)
@@ -40,7 +40,7 @@ function interpolate (template, replacements, syntax) {
     var stache = opts || /\{\{([^\}]+)\}\}/g // mustache-like
 
     function replaceFn (match, prop) {
-      var template = look(data, prop)
+      var template = get(data, prop)
 
       return stache.test(template)
         ? template.replace(stache, replaceFn)
