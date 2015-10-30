@@ -1,6 +1,6 @@
-var repeat = require('./repeat')
-var assert = require('assert')
+var repeat  = require('../string/repeat')
 var replace = require('../regex/replace')
+var assert  = require('assert')
 
 function indent (str, char, num) {
   assert(typeof str === 'string', 'first parameter should be a string')
