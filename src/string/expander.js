@@ -2,7 +2,7 @@
 // Copyright (c) 2015, Jon Schlinkert (MIT)
 
 var kindOf = require('../lang/kindOf')
-var look   = require('../object/look')
+var get    = require('../object/get')
 
 // Removed curried function:
 // var expand = require('expand')
@@ -61,10 +61,10 @@ function expand (val, data, opts) {
       if (/[()]/.test(prop)) {
         val = resolveFunc(prop, data)
       } else {
-        val = look(data, prop)
+        val = get(data, prop)
       }
 
-      // if no value was retured from `look` or `resolveFunc`,
+      // if no value was retured from `get` or `resolveFunc`,
       // reset the value to `match`
       if (val == null) val = match
 
