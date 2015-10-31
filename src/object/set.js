@@ -1,10 +1,10 @@
 // adopted from set-value <>
 //
 
-var isObject = require('toolz/src/lang/isPlainObject')
-var isArray  = require('toolz/src/lang/isArray')
-var isString = require('toolz/src/lang/isString')
-var extend   = require('toolz/src/object/extend')
+var isObject = require('../lang/isPlainObject')
+var isArray  = require('../lang/isArray')
+var isString = require('../lang/isString')
+var extend   = require('../object/extend')
 var toPath   = require('./toPath')
 
 function setvalue (obj, path, val) {
