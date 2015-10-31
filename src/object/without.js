@@ -2,9 +2,8 @@
 // array or strings.
 
 var kindOf  = require('../lang/kindOf')
-var clone   = require('../lang/clone')
 var slice   = require('../array/slice')
-var forEach = require('../array/forEach')
+var extend  = require('../object/extend')
 var keys    = require('../object/keys')
 
 function without (obj, props) {
@@ -20,11 +19,13 @@ function without (obj, props) {
       break
   }
 
-  var output = clone(obj)
+  var output = extend({}, obj)
+  var i = -1
+  var len = props.length
 
-  forEach(props, function (omit) {
-    delete output[omit]
-  })
+  while (++i < len) {
+    delete output[props[i]]
+  }
 
   return output
 }
