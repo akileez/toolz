@@ -1,14 +1,16 @@
 // adopted from set-value <>
 //
 
-var extend = require('./extend')
-var toPath = require('./toPath')
-
+var isObjectLike = require('toolz/src/lang/isObjectLike')
+var isArray      = require('toolz/src/lang/isArray')
+var isString     = require('toolz/src/lang/isString')
+var extend       = require('toolz/src/object/extend')
+var toPath       = require('./toPath')
 
 function setvalue (obj, path, val) {
-  if (typeof obj !== 'object') return obj
-  if (Array.isArray(path)) path = toPath(path)
-  if (typeof path !== 'string') return obj
+  if (!isObjectLike(obj)) return obj
+  if (isArray(path)) path = toPath(path)
+  if (!isString(path)) return obj
 
   var segs = path.split('.')
   var len = segs.length
@@ -24,12 +26,12 @@ function setvalue (obj, path, val) {
       break
     }
 
-    if (typeof obj[key] !== 'object') obj[key] = {}
+    if (!isObjectLike(obj[key])) obj[key] = {}
 
     obj = obj[key]
   }
 
-  if (obj.hasOwnProperty(last) && typeof obj[last] === 'object') extend(obj[last, val])
+  if (obj.hasOwnProperty(last) && isObjectLike(obj[last])) extend(obj[last, val])
   else obj[last] = val
 
   return res
