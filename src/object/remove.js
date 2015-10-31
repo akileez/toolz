@@ -3,6 +3,7 @@
 
 var isObject = require('../lang/isPlainObject')
 var isString = require('../lang/isString')
+var extend   = require('./extend')
 var omit     = require('./omit')
 var get      = require('./get')
 var set      = require('./set')
@@ -14,9 +15,10 @@ function omitValue (obj, prop, keys) {
 
   if (typeof keys === 'undefined') return omit(obj, prop)
 
-  var val = get(obj, prop)
-  set(obj, prop, omit(val, keys))
-  return obj
+  var res = extend({}, obj)
+  var val = get(res, prop)
+  set(res, prop, omit(val, keys))
+  return res
 }
 
 module.exports = omitValue
