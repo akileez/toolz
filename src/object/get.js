@@ -3,8 +3,8 @@
 
 // get nested object property. supports an array of properties
 
-var isString = require('toolz/src/lang/isString')
-var isArray = require('toolz/src/lang/isArray')
+var isString = require('../lang/isString')
+var isArray = require('../lang/isArray')
 
 function getValue (obj, prop) {
   var segs = toSegemnts(prop)
