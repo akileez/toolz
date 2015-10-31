@@ -1,6 +1,6 @@
 var kindOf        = require('./kindOf')
 var isPlainObject = require('./isPlainObject')
-var mixIn        = require('../object/mixIn')
+var extend        = require('../object/extend')
 
 function clone (value) {
   switch (kindOf(value)) {
@@ -13,7 +13,7 @@ function clone (value) {
 }
 
 function cloneObject (src) {
-  if (isPlainObject(src)) return mixIn({}, src)
+  if (isPlainObject(src)) return extend({}, src)
   else return src
 }
 
