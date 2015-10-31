@@ -27,24 +27,23 @@
     //=> {a: 'a', b: 'b', c: 'c', d: { e: 'f' }};
 */
 
-function objVisit (thisArg, method, target) {
-  for (var key in target) {
-    if (target.hasOwnProperty(key)) thisArg[method](key, target[key])
-  }
+function visit (collection, method, target) {
+  if (Array.isArray(target)) arrVisit(collection, method, target)
+  else objVisit(collection, method, target)
 
-  return thisArg
+  return collection
 }
 
-function arrVisit (thisArg, method, array) {
-
-  array.forEach(function (obj) {
-    objVisit(thisArg, method, obj)
+function arrVisit (collection, method, target) {
+  target.forEach(function (obj) {
+    objVisit(collection, method, obj)
   })
 }
 
-function visit (collection, method, val) {
-  if (Array.isArray(val)) arrVisit(collection, method, val)
-  else objVisit(collection, method, val)
+function objVisit (collection, method, target) {
+  for (var key in target) {
+    if (target.hasOwnProperty(key)) collection[method](key, target[key])
+  }
 
   return collection
 }
