@@ -2,7 +2,7 @@
 // Copyright (c) 2015, Jon Schlinkert. (MIT)
 
 var isUndefined = require('../lang/isUndefined')
-var isObject    = require('../lang/isObject')
+var isObject    = require('../lang/isObjectLike')
 var isString    = require('../lang/isString')
 var kindOf      = require('../lang/kindOf')
 var yoda        = require('../lang/yoda')
