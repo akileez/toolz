@@ -12,7 +12,7 @@ function omitValue (obj, prop, keys) {
   assert(isObject(obj), 'omitValue expects first arg to be an object.')
   assert(isString(prop), 'omitValue expects prop to be a string')
 
-  if (typeof keys === undefined) return omit(obj, prop)
+  if (typeof keys === 'undefined') return omit(obj, prop)
 
   var val = get(obj, prop)
   set(obj, prop, omit(val, keys))
