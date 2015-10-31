@@ -1,7 +1,7 @@
 // adopted from: <https://github.com/jonschlinkert/omit-value>
 // Copyright (c) 2015, Jon Schlinkert. (MIT)
 
-var isObject = require('../lang/isObject')
+var isObject = require('../lang/isPlainObject')
 var isString = require('../lang/isString')
 var omit     = require('./omit')
 var get      = require('./get')
