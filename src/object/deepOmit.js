@@ -1,4 +1,4 @@
-var isObject = require('../lang/isObject')
+var isObject = require('../lang/isPlainObject')
 var forOwn = require('./forOwn')
 var omit = require('./omit')
 
