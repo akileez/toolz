@@ -1,9 +1,9 @@
 // adopted from: to-object-path <>
 //
 
-var isArguments = require('toolz/src/lang/isArguments')
-var flatten     = require('toolz/src/array/flatten')
-var slice       = require('toolz/src/array/slice')
+var isArguments = require('../lang/isArguments')
+var flatten     = require('../array/flatten')
+var slice       = require('../array/slice')
 
 function topath (args) {
   if (isArguments(args)) args = slice(args)
