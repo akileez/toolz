@@ -1,7 +1,6 @@
 var isObject = require('../lang/isPlainObject')
 var isArray  = require('../lang/isArray')
 var isString = require('../lang/isString')
-var forEach  = require('../array/forEach')
 var dotPath  = require('./dotPath')
 
 function setvalue (obj, path, val) {
