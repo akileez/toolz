@@ -34,8 +34,11 @@ function wrap (text, opts) {
   return lines.join(opts.eol)
 }
 
+// returns the wrapped output as an array of lines, rather than a single string
 function wrapLines (text, opts) {
-  var words = text.match(re.nonWhitespaceCharsOrNewLine) || []
+  opts = opts || defaultOpts(opts)
+
+  var words = getWords(text)
 
   var lineLength = 0
   var lines = []
@@ -63,6 +66,7 @@ function wrapLines (text, opts) {
     words = broken
   }
 
+  // for each word, either extend the current `line` or create a new one
   forEach(words, function (word) {
     if (re.singleNewLine.test(word)) {
       lines.push(line ? opts.indent + line : '')
@@ -92,6 +96,11 @@ function wrapLines (text, opts) {
   return lines
 }
 
+// splits the input text returning an array of words
+function getWords (text) {
+  return text.match(re.nonWhitespaceCharsOrNewLine) || []
+}
+
 function replaceIgnored (string, ignore) {
   toArray(ignore).forEach(function (pattern) {
     string = string.replace(pattern, '')
@@ -102,10 +111,12 @@ function replaceIgnored (string, ignore) {
 function defaultOpts (opts) {
   opts = opts || {}
   opts.width = opts.width || 50
-  opts.broken = opts.broken || false
+  opts.break = opts.break || false
   opts.indent = opts.indent || ''
   opts.eol = opts.eol || '\n'
   return opts
 }
 
 module.exports = wrap
+module.exports.lines = wrapLines
+module.exports.getWords = getWords
