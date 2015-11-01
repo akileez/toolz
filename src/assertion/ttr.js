@@ -8,6 +8,7 @@
 
 var slice  = require('../array/slice')
 var clrz   = require('../util/colorz')
+var indent = require('../text/indent')
 var t      = require('./tta')
 
 var countTotal = 0
@@ -39,7 +40,7 @@ function report (name, fn) {
   function next (msg) {
     t.comment = true
     log(grn(succ), mag(name))
-    if (msg) log('     #', msg.replace(/^#\s*/, ''))
+    if (msg) log(indent(msg, ' ', 6))
   }
 
   try {
