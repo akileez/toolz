@@ -22,6 +22,11 @@
 var forEach = require('../array/forEach')
 var toArray = require('../lang/toArray')
 
+var re = {
+  nonWhitespaceCharsOrNewLine:  /[^\s-]+?-\b|\S+|\r\n?|\n/g,
+  singleNewLine: /^(\r\n?|\n)$/
+}
+
 function wrap (text, opts) {
   opts = defaultOpts(opts)
 
@@ -30,7 +35,7 @@ function wrap (text, opts) {
 }
 
 function wrapLines (text, opts) {
-  var words = text.match(/(\S+|\r\n?|\n)/g) || []
+  var words = text.match(re.nonWhitespaceCharsOrNewLine) || []
 
   var lineLength = 0
   var lines = []
@@ -59,7 +64,7 @@ function wrapLines (text, opts) {
   }
 
   forEach(words, function (word) {
-    if (/^(\r\n?|\n)$/.test(word)) {
+    if (re.singleNewLine.test(word)) {
       lines.push(line ? opts.indent + line : '')
       line = ''
       lineLength = 0
@@ -72,11 +77,12 @@ function wrapLines (text, opts) {
 
       if (lineLength > opts.width) {
         // Can't fit word on line, cache line and create new one
-        lines.push(opts.indent + line)
+        if (line) lines.push(opts.indent + line)
         line = word
         lineLength = wordLength
       } else {
-        line += (line ? ' ' : '') + word
+        if (/-$/.test(line)) line = word
+        else line += (line ? ' ' : '') + word
       }
     }
   })
