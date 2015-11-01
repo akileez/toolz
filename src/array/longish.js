@@ -11,7 +11,6 @@
 var assert = require('assert')
 var values = require('../collection/values')
 
-
 function longish (arr) {
   if (!arr || !arr.length) return null
 
