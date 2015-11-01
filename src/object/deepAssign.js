@@ -6,6 +6,7 @@ var isObj   = require('../lang/isPlainObject')
 var isStr   = require('../lang/isString')
 var kindOf  = require('../lang/kindOf')
 var yoda    = require('../lang/yoda')
+var deepEx  = require('./deepExtend')
 var merge   = require('./merge')
 var get     = require('./get')
 var set     = require('./set')
@@ -18,15 +19,17 @@ function mergeValue (obj, prop, val) {
 
   if (isUndef(val) && isObj(prop)) return merge(obj, prop)
 
+  var target = deepEx({}, obj)
+
   if (isStr(val)) {
-    set(obj, prop, val)
-    return obj
+    set(target, prop, val)
+    return target
   }
 
-  var curr = get(obj, prop)
-  var rest = merge({}, curr, val)
-  set(obj, prop, rest)
-  return obj
+  var curr = get(target, prop)
+  var rest = merge(curr, val)
+  set(target, prop, rest)
+  return target
 }
 
 module.exports = mergeValue
