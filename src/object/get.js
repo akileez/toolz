@@ -7,7 +7,7 @@ var isString = require('../lang/isString')
 var isArray = require('../lang/isArray')
 
 function getValue (obj, prop) {
-  var segs = toSegemnts(prop)
+  var segs = toSegments(prop)
 
   if (segs === null) return obj
 
@@ -21,7 +21,7 @@ function getValue (obj, prop) {
   return obj
 }
 
-function toSegemnts (val) {
+function toSegments (val) {
   if (isArray(val)) return val
   if (isString(val)) return val.split('.')
   return null
