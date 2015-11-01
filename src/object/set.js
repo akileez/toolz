@@ -1,10 +1,7 @@
-// adopted from set-value <>
-//
-
 var isObject = require('../lang/isPlainObject')
 var isArray  = require('../lang/isArray')
 var isString = require('../lang/isString')
-var extend   = require('../object/extend')
+var forEach   = require('../array/forEach')
 var toPath   = require('./toPath')
 
 function setvalue (obj, path, val) {
@@ -13,28 +10,22 @@ function setvalue (obj, path, val) {
   if (!isString(path)) return obj
 
   var segs = path.split('.')
-  var len = segs.length
+  var last = segs.pop()
+
+  if (segs) namespace(obj, segs)[last] = val
+  else obj[path] = val
+}
+
+function namespace (obj, path) {
   var i = -1
-  var res = obj
-  var last
+  var len = path.length
 
   while (++i < len) {
-    var key = segs[i]
-
-    if (i === len - 1) {
-      last = key
-      break
-    }
-
-    if (!isObject(obj[key])) obj[key] = {}
-
-    obj = obj[key]
+    if (!obj[path[i]]) obj[path[i]] = {}
+    obj = obj[path[i]]
   }
 
-  if (obj.hasOwnProperty(last) && isObject(obj[last])) extend(obj[last, val])
-  else obj[last] = val
-
-  return res
+  return obj
 }
 
 module.exports = setvalue
