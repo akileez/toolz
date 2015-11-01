@@ -17,7 +17,6 @@ var isObject    = require('../lang/isObject')
 var isUndefined = require('../lang/isUndefined')
 var ansiEscSeq  = require('../regex/rex-ansiEscape')
 var where       = require('../array/where')
-var filter      = require('../array/filter')
 
 function columnLayout (data, options) {
   options = extend({
@@ -47,8 +46,8 @@ function columnLayout (data, options) {
 
   // if no column options supplied, create them...
   var uniquePropertyNames = getUniquePropertyNames(rows)
-  var columnsWithoutOptions =
-    without(uniquePropertyNames, pluck(options.columns, "name"))
+  var columnsWithoutOptions
+    = without(uniquePropertyNames, pluck(options.columns, 'name'))
 
   forEach(columnsWithoutOptions, function (columnName) {
     options.columns.push(createColumnOption(columnName))
@@ -182,7 +181,9 @@ function autosizeColumnWidths (options, data) {
   var unWrappableColumns = getUnWrappableColumns(data, options.columns)
   var totalWidthOfUnwrappableColumns = sum(
       where(options.columns, map(unWrappableColumns, function (colName) {
-        return { name: colName }
+        return {
+          name: colName
+        }
       })),
       'width')
   var remainingWidth = options.viewWidth - totalWidthOfUnwrappableColumns
@@ -205,7 +206,9 @@ function getPaddingWidth (options) {
 }
 
 function createColumnOption (name) {
-  return { name: name }
+  return {
+    name: name
+  }
 }
 
 function getColumnOption (columnOptions, columnName) {

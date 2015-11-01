@@ -121,7 +121,7 @@ function getUsage (defs, opts) {
   }
 
   // the footer adds an empty line - remove it if one-too-many
-  output = rendr(lines, opts).replace(/\n\s*\n$/, '\n')
+  var output = rendr(lines, opts).replace(/\n\s*\n$/, '\n')
   return output
 }
 
