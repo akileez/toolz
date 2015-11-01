@@ -10,7 +10,11 @@ function matches (re, str) {
   return str.match(re)
 }
 
+function execute (re, str) {
+  return re.exec(str)
+}
+
 exports.replace = replace
 exports.contains = contains
 exports.matches = matches
-// exports.exec = exec
+exports.execute = execute
