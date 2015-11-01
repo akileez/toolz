@@ -5,7 +5,7 @@
 // })
 
 // can also be achieved with the following:
-// values(obj).forEach(callback)
+// keys(obj).forEach(callback), or using values: values(obj).forEach(cb)
 
 function foreach (obj, fn) {
   var key
