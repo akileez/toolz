@@ -2,7 +2,7 @@
 // Copyright (c) 2015 Lloyd Brookes <75pound@gmail.com> (MIT)
 
 var toArray       = require('./toArray')
-var isObject      = require('./isObject')
+var isObject      = require('./isObjectLike')
 var isPlainObject = require('./isPlainObject')
 var every         = require('../array/every')
 var some          = require('../array/some')
