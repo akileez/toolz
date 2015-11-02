@@ -1,4 +1,4 @@
-var slice = require('../array/sliced')
+var slice = require('../array/slice')
 var every = require('../array/every')
 var some = require('../array/some')
 
