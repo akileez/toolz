@@ -1,4 +1,4 @@
-var MapCache = require('../base/MapCache')
+var MapCache = require('../cache/MapCache')
 
 /**
  * lodash memorize
