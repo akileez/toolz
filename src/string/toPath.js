@@ -1,4 +1,4 @@
-var baseToString = require('../base/baseToString')
+var toString = require('../lang/toString')
 var isArray = require('../lang/isArray')
 
 // used to match property names within property paths.
@@ -13,7 +13,7 @@ function toPath (value) {
   if (isArray(value)) return value
 
   var result = []
-  baseToString(value).replace(rePropName, function (match, number, quote, string) {
+  toString(value).replace(rePropName, function (match, number, quote, string) {
     result.push(quote ? string.replace(reEscapeChar, '$1') : (number || match))
   })
   return result
