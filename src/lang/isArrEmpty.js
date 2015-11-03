@@ -1,4 +1,4 @@
-var slice = require('../array/sliced')
+var slice = require('../array/slice')
 
 function isEmpty () {
   var args = slice(arguments)
