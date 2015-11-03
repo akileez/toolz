@@ -4,7 +4,7 @@ var get      = require('../object/get')
 var has      = require('../object/has')
 var omit     = require('../object/omit')
 var visit    = require('../object/visit')
-var isOr     = require('../lang/isOr')
+var isOr     = require('../lang/yoda').or
 var kindOf   = require('../lang/kindOf')
 var toFlags  = require('../string/toFlags')
 
