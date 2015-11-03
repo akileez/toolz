@@ -77,7 +77,18 @@ function wrapLines (text, opts) {
         ? replaceIgnored(word, opts.ignore).length
         : word.length
 
-      lineLength += wordLength + (line ? 1 : 0)
+      var offset
+      if (lineLength > options.width) {
+        offset = 0
+      } else {
+        if (/-$/.test(line)) {
+          offset = 0
+        } else {
+          offset = line ? 1 : 0
+        }
+      }
+
+      lineLength += wordLength + offset
 
       if (lineLength > opts.width) {
         // Can't fit word on line, cache line and create new one
