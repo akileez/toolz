@@ -16,5 +16,10 @@ function or (ans) {
   })
 }
 
+function id (what, who) {
+  return (who && typeof who === what)
+}
+
 exports.and = and
 exports.or = or
+exports.id = id
