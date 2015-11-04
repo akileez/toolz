@@ -78,7 +78,7 @@ function wrapLines (text, opts) {
         : word.length
 
       var offset
-      if (lineLength > options.width) {
+      if (lineLength > opts.width) {
         offset = 0
       } else {
         if (/-$/.test(line)) {
