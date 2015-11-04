@@ -2,7 +2,6 @@ var Emitter  = require('../util/Emitter')
 var set      = require('../object/set')
 var get      = require('../object/get')
 var has      = require('../object/has')
-var omit     = require('../object/omit')
 var visit    = require('../object/visit')
 
 function Cfg () {
@@ -40,7 +39,7 @@ function hasit (key) {
 
 // remove 'keys' from the cache. if no value specified, the entire cache is reset
 function removeit (key) {
-  this.cache = key ? omit(this.cache, key) : {}
+  this.cache = key ? delete this.cache[key] : {}
   this.emit('del', key)
   return this
 }
