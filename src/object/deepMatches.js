@@ -1,8 +1,9 @@
-var forOwn = require('./forOwn')
+var forOwn  = require('./forOwn')
 var isArray = require('../lang/isArray')
+var isId    = require('../lang/yoda').id
 
 function deepMatches (target, pattern) {
-  if (target && typeof target === 'object' && pattern && typeof pattern === 'object') {
+  if (isId('object', target) && isId('object', pattern))
     if (isArray(target) && isArray(pattern)) return matchArray(target, pattern)
     else return matchObject(target, pattern)
   } else {
@@ -11,28 +12,34 @@ function deepMatches (target, pattern) {
 }
 
 function matchArray (target, pattern) {
-  var iter = -1
-  var patternLength = pattern.length
-  while (++iter < patternLength) {
-    if (!containsMatch(target, pattern[iter])) return false
+  var i = - 1
+  var len = pattern.length
+
+  while (++i < len) {
+    if (!containsMatch(target, pattern[i])) return false
   }
+
   return true
 }
 
 function matchObject (target, pattern) {
   var result = true
+
   forOwn(pattern, function (value, key) {
     if (!deepMatches(target[key], value)) return (result = false)
   })
+
   return result
 }
 
 function containsMatch (array, pattern) {
-  var iter = -1
-  var length = array.length
-  while (++iter < length) {
-    if (deepMatches(array[iter], pattern)) return true
+  var i = - 1
+  var len = array.length
+
+  while (++i < len) {
+    if (deepMatches(array[i], pattern)) return true
   }
+
   return false
 }
 
