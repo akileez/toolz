@@ -1,4 +1,4 @@
-var kindOf        = require('./kindOf')
+var kindOf        = require('./kindOf').objs
 var isPlainObject = require('./isPlainObject')
 var extend        = require('../object/extend')
 

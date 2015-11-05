@@ -1,7 +1,7 @@
 // basic version of ./expander.js but enhanced version of ./interpolate.js
 // focused solely on string replacements within objects/arrays/strings.
 
-var kindOf = require('../lang/kindOf')
+var kindOf = require('../lang/kindOf').objs
 var get    = require('../object/get')
 
 function interpolate (template, replacements, syntax) {
