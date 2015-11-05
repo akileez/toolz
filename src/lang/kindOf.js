@@ -91,6 +91,7 @@ function objType (value) {
 }
 
 function objSafe (value) {
+  if (typeof value.pipe === 'function') return 'stream'
   // Object.create(null) throws an error. Code below
   // prevents this from happening. Handles arguments.
   try {
