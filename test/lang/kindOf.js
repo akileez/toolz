@@ -156,11 +156,39 @@ test('kindOf Functions', function (t) {
 })
 
 test('kindOf Dates', function (t) {
+  t.is(kindOf(dat), 'date')
+  t.is(kindOf(new Date()), 'date')
+  t.is(kindOf(new Date(2017, 2, 19)), 'date')
 
+  t.is(kindOf.type(dat), 'date')
+  t.is(kindOf.type(new Date()), 'date')
+  t.is(kindOf.type(new Date(2017, 2, 19)), 'date')
+
+  t.is(kindOf.objs(dat), 'date')
+  t.is(kindOf.objs(new Date()), 'date')
+  t.is(kindOf.objs(new Date(2017, 2, 19)), 'date')
+
+  t.is(kindOf.safe(dat), 'date')
+  t.is(kindOf.safe(new Date()), 'date')
+  t.is(kindOf.safe(new Date(2017, 2, 19)), 'date')
 })
 
 test('kindOf RegExps', function (t) {
+  t.is(kindOf(rex), 'regexp')
+  t.is(kindOf(/[\w\s]+/), 'regexp')
+  t.is(kindOf(new RegExp('^' + 'apple', 'g')), 'regexp')
 
+  t.is(kindOf.type(rex), 'regexp')
+  t.is(kindOf.type(/[\w\s]+/), 'regexp')
+  t.is(kindOf.type(new RegExp('^' + 'apple', 'g')), 'regexp')
+
+  t.is(kindOf.objs(rex), 'regexp')
+  t.is(kindOf.objs(/[\w\s]+/), 'regexp')
+  t.is(kindOf.objs(new RegExp('^' + 'apple', 'g')), 'regexp')
+
+  t.is(kindOf.safe(rex), 'regexp')
+  t.is(kindOf.safe(/[\w\s]+/), 'regexp')
+  t.is(kindOf.safe(new RegExp('^' + 'apple', 'g')), 'regexp')
 })
 
 test('kindOf Objects', function (t) {
