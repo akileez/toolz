@@ -206,11 +206,17 @@ test('kindOf Arguments', function (t) {
     return kindOf.type(arguments)
   })(), 'object')
 
-  t.is(kindOf.safe(arg), 'arguments')
-  t.is(kindOf.safe(arguments), 'arguments')
+  t.is(kindOf.objs(arg), 'object')
+  t.is(kindOf.objs(arguments), 'object')
+  t.is((function () {
+    return kindOf.objs(arguments)
+  })(), 'object')
+
+  t.is(kindOf.safe(arg), 'object')
+  t.is(kindOf.safe(arguments), 'object')
   t.is((function () {
     return kindOf.safe(arguments)
-  })(), 'arguments')
+  })(), 'object')
 })
 
 test('kindOf Buffer', function (t) {
@@ -222,6 +228,7 @@ test('kindOf Buffer', function (t) {
 
   t.is(kindOf.objs(buf), 'buffer')
   t.is(kindOf.objs(new Buffer(' ')), 'buffer')
+
   t.is(kindOf.safe(buf), 'buffer')
   t.is(kindOf.safe(new Buffer(' ')), 'buffer')
 })

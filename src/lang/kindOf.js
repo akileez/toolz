@@ -9,6 +9,7 @@ function kindOf (value) {
 function kindOfType (value) {
   // Return the constructor name if not a primative, array or function
   // A more performant `kindOf` with cavets. Must test ES6 after upgrade.
+  // Does not handle arguments.
   if (value === null) return 'null'
   if (value === undefined) return 'undefined'
 
@@ -34,6 +35,7 @@ function kindOfType (value) {
 
 function kindOfObjs (value) {
   // a speedy version to obtain common object "types"
+  // Does not handle arguments.
   if (typeof value === 'function') return 'function'
   if (Array.isArray(value)) return 'array'
   if (typeof value === 'string') return 'string'
@@ -49,7 +51,7 @@ function kindOfObjs (value) {
 
 function kindOfSafe (value) {
   // Object.create(null) throws an error. Code below
-  // prevents this from happening.
+  // prevents this from happening. Does not handle arguments.
   try {
     if (value === null) return 'null'
     if (value === undefined) return 'undefined'
@@ -65,11 +67,7 @@ function kindOfSafe (value) {
     if (type === 'Function') return 'function'
     if (type === 'RegExp') return 'regexp'
     if (type === 'Date') return 'date'
-    if (type === 'Object') {
-      return Object.prototype.toString.call(value) === '[object Arguments]'
-        ? 'arguments'
-        : 'object'
-    }
+    if (type === 'Object') return 'object'
 
     return type.toLowerCase()
   } catch (err) {
