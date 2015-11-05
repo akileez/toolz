@@ -27,8 +27,8 @@ function kindOfType (value) {
   var type = value.constructor.name
 
   if (type === 'Object') return 'object'
-  if (type === 'Date') return 'date'
   if (type === 'RegExp') return 'regexp'
+  if (type === 'Date') return 'date'
 
   return type.toLowerCase()
 }
@@ -43,8 +43,8 @@ function kindOfObjs (value) {
   var type = value.constructor.name
 
   if (type === 'Object') return 'object'
-  if (type === 'Date') return 'date'
   if (type === 'RegExp') return 'regexp'
+  if (type === 'Date') return 'date'
 
   return type.toLowerCase()
 }
@@ -65,9 +65,9 @@ function kindOfSafe (value) {
     if (type === 'Number') return 'number'
     if (type === 'Symbol') return 'symbol'
     if (type === 'Function') return 'function'
+    if (type === 'Object') return 'object'
     if (type === 'RegExp') return 'regexp'
     if (type === 'Date') return 'date'
-    if (type === 'Object') return 'object'
 
     return type.toLowerCase()
   } catch (err) {
