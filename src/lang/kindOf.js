@@ -25,8 +25,9 @@ function kindOfBase (value) {
   if (type === 'Symbol') return 'symbol'
   if (type === 'Function') return 'function'
   if (type === 'Object') return 'object'
-  if (type === 'Date') return 'date'
   if (type === 'RegExp') return 'regexp'
+  if (type === 'Date') return 'date'
+  if (type === 'Buffer') return 'buffer'
 
   return type.toLowerCase()
 }
@@ -55,6 +56,7 @@ function kindOfType (value) {
   if (type === 'Object') return 'object'
   if (type === 'RegExp') return 'regexp'
   if (type === 'Date') return 'date'
+  if (type === 'Buffer') return 'buffer'
 
   return type.toLowerCase()
 }
@@ -71,6 +73,7 @@ function kindOfObjs (value) {
   if (type === 'Object') return 'object'
   if (type === 'RegExp') return 'regexp'
   if (type === 'Date') return 'date'
+  if (type === 'Buffer') return 'buffer'
 
   return type.toLowerCase()
 }
@@ -100,6 +103,7 @@ function kindOfSafe (value) {
 
     if (type === 'RegExp') return 'regexp'
     if (type === 'Date') return 'date'
+    if (type === 'Buffer') return 'buffer'
 
     return type.toLowerCase()
   } catch (err) {
