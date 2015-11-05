@@ -177,6 +177,11 @@ test('kindIs Arguments', function (t) {
   t.is((function () {
     return kindIs.args(arguments)
   })(), 'arguments')
+  t.is(kindIs.safe(arg), 'arguments')
+  t.is(kindIs.safe(arguments), 'arguments')
+  t.is((function () {
+    return kindIs.safe(arguments)
+  })(), 'arguments')
 })
 
 test('kindIs Buffer', function (t) {
