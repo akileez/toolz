@@ -47,18 +47,7 @@ function kindOfType (value) {
   if (typeof value === 'symbol') return 'symbol'
   if (typeof value === 'function') return 'function'
 
-  // this will pick out PlainObjects, regexps, and dates
-  // quicker than a toString.call() but marginally slower
-  // than the base implementation. Fails on arguments,
-  // not really though --> arguments [object]
-  var type = value.constructor.name
-
-  if (type === 'Object') return 'object'
-  if (type === 'RegExp') return 'regexp'
-  if (type === 'Date') return 'date'
-  if (type === 'Buffer') return 'buffer'
-
-  return type.toLowerCase()
+  return objType(value)
 }
 
 function kindOfObjs (value) {
@@ -68,14 +57,7 @@ function kindOfObjs (value) {
   if (Array.isArray(value)) return 'array'
   if (typeof value === 'string') return 'string'
 
-  var type = value.constructor.name
-
-  if (type === 'Object') return 'object'
-  if (type === 'RegExp') return 'regexp'
-  if (type === 'Date') return 'date'
-  if (type === 'Buffer') return 'buffer'
-
-  return type.toLowerCase()
+  return objType(value)
 }
 
 function kindOfSafe (value) {
@@ -90,6 +72,25 @@ function kindOfSafe (value) {
   if (typeof value === 'symbol') return 'symbol'
   if (typeof value === 'function') return 'function'
 
+  return objSafe(value)
+}
+
+function objType (value) {
+  // this will pick out PlainObjects, regexps, and dates
+  // quicker than a toString.call() but marginally slower
+  // than the base implementation. Fails on arguments,
+  // not really though --> arguments [object]
+  var type = value.constructor.name
+
+  if (type === 'Object') return 'object'
+  if (type === 'RegExp') return 'regexp'
+  if (type === 'Date') return 'date'
+  if (type === 'Buffer') return 'buffer'
+
+  return type.toLowerCase()
+}
+
+function objSafe (value) {
   // Object.create(null) throws an error. Code below
   // prevents this from happening. Handles arguments.
   try {
