@@ -1,4 +1,4 @@
-var isArrayLike = require('toolz/src/lang/isArrayLike')
+var isArrayLike = require('./isArrayLike')
 
 function kindOf (value) {
   return typeof value === 'object'
