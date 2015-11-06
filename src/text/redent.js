@@ -1,8 +1,8 @@
-var striptIndent = require('./indentStrip')
-var indentString = require('./indent')
+var undent = require('./undent')
+var indent = require('./indent')
 
 function redent (str, num, char) {
-  return indentString(striptIndent(str), char || ' ', num || 0)
+  return indent(undent(str), char || ' ', num || 0)
 }
 
 module.exports = redent
