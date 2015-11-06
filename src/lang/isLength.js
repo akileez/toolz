@@ -11,7 +11,10 @@ var MAX_SAFE_INT = require('../number/MAX_SAFE_INT')
  */
 
 function isLength (value) {
-  return typeof value === 'number' && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INT
+  return typeof value === 'number'
+    && value > -1
+    && value % 1 == 0
+    && value <= MAX_SAFE_INT
 }
 
 module.exports = isLength
