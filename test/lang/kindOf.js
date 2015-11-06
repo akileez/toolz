@@ -324,6 +324,27 @@ test('kindOf Arguments', function (t) {
   })(), 'arguments')
 })
 
+test('kindOf Constructors', function (t) {
+  function Foo () {}
+  var foo = new Foo()
+
+  // default
+  t.is(kindOf(foo), 'object')
+  t.is(kindOf(new Foo()), 'object')
+  // base
+  t.is(kindOf.base(foo), 'foo')
+  t.is(kindOf.base(new Foo()), 'foo')
+  // type
+  t.is(kindOf.type(foo), 'foo')
+  t.is(kindOf.type(new Foo()), 'foo')
+  // objs
+  t.is(kindOf.objs(foo), 'foo')
+  t.is(kindOf.objs(new Foo()), 'foo')
+  // safe
+  t.is(kindOf.safe(foo), 'foo')
+  t.is(kindOf.safe(new Foo()), 'foo')
+})
+
 test('kindOf Buffer', function (t) {
   // default
   t.is(kindOf(buf), 'object')
