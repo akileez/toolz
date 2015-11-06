@@ -1,6 +1,6 @@
 // adopted from: https://github.com/djelic/node-object-utils (MIT)
 
-var kindOf  = require('../lang/kindOf').objs
+var kindOf  = require('../lang/kind').objs
 var get     = require('../object/get')
 var keys    = require('../object/keys')
 var forEach = require('../array/forEach')

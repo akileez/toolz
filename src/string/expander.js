@@ -1,7 +1,7 @@
 // adopted from: https://github.com/jonschlinkert/expand
 // Copyright (c) 2015, Jon Schlinkert (MIT)
 
-var kindOf = require('../lang/kindOf').objs
+var kindOf = require('../lang/kind').objs
 var get    = require('../object/get')
 
 // Removed curried function:
