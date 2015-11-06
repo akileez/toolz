@@ -1,4 +1,4 @@
-var kindOf = require('./kindOf')
+var kindOf = require('./kindOf').type
 var GLOBAL = require('./GLOBAL')
 
 // convert array-like object into array
