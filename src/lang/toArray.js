@@ -1,6 +1,6 @@
 // convert array-like object into array
 
-var kindOf = require('./kindOf').type
+var kindOf = require('./kind')
 var GLOBAL = require('./GLOBAL')
 
 function toArray (value) {
