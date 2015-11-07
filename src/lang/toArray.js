@@ -1,17 +1,16 @@
 // convert array-like object into array
 
-var kindOf = require('./kind')
 var GLOBAL = require('./GLOBAL')
 
 function toArray (value) {
   if (value == null) return []
 
-  var kind = kindOf(value)
+  var kind = typeof value
 
   if (value.length == null
     || kind === 'string'
     || kind === 'function'
-    || kind === 'regexp'
+    || value instanceof RegExp
     || value === GLOBAL
     ) {
     // string, regexp, function have .length but user probably just want
