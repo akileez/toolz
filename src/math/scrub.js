@@ -2,13 +2,14 @@
 // ensures the array length is equal to the number of items
 // being used in calculations
 
-var isNumber = require('../number/isNumber')
+var isNumber = require('../number/isFinite')
+var filter = require('../array/filter')
 
 function scrub (arr) {
   if (!Array.isArray(arr)) throw new Error('math/scrub.js Expects an array')
 
-  return arr.filter(function (value) {
-    return isNumber(value) && (value != null)
+  return filter(arr, function (value) {
+    return isNumber(value)
   })
 }
 
