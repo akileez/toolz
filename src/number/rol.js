@@ -5,4 +5,4 @@ function rol (val, shift) {
   return (val << shift) | (val >> (32 - shift))
 }
 
-module.export = rol
+module.exports = rol
