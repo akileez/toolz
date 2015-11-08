@@ -1,7 +1,7 @@
-var isNumber = require('toolz/src/number/isFinite')
-var slice = require('toolz/src/array/slice')
-var filter = require('toolz/src/array/filter')
-var reduce = require('toolz/src/array/reduce')
+var isNumber = require('../number/isFinite')
+var slice = require('../array/slice')
+var filter = require('../array/filter')
+var reduce = require('../array/reduce')
 
 function sum (arr) {
   arr = Array.isArray(arr) ? arr : slice(arguments)

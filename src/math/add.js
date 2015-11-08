@@ -1,6 +1,6 @@
-var scrub = require('toolz/src/math/scrub')
-var slice = require('toolz/src/array/slice')
-var reduce = require('toolz/src/array/reduce')
+var scrub = require('./scrub')
+var slice = require('../array/slice')
+var reduce = require('../array/reduce')
 
 function add (arr) {
   arr = Array.isArray(arr) ? arr : slice(arguments)
