@@ -9,6 +9,13 @@ function and (ans) {
   })
 }
 
+function not (ans) {
+  var args = slice(arguments, 1)
+  return every(args, function (question) {
+    return (ans !== question)
+  })
+}
+
 function or (ans) {
   var args = slice(arguments, 1)
   return some(args, function (question) {
@@ -21,5 +28,6 @@ function id (what, who) {
 }
 
 exports.and = and
+exports.not = not
 exports.or = or
 exports.id = id
