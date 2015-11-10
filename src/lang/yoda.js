@@ -23,11 +23,25 @@ function or (ans) {
   })
 }
 
+// confirms if `who` exists and is of `what` type
+// var str = 'hello'
+// yoda.id('string', str) --> true
 function id (what, who) {
   return (who && typeof who === what)
+}
+
+// checks if a collection of arrays are empty
+// var arr1 = [], arr2 = [], arr3 = [], arr4 = []
+// yoda.empty(arr1, arr2, arr3, arr4) --> true
+function isEmpty () {
+  var args = slice(arguments)
+  return every(args, function (val) {
+    return !val.length
+  })
 }
 
 exports.and = and
 exports.not = not
 exports.or = or
 exports.id = id
+exports.empty = isEmpty
