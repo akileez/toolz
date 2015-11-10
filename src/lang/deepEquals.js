@@ -1,5 +1,5 @@
 var is        = require('./is')
-var isObject  = require('./isObject')
+var isObject  = require('./isPlainObject')
 var isArray   = require('./isArray')
 var objEquals = require('../object/equals')
 var arrEquals = require('../array/equals')
