@@ -21,6 +21,10 @@ function base (value) {
   if (type === 'RegExp') return 'regexp'
   if (type === 'Date') return 'date'
   if (type === 'Buffer') return 'buffer'
+  if (type === 'Map') return 'map'
+  if (type === 'WeakMap') return 'weakmap'
+  if (type === 'Set') return 'set'
+  if (type === 'WeakSet') return 'weakset'
 
   return type.toLowerCase()
 }
@@ -49,6 +53,9 @@ function objs (value) {
   if (typeof value === 'function') return 'function'
   if (Array.isArray(value)) return 'array'
   if (typeof value === 'string') return 'string'
+    // safety check for kind.objs
+  if (value === null) return 'null'
+  if (value === undefined) return 'undefined'
 
   return objType(value)
 }
@@ -79,6 +86,10 @@ function objType (value) {
   if (type === 'RegExp') return 'regexp'
   if (type === 'Date') return 'date'
   if (type === 'Buffer') return 'buffer'
+  if (type === 'Map') return 'map'
+  if (type === 'Set') return 'set'
+  if (type === 'WeakMap') return 'weakmap'
+  if (type === 'WeakSet') return 'weakset'
 
   return type.toLowerCase()
 }
@@ -99,6 +110,10 @@ function objSafe (value) {
     if (type === 'RegExp') return 'regexp'
     if (type === 'Date') return 'date'
     if (type === 'Buffer') return 'buffer'
+    if (type === 'Map') return 'map'
+    if (type === 'Set') return 'set'
+    if (type === 'WeakMap') return 'weakmap'
+    if (type === 'WeakSet') return 'weakset'
 
     return type.toLowerCase()
   } catch (err) {
