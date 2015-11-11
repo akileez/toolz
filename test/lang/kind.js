@@ -17,7 +17,6 @@ var buf = new Buffer(' ')
 var nan = NaN
 
 test('kind Nil', function (t) {
-  // No kind.objs() test. null and undefined throws.
   // default
   t.is(kind.Of(nul), 'null')
   t.is(kind.Of(null), 'null')
@@ -33,6 +32,11 @@ test('kind Nil', function (t) {
   t.is(kind(null), 'null')
   t.is(kind(udf), 'undefined')
   t.is(kind(undefined), 'undefined')
+  // objs
+  t.is(kind.objs(nul), 'null')
+  t.is(kind.objs(null), 'null')
+  t.is(kind.objs(udf), 'undefined')
+  t.is(kind.objs(undefined), 'undefined')
   // safe
   t.is(kind.safe(nul), 'null')
   t.is(kind.safe(null), 'null')
@@ -119,20 +123,25 @@ test('kind Numbers', function (t) {
 test('kind Symbols', function (t) {
   // default
   t.is(kind.Of(sym), 'symbol')
-  // t.eq(kind.Of(new Symbol('a')), 'symbol')
+  t.eq(kind.Of(Symbol('a')), 'symbol')
+  t.is(kind.Of(Symbol.prototype), 'object')
   // base
   t.is(kind.base(sym), 'symbol')
-  // t.is(kind.base(new Symbol('a')), 'symbol')
+  t.is(kind.base(Symbol('a')), 'symbol')
+  t.is(kind.base(Symbol.prototype), 'symbol')
   // type
   t.is(kind(sym), 'symbol')
-  // t.is(kind(new Symbol('a')), 'symbol')
+  t.is(kind(Symbol('a')), 'symbol')
+  t.is(kind(Symbol.prototype), 'symbol')
   // objs
   t.is(kind.objs(sym), 'symbol')
-  // t.is(kind.objs(new Symbol('a')), 'symbol')
+  t.is(kind.objs(Symbol('a')), 'symbol')
+  t.is(kind.objs(Symbol.prototype), 'symbol')
   // safe
   t.is(kind.safe(sym), 'symbol')
-  // t.is(kind.safe(new Symbol('a')), 'symbol')
-  t.end('symbols need more work')
+  t.is(kind.safe(Symbol('a')), 'symbol')
+  t.is(kind.safe(Symbol.prototype), 'symbol')
+
 })
 
 test('kind Strings', function (t) {
@@ -347,8 +356,8 @@ test('kind Constructors', function (t) {
 
 test('kind Buffer', function (t) {
   // default
-  t.is(kind.Of(buf), 'object')
-  t.is(kind.Of(new Buffer(' ')), 'object')
+  t.is(kind.Of(buf), 'uint8array')
+  t.is(kind.Of(new Buffer(' ')), 'uint8array')
   // base
   t.is(kind.base(buf), 'buffer')
   t.is(kind.base(new Buffer(' ')), 'buffer')
@@ -364,11 +373,199 @@ test('kind Buffer', function (t) {
 })
 
 test('kind Map', function (t) {
-  // t.is(kind.Of(map,'map'))
-  // t.is(kind.Of(map.set,'function'))
-  // t.is(kind.Of(map.get,'function'))
-  // t.is(kind.Of(map.add,'undefined'))
-  t.end('Map is not defined. Test after upgrading')
+  var map = new Map()
+  t.is(kind.Of(map), 'map')
+  t.is(kind.Of(map.set), 'function')
+  t.is(kind.Of(map.get), 'function')
+  t.is(kind.Of(map.add), 'undefined')
+
+  t.is(kind.base(map), 'map')
+  t.is(kind.base(map.set), 'function')
+  t.is(kind.base(map.get), 'function')
+  t.is(kind.base(map.add), 'undefined')
+
+  t.is(kind(map), 'map')
+  t.is(kind(map.set), 'function')
+  t.is(kind(map.get), 'function')
+  t.is(kind(map.add), 'undefined')
+
+  t.is(kind.objs(map), 'map')
+  t.is(kind.objs(map.set), 'function')
+  t.is(kind.objs(map.get), 'function')
+  t.is(kind.objs(map.add), 'undefined')
+
+  t.is(kind.safe(map), 'map')
+  t.is(kind.safe(map.set), 'function')
+  t.is(kind.safe(map.get), 'function')
+  t.is(kind.safe(map.add), 'undefined')
+  t.end()
 })
+
+test('kind WeakMap', function (t) {
+  var weakmap = new WeakMap()
+  t.is(kind.Of(weakmap), 'weakmap')
+  t.is(kind.Of(weakmap.set), 'function')
+  t.is(kind.Of(weakmap.get), 'function')
+  t.is(kind.Of(weakmap.add), 'undefined')
+
+  t.is(kind.base(weakmap), 'weakmap')
+  t.is(kind.base(weakmap.set), 'function')
+  t.is(kind.base(weakmap.get), 'function')
+  t.is(kind.base(weakmap.add), 'undefined')
+
+  t.is(kind(weakmap), 'weakmap')
+  t.is(kind(weakmap.set), 'function')
+  t.is(kind(weakmap.get), 'function')
+  t.is(kind(weakmap.add), 'undefined')
+
+  t.is(kind.objs(weakmap), 'weakmap')
+  t.is(kind.objs(weakmap.set), 'function')
+  t.is(kind.objs(weakmap.get), 'function')
+  t.is(kind.objs(weakmap.add), 'undefined')
+
+  t.is(kind.safe(weakmap), 'weakmap')
+  t.is(kind.safe(weakmap.set), 'function')
+  t.is(kind.safe(weakmap.get), 'function')
+  t.is(kind.safe(weakmap.add), 'undefined')
+})
+
+test('kind Set', function (t) {
+  var set = new Set()
+  t.is(kind.Of(set), 'set')
+  t.is(kind.Of(set.add), 'function')
+  t.is(kind.Of(set.set), 'undefined')
+  t.is(kind.Of(set.get), 'undefined')
+
+  t.is(kind.base(set), 'set')
+  t.is(kind.base(set.add), 'function')
+  t.is(kind.base(set.set), 'undefined')
+  t.is(kind.base(set.get), 'undefined')
+
+  t.is(kind(set), 'set')
+  t.is(kind(set.add), 'function')
+  t.is(kind(set.set), 'undefined')
+  t.is(kind(set.get), 'undefined')
+
+  t.is(kind.objs(set), 'set')
+  t.is(kind.objs(set.add), 'function')
+  t.is(kind.objs(set.set), 'undefined')
+  t.is(kind.objs(set.get), 'undefined')
+
+  t.is(kind.safe(set), 'set')
+  t.is(kind.safe(set.add), 'function')
+  t.is(kind.safe(set.set), 'undefined')
+  t.is(kind.safe(set.get), 'undefined')
+
+})
+
+test('kind WeakSet', function (t) {
+  var weakset = new WeakSet()
+  t.is(kind.Of(weakset), 'weakset')
+  t.is(kind.Of(weakset.add), 'function')
+  t.is(kind.Of(weakset.set), 'undefined')
+  t.is(kind.Of(weakset.get), 'undefined')
+
+  t.is(kind.base(weakset), 'weakset')
+  t.is(kind.base(weakset.add), 'function')
+  t.is(kind.base(weakset.set), 'undefined')
+  t.is(kind.base(weakset.get), 'undefined')
+
+  t.is(kind(weakset), 'weakset')
+  t.is(kind(weakset.add), 'function')
+  t.is(kind(weakset.set), 'undefined')
+  t.is(kind(weakset.get), 'undefined')
+
+  t.is(kind.objs(weakset), 'weakset')
+  t.is(kind.objs(weakset.add), 'function')
+  t.is(kind.objs(weakset.set), 'undefined')
+  t.is(kind.objs(weakset.get), 'undefined')
+
+  t.is(kind.safe(weakset), 'weakset')
+  t.is(kind.safe(weakset.add), 'function')
+  t.is(kind.safe(weakset.set), 'undefined')
+  t.is(kind.safe(weakset.get), 'undefined')
+})
+
+
+test('kind Int8Array', function (t) {
+  var int8array = new Int8Array();
+  t.is(kind.Of(int8array), 'int8array')
+  t.is(kind.base(int8array), 'int8array')
+  t.is(kind(int8array), 'int8array')
+  t.is(kind.objs(int8array), 'int8array')
+  t.is(kind.safe(int8array), 'int8array')
+});
+
+test('kind Uint8Array', function (t) {
+  var uint8array = new Uint8Array();
+  t.is(kind.Of(uint8array), 'uint8array')
+  t.is(kind.base(uint8array), 'uint8array')
+  t.is(kind(uint8array), 'uint8array')
+  t.is(kind.objs(uint8array), 'uint8array')
+  t.is(kind.safe(uint8array), 'uint8array')
+});
+
+test('kind Uint8ClampedArray', function (t) {
+  var uint8clampedarray = new Uint8ClampedArray();
+  t.is(kind.Of(uint8clampedarray), 'uint8clampedarray')
+  t.is(kind.base(uint8clampedarray), 'uint8clampedarray')
+  t.is(kind(uint8clampedarray), 'uint8clampedarray')
+  t.is(kind.objs(uint8clampedarray), 'uint8clampedarray')
+  t.is(kind.safe(uint8clampedarray), 'uint8clampedarray')
+});
+
+test('kind Int16Array', function (t) {
+  var int16array = new Int16Array();
+  t.is(kind.Of(int16array), 'int16array')
+  t.is(kind.base(int16array), 'int16array')
+  t.is(kind(int16array), 'int16array')
+  t.is(kind.objs(int16array), 'int16array')
+  t.is(kind.safe(int16array), 'int16array')
+});
+
+test('kind Uint16Array', function (t) {
+  var uint16array = new Uint16Array();
+  t.is(kind.Of(uint16array), 'uint16array')
+  t.is(kind.base(uint16array), 'uint16array')
+  t.is(kind(uint16array), 'uint16array')
+  t.is(kind.objs(uint16array), 'uint16array')
+  t.is(kind.safe(uint16array), 'uint16array')
+});
+
+test('kind Int32Array', function (t) {
+  var int32array = new Int32Array();
+  t.is(kind.Of(int32array), 'int32array')
+  t.is(kind.base(int32array), 'int32array')
+  t.is(kind(int32array), 'int32array')
+  t.is(kind.objs(int32array), 'int32array')
+  t.is(kind.safe(int32array), 'int32array')
+});
+
+test('kind Uint32Array', function (t) {
+  var uint32array = new Uint32Array();
+  t.is(kind.Of(uint32array), 'uint32array')
+  t.is(kind.base(uint32array), 'uint32array')
+  t.is(kind(uint32array), 'uint32array')
+  t.is(kind.objs(uint32array), 'uint32array')
+  t.is(kind.safe(uint32array), 'uint32array')
+});
+
+test('kind Float32Array', function (t) {
+  var float32array = new Float32Array();
+  t.is(kind.Of(float32array), 'float32array')
+  t.is(kind.base(float32array), 'float32array')
+  t.is(kind(float32array), 'float32array')
+  t.is(kind.objs(float32array), 'float32array')
+  t.is(kind.safe(float32array), 'float32array')
+});
+
+test('kind Float64Array', function (t) {
+  var float64array = new Float64Array();
+  t.is(kind.Of(float64array), 'float64array')
+  t.is(kind.base(float64array), 'float64array')
+  t.is(kind(float64array), 'float64array')
+  t.is(kind.objs(float64array), 'float64array')
+  t.is(kind.safe(float64array), 'float64array')
+});
 
 test.result()
