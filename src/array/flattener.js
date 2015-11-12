@@ -1,7 +1,7 @@
-var arrPush = require('./arrPush')
-var isArguments = require('../lang/isArguments')
-var isArray = require('../lang/isArray')
-var isArrayLike = require('../lang/isArrayLike')
+var arrPush      = require('./append')
+var isArguments  = require('../lang/isArguments')
+var isArray      = require('../lang/isArray')
+var isArrayLike  = require('../lang/isArrayLike')
 var isObjectLike = require('../lang/isObjectLike')
 
 /**
