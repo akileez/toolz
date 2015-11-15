@@ -86,10 +86,6 @@ function objType (value) {
   if (type === 'RegExp') return 'regexp'
   if (type === 'Date') return 'date'
   if (type === 'Buffer') return 'buffer'
-  if (type === 'Map') return 'map'
-  if (type === 'Set') return 'set'
-  if (type === 'WeakMap') return 'weakmap'
-  if (type === 'WeakSet') return 'weakset'
 
   return type.toLowerCase()
 }
@@ -110,10 +106,6 @@ function objSafe (value) {
     if (type === 'RegExp') return 'regexp'
     if (type === 'Date') return 'date'
     if (type === 'Buffer') return 'buffer'
-    if (type === 'Map') return 'map'
-    if (type === 'Set') return 'set'
-    if (type === 'WeakMap') return 'weakmap'
-    if (type === 'WeakSet') return 'weakset'
 
     return type.toLowerCase()
   } catch (err) {
