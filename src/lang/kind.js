@@ -1,5 +1,4 @@
 var isArrayLike = require('./isArrayLike')
-var kindOf = require('./kindOf')
 
 function base (value) {
   // Base implementation which all other kindOf
@@ -109,10 +108,14 @@ function objSafe (value) {
 
     return type.toLowerCase()
   } catch (err) {
-    return Object.prototype.toString.call(value)
-      .replace(/^\[object |\]$/g, '')
-      .toLowerCase()
+    return kindOf(value)
   }
+}
+
+function kindOf (value) {
+  return Object.prototype.toString.call(value)
+    .replace(/^\[object |\]$/g, '')
+    .toLowerCase()
 }
 
 module.exports = kind
