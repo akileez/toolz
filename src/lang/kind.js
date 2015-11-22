@@ -20,10 +20,6 @@ function base (value) {
   if (type === 'RegExp') return 'regexp'
   if (type === 'Date') return 'date'
   if (type === 'Buffer') return 'buffer'
-  if (type === 'Map') return 'map'
-  if (type === 'WeakMap') return 'weakmap'
-  if (type === 'Set') return 'set'
-  if (type === 'WeakSet') return 'weakset'
 
   return type.toLowerCase()
 }
