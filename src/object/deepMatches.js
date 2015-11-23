@@ -3,7 +3,7 @@ var isArray = require('../lang/isArray')
 var isId    = require('../lang/yoda').id
 
 function deepMatches (target, pattern) {
-  if (isId('object', target) && isId('object', pattern))
+  if (isId('object', target) && isId('object', pattern)) {
     if (isArray(target) && isArray(pattern)) return matchArray(target, pattern)
     else return matchObject(target, pattern)
   } else {
