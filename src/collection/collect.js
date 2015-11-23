@@ -1,6 +1,7 @@
 // Maps the items in arr and concatenates the resulting arrays
+// this allow for the shorthand syntax through makeIterator.
 
-var append = require('./append')
+var append = require('../array/append')
 var makeIterator = require('../function/makeIterator_')
 
 function collect (arr, fn, thisObj) {
