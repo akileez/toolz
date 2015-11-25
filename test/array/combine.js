@@ -11,4 +11,17 @@ test('combine items of arr2 with arr1 ignoring dupes', function (t) {
   t.same(arr1, [1, 2, 3, 4, 5])
 })
 
+test('combine null second array', function (t) {
+  var arr1 = [1]
+  combine(arr1, null)
+  t.same(arr1, [1])
+})
+
+test('combine undefined second array', function (t) {
+  var arr1 = [1, 2]
+  var undef
+  combine(arr1, undef)
+  t.same(arr1, [1, 2])
+})
+
 test.result()
