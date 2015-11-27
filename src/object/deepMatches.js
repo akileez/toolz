@@ -12,7 +12,7 @@ function deepMatches (target, pattern) {
 }
 
 function matchArray (target, pattern) {
-  var i = - 1
+  var i = -1
   var len = pattern.length
 
   while (++i < len) {
@@ -33,7 +33,7 @@ function matchObject (target, pattern) {
 }
 
 function containsMatch (array, pattern) {
-  var i = - 1
+  var i = -1
   var len = array.length
 
   while (++i < len) {
