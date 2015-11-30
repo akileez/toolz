@@ -8,7 +8,7 @@
 // }
 
 var isArray = require('../lang/isArray')
-var slice   = require('./sliced')
+var slice   = require('./slice')
 var forEach = require('./forEach')
 var sort    = require('./sort')
 
