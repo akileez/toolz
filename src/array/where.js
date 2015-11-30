@@ -3,12 +3,12 @@
 
 // Deep query an array
 
-var toArray = require('../lang/toArray')
-var testval = require('../lang/testval')
+var convert = require('./convert')
 var filter  = require('./filter')
+var testval = require('../lang/testval')
 
 function where (arr, query) {
-  arr = toArray(arr)
+  arr = convert(arr)
 
   return filter(arr, function (item) {
     return testval(item, query)
