@@ -1,9 +1,9 @@
-var toArray = require('../lang/toArray')
-var testval = require('../lang/testval')
+var convert = require('./convert')
 var filter  = require('./filter')
+var testval = require('../lang/testval')
 
 function without (arr, removeItems) {
-  removeItems = toArray(removeItems) // check this for a string of args
+  removeItems = convert.toArray(removeItems)
 
   return filter(arr, function (item) {
     return !testval(item, removeItems)
