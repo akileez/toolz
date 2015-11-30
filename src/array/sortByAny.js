@@ -5,8 +5,8 @@
 // this function assumes a flat object structure for the items
 // in the array.
 
-var rest = require('toolz/src/function/rest')
-var kindOf = require('toolz/src/lang/kindOf')
+var rest = require('../function/rest')
+var kindOf = require('../lang/kindOf')
 
 function sortBy (data) {
   return rest(function (args) {
