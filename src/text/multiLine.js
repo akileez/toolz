@@ -1,7 +1,7 @@
 // adopted from: multiline <https://github.com/sindresorhus/multiline>
 // Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT)
 
-var stripIndent = require('./indentStrip')
+var undent = require('./undent')
 var isFunction = require('../lang/isFunction')
 var assert = require('assert')
 
@@ -19,7 +19,7 @@ function multiLine (fn) {
 }
 
 function strip (fn) {
-  return stripIndent(multiLine(fn))
+  return undent(multiLine(fn))
 }
 
 module.exports = multiLine
