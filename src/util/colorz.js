@@ -32,6 +32,17 @@ function expose (style, str, noColor) {
       .replace(/(\\u001b\[\d+m)/g, colorz[style](['$1']))
 }
 
+function colorize (str, style) {
+  if (!style) return str
+
+  if (Array.isArray(style) && style.length > 1) {
+    return colorize(colorz[style[0]](str), style.slice(1))
+  } else {
+    return colorz[Array.isArray(style) ? style[0] : style](str)
+  }
+}
+
 module.exports = colorz
 module.exports.strip = strip
 module.exports.expose = expose
+module.exports.colorize = colorize
