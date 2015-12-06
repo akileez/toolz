@@ -46,3 +46,4 @@ module.exports = colorz
 module.exports.strip = strip
 module.exports.expose = expose
 module.exports.colorize = colorize
+module.exports.format = colorize
