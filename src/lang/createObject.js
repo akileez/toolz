@@ -1,9 +1,9 @@
-var mixIn = require('../object/mixIn')
+var extend = require('../object/extend')
 
 function createObject (parent, props) {
   function F () {}
   F.prototype = parent
-  return mixIn(new F(), props)
+  return extend(new F(), props)
 }
 
 module.exports = createObject
