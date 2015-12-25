@@ -61,9 +61,11 @@ function pickOne (arr) {
 }
 
 exports.first   = first
+exports.take    = first   // lodash alias
 exports.last    = last
 exports.before  = before
-exports.initial = before
+exports.initial = before  // lodash alias
 exports.after   = after
+exports.rest    = after   // lodash alias
 exports.between = between
 exports.rand    = rand
