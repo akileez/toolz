@@ -1,4 +1,4 @@
-var slice = require('../array/sliced')
+var slice = require('../array/slice')
 
 Function.prototype.then = function (fn) {
   var that = this
