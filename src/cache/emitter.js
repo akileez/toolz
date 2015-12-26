@@ -7,4 +7,3 @@ module.exports = stampit()
       Emitter(this)
     }
   ])
-  // .convertConstructor(Emitter)
