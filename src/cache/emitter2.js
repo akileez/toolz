@@ -5,5 +5,6 @@ module.exports = stampit()
   .init([
     function () {
       Emitter(this)
+      Emitter.call(this)
     }
   ])
