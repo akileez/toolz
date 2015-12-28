@@ -1,6 +1,6 @@
 var hasOwn    = require('./hasOwn')
 var deepClone = require('../lang/deepClone')
-var isObject  = require('../lang/isPlainObject')
+var isObject  = require('../lang/is-object')
 
 // deep merge objects
 
