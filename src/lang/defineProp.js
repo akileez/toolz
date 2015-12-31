@@ -1,4 +1,11 @@
-var isDescriptor = require('./isDescriptor')
+var omit                 = require('../object/omit')
+var extend               = require('../object/extend')
+var hasOwn               = require('../object/hasOwn')
+var isBoolean            = require('./isBoolean')
+var isFunction           = require('./isFunction')
+var isPlainObject        = require('./isPlainObject')
+var isDataDescriptor     = require('./isDescriptorData')
+var isAccessorDescriptor = require('./isDescriptorAccessor')
 
 // This method allows precise addition to or modification of a property on an object.
 
@@ -24,26 +31,43 @@ var isDescriptor = require('./isDescriptor')
 // b: a javascript value if data-descriptor (alias for value), function if accessor-descriptor (alias for setter function)
 
 function defineProperty (obj, prop, config, enumerable, a, b) {
-  if (typeof config === 'boolean') {
-    // defining an accessor descriptor
-    if (typeof a === 'function') {
-      return Object.defineProperty(obj, prop, {
-        configurable: config || false,
-        enumerable: enumerable || false,
-        get: a,
-        set: b
-      })
+  if (isPlainObject(config)) {
+    return Object.defineProperty(obj, prop, definePropDefaults(config))
+  }
+
+  if (isBoolean(config)) {
+    var configuration = {}
+    configuration.configurable = config || false
+    configuration.enumerable = enumerable || false
+
+    if (isFunction(a)) {
+      configuration.get = a
+      configuration.set = b
     } else {
-      // defining a data descriptor
-      return Object.defineProperty(obj, prop, {
-        configurable: config || false,
-        enumerable: enumerable || false,
-        writable: a || false,
-        value: b
-      })
+      configuration.writable = a || false
+      configuration.value = b
     }
-  } else if (isDescriptor(config)) {
-    return Object.defineProperty(obj, prop, config)
+
+    return Object.defineProperty(obj, prop, configuration)
+  }
+}
+
+function definePropDefaults (obj) {
+  var options = {
+    configurable: true,
+    enumerable: true,
+    writable: false,
+    value: undefined,
+    get: undefined,
+    set: undefined
+  }
+
+  if (isDataDescriptor(obj) || hasOwn(obj, 'value')) {
+    return extend({}, omit(options, ['get', 'set']), obj)
+  }
+
+  if (isAccessorDescriptor(obj) || hasOwn(obj, 'get')) {
+    return extend({}, omit(options, ['writable', 'value']), obj)
   }
 }
 
