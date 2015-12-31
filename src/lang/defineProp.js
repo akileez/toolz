@@ -23,14 +23,18 @@ var isAccessorDescriptor = require('./isDescriptorAccessor')
 // An accessor descriptor is a property described by a getter-setter pair of functions.
 
 // This is extrememly raw.
-// obj: [object] object to be mutated
-// prop: [String] property to add.
-// config: [Boolean|Object] boolean for configurable key or descriptor object
-// enumerable: [Boolean] boolean for enumerable key
-// a: [Boolean|Function] boolean if data-descriptor (alias for writable key), function if accessor-descriptor (alias for getter function)
-// b: [AnyValue|Function] a javascript value if data-descriptor (alias for value), function if accessor-descriptor (alias for setter function)
+// function signature: defineProperty(obj, prop[, config[, enumerable, a, b]])
+// function parameters:
+//   obj: [object] object to be mutated
+//   prop: [String|Object] property to add or an object of property definitions.
+//   config: [Boolean|Object] boolean for configurable key or descriptor object
+//   list: [Boolean] boolean for enumerable key
+//   a: [Boolean|Function] boolean if data-descriptor (alias for writable key),
+//      function if accessor-descriptor (alias for getter function)
+//   b: [AnyValue|Function] a javascript value if data-descriptor (alias for value),
+//      function if accessor-descriptor (alias for setter function)
 
-function defineProperty (obj, prop, config, enumerable, a, b) {
+function defineProperty (obj, prop, config, list, a, b) {
   // multiple definition
   if (isPlainObject(prop)) {
     return Object.defineProperties(obj, map(prop, definePropDefaults))
@@ -43,7 +47,7 @@ function defineProperty (obj, prop, config, enumerable, a, b) {
   // explicit definition
   var configuration = {}
   configuration.configurable = !!config
-  configuration.enumerable = !!enumerable
+  configuration.enumerable = !!list
 
   if (isFunction(a)) {
     configuration.get = a
