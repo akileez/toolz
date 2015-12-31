@@ -1,7 +1,6 @@
 var omit                 = require('../object/omit')
 var extend               = require('../object/extend')
 var hasOwn               = require('../object/hasOwn')
-var isBoolean            = require('./isBoolean')
 var isFunction           = require('./isFunction')
 var isPlainObject        = require('./isPlainObject')
 var isDataDescriptor     = require('./isDescriptorData')
@@ -37,21 +36,19 @@ function defineProperty (obj, prop, config, enumerable, a, b) {
   }
 
   // explicit definition
-  if (isBoolean(config)) {
-    var configuration = {}
-    configuration.configurable = config || false
-    configuration.enumerable = enumerable || false
+  var configuration = {}
+  configuration.configurable = !!config || false
+  configuration.enumerable = !!enumerable || false
 
-    if (isFunction(a)) {
-      configuration.get = a
-      configuration.set = b
-    } else {
-      configuration.writable = a || false
-      configuration.value = b
-    }
-
-    return Object.defineProperty(obj, prop, configuration)
+  if (isFunction(a)) {
+    configuration.get = a
+    configuration.set = b
+  } else {
+    configuration.writable = !!a || false
+    configuration.value = b
   }
+
+  return Object.defineProperty(obj, prop, configuration)
 }
 
 function definePropDefaults (obj) {
