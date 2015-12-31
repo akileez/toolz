@@ -42,14 +42,14 @@ function defineProperty (obj, prop, config, enumerable, a, b) {
 
   // explicit definition
   var configuration = {}
-  configuration.configurable = !!config || false
-  configuration.enumerable = !!enumerable || false
+  configuration.configurable = !!config
+  configuration.enumerable = !!enumerable
 
   if (isFunction(a)) {
     configuration.get = a
     configuration.set = b
   } else {
-    configuration.writable = !!a || false
+    configuration.writable = !!a
     configuration.value = b
   }
 
