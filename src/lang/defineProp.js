@@ -1,3 +1,4 @@
+var map                  = require('../object/map')
 var omit                 = require('../object/omit')
 var extend               = require('../object/extend')
 var hasOwn               = require('../object/hasOwn')
@@ -30,6 +31,10 @@ var isAccessorDescriptor = require('./isDescriptorAccessor')
 // b: [AnyValue|Function] a javascript value if data-descriptor (alias for value), function if accessor-descriptor (alias for setter function)
 
 function defineProperty (obj, prop, config, enumerable, a, b) {
+  // multiple definition
+  if (isPlainObject(prop)) {
+    return Object.defineProperties(obj, map(prop, definePropDefaults))
+  }
   // implicit definition
   if (isPlainObject(config)) {
     return Object.defineProperty(obj, prop, definePropDefaults(config))
