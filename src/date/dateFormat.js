@@ -46,46 +46,49 @@ function dateFormat (date, mask) {
 }
 
 function convertFlag (date, token) {
-  switch (token) {
-    case 'd'     : return date.getDate()
-    case 'dd'    : return pad(date.getDate(), 2)
-    case 'ddd'   : return nameOfDay(date, 3)
-    case 'dddd'  : return nameOfDay(date)
-    case 'm'     : return date.getMonth() + 1
-    case 'mm'    : return pad(date.getMonth() + 1, 2)
-    case 'mmm'   : return nameOfMonth(date, 3)
-    case 'mmmm'  : return nameOfMonth(date)
-    case 'yyyy'  : return pad(date.getFullYear(), 4)
-    case 'yy'    : return pad(date.getFullYear() % 100, 2)
-    case 'h'     : return date.getHours() % 12 || 12
-    case 'hh'    : return pad(date.getHours() % 12 || 12, 2)
-    case 'H'     : return date.getHours()
-    case 'HH'    : return pad(date.getHours(), 2)
-    case 'M'     : return date.getMinutes()
-    case 'MM'    : return pad(date.getMinutes(), 2)
-    case 'S'     : return date.getSeconds()
-    case 'SS'    : return pad(date.getSeconds(), 2)
-    case 's'     : return date.getMilliseconds()
-    case 'ss'    : return pad(date.getMilliseconds(), 3)
-    case 't'     : return date.getHours() < 12 ? ' a' : ' p'
-    case 'tt'    : return date.getHours() < 12 ? ' am' : ' pm'
-    case 'T'     : return date.getHours() < 12 ? ' A' : ' P'
-    case 'TT'    : return date.getHours() < 12 ? ' AM' : ' PM'
-    case 'N'     : return dayOfTheYear(date)
-    case 'W'     : return weekOfTheYear(date)
-    case 'Q'     : return quarterOfTheYear(date)
-    case 'Z'     : return timezoneOffset(date)
-    case 'u'     : return totalDaysThisMonth(date)
-    case 'uu'    : return totalDaysThisYear(date)
-    case 'x'     : return daysLeftThisWeek(date)
-    case 'xx'    : return daysLeftThisMonth(date)
-    case 'xxx'   : return daysLeftThisYear(date)
-    case 'v'     : return isLeapYear(date)
-    case 'o'     : return ordinal(date.getDate())
-    case 'O'     : return nameOfDay(date, 1)
-    case 'OO'    : return nameOfDay(date, 2)
-    default      : return token.replace(/'/g, '')
+  var tokens = {
+    d     : () => {return date.getDate()},
+    dd    : () => {return pad(date.getDate(), 2)},
+    ddd   : () => {return nameOfDay(date, 3)},
+    dddd  : () => {return nameOfDay(date)},
+    m     : () => {return date.getMonth() + 1},
+    mm    : () => {return pad(date.getMonth() + 1, 2)},
+    mmm   : () => {return nameOfMonth(date, 3)},
+    mmmm  : () => {return nameOfMonth(date)},
+    yyyy  : () => {return pad(date.getFullYear(), 4)},
+    yy    : () => {return pad(date.getFullYear() % 100, 2)},
+    h     : () => {return date.getHours() % 12 || 12},
+    hh    : () => {return pad(date.getHours() % 12 || 12, 2)},
+    H     : () => {return date.getHours()},
+    HH    : () => {return pad(date.getHours(), 2)},
+    M     : () => {return date.getMinutes()},
+    MM    : () => {return pad(date.getMinutes(), 2)},
+    S     : () => {return date.getSeconds()},
+    SS    : () => {return pad(date.getSeconds(), 2)},
+    s     : () => {return date.getMilliseconds()},
+    ss    : () => {return pad(date.getMilliseconds(), 3)},
+    t     : () => {return date.getHours() < 12 ? ' a' : ' p'},
+    tt    : () => {return date.getHours() < 12 ? ' am' : ' pm'},
+    T     : () => {return date.getHours() < 12 ? ' A' : ' P'},
+    TT    : () => {return date.getHours() < 12 ? ' AM' : ' PM'},
+    N     : () => {return dayOfTheYear(date)},
+    W     : () => {return weekOfTheYear(date)},
+    Q     : () => {return quarterOfTheYear(date)},
+    Z     : () => {return timezoneOffset(date)},
+    u     : () => {return totalDaysThisMonth(date)},
+    uu    : () => {return totalDaysThisYear(date)},
+    x     : () => {return daysLeftThisWeek(date)},
+    xx    : () => {return daysLeftThisMonth(date)},
+    xxx   : () => {return daysLeftThisYear(date)},
+    v     : () => {return isLeapYear(date)},
+    o     : () => {return ordinal(date.getDate())},
+    O     : () => {return nameOfDay(date, 1)},
+    OO    : () => {return nameOfDay(date, 2)},
+    defaults : () => {return token.replace(/'/g, '')}
   }
+  return typeof tokens[token] !== 'function'
+    ? tokens.defaults()
+    : tokens[token]()
 }
 
 function antiPattern (mask, token) {
