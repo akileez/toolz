@@ -1,7 +1,7 @@
 // adopted from: is-data-descriptor <https://github.com/jonschlinkert/is-data-descriptor>
 // Copyright (c) 2015, Jon Schlinkert. (MIT)
 
-var hasOwn = require('../object/hasOwn')
+var hasOwn = require('./hasOwn')
 var kind   = require('../lang/kind')
 
 function isDataDescriptor (obj, prop) {

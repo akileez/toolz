@@ -1,7 +1,7 @@
 // adopted from: is-accessor-descriptor <https://github.com/jonschlinkert/is-accessor-descriptor>
 // Copyright (c) 2015, Jon Schlinkert. (MIT)
 
-var hasOwn = require('../object/hasOwn')
+var hasOwn = require('./hasOwn')
 var kind   = require('../lang/kind')
 
 function isAccessorDescriptor (obj, prop) {
