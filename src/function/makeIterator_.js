@@ -4,21 +4,33 @@ var deepMatches = require('../object/deepMatches')
 
 function makeIterator (src, thisObj) {
   if (src == null) return identity
-  switch (typeof src) {
-    case 'function' :
+
+  var source = typeof src
+
+  var iterate = {
+    'function' : function () {
       return (typeof thisObj !== 'undefined')
         ? function (value, idx, arr) {
             return src.call(thisObj, value, idx, arr)
           }
         : src
-    case 'object' :
+      },
+
+    'object' : function () {
       return function (value) {
         return deepMatches(value, src)
       }
-    case 'string' :
-    case 'number' :
+    },
+
+    defaults : function () {
+      // handles strings and numbers
       return prop(src)
+    }
   }
+
+  return (typeof iterate[source] !== 'function')
+    ? iterate.defaults()
+    : iterate[source]()
 }
 
 module.exports = makeIterator
