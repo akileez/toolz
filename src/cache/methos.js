@@ -1,4 +1,4 @@
-var stampit  = require('../stamp/stampit')
+var stampit  = require('../object/stampit')
 var set      = require('../object/set')
 var get      = require('../object/get')
 var has      = require('../object/has')
