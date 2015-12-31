@@ -2,10 +2,8 @@ var apply = require('../function/apply')
 var noop  = require('../function/noop')
 var kind  = require('../lang/kind')
 
-function makeCollectionMethod (arr, obj, str, rex, def) {
+function makeCollectionMethod (arr, obj, str, rex) {
   return function (list) {
-    // console.log('----------------------the list(new)-----------------------')
-    // console.log(kind.safe(list))
     var type = kind(list)
     var types = {
       array    : arr,
