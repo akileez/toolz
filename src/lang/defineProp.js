@@ -23,18 +23,20 @@ var isAccessorDescriptor = require('./isDescriptorAccessor')
 // An accessor descriptor is a property described by a getter-setter pair of functions.
 
 // This is extrememly raw.
-// obj: object to be mutated
-// prop: property to add.
-// config: boolean for configurable key or descriptor object
-// enumerable: boolean for enumerable key
-// a: boolean if data-descriptor (alias for writable key), function if accessor-descriptor (alias for getter function)
-// b: a javascript value if data-descriptor (alias for value), function if accessor-descriptor (alias for setter function)
+// obj: [object] object to be mutated
+// prop: [String] property to add.
+// config: [Boolean|Object] boolean for configurable key or descriptor object
+// enumerable: [Boolean] boolean for enumerable key
+// a: [Boolean|Function] boolean if data-descriptor (alias for writable key), function if accessor-descriptor (alias for getter function)
+// b: [AnyValue|Function] a javascript value if data-descriptor (alias for value), function if accessor-descriptor (alias for setter function)
 
 function defineProperty (obj, prop, config, enumerable, a, b) {
+  // implicit definition
   if (isPlainObject(config)) {
     return Object.defineProperty(obj, prop, definePropDefaults(config))
   }
 
+  // explicit definition
   if (isBoolean(config)) {
     var configuration = {}
     configuration.configurable = config || false
