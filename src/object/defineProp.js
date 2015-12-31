@@ -2,7 +2,7 @@ var isFunction           = require('../lang/isFunction')
 var isPlainObject        = require('../lang/isPlainObject')
 var isAccessorDescriptor = require('./is-descriptor-accessor')
 var isDataDescriptor     = require('./is-descriptor-data')
-var extend               = require('./extend')
+var update               = require('./update')
 var hasOwn               = require('./hasOwn')
 var omit                 = require('./omit')
 var map                  = require('./map')
@@ -72,11 +72,11 @@ function definePropDefaults (obj) {
   }
 
   if (isDataDescriptor(obj) || hasOwn(obj, 'value')) {
-    return extend({}, omit(options, ['get', 'set']), obj)
+    return update(omit(options, ['get', 'set']), obj)
   }
 
   if (isAccessorDescriptor(obj) || hasOwn(obj, 'get')) {
-    return extend({}, omit(options, ['writable', 'value']), obj)
+    return update(omit(options, ['writable', 'value']), obj)
   }
 }
 
