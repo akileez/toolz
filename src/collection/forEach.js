@@ -1,4 +1,4 @@
-var make = require('./_make')
+var make = require('./_make_new')
 var makeIterator = require('../function/makeIterator_')
 
 function arrForEach (arr, fn, thisObj) {
