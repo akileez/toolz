@@ -1,10 +1,12 @@
-var stampit  = require('../stamp/_stampit')
+var stampit  = require('../object/stampit')
 var Emitter  = require('../util/Emitter')
 
 module.exports = stampit()
-  .init([
+  .initializers([
     function () {
       Emitter(this)
+    },
+    function () {
       Emitter.call(this)
     }
   ])
