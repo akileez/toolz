@@ -1,11 +1,12 @@
-var map                  = require('../object/map')
-var omit                 = require('../object/omit')
-var extend               = require('../object/extend')
-var hasOwn               = require('../object/hasOwn')
-var isFunction           = require('./isFunction')
-var isPlainObject        = require('./isPlainObject')
-var isDataDescriptor     = require('./isDescriptorData')
-var isAccessorDescriptor = require('./isDescriptorAccessor')
+var isFunction           = require('../lang/isFunction')
+var isPlainObject        = require('../lang/isPlainObject')
+var isAccessorDescriptor = require('./is-descriptor-accessor')
+var isDataDescriptor     = require('./is-descriptor-data')
+var extend               = require('./extend')
+var hasOwn               = require('./hasOwn')
+var omit                 = require('./omit')
+var map                  = require('./map')
+
 
 // This method allows precise addition to or modification of a property on an object.
 
