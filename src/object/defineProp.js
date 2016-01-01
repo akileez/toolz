@@ -7,6 +7,9 @@ var hasOwn               = require('./hasOwn')
 var omit                 = require('./omit')
 var map                  = require('./map')
 
+// Taken from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+
+// --- Begin Transmission
 
 // This method allows precise addition to or modification of a property on an object.
 
@@ -23,7 +26,9 @@ var map                  = require('./map')
 
 // An accessor descriptor is a property described by a getter-setter pair of functions.
 
-// This is extrememly raw.
+// --- End Transmission
+
+// This is extrememly raw and extremely functional!!
 // function signature: defineProperty(obj, prop[, config[, enumerable, a, b]])
 // function parameters:
 //   obj: [object] object to be mutated
@@ -34,6 +39,7 @@ var map                  = require('./map')
 //      function if accessor-descriptor (alias for getter function)
 //   b: [AnyValue|Function] a javascript value if data-descriptor (alias for value),
 //      function if accessor-descriptor (alias for setter function)
+// function return: [Object]
 
 function defineProperty (obj, prop, config, list, a, b) {
   // multiple definition
