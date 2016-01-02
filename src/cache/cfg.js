@@ -1,4 +1,4 @@
-var Emitter  = require('../util/Emitter')
+var Emitter  = require('../event/Emitter')
 var set      = require('../object/set')
 var get      = require('../object/get')
 var has      = require('../object/has')
