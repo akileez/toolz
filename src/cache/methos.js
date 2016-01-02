@@ -41,10 +41,13 @@ function hasit (key) {
 // remove 'keys' from the cache. if no value specified, the entire cache is reset
 function removeit (key) {
   if (!key) this.cache = {}
-  if (typeof key === 'object') visit(this, 'del', key)
-  else if (this.has(key)) {
-    delete this.cache[key]
-    if (this.emit) this.emit('del', key)
+  else{
+    if (typeof key === 'object') visit(this, 'del', key)
+    else if (this.has(key)) {
+      delete this.cache[key]
+      if (this.emit) this.emit('del', key)
+    }
   }
+
   return this
 }
