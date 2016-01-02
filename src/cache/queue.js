@@ -7,16 +7,18 @@ var flatten  = require('../array/flatten')
 var slice    = require('../array/slice')
 var forEach  = require('../collection/forEach')
 
+// process-queue for the primary way I use this: bot.process(bot.queue)
+
 module.exports = stampit()
   .methods({
     register: map,
     alias: alias,
-    process: process,
+    process: processq,
     addKey: addKey
   })
   .init([
     function () {
-      define(this, 'isQConfig', true)
+      define(this, 'isProcessQueue', true)
       this.tasks = {}
       this.keys = []
       this.aliases = {}
@@ -26,7 +28,7 @@ module.exports = stampit()
 
 function map (key, val) {
   // allow passing another map-config object in as a value
-  if (isQConfig(val)) {
+  if (isProcessQueue(val)) {
     this.register(key, function(cfg) {
       return val.process(cfg);
     })
@@ -48,7 +50,7 @@ function alias (alias, key) {
   return this
 }
 
-function process (args) {
+function processq (args) {
   args = args || {}
   var key
 
@@ -101,10 +103,10 @@ function addKey (key, arr) {
   return this
 }
 
-function isQConfig (val) {
+function isProcessQueue (val) {
   return val
     && typeof val === 'object'
-    && val.isQConfig === true
+    && val.isProcessQueue === true
 }
 
 function define (obj, prop, val) {
