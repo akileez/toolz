@@ -1,5 +1,5 @@
 var stampit  = require('../object/_stampit')
-var Emitter  = require('../util/Emitter')
+var Emitter  = require('./Emitter')
 
 module.exports = stampit()
   .init([
