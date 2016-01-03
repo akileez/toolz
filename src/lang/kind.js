@@ -118,6 +118,7 @@ function kindOf (value) {
     string   : function () {return 'string'},
     boolean  : function () {return 'boolean'},
     number   : function () {return 'number'},
+    symbol   : function () {return 'symbol'},
     function : function () {return 'function'},
     defaults : function () {
       return Object.prototype.toString.call(value)
