@@ -4,6 +4,8 @@ var get      = require('../object/get')
 var has      = require('../object/has')
 var visit    = require('../object/visit')
 
+// Using stampit version 3
+
 module.exports = stampit()
   .methods({
     set: setter,
@@ -16,7 +18,6 @@ module.exports = stampit()
       this.cache = {}
     }
   ])
-
 
 // sets 'value' to 'key' of the cache
 function setter (key, value) {
