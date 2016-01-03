@@ -1,9 +1,9 @@
 var stampit  = require('../object/stampit')
-var kindOf   = require('../lang/kindOf')
-var flatten  = require('../array/flatten')
-var slice    = require('../array/slice')
-// var isStream = require('../lang/isStream')
 var forEach  = require('../collection/forEach')
+var slice    = require('../array/slice')
+var flatten  = require('../array/flatten')
+var kindOf   = require('../lang/kindOf')
+// var isStream = require('../lang/isStream') // not using Streams yet.
 
 module.exports = stampit()
   .methods({
@@ -45,13 +45,15 @@ function loader (name, laoders) {
 // private method
 function buildStack (args, cache) {
   // args isArray check not needed here. private function. one call made from this.loader()
+  // the following in is commented out.
   // if (!Array.isArray(args)) throw new TypeError('Loaders#buildStack expects an array.')
 
   var len = args.length
   var i = 0
   var stack = []
   var other = []
-  // making this function private therefore I will need to pass the cache in manually
+
+  // this is a function private therefore I will need to pass the cache in manually
   // as a result the following line is commented out.
   // cache = cache || this.tasks
 
@@ -62,29 +64,13 @@ function buildStack (args, cache) {
     if (kind === 'string' && cache[arg]) stack.push(cache[arg])
     else if (kind === 'function') stack.push(arg)
     else if (kind === 'array') stack.push.apply(stack, buildStack(arg, cache).stack)
+    // -- not using Streams yet...
     // else if (isStream(arg)) stack.push(arg)
     else other.push(arg)
   }
 
   var res = {}
-  res.stack = stack //flatten(stack)
+  res.stack = stack
   res.args = other
   return res
 }
-
-// function then (fn) {
-//   var that = this
-//   return function () {
-//     return fn(that.apply(null, arguments))
-//   }
-// }
-
-// function runner (arr) {
-//   var len = arr.length
-//   var i = 0
-//   while (len--) {
-//     this.tasks[name][i++](arr)
-//     obj[prop](arr[i++])
-//   }
-// }
-
