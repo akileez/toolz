@@ -4,6 +4,8 @@ var get      = require('../object/get')
 var has      = require('../object/has')
 var visit    = require('../object/visit')
 
+// Using stampit version 2
+
 module.exports = stampit()
   .init([
     function () {
