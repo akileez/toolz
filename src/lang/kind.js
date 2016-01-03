@@ -109,9 +109,28 @@ function objSafe (value) {
 }
 
 function kindOf (value) {
-  return Object.prototype.toString.call(value)
-    .replace(/^\[object |\]$/g, '')
-    .toLowerCase()
+  if (value === null) return 'null'
+  if (value === undefined) return 'undefined'
+
+  if (Array.isArray(value)) return 'array'
+
+  var types = {
+    string   : function () {return 'string'},
+    boolean  : function () {return 'boolean'},
+    number   : function () {return 'number'},
+    function : function () {return 'function'},
+    defaults : function () {
+      return Object.prototype.toString.call(value)
+        .replace(/^\[object |\]$/g, '')
+        .toLowerCase()
+    }
+  }
+
+  var type = typeof value
+
+  return (types[type])
+    ? types[type]()
+    : types.defaults(value)
 }
 
 module.exports = kind
