@@ -12,8 +12,8 @@ module.exports = stamp.methods({
   getStamp: function getStamp () {
     jlog(this)
   },
-  log: function log (key) {
-    jlog(key)
+  log: function log (output) {
+    jlog(output)
   },
   view: function chk (name) {
     jlog(this[name])
