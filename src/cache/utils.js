@@ -8,7 +8,14 @@ module.exports = stamp.methods({
     if (this.emit) this.emit('set', key, 'reset')
     return this
   },
+  // debugging toolz
   getStamp: function getStamp () {
     jlog(this)
-  }
+  },
+  log: function log (key) {
+    jlog(key)
+  },
+  view: function chk (name) {
+    jlog(this[name])
+  },
 })
