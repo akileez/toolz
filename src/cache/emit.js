@@ -18,7 +18,7 @@ module.exports = stamp()
   .methods({
     emit : emit,
     on   : on,
-    once : once
+    once : once,
     off  : off
   })
 
