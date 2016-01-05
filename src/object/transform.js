@@ -1,6 +1,6 @@
 // adopted from: https://github.com/djelic/node-object-utils (MIT)
 
-var kindOf  = require('../lang/kind').objs
+var kind    = require('../lang/kind').objs
 var get     = require('../object/get')
 var keys    = require('../object/keys')
 var forEach = require('../array/forEach')
@@ -12,7 +12,7 @@ function transform (src, schema) {
   var obj = {}
 
   function transformer (val) {
-    switch (kindOf(val)) {
+    switch (kind(val)) {
       case 'object'   : return transform(src, val)
       case 'array'    : return map(val, transformer)
       case 'function' : return val.call(obj, src)
