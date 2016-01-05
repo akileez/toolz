@@ -12,6 +12,7 @@ function extend (target) {
       if (arg.hasOwnProperty(key)) target[key] = arg[key]
     }
   }
+
   return target
 }
 
