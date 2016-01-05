@@ -9,11 +9,11 @@ function prop (name) {
   }
 }
 
-function deepProp (path) {
+function deepProps (path) {
   return function (obj) {
     return get(obj, path)
   }
 }
 
-module.exports = deepProp
+module.exports = deepProps
 module.exports.shallow = prop
