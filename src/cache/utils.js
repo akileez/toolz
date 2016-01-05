@@ -6,5 +6,8 @@ module.exports = stamp.methods({
     this.set(key, {})
     if (this.emit) this.emit('set', key, 'reset')
     return this
+  },
+  look: function (key) {
+    return this[key]
   }
 })
