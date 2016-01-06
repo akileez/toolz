@@ -23,9 +23,9 @@ iterate.each(object, function (value, key, done) {
 ```
 
 #### `iterate::map(object, iterator, done)`
-**object** - array/object for iteration
-**iterator** - function(value, key, done)
-**done** - function(error, resultArray)
+**object** - array/object for iteration   
+**iterator** - function(value, key, done)   
+**done** - function(error, resultArray)   
 
 ```js
 var iterate = require('async-iterate');
@@ -40,10 +40,10 @@ iterate.each(object, function (value, key, done) {
 ```
 
 #### `iterate::reduce(object, reduceObject, iterator, done)`
-**object** - `array/object` for iteration
-**reduceObject** - `Mixed`
-**iterator** - `function`(reduceObject, value, key, done)
-**done** - `function`(error, reduceObject)
+**object** - `array/object` for iteration   
+**reduceObject** - `Mixed`   
+**iterator** - `function`(reduceObject, value, key, done)   
+**done** - `function`(error, reduceObject)   
 
 ```js
 var iterate = require('async-iterate');
