@@ -1,0 +1,6 @@
+exports.getDescriptor = require('./get-descriptor')
+exports.hasConstrutor = require('./has-constructor')
+exports.isObject      = require('./is-object')
+exports.nativeKeys    = require('./native-keys')
+exports.pr            = require('./prop-retriever')
+exports.isComposable  = require('./is-composable')
