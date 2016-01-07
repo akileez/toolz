@@ -9,9 +9,9 @@ function isPrimitive (value) {
     || typeof value === 'undefined'
 }
 
-function isExtendable (value) {
+function isReference (value) {
   return !isPrimitive(value)
 }
 
 module.exports = isPrimitive
-module.exports.isExtendable = isExtendable
+module.exports.Not = isReference
