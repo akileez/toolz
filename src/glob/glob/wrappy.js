@@ -1,9 +1,9 @@
 // adopted from: https://github.com/npm/wrappy
 // Copyright (c) Isaac Z. Schlueter and Contributors (ISC)
 
-var forEach = require('../array/forEach')
-var keys = require('../object/keys')
-var apply = require('../function/apply')
+var forEach = require('../../array/forEach')
+var keys    = require('../../object/keys')
+var apply   = require('../../function/apply')
 
 // Callback wrapping utility
 

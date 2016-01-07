@@ -42,13 +42,13 @@
 module.exports = glob
 
 var fs = require('fs')
-var minimatch = require('./minimatch')
+var minimatch = require('../minimatch')
 var Minimatch = minimatch.Minimatch
 var inherits = require('./inherits')
 var EE = require('events').EventEmitter
 var path = require('path')
 var assert = require('assert')
-var isAbsolute = require('../path/isAbsolute')
+var isAbsolute = require('../../path/isAbsolute')
 var globSync = require('./sync.js')
 var common = require('./common.js')
 var alphasort = common.alphasort

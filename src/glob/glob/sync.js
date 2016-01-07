@@ -3,13 +3,13 @@ module.exports = globSync
 globSync.GlobSync = GlobSync
 
 var fs              = require('fs')
-var minimatch       = require('./minimatch')
+var minimatch       = require('../minimatch')
 var Minimatch       = minimatch.Minimatch
-var Glob            = require('./glob.js').Glob
+var Glob            = require('./index').Glob
 var util            = require('util')
 var path            = require('path')
 var assert          = require('assert')
-var isAbsolute      = require('../path/isAbsolute')
+var isAbsolute      = require('../../path/isAbsolute')
 var common          = require('./common.js')
 var alphasort       = common.alphasort
 var alphasorti      = common.alphasorti
