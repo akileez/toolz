@@ -65,6 +65,8 @@ function engine () {
       'function'  : 'func',
       'null'      : 'null',
       'undefined' : 'undef',
+      'object'    : 'obj',
+      'array'     : 'arr',
       'regexp'    : 'regex',
       'date'      : 'date'
     }
@@ -76,15 +78,21 @@ function engine () {
     var key
 
     for (key in obj) {
-      if (obj.hasOwnProperty(key)) lastKey = key
+      lastKey = key
+      // checking the entire prototype of the object to correct placement of
+      // commas. the last property before listing methods on an object
+      // would not display a comma. Following commands show history of this transistion
+      // if (obj.hasOwnProperty(key)) lastKey = key
       // (getType(obj[key]) === 'func') && delete obj[key] || (lastKey = key)
     }
     return lastKey
   }
 
   function cleanArray (arr) {
+    if (options.display.xarr) return arr
+
     return filter(arr, function (item) {
-      return getType(item) //!== 'func'
+      return ['func', 'obj', 'arr', 'date'].indexOf(getType(item)) === -1
     })
   }
 
