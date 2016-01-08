@@ -1,7 +1,7 @@
 // adopted from: is-regex <https://github.com/ljharb/is-regex>
 // Copyright (c) 2014 Jordan Harband (MIT)
 
-'use strict';
+'use strict'
 
 function isRegex (value) {
   if (typeof value !== 'object') return false
