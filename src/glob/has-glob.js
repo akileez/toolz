@@ -1,9 +1,9 @@
 //adopted from: has-glob <https://github.com/jonschlinkert/has-glob>
 // Copyright (c) 2015, Jon Schlinkert. (MIT)
 
-'use strict';
+'use strict'
 
-var isGlob = require('./is-glob');
+var isGlob = require('./is-glob')
 
 function hasGlob (val) {
   if (val == null) return false
@@ -20,4 +20,3 @@ function hasGlob (val) {
 }
 
 module.exports = hasGlob
-
