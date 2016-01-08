@@ -1,10 +1,8 @@
 // adopted from: https://github.com/Raynos/reduce
 // Copyright (c) 2012 Raynos. (MIT)
 
-var Okeys = require('../object/keys')
-
 function reduce (list, iterator) {
-  var keys = Okeys(list)
+  var keys = Object.keys(list)
   var i = -1
   var accumulator = list[0]
   var context = this
@@ -16,12 +14,6 @@ function reduce (list, iterator) {
     accumulator = arguments[3]
   }
 
-  // for (var len = keys.length; i < len; i++) {
-  //   var key = keys[i]
-  //   var value = list[key]
-
-  //   accumulator = iterator.call(context, accumulator, value, key, list)
-  // }
   var len = keys.length
 
   while (++i < len) {
