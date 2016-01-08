@@ -1,10 +1,10 @@
-var assign           = require('./extend')
-var merge            = require('./merge')
-var slice            = require('../array/slice')
-var apply            = require('../function/apply')
-var extractFunctions = require('./extract-functions')
-var isComposable     = require('./is-composable')
-var isObject         = require('./is-object')
+var slice            = require('../../array/slice')
+var apply            = require('../../function/apply')
+var extractFunctions = require('../extract-functions')
+var isComposable     = require('../is-composable')
+var isObject         = require('../is-object')
+var assign           = require('../extend')
+var merge            = require('../merge')
 var compose          = require('./compose')
 
 var rawUtils = {
