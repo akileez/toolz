@@ -1,7 +1,7 @@
 // adopted from: <https://github.com/jonschlinkert/is-valid-glob>
 // Copyright (c) 2015, Jon Schlinkert and contributors (MIT)
 
-'use strict';
+'use strict'
 
 // This just checks to make sure that a pattern is either a string or array,
 // and if it's an array it's either empty or consists of only strings.
