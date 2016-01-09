@@ -2,7 +2,7 @@ var fs      = require('fs')
 var path    = require('path')
 
 // yamljs
-var extract = require('./index').extract
+var extract = require('./fme')
 
 // front-matter-extractor
 
