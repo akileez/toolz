@@ -1,10 +1,9 @@
 var fs = require('fs')
-var modStats = require('./modStats')
 
 function stat (fp, cb) {
-  if (arguments.length === 1) return modStats(fs.statSync(fp), fp)
+  if (arguments.length === 1) return fs.statSync(fp)
   fs.stat(fp, function (err, stats) {
-    cb(err, stats ? modStats(stats, fp) : stats)
+    cb(err, stats)
   })
 }
 
