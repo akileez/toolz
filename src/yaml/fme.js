@@ -1,3 +1,5 @@
+// interface to yamljs -- front matter extraction
+
 var yaml = require('./lib/Yaml')
 
 function extract (input) {
@@ -12,12 +14,8 @@ function extract (input) {
     var matches = input.match(matter)
 
     if (matches) {
-      // js-yaml implementation:
-      // result.data = yaml.safeLoad(matches[1])
-
       // yamljs implementation:
       result.data = yaml.parse(matches[1])
-
       result.content = input.replace(matches[0], '')
     }
   }
@@ -25,11 +23,4 @@ function extract (input) {
   return result
 }
 
-// Exposing yamljs
-module.exports = yaml
-module.exports.extract = extract
-
-// methods on yamljs:
-// exports.load = yaml.load
-// exports.parse = yaml.parse
-// exports.stringify = yaml.stringify
+module.exports = extract
