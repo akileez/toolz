@@ -48,7 +48,7 @@ module.exports = function(cacheName) {
     }
 
     process.once('exit', function() {
-      fs.writeFileSync(cacheName, JSON.stringify(resolveCache, null, 4))
+      fs.writeFileSync(cacheName, JSON.stringify(resolveCache, null, 2))
     })
   }
 }
