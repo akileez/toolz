@@ -1,6 +1,108 @@
 var kindOf = require('../lang/kindOf')
 
 // https://github.com/component/to-functon
+// Convert property access strings to a function ("user.name.first" etc)
+
+/*
+
+    var toFunction = require('to-function');
+
+    var fn = toFunction('name.first');
+    var user = { name: { first: 'Tobi' }};
+    fn(user);
+    // => "Tobi"
+
+    var _ = require('..');
+
+    // Dot Access
+    var users = [
+      { name: { first: 'Tobi' }},
+      { name: { first: 'Loki' }},
+      { name: { first: 'Jane' }},
+      { name: { first: 'Manny' }}
+    ];
+
+    var short = users.map(_('name.first'));
+    console.log(short);
+    // => [ 'Tobi', 'Loki', 'Jane', 'Manny' ]
+
+    // Equality
+    var tobi = { name: { first: 'Tobi' }, age: 2 };
+    var loki = { name: { first: 'Loki' }, age: 2 };
+    var jane = { name: { first: 'Jane' }, age: 6 };
+
+    var users = [tobi, loki, jane];
+
+    var user = users.filter(_(loki)).pop();
+    console.log(user);
+    // => { name: { first: 'Loki' }, age: 2 }
+
+    // Expressions
+    var users = [
+      { name: { first: 'Tobi' }, age: 2 },
+      { name: { first: 'Loki' }, age: 2 },
+      { name: { first: 'Jane' }, age: 6 }
+    ];
+
+    var oldPets = users.filter(_('age > 2 && age < 10'));
+    console.log(oldPets);
+    // => [ { name: { first: 'Jane' }, age: 6 } ]
+
+    // Regular Expressions
+    var users = [
+      'Tobi',
+      'Loki',
+      'Jane'
+    ];
+
+    var t = users.filter(_(/^T/));
+
+    console.log(t);
+    // => [ 'Tobi' ]
+
+    // Nesting
+    var users = [
+      { name: { first: 'Tobi', last: 'Ferret' }, age: 2 },
+      { name: { first: 'Loki', last: 'Ferret' }, age: 2 },
+      { name: { first: 'Luna', last: 'Cat' }, age: 2 },
+      { name: { first: 'Manny', last: 'Cat' }, age: 3 }
+    ];
+
+    // single-key
+
+    var query = _({
+      name: {
+        last: 'Cat'
+      }
+    });
+
+    console.log(users.filter(query));
+    // => [ { name: { first: 'Luna', last: 'Cat' }, age: 2 },
+    //      { name: { first: 'Manny', last: 'Cat' }, age: 3 } ]
+
+    // multi-key
+
+    var query = _({
+      name: {
+        first: /^L/,
+        last: 'Cat'
+      }
+    });
+
+    console.log(users.filter(query));
+    // => [ { name: { first: 'Luna', last: 'Cat' }, age: 2 } ]
+
+    // multi-level
+
+    var query = _({
+      name: { last: 'Cat' },
+      age: 3
+    });
+
+    console.log(users.filter(query));
+    // => [ { name: { first: 'Manny', last: 'Cat' }, age: 3 } ]
+
+*/
 
 function toFuncton (obj) {
   switch (kindOf(obj)) {
