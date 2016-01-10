@@ -4,10 +4,12 @@ var path   = require('path')
 var fs     = require('fs')
 
 /*
+
   fp (filepath) [string] file path to read
   fc (filecontent) [object|function] object or function returning an object to mixin
   s (stats?) [boolean] include file stats
- */
+
+*/
 
 function virtualFileObject (fp, fc, s) {
   if (typeof fc === 'function') {
