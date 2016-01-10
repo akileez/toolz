@@ -4,8 +4,7 @@ var extract = require('./fme')
 function parse (input, cb) {
   readFile(input, function (err, res) {
     if (err) return cb(err)
-    var fm = extract(res)
-    return cb(null, res)
+    cb(null, extract(res))
   })
 }
 
