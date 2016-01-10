@@ -2,9 +2,10 @@ var readFile = require('../file/readFile')
 var extract = require('./fme')
 
 function parse (input, cb) {
-  readFile(input, 'utf8', function (err, res) {
+  readFile(input, function (err, res) {
     if (err) return cb(err)
-    cb(null, extract(res))
+    var fm = extract(res)
+    return cb(null, res)
   })
 }
 

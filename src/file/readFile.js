@@ -4,11 +4,13 @@ var assert = require('assert')
 function readFile (fp, opts, cb) {
   if (arguments.length === 1) return fs.readFileSync(fp, 'utf8')
 
-  if (arguments.length === 2 && typeof opts === 'function') {
-    cb = opts
-    opts = 'utf8'
-  } else {
-    return fs.readFileSync(fp, opts)
+  if (arguments.length === 2) {
+    if (typeof opts === 'function') {
+      cb = opts
+      opts = 'utf8'
+    } else {
+      return fs.readFileSync(fp, opts)
+    }
   }
 
   fs.readFile(fp, opts, function (err, data) {
