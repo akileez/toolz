@@ -1,3 +1,5 @@
+// immutable extending
+
 function extend () {
   var arg
   var key
