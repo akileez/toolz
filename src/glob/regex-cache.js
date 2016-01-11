@@ -1,7 +1,7 @@
 // adopted from: regex-cache <https://github.com/jonschlinkert/regex-cache>
 // Copyright (c) 2015 Jon Schlinkert. (MIt)
 
-'use strict';
+'use strict'
 
 var equal = require('./is-equal-shallow')
 
