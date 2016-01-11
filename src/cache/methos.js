@@ -7,17 +7,17 @@ var visit    = require('../object/visit')
 // Using stampit version 3
 
 module.exports = stampit()
+  .initializers([
+    function () {
+      this.cache = {}
+    }
+  ])
   .methods({
     set: setter,
     get: getter,
     has: hasit,
     del: removeit
   })
-  .initializers([
-    function () {
-      this.cache = {}
-    }
-  ])
 
 // sets 'value' to 'key' of the cache
 function setter (key, value) {
