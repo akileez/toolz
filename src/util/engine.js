@@ -92,7 +92,7 @@ function engine () {
     if (options.display.xarr) return arr
 
     return filter(arr, function (item) {
-      return ['func', 'obj', 'arr', 'date'].indexOf(getType(item)) === -1
+      return ['func', 'date'].indexOf(getType(item)) === -1
     })
   }
 
