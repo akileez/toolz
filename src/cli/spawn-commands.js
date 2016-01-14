@@ -3,29 +3,18 @@
 
 'use strict'
 
-var serial = require('../async/iterate').each
-var concurrent = require('../async/concurrent').each
+var iterate = require('../async/iterate').each
 var forEach = require('../collection/forEach')
 var child = require('child_process')
 
 // cmds: arrary/object of objects {cmd: 'something', args: ['some', 'things']}
-// cp: concurrent processing?. [boolean]
 // cb: callback [function]
 
-function commands(cmds, cp, cb) {
-  if (arguments.length === 2) {
-    cb = cp
-    cp = false
-  }
-
-  var iterate = cp ? concurrent : serial
+function commands(cmds, cb) {
+  if (arguments.length === 1) cb = function () {}
 
   iterate(cmds, function (cmd, idx, next) {
-    var command =  cmd.cmd
-    var args = cmd.args
-
-
-    child.spawn(command, args, {stdio: 'inherit'})
+    child.spawn(cmd.cmd, cmd.args, {stdio: 'inherit'})
       .on('error', next)
       .on('close', next)
   }, cb)
@@ -35,11 +24,7 @@ commands.sync = function (cmds) {
   cmds = Array.isArray(cmds) ? cmds : [cmds]
 
   forEach(cmds, function (cmd) {
-    var command = cmd.cmd
-    var args = cmd.args
-    child.spawnSync(command, args, {
-      stdio: 'inherit'
-    })
+    child.spawnSync(cmd.cmd, cmd.args, {stdio: 'inherit'})
   })
 }
 
