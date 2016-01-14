@@ -28,14 +28,17 @@ function commands(cmds, opts, cb) {
   if (arguments.length === 1) {
     cb = function () {}
     opts = defs()
+  } else if (arguments.length === 2) {
+    if (typeof opts === 'function') {
+      cb = opts
+      opts = defs()
+    } else {
+      cb = function () {}
+      opts = defs(opts)
+    }
+  } else {
+    opts = defs(opts)
   }
-
-  if (arguments.length === 2) {
-    cb = opts
-    opts = defs()
-  }
-
-  if (arguments.length === 3) opts = defs(opts)
 
   if (opts.preferLocal) {
     opts.env = extend({}, opts.env || process.env)
