@@ -12,7 +12,7 @@
  * resolve the global prefix.
  */
 
-var isWindows = require('./is-windows');
+var isWindows = require('../../os/is-windows');
 var path = require('path');
 var prefix;
 

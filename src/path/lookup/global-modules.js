@@ -9,7 +9,7 @@
 
 var path = require('path');
 var prefix = require('./global-prefix');
-var isWindows = require('./is-windows');
+var isWindows = require('../../os/is-windows');
 
 if (isWindows()) {
   module.exports = path.resolve(prefix, 'node_modules');
