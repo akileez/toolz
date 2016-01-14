@@ -1,2 +1,3 @@
-'use strict';
-module.exports = require('./os-homedir')();
+'use strict'
+
+module.exports = require('../../os/os-homedir')()
