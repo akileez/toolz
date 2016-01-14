@@ -2,7 +2,6 @@ var serial = require('../async/iterate').each
 var concurrent = require('../async/concurrent').each
 var forEach = require('../collection/forEach')
 var child = require('child_process')
-var extend = require('../object/extend')
 
 var TEN_MEBIBYTE = 1024 * 1024 * 10
 
@@ -13,7 +12,7 @@ function commands(cmds, opts, cb) {
       maxBuffer: TEN_MEBIBYTE,
       env: process.env,
       encoding: opts.encoding || 'utf8',
-      cp: opts.cp || false
+      concurrent: opts.concurrent || false
     }
   }
 
@@ -24,22 +23,20 @@ function commands(cmds, opts, cb) {
     opts = defs(opts)
   }
 
-  var iterate = opts.cp ? concurrent : serial
+  var iterate = opts.concurrent ? concurrent : serial
 
   iterate(cmds, function (cmd, idx, next) {
-    var command =  cmd
-
-    // this needs to be cleaned up. maybe returned as a result object
-    child.exec(cmd, opts, function(err, stderr, stdout) {
-      if (err) console.log(err)
-      if (stdout) console.log(stdout)
-      if (stderr) console.log(stderr)
+    child.exec(cmd, opts, function(err, stdout, stderr) {
+      if (err) process.stderr.write('\u001b[31m' + err.toString() + '\u001b[39m')
+      if (stdout) process.stdout.write(stdout)
+      if (stderr) process.stdout.write(stderr)
       next()
     })
   }, cb)
 }
 
 commands.sync = function (cmds, opts) {
+  // object and string to be delt with (visit pattern?)
   cmds = Array.isArray(cmds) ? cmds : [cmds]
 
   forEach(cmds, function (cmd) {
