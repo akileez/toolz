@@ -99,5 +99,6 @@ function colorize (str, style) {
 module.exports = colorz
 module.exports.strip = strip
 module.exports.expose = expose
+module.exports.wrap = colorize
 module.exports.colorize = colorize
 module.exports.format = colorize
