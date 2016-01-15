@@ -1,30 +1,36 @@
 var serial = require('../async/iterate').each
-var concurrent = require('../async/concurrent').each
 var forEach = require('../collection/forEach')
+var concurrent = require('../async/concurrent').each
 var child = require('child_process')
 
 var TEN_MEBIBYTE = 1024 * 1024 * 10
 
-function commands(cmds, opts, cb) {
-  function defs(opts) {
-    opts = opts || {}
-    return {
-      maxBuffer: TEN_MEBIBYTE,
-      env: process.env,
-      encoding: opts.encoding || 'utf8',
-      concurrent: opts.concurrent || false
-    }
+function noop () {}
+
+function defs (opts) {
+  opts = opts || {}
+
+  return {
+    maxBuffer: TEN_MEBIBYTE,
+    env: process.env,
+    stdio: 'inherit',
+    encoding: opts.encoding || 'utf8',
+    concurrent: opts.concurrent || false
   }
+}
+
+function commands (cmds, opts, cb) {
+  cmds = Array.isArray(cmds) ? cmds : [cmds]
 
   if (arguments.length === 1) {
-    cb = function () {}
+    cb = noop
     opts = defs()
   } else if (arguments.length === 2) {
     if (typeof opts === 'function') {
       cb = opts
       opts = defs()
     } else {
-      cb = function () {}
+      cb = noop
       opts = defs(opts)
     }
   } else {
@@ -45,18 +51,16 @@ function commands(cmds, opts, cb) {
 
 commands.sync = function (cmds, opts) {
   // object and string to be delt with (visit pattern?)
-  cmds = Array.isArray(cmds) ? cmds : [cmds]
+  if (typeof cmds === 'string') cmds = [cmds]
 
   forEach(cmds, function (cmd) {
-    opts = {
-      maxBuffer: TEN_MEBIBYTE,
-      env: process.env,
-      encoding: 'utf8',
-      stdio: 'inherit'
-    }
-
-    child.execSync(cmd, opts)
+    child.execSync(cmd, defs(opts))
   })
+
+  // serial(cmds, function (cmd, idx, next) {
+  //   child.execSync(cmd, defs(opts))
+  //   next()
+  // }, noop)
 }
 
 module.exports = commands
