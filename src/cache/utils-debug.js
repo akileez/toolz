@@ -12,5 +12,5 @@ module.exports = stamp.methods({
   },
   view: function chk (name) {
     jlog(this[name])
-  },
+  }
 })
