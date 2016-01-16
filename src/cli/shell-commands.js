@@ -40,7 +40,7 @@ function commands (cmds, opts, cb) {
   var iterate = opts.concurrent ? concurrent : serial
 
   iterate(cmds, function (cmd, idx, next) {
-    child.exec(cmd, opts, function(err, stdout, stderr) {
+    child.exec(cmd, opts, function (err, stdout, stderr) {
       if (err) process.stderr.write('\u001b[31m' + err.toString() + '\u001b[39m')
       if (stdout) process.stdout.write(stdout)
       if (stderr) process.stdout.write(stderr)
