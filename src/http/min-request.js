@@ -2,40 +2,44 @@
 // (ISC)
 
 var http = require('http')
-var url = require('url')
+var url  = require('url')
 var util = require('util')
-var debug = function() {}
+
+var debug = function () {}
+
 if (util.debuglog) {
   debug = util.debuglog('request')
 }
 
 module.exports = exports = request
 
-function canPipe(x) {
-  return x && 'function' == typeof x.pipe
+function canPipe (x) {
+  return x && typeof x.pipe == 'function'
 }
 
-function request(raw, opt, cb) {
-  if ('function' == opt) {
+function request (raw, opt, cb) {
+  if (opt == 'function') {
     cb = opt
     opt = {}
   }
+
   if (!/^http/i.test(raw)) {
     raw = 'http://' + raw
   }
+
   var parsed = url.parse(raw)
   var headers = opt.headers || {}
   var options = {
-      hostname: parsed.hostname
-    , port: parsed.port
-    , path: parsed.path
-    , auth: parsed.auth || undefined
+    hostname: parsed.hostname,
+    port: parsed.port,
+    path: parsed.path,
+    auth: parsed.auth || undefined
   }
   var method = 'GET'
   var body = opt.body || opt.data
   var type, len
 
-  if (null != body) {
+  if (body != null) {
     // string, buffer, stream, object
     method = 'POST'
     if (Buffer.isBuffer(body)) {
@@ -62,11 +66,11 @@ function request(raw, opt, cb) {
   options.method = opt.method || method
   debug('options: %j', options)
 
-  var req = http.request(options, function(res) {
+  var req = http.request(options, function (res) {
     var body = ''
-    res.on('data', function(buf) {
+    res.on('data', function (buf) {
       body += buf
-    }).on('end', function() {
+    }).on('end', function () {
       res.body = body
       cb(null, res, res.body)
     }).on('error', cb)
