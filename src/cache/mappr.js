@@ -19,7 +19,6 @@ module.exports = stampit()
     }
   ])
 
-
 // sets 'value' to 'key' of the cache
 function setter (key, value) {
   set(this.cache, key, value)
