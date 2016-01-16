@@ -2,9 +2,6 @@
 // Copyright (c) 2015, Brian Woodward
 
 var stampit  = require('../object/stampit')
-var kindOf   = require('../lang/kindOf')
-var flatten  = require('../array/flatten')
-var slice    = require('../array/slice')
 var forEach  = require('../collection/forEach')
 
 // process-queue for the primary way I use this: bot.process(bot.queue)
@@ -29,8 +26,8 @@ module.exports = stampit()
 function map (key, val) {
   // allow passing another map-config object in as a value
   if (isProcessQueue(val)) {
-    this.register(key, function(cfg) {
-      return val.process(cfg);
+    this.register(key, function (cfg) {
+      return val.process(cfg)
     })
     return this.addKey(key, val.keys)
   }
@@ -52,7 +49,7 @@ function alias (alias, key) {
 
 function processq (args) {
   args = args || {}
-  var key
+  // var key
 
   forEach(this.aliases, (val, key) => {
     var alias = this.aliases[key]
@@ -82,15 +79,15 @@ function addKey (key, arr) {
 
   if (Array.isArray(arr)) {
     if (idx === -1) {
-      this.keys = this.keys.concat(arr.map(function(val) {
+      this.keys = this.keys.concat(arr.map(function (val) {
         return [key, val].join('.')
       }))
     } else {
       this.keys.splice(idx, 1)
-      var vals = arr.map(function(val) {
+      var vals = arr.map(function (val) {
         return [key, val].join('.')
       })
-      .filter(function(val) {
+      .filter(function (val) {
         return this.keys.indexOf(val) === -1
       }.bind(this))
 
