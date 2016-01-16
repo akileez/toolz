@@ -10,7 +10,7 @@ var child = require('child_process')
 // cmds: arrary/object of objects {cmd: 'something', args: ['some', 'things']}
 // cb: callback [function]
 
-function commands(cmds, cb) {
+function commands (cmds, cb) {
   if (arguments.length === 1) cb = function () {}
 
   iterate(cmds, function (cmd, idx, next) {
