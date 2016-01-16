@@ -35,9 +35,9 @@ function vfs (fp, fc) {
  // virtualFilePath: file path metadata
 function vfp (fp) {
   return {
-    abs  : fs.realpathSync(fp),
-    rel  : fp,
-    file : {
+    path : {
+      abs  : fs.realpathSync(fp),
+      rel  : fp,
       root : process.cwd().split(/[\\\/]/g).slice(-1)[0],
       home : path.dirname(fp),
       name : path.basename(fp),
