@@ -14,7 +14,7 @@ var TEN_MEBIBYTE = 1024 * 1024 * 10
 // cmds: arrary/object of objects {cmd: 'something', args: ['some', 'things']}
 // opts: options object
 // cb: callback [function]
-function defs(opts) {
+function defs (opts) {
   opts = opts || {}
 
   if (opts.preferLocal) {
@@ -33,7 +33,7 @@ function defs(opts) {
   }, opts)
 }
 
-function commands(cmds, opts, cb) {
+function commands (cmds, opts, cb) {
   if (arguments.length === 1) {
     cb = function () {}
     opts = defs()
