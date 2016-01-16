@@ -17,9 +17,9 @@ var cwd = process.cwd()
 var hook = require('./requireHook')(_hooker)
 var argv = require('../util/argh').argv
 var table = require('../text/text-table')
-var dateTime = require('../date/dateFormat')
+var dateTime = require('../time/clockin')
 var repeat = require('../glob/repeat-string')
-var prettyMs = require('./timeFormat')
+var prettyMs = require('./ms')
 var clrz = require('../util/colorz')
 
 // extra locals
