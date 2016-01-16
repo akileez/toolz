@@ -1,5 +1,4 @@
 var stampit  = require('../object/stampit')
-var forEach  = require('../collection/forEach')
 var slice    = require('../array/slice')
 var flatten  = require('../array/flatten')
 var kindOf   = require('../lang/kindOf')
