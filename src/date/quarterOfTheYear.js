@@ -1,9 +1,9 @@
-  function quarter (date) {
-    var month = date.getMonth() + 1
-    return (Math.ceil(month / 3))
-  }
+function quarter (date) {
+  var month = date.getMonth() + 1
+  return (Math.ceil(month / 3))
+}
 
-  module.exports = quarter
+module.exports = quarter
 
 // Original Code - mout.js
 //   function quarter(date){
