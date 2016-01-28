@@ -24,6 +24,14 @@ function convertDiff (diffHRTimes, conversionUnit, precision) {
     return time[0] * 1e9 + time[1]
   }
 
+  if (arguments.length === 2 && typeof conversionUnit === 'number') {
+    precision = conversionUnit
+    conversionUnit = 'second'
+  }
+
+  conversionUnit = conversionUnit || 'second'
+  precision = precision || 9
+
   var getUnit = {
     'm'      : 6e10,
     'minute' : 6e10,
@@ -36,9 +44,6 @@ function convertDiff (diffHRTimes, conversionUnit, precision) {
     'ns'     : 1,
     'nano'   : 1
   }
-
-  conversionUnit = conversionUnit || 's'
-  precision = precision || 9
 
   return precise(nano(diffHRTimes) / getUnit[conversionUnit], precision)
 }
