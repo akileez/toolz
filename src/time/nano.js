@@ -1,4 +1,4 @@
-var precise = require('toolz/src/number/enforcePrecision')
+var precise = require('../number/enforcePrecision')
 
 /*
   convert a high resolution time in nanoseconds to another unit of time
