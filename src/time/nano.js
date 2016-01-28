@@ -4,7 +4,7 @@ var precise = require('toolz/src/number/enforcePrecision')
   convert a high resolution time in nanoseconds to another unit of time
 
   val            : high resolution time diff (process.hrtime(process.hrtime())
-  conversionUnit : convert to specified time units. default: ms
+  conversionUnit : convert to specified time units. default: seconds
   precision      : number of decimal places. default: 9
 
   ------------------------------------------------------------------------
@@ -37,7 +37,7 @@ function convertDiff (diffHRTimes, conversionUnit, precision) {
     'nano'   : 1
   }
 
-  conversionUnit = conversionUnit || 'ms'
+  conversionUnit = conversionUnit || 's'
   precision = precision || 9
 
   return precise(nano(diffHRTimes) / getUnit[conversionUnit], precision)
