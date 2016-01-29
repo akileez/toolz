@@ -7,39 +7,41 @@ var hasOwn               = require('./hasOwn')
 var omit                 = require('./omit')
 var map                  = require('./map')
 
-// Taken from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+/*
+  Taken from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
 
-// --- Begin Transmission
+  --- Begin Transmission
 
-// This method allows precise addition to or modification of a property on an object.
+    This method allows precise addition to or modification of a property on an object.
 
-// Normal property addition through assignment creates properties which show up during property enumeration (for...in loop or Object.keys method), whose values may be changed, and which may be deleted. This method allows these extra details to be changed from their defaults.
+    Normal property addition through assignment creates properties which show up during property enumeration (for...in loop or Object.keys method), whose values may be changed, and which may be deleted. This method allows these extra details to be changed from their defaults.
 
-// By default, values added using Object.defineProperty() are immutable.
+    By default, values added using Object.defineProperty() are immutable.
 
-// Property descriptors present in objects come in two main flavors: data descriptors and accessor descriptors. A descriptor must be one of these two flavors; it cannot be both.
-// Both data and accessor descriptors are objects.
+    Property descriptors present in objects come in two main flavors: data descriptors and accessor descriptors. A descriptor must be one of these two flavors; it cannot be both.
+    Both data and accessor descriptors are objects.
 
-// They share the following required keys: configurable, enumerable
+    They share the following required keys: configurable, enumerable
 
-// A data descriptor is a property that has a value, which may or may not be writable.
+    A data descriptor is a property that has a value, which may or may not be writable.
 
-// An accessor descriptor is a property described by a getter-setter pair of functions.
+    An accessor descriptor is a property described by a getter-setter pair of functions.
 
-// --- End Transmission
+  --- End Transmission
 
-// This is extrememly raw and extremely functional!!
-// function signature: defineProperty(obj, prop[, config[, enumerable, a, b]])
-// function parameters:
-//   obj: [object] object to be mutated
-//   prop: [String|Object] property to add or an object of property definitions.
-//   config: [Boolean|Object] boolean for configurable key or descriptor object
-//   list: [Boolean] boolean for enumerable key
-//   a: [Boolean|Function] boolean if data-descriptor (alias for writable key),
-//      function if accessor-descriptor (alias for getter function)
-//   b: [AnyValue|Function] a javascript value if data-descriptor (alias for value),
-//      function if accessor-descriptor (alias for setter function)
-// function return: [Object]
+  This is extrememly raw and extremely functional!!
+  function signature: defineProperty(obj, prop[, config[, enumerable, a, b]])
+  function parameters:
+    obj: [object] object to be mutated
+    prop: [String|Object] property to add or an object of property definitions.
+    config: [Boolean|Object] boolean for configurable key or descriptor object
+    list: [Boolean] boolean for enumerable key
+    a: [Boolean|Function] boolean if data-descriptor (alias for writable key),
+       function if accessor-descriptor (alias for getter function)
+    b: [AnyValue|Function] a javascript value if data-descriptor (alias for value),
+       function if accessor-descriptor (alias for setter function)
+  function return: [Object]
+*/
 
 function defineProperty (obj, prop, config, list, a, b) {
   // multiple definition
