@@ -1,11 +1,11 @@
 var isObject = require('../lang/isPlainObject')
 var isArray  = require('../lang/isArray')
 var isString = require('../lang/isString')
-var dotPath  = require('./dotPath')
+var toPath   = require('./toPath')
 
 function setvalue (obj, path, val) {
   if (!isObject(obj)) return obj
-  if (isArray(path)) path = dotPath(path)
+  if (isArray(path)) path = toPath(path)
   if (!isString(path)) return obj
 
   var segs = path.split('.')
