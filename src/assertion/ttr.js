@@ -9,6 +9,7 @@
 var slice  = require('../array/slice')
 var clrz   = require('../util/colorz')
 var indent = require('../text/indent')
+var nano   = require('../time/nano')
 var t      = require('./tta')
 
 var countTotal = 0
@@ -30,6 +31,7 @@ var mag = clrz.magenta
 var gry = clrz.grey
 
 log(nl, udl(yel('Tests:')), nl)
+var strt = process.hrtime()
 
 function report (name, fn) {
   t.assert(typeof name === 'string', 'The description must be a string')
@@ -68,6 +70,7 @@ function result () {
   log(s1, mag(countTotal), 'total')
   log(s1, grn(countSucc), 'passed')
   log(s1, (countFail == 0 ? grn(countFail) : red(countFail)), 'failed')
+  log(nl, 'Total time elapsed:', mag(nano(process.hrtime(strt), 4) + 's'))
   process.exit(countFail)
   return
 }
