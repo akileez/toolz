@@ -1,6 +1,6 @@
 var slice      = require('../array/slice')
 var colorz     = require('../util/colorz')
-var dateformat = require('../date/dateFormat')
+var dateformat = require('../date/clockin')
 
 function logger () {
   var args = slice(arguments).join(' ') + '\n'
