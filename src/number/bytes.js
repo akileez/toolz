@@ -1,4 +1,4 @@
-// adeopted from: byte-size <https://github.com/75lb/byte-size> and
+// adopted from: byte-size <https://github.com/75lb/byte-size> and
 // pretty-bytes <https://github.com/sindresorhus/pretty-bytes>
 
 // Copyright (c) 2015 Lloyd Brookes <75pound@gmail.com> (MIT)
