@@ -49,7 +49,10 @@ function files (dir, type, cb, ignoreType) {
     type = 'file'
   }
 
-  if (fs.statSync(dir).mode !== 17115) {
+  fs.stat(dir, function (err, stat) {
+    if (err) return cb(err)
+    if (stat && stat.mode === 17115) return done()
+
     fs.readdir(dir, function (err, list) {
       if (err) return cb(err)
       pending = list.length
@@ -59,9 +62,7 @@ function files (dir, type, cb, ignoreType) {
         fs.stat(file, getStatHandler(file))
       }
     })
-  } else {
-    return done()
-  }
+  })
 }
 
 function paths (dir, combine, cb) {
