@@ -6,25 +6,19 @@
 
 > development tools for node, devtoolz. 
 
-A semi-complete rewrite of [mout.js](http://moutjs.com), a modularization of [async.js](https://github.com/caolan/async) and a peppering of [lodash](https://lodash.com) all for educational purposes (with a couple tibits from underscore.string). 
+This project started off as a semi-complete rewrite of [mout.js](http://moutjs.com), a modularization of [async.js](https://github.com/caolan/async) and a peppering of [lodash](https://lodash.com) (with a couple tibits from underscore.string) all for educational purposes. It has morphed into an everything I might possibly use, including the kitchen sink,
+type of library. 
 
-There is no intention of competing with these giants. Please, I advocate, USE mout.js/lodash/async/underscore.string or any other library that fits your needs. This library will forever be experimental with the potential to change at any moment. 
+At present, my focus is to get a handle on `streams`, `promises`, `factory functions` (in particular `constructors`), `bind`, `apply`, `call`, `errors`, `emitters` and `http`.
 
-The focus here is node. Although the above libraries work in the browser, changes I have made or will make in the future will ensure breakage somewhere along the line. Server-side use is more inline with my thinking -- but I did say these were devtoolz. 
+This library will forever be experimental with the potential to change at any moment. 
 
-**Warning!!!** there are bugs. This code was hand typed. It is not ready for even development yet.
+The focus here is node. Server-side use is more inline with my thinking. 
+
 
 ## Why?
-Why would I do something stupid like re-writing portions of these libs when I could easily clone or fork them? TO LEARN, PERIOD. While I am retyping everything in, I get intimate with the code. I am able to play with each function, learn it inside out.
+Eduction first and foremost. 
 
-## Goals
-
-- eduction first and foremost
-- understanding the complexities of a large project
-- automated build system for filesets and documentation (eventually)
-- formal testing with unit-tests (**!**console.log) (eventually)
-- goto library for my handlebars helpers 
-- practice typing in personal code style
 
 ## Installation
 ```bash
@@ -32,9 +26,7 @@ $ npm install akileez\toolz
 ```
 
 ## Usage
-As with mout.js, each method is a separate module, so require only the methods you need:   
-Note: the ability to require collections or the entire library has been removed. This collection
-of toolz has grown too large for loading the entire set.
+Each method is a separate module, so require only the methods you need (At present the are over 800 modules contained within). The ability to require collections or the entire library has been removed. This collection of toolz has grown too large for loading the entire set.
 
 ```js
 // individual methods (recommended)
@@ -49,7 +41,7 @@ var extend = require('toolz/src/object/extend')
 extend({}, {a: "Hello", b: "World"}) // {a: "Hello", b: "World"}
 
 ```
-There is no documentation at the moment. Only markdown files from mout and async in the doc folder. 
+Documentation has been eliminated. Another solution is being developed.
 
 
 ## See Also
