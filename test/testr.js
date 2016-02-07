@@ -14,6 +14,28 @@ function arr () {
   }, {cwd: 'array'})
 }
 
+function lang () {
+  execa({
+    cmd1: {cmd: 'node', args: ['clone.js']},
+    cmd2: {cmd: 'node', args: ['kind.js']}
+  }, {cwd: 'lang'})
+}
+
+function obj () {
+  execa({
+    cmd1: {cmd: 'node', args: ['dotPath.js']},
+    cmd2: {cmd: 'node', args: ['merge.js']}
+  }, {cwd: 'object'})
+}
+
+function defs () {
+  arr()
+  lang()
+  obj()
+}
+
 runr
-  .task('default', arr)
-  .task('array', arr)
+  .task('default', defs)
+  .task('arr', arr)
+  .task('lang', lang)
+  .task('obj', obj)
