@@ -28,6 +28,16 @@ function obj () {
   }, {cwd: 'object'})
 }
 
+function stamp () {
+  execa({
+    cmd1: {cmd: 'node', args: ['basic-init.js']},
+    cmd2: {cmd: 'node', args: ['basic-methods.js']},
+    cmd3: {cmd: 'node', args: ['basic-props.js']},
+    cmd4: {cmd: 'node', args: ['basic-refs.js']},
+    cmd5: {cmd: 'node', args: ['basic-statics.js']}
+  }, {cwd: 'stamp'})
+}
+
 function defs () {
   arr()
   lang()
@@ -39,3 +49,4 @@ runr
   .task('arr', arr)
   .task('lang', lang)
   .task('obj', obj)
+  .task('stamp', stamp)
