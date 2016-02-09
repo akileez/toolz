@@ -2,7 +2,7 @@
 
 var isArray = require('../lang/isArray')
 var is      = require('../lang/is')
-var every   = require('./every')
+var every   = require('../collection/every')
 
 function equals (a, b, fn) {
   fn = fn || is
