@@ -21,7 +21,8 @@ var frmt = {
   'isoDateTime'         : 'yyyy-mm-dd\'T\'HH:MM:SS:ss',
   'isoUtcDateTime'      : 'yyyy-mm-dd\'T\'HH:MM:SS\'Z\'',
   'expiresHeaderFormat' : 'ddd, dd mmm yyyy HH:MM:SS Z',
-  'timestamp'           : 'yyyymmddHHMMSSss'
+  'timestamp'           : 'yyyymmddHHMMSSss',
+  'logStamp'            : 'HH:MM:SS:ss -'
 }
 
 var dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
