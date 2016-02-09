@@ -1,4 +1,4 @@
-var colorz = require('./colorz')
+var colorz = require('../colorz')
 
 function engine () {
   var options
