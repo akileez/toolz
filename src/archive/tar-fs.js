@@ -1,7 +1,7 @@
 // https://github.com/mafintosh/tar-fs
 // Copyright (c) 2014 Mathias Buus (MIT)
 
-var tar    = require('../stream/tar-stream')
+var tar    = require('./tar-stream')
 var pump   = require('../stream/pump')
 var mkdirp = require('../file/mkdirp')
 var fs     = require('fs')
