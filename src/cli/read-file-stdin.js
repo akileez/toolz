@@ -1,6 +1,6 @@
 // https://github.com/ianstormtaylor/read-file-stdin
 
-var gather = require('../stream/gather-stream')
+var gather = require('../stream/gather')
 var fs = require('fs')
 
 function read (file, callback) {
