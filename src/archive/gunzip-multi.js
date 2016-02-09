@@ -1,7 +1,6 @@
 // https://github.com/eugeneware/gunzipMulti
 // Copyright (c) 2016, Eugene Ware (BSD-3-Clause)
 
-var stream = require('stream')
 var spawn = require('child_process').spawn
 var combiner = require('../stream/pumpify')
 
@@ -24,7 +23,7 @@ The upside is that in my testing, the command line utility is much faster at doi
 
 */
 
-function gunzipMulti(opts) {
+function gunzipMulti (opts) {
   if (typeof opts === 'undefined') {
     opts = {
       path: 'gzip'
