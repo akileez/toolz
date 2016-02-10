@@ -5,3 +5,7 @@ var strContains = require('../string/contains')
 var rexContains = require('../regex/contains')
 
 module.exports = make(arrContains, objContains, strContains, rexContains)
+module.exports.arr = arrContains
+module.exports.obj = objContains
+module.exports.str = strContains
+module.exports.rex = rexContains
