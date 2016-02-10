@@ -1,4 +1,4 @@
-var make = require('./_make')
+var make = require('./_make_new')
 var makeIterator = require('../function/makeIterator_')
 
 function arrEvery (arr, fn, thisObj) {
@@ -37,3 +37,5 @@ function objEvery (obj, fn, thisObj) {
 }
 
 module.exports = make(arrEvery, objEvery)
+module.exports.arr = arrEvery
+module.exports.obj = objEvery
