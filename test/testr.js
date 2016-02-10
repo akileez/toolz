@@ -10,7 +10,9 @@ function arr () {
     cmd4: {cmd: 'node', args: ['compact.js']},
     cmd5: {cmd: 'node', args: ['contains.js']},
     cmd6: {cmd: 'node', args: ['convert.js']},
-    cmd7: {cmd: 'node', args: ['difference.js']}
+    cmd7: {cmd: 'node', args: ['difference.js']},
+    cmd7: {cmd: 'node', args: ['equals.js']},
+    cmd7: {cmd: 'node', args: ['every.js']}
   }, {cwd: 'array'})
 }
 
@@ -42,6 +44,7 @@ function defs () {
   arr()
   lang()
   obj()
+  stamp()
 }
 
 runr
