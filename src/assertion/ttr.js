@@ -82,3 +82,4 @@ function log () {
 
 module.exports = report
 module.exports.result = result
+module.exports.log = log
