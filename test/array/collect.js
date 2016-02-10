@@ -2,6 +2,8 @@ var test = require('../../src/assertion/ttr')
 var collect = require('../../src/array/collect')
 var collection = require('../../src/collection/collect')
 
+test.log('Testing array/collect and collection/collect\n')
+
 test('collect [map] items and concat results', function (t) {
   var src = [0, 1, 2, 3]
   var res = collect(src, function (val) {

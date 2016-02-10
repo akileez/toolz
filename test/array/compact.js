@@ -2,6 +2,8 @@ var test = require('../../src/assertion/ttr')
 var compact = require('../../src/array/compact')
 var compactor = require('../../src/array/compactor')
 
+test.log('Testing array/compact and array/compactor\n')
+
 test('compact to remove null and undefined items', function (t) {
   var arr = [1, 2, null, false, '', 'foo', undefined]
   arr[10] = 'bar'

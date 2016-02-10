@@ -1,6 +1,8 @@
 var test = require('../../src/assertion/ttr')
 var combine = require('../../src/array/combine')
 
+test.log('Testing array/combine\n')
+
 test('combine items of arr2 with arr1 ignoring dupes', function (t) {
   var arr1 = [1, 2, 3]
   var arr2 = [3, 4, 5]

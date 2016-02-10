@@ -1,6 +1,8 @@
 var test = require('../../src/assertion/ttr')
 var append = require('../../src/array/append')
 
+test.log('Testing array/append\n')
+
 test('append all items of second array to end of first array', function (t) {
   var arr1 = [1, 2, 3]
   var arr2 = [3, 4, 5]
