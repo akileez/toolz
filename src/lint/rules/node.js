@@ -13,7 +13,7 @@ module.exports = {
   'global-require': 1,
 
   // enforce error handling in callbacks
-  'handle-callback-err': 2,
+  'handle-callback-err': [2, '^(err|error)$'],
 
   // disallow mixing regular variable and require declarations
   'no-mixed-requires': 2,
