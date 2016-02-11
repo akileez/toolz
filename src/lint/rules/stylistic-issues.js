@@ -49,12 +49,15 @@ module.exports = {
   'id-match': 2,
 
   // specify tab or space width for your code
-  'indent': [2, 2, {'SwitchCase': 1}],
+  // Use warning here. code alignment dictates sometimes
+  'indent': [1, 2, {'SwitchCase': 1}],
+
   // specify whether double or single quotes should be used in JSX attributes
   'jsx-quotes': [2, 'prefer-double'],
 
   // enforce spacing between keys and values in object literal properties
-  'key-spacing': [2, {
+  // Standard does not allow multiple spaces before or after colon
+  'key-spacing': [0, {
     'beforeColon': false,
     'afterColon': true
   }],
@@ -97,7 +100,7 @@ module.exports = {
 
   // disallow multiple empty lines
   'no-multiple-empty-lines': [2, {
-    'max': 2
+    'max': 1
   }],
 
   // disallow nested ternary expressions
@@ -128,11 +131,11 @@ module.exports = {
   'no-unneeded-ternary': 2,
 
   // require or disallow padding inside curly braces
-  'object-curly-spacing': 2,
+  // Standard goes either way with plugin but use `always` in base config
+  'object-curly-spacing': [2, 'never'],
 
   // require or disallow one variable declaration per function
   'one-var': [2, {
-    'uninitialized': 'always',
     'initialized': 'never'
   }],
 
@@ -140,7 +143,8 @@ module.exports = {
   'operator-assignment': 2,
 
   // enforce operators to be placed before or after line breaks
-  'operator-linebreak': 2,
+  // Standard uses operator-linebreak `after` but overrides `?` and `:` before
+  'operator-linebreak': [2, 'before'],
 
   // enforce padding within blocks
   'padded-blocks': [2, 'never'],
@@ -161,25 +165,26 @@ module.exports = {
   }],
 
   // require or disallow use of semicolons instead of ASI
-  'semi': [2, 'always'],
+  'semi': [2, 'never'],
 
   // sort variables within the same declaration block
   'sort-vars': 2,
 
   // require a space after certain keywords
-  'space-after-keywords': 2,
+  'space-after-keywords': [2, 'always'],
 
   // require a space before certain keywords
-  'space-before-keywords': 2,
+  // Turning off. conflicts with rule "array-bracket-spacing"
+  'space-before-keywords': [0, 'always'],
 
   // require or disallow a space before blocks
-  'space-before-blocks': 2,
+  'space-before-blocks': [2, 'always'],
 
   // require or disallow a space before function opening parenthesis
-  'space-before-function-paren': [2, 'never'],
+  'space-before-function-paren': [2, 'always'],
 
   // require or disallow spaces inside parentheses
-  'space-in-parens': 2,
+  'space-in-parens': [2, 'never'],
 
   // require spaces around operators
   'space-infix-ops': 2,
@@ -188,12 +193,14 @@ module.exports = {
   'space-return-throw-case': 2,
 
   // require or disallow spaces before/after unary operators
-  'space-unary-ops': 2,
+  'space-unary-ops': [2, {
+    'words': true,
+    'nonwords': false
+  }],
 
   // require or disallow a space immediately following the // or /* in a comment
   'spaced-comment': [2, 'always', {
-    'exceptions': ['-', '+'],
-    'markers': ['=', '!'] // space here to support sprockets directives
+    'markers': ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
   }],
 
   // require regex literals to be wrapped in parentheses
