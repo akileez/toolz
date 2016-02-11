@@ -1,7 +1,7 @@
 # toolz
-[![NPM version][npm-image]][npm-url]
 [![schoolmarm-standard-style][marm-image]][marm-url]
 [![experimental][stability-image]][stability-url]
+[![phase][phase-image]][phase-url]
 [![ISC license][license-img]][license-url]
 
 > development tools for node, devtoolz. 
@@ -52,12 +52,12 @@ Documentation has been eliminated. Another solution is being developed.
 ## License
 [ISC](https://tldrlegal.com/license/ISC-license)
 
-[npm-image]: https://img.shields.io/npm/v/toolz.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/toolz
 [marm-image]: https://img.shields.io/badge/code%20style-marm-brightgreen.svg?style=flat-square
 [marm-url]: https://github.com/akileez/eslint-config-marm
 [stability-image]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [stability-url]: https://github.com/akileez/toolz
+[phase-image]: https://img.shields.io/badge/phase-expansion-red.svg?style=flat-square
+[phase-url]: https://github.com/akileez/toolz
 [license-img]: https://img.shields.io/badge/license-ISC-blue.svg?style=flat-square
 [license-url]: https://github.com/akileez/toolz/blob/master/license.md
 
