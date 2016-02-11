@@ -1,6 +1,7 @@
 // use this file to automate the running of tests.
 var runr = require('../src/util/runr')
 var execa = require('../src/cli/execa-commands')
+var timeout = require('../src/function/timOut')
 
 function arr () {
   execa({
@@ -14,6 +15,12 @@ function arr () {
     cmd7: {cmd: 'node', args: ['equals.js']},
     cmd7: {cmd: 'node', args: ['every.js']}
   }, {cwd: 'array'})
+
+  timeout(150)(() => {
+    execa({
+      lint: {cmd: 'eslint', args: ['*.js']}
+    }, {cwd: '../src/array'})
+  })
 }
 
 function lang () {
