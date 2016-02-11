@@ -30,7 +30,7 @@ module.exports = {
   'dot-location': [2, 'property'],
 
   // require the use of === and !==
-  'eqeqeq': 2,
+  'eqeqeq': [2, "allow-null"],
 
   // make sure for-in loops have an if statement
   'guard-for-in': 2,
@@ -99,7 +99,8 @@ module.exports = {
   'no-magic-numbers': 0,
 
   // disallow use of multiple spaces
-  'no-multi-spaces': 2,
+  // Standard does not allow multi-spaces
+  'no-multi-spaces': 0,
 
   // disallow use of multiline strings
   'no-multi-str': 2,
@@ -177,5 +178,5 @@ module.exports = {
   'wrap-iife': [2, 'any'],
 
   // require or disallow Yoda conditions
-  'yoda': 2
+  'yoda': [2, 'never']
 };
