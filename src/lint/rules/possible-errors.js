@@ -6,7 +6,7 @@ module.exports = {
   'comma-dangle': [2, 'never'],
 
   // disallow assignment in conditional expressions
-  'no-cond-assign': [2, 'always'],
+  'no-cond-assign': 2,
 
   // disallow use of console in the node environment
   'no-console': 1,
@@ -18,7 +18,7 @@ module.exports = {
   'no-control-regex': 2,
 
   // disallow use of debugger
-  'no-debugger': 1,
+  'no-debugger': 2,
 
   // disallow duplicate arguments in functions
   'no-dupe-args': 2,
@@ -51,7 +51,7 @@ module.exports = {
   'no-func-assign': 2,
 
   // disallow function or variable declarations in nested blocks
-  'no-inner-declarations': 2,
+  'no-inner-declarations': [2, 'functions'],
 
   // disallow invalid regular expression strings in the RegExp constructor
   'no-invalid-regexp': 2,
@@ -71,6 +71,9 @@ module.exports = {
   // disallow sparse arrays
   'no-sparse-arrays': 2,
 
+  // Avoid code that looks like two expressions but is actually one
+  'no-unexpected-multiline': 2,
+
   // disallow unreachable statements after a return, throw, continue, or break statement
   'no-unreachable': 2,
 
@@ -81,8 +84,5 @@ module.exports = {
   'valid-jsdoc': 0,
 
   // Ensure that the results of typeof are compared against a valid string
-  'valid-typeof': 2,
-
-  // Avoid code that looks like two expressions but is actually one
-  'no-unexpected-multiline': 2
-};
+  'valid-typeof': 2
+}
