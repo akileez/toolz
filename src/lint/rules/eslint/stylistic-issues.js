@@ -3,7 +3,8 @@
  */
 module.exports = {
   // enforce spacing inside array brackets
-  'array-bracket-spacing': 2,
+  // Standard Plugin Options -- using eslint here
+  'array-bracket-spacing': [2, 'never'],
 
   // disallow or enforce spaces inside of single line blocks
   'block-spacing': [2, 'always'],
@@ -29,7 +30,8 @@ module.exports = {
   'comma-style': [2, 'last'],
 
   // require or disallow padding inside computed properties
-  'computed-property-spacing': 2,
+  // Standard Plugin Options -- using eslint here
+  'computed-property-spacing': [2, "never"],
 
   // enforce consistent naming when capturing the current execution context
   'consistent-this': 2,
