@@ -18,7 +18,10 @@ module.exports = {
   'constructor-super': 2,
 
   // enforce spacing around the * in generator functions
-  'generator-star-spacing': [0, 'before'],
+  'generator-star-spacing': [2, {
+    'before': true,
+    'after': true
+  }],
 
   // disallow arrow functions where a condition is expected
   'no-arrow-condition': 2,
