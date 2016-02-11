@@ -31,8 +31,8 @@ module.exports = {
 
   // disallow declaration of variables that are not used in the code
   'no-unused-vars': [2, {
-    'vars': 'local',
-    'args': 'after-used'
+    'vars': 'all',
+    'args': 'none'
   }],
 
   // disallow use of variables before they are defined
