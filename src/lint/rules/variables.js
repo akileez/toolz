@@ -3,7 +3,7 @@
  */
 module.exports = {
   // enforce or disallow variable initializations at definition
-  'init-declarations': 2,
+  'init-declarations': 0,
 
   // disallow the catch clause parameter name being the same as a variable in the outer scope
   'no-catch-shadow': 2,
@@ -36,5 +36,5 @@ module.exports = {
   }],
 
   // disallow use of variables before they are defined
-  'no-use-before-define': 2
+  'no-use-before-define': 0
 };
