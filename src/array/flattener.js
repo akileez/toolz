@@ -17,7 +17,7 @@ var isObjectLike = require('../lang/isObjectLike')
  */
 
 function flattener (arr, isDeep, isStrict, result) {
-  result || (result = [])
+  result = result || []
 
   var idx = -1
   var len = arr.length
