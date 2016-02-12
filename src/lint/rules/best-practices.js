@@ -6,7 +6,7 @@ module.exports = {
   'accessor-pairs': 2,
 
   // treat var statements as if they were block scoped
-  'block-scoped-var': 2,
+  'block-scoped-var': 0,
 
   // specify the maximum cyclomatic complexity allowed in a program
   'complexity': 2,
@@ -48,7 +48,7 @@ module.exports = {
   'no-div-regex': 2,
 
   // disallow else after a return in an if
-  'no-else-return': 2,
+  'no-else-return': 0,
 
   // disallow use of labels for anything other than loops and switches
   'no-empty-label': 2,
@@ -57,7 +57,7 @@ module.exports = {
   'no-empty-pattern': 2,
 
   // disallow comparisons to null without a type-checking operator
-  'no-eq-null': 2,
+  'no-eq-null': 0,
 
   // disallow use of eval()
   'no-eval': 2,
@@ -75,13 +75,13 @@ module.exports = {
   'no-floating-decimal': 2,
 
   // disallow the type conversions with shorter notations
-  'no-implicit-coercion': 2,
+  'no-implicit-coercion': 0,
 
   // disallow use of eval()-like methods
   'no-implied-eval': 2,
 
   // disallow this keywords outside of classes or class-like objects
-  'no-invalid-this': 2,
+  'no-invalid-this': 0,
 
   // disallow usage of __iterator__ property
   'no-iterator': 2,
@@ -93,7 +93,7 @@ module.exports = {
   'no-lone-blocks': 2,
 
   // disallow creation of functions within loops
-  'no-loop-func': 2,
+  'no-loop-func': 0,
 
   // disallow the use of magic numbers
   'no-magic-numbers': 0,
@@ -124,7 +124,7 @@ module.exports = {
   'no-octal': 2,
 
   // disallow reassignment of function parameters
-  'no-param-reassign': 2,
+  'no-param-reassign': 0,
 
   // disallow use of process.env
   'no-process-env': 1,
@@ -160,7 +160,7 @@ module.exports = {
   'no-useless-concat': 2,
 
   // disallow use of the void operator
-  'no-void': 2,
+  'no-void': 0,
 
   // disallow usage of configurable warning terms in comments e.g. TODO or FIXME
   'no-warning-comments': 2,
@@ -172,7 +172,7 @@ module.exports = {
   'radix': 2,
 
   // require declaration of all vars at the top of their containing scope
-  'vars-on-top': 2,
+  'vars-on-top': 0,
 
   // require immediate function invocation to be wrapped in parentheses
   'wrap-iife': [2, 'any'],
