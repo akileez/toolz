@@ -18,7 +18,7 @@ function arr () {
 
   timeout(150)(() => {
     execa({
-      lint: {cmd: 'eslint', args: ['*.js']}
+      lint: {cmd: 'eslint', args: ['-c', '../../.eslintrc.js', '*.js']}
     }, {cwd: '../src/array'})
   })
 }
