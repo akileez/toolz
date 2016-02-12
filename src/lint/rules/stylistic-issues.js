@@ -16,7 +16,7 @@ module.exports = {
   }],
 
   // require camel case names
-  'camelcase': [2, {
+  'camelcase': [0, {
     'properties': 'never'
   }],
 
@@ -40,7 +40,7 @@ module.exports = {
   'eol-last': 2,
 
   // require function expressions to have a name
-  'func-names': 1,
+  'func-names': 0,
 
   // enforce use of function declarations or expressions
   'func-style': 0,
@@ -87,10 +87,10 @@ module.exports = {
   'no-array-constructor': 2,
 
   // disallow use of the continue statement
-  'no-continue': 2,
+  'no-continue': 0,
 
   // disallow comments inline after code
-  'no-inline-comments': 2,
+  'no-inline-comments': 0,
 
   // disallow if as the only statement in an else block
   'no-lonely-if': 2,
@@ -104,10 +104,10 @@ module.exports = {
   }],
 
   // disallow nested ternary expressions
-  'no-nested-ternary': 2,
+  'no-nested-ternary': 0,
 
   // disallow negated conditions
-  'no-negated-condition': 2,
+  'no-negated-condition': 0,
 
   // disallow the use of the Object constructor
   'no-new-object': 2,
