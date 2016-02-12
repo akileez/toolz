@@ -39,19 +39,19 @@ module.exports = {
   'no-this-before-super': 2,
 
   // require let or const instead of var
-  'no-var': 2,
+  'no-var': 0,
 
   // require method and property shorthand syntax for object literals
   'object-shorthand': 2,
 
   // suggest using arrow functions as callbacks
-  'prefer-arrow-callback': 2,
+  'prefer-arrow-callback': 0,
 
   // suggest using const declaration for variables that are never modified after declared
-  'prefer-const': 2,
+  'prefer-const': 0,
 
   // suggest using the spread operator instead of .apply().
-  'prefer-spread': 2,
+  'prefer-spread': 0,
 
   // suggest using Reflect methods where applicable
   'prefer-reflect': 0,
