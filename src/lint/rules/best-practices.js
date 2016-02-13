@@ -53,7 +53,7 @@ module.exports = {
   'no-else-return': 0,
 
   // disallow use of labels for anything other than loops and switches
-  'no-empty-label': 2,
+  // 'no-empty-label': 2,
 
   // disallow use of empty destructuring patterns
   'no-empty-pattern': 2,
