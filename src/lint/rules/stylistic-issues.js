@@ -1,6 +1,5 @@
-/**
- * Stylistic Issues
- */
+// Stylistic Issues
+
 module.exports = {
   // enforce spacing inside array brackets
   // Standard Plugin Options -- using eslint here
@@ -45,15 +44,21 @@ module.exports = {
   // enforce use of function declarations or expressions
   'func-style': 0,
 
+  // this option enforces minimum and maximum identifier lengths (variable names, property names etc.)
+  'id-length': 0,
+
   // require identifiers to match the provided regular expression
   'id-match': 2,
+
+  // blacklist certain identifiers to prevent them being used
+  'id-blacklist': 0,
 
   // specify tab or space width for your code
   // Use warning here. code alignment dictates sometimes
   'indent': [1, 2, {'SwitchCase': 1}],
 
   // specify whether double or single quotes should be used in JSX attributes
-  'jsx-quotes': [2, 'prefer-double'],
+  'jsx-quotes': [2, 'prefer-single'],
 
   // enforce spacing between keys and values in object literal properties
   // Standard does not allow multiple spaces before or after colon
@@ -62,14 +67,29 @@ module.exports = {
     'afterColon': true
   }],
 
-  // enforce empty lines around comments
-  'lines-around-comment': 2,
+  // enforce spacing before and after keywords
+  'keyword-spacing': [2, {'before': true, 'after': true}],
 
   // disallow mixed 'LF' and 'CRLF' as linebreaks
   'linebreak-style': 2,
 
+  // enforce empty lines around comments
+  'lines-around-comment': 2,
+
+  // specify the maximum depth that blocks can be nested
+  'max-depth': 0,
+
+  // specify the maximum length of a line in your program
+  'max-length': 0,
+
   // specify the maximum depth callbacks can be nested
   'max-nested-callbacks': 2,
+
+  // limits the number of parameters that can be used in the function declaration
+  'max-params': 0,
+
+  // specify the maximum number of statement allowed in a function
+  'max-statements': 0,
 
   // require a capital letter for constructors
   'new-cap': [2, {
@@ -83,8 +103,14 @@ module.exports = {
   // require or disallow an empty newline after variable declarations
   'newline-after-var': 0,
 
+  // enforce newline after each call when chaining the calls
+  'newline-per-chained-call': 0,
+
   // disallow use of the Array constructor
   'no-array-constructor': 2,
+
+  // disallow use of bitwise operators
+  'no-bitwise': 0,
 
   // disallow use of the continue statement
   'no-continue': 0,
@@ -103,17 +129,23 @@ module.exports = {
     'max': 1
   }],
 
-  // disallow nested ternary expressions
-  'no-nested-ternary': 0,
-
   // disallow negated conditions
   'no-negated-condition': 0,
+
+  // disallow nested ternary expressions
+  'no-nested-ternary': 0,
 
   // disallow the use of the Object constructor
   'no-new-object': 2,
 
+  // disallow use of unary operators, ++ and --
+  'no-plusplus': 0,
+
   // disallow use of certain syntax in code
   'no-restricted-syntax': [2, 'WithStatement'],
+
+  // disallow whitespace before properties
+  'no-whitespace-before-property': 0,
 
   // disallow space between function identifier and application
   'no-spaced-func': 2,
@@ -138,6 +170,9 @@ module.exports = {
   'one-var': [2, {
     'initialized': 'never'
   }],
+
+  // require or disallow an newline around variable declarations
+  'one-var-declaration-per-line': 2,
 
   // require assignment operator shorthand where possible or prohibit it entirely
   'operator-assignment': 2,
@@ -170,12 +205,15 @@ module.exports = {
   // sort variables within the same declaration block
   'sort-vars': 2,
 
+  // sort import declarations within module
+  'sort-imports': 0,
+
   // require a space after certain keywords
-  'space-after-keywords': [2, 'always'],
+  // 'space-after-keywords': [2, 'always'],
 
   // require a space before certain keywords
   // Turning off. conflicts with rule "array-bracket-spacing"
-  'space-before-keywords': [0, 'always'],
+  // 'space-before-keywords': [0, 'always'],
 
   // require or disallow a space before blocks
   'space-before-blocks': [2, 'always'],
@@ -190,7 +228,7 @@ module.exports = {
   'space-infix-ops': 2,
 
   // require a space after return, throw, and case
-  'space-return-throw-case': 2,
+  // 'space-return-throw-case': 2,
 
   // require or disallow spaces before/after unary operators
   'space-unary-ops': [2, {
@@ -205,4 +243,4 @@ module.exports = {
 
   // require regex literals to be wrapped in parentheses
   'wrap-regex': 2
-};
+}
