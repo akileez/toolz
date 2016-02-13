@@ -15,7 +15,7 @@ var cwd = process.cwd()
 // require hooker should be first module loaded so all the other requires should count as well
 /* jshint -W003 */
 var hook = require('./requireHook')(_hooker)
-var argv = require('../util/argh').argv
+var argv = require('../process/argh').argv
 var table = require('../text/text-table')
 var dateTime = require('../date/clockin')
 var repeat = require('../glob/repeat-string')
