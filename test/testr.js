@@ -48,7 +48,9 @@ function stamp () {
 }
 
 function lint () {
-  spawn([{cmd: 'eslint', args: ['*.js']}], {cwd: '../src/array'})
+  ['array', 'lang'].forEach((val) => {
+    spawn([{cmd: 'eslint', args: ['*.js']}], {cwd: '../src/' + val})
+  })
 }
 
 function defs () {
