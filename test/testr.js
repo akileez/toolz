@@ -1,12 +1,7 @@
 // use this file to automate the running of tests.
 var runr = require('../src/util/runr')
 var execa = require('../src/cli/execa-commands')
-
-function lint () {
-  execa({
-    lint: {cmd: 'eslint', args: ['*.js']}
-  }, {cwd: '../src/array'})
-}
+var spawn = require('../src/cli/spawn-commands')
 
 function arr () {
   execa({
@@ -19,7 +14,7 @@ function arr () {
     cmd7: {cmd: 'node', args: ['difference.js']},
     cmd7: {cmd: 'node', args: ['equals.js']},
     cmd7: {cmd: 'node', args: ['every.js']}
-  }, {cwd: 'array'})
+  }, {cwd: 'array', concurrent: true})
 }
 
 function lang () {
@@ -52,12 +47,21 @@ function stamp () {
   }, {cwd: 'stamp'})
 }
 
+function lint () {
+  spawn([{cmd: 'eslint', args: ['*.js']}], {cwd: '../src/array'})
+}
+
 function defs () {
   arr()
   lang()
   num()
   obj()
   stamp()
+}
+
+function all () {
+  defs()
+  lint()
 }
 
 runr
@@ -68,3 +72,4 @@ runr
   .task('obj', obj)
   .task('stamp', stamp)
   .task('lint', lint)
+  .task('all', all)
