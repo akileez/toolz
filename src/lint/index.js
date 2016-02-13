@@ -1,16 +1,16 @@
 module.exports = Object.assign(
   Object.create(null),
+  {parserOptions: require('./env/parserOptions')},
   {env: require('./env')},
   {globals: require('./env/globals')},
-  {ecmaFeatures: require('./env/ecmaFeatures')},
   {rules: Object.assign(
     Object.create(null),
-    require('./rules/best-practices'),
-    require('./rules/es2015'),
-    require('./rules/node'),
     require('./rules/possible-errors'),
+    require('./rules/best-practices'),
     require('./rules/strict-mode'),
-    require('./rules/stylistic-issues'),
     require('./rules/variables')
+    require('./rules/node'),
+    require('./rules/stylistic-issues'),
+    require('./rules/ecmascript6')
   )}
 )
