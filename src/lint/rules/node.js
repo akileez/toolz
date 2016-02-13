@@ -1,6 +1,5 @@
-/**
- * Node
- */
+// Node and Common JS
+
 module.exports = {
   // enforce return after a callback
   'callback-return': [2, [
@@ -27,9 +26,12 @@ module.exports = {
   // disallow process.exit()
   'no-process-exit': 2,
 
+  // restrict usage of specified node imports
+  'no-restricted-imports': 0,
+
   // restrict usage of specified node modules
   'no-restricted-modules': 0,
 
   // disallow use of synchronous methods
   'no-sync': 1
-};
+}
