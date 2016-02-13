@@ -51,10 +51,10 @@ module.exports = {
   'no-useless-constructor': 2,
 
   // require method and property shorthand syntax for object literals
-  'object-shorthand': 2,
+  'object-shorthand': 0,
 
   // suggest using arrow functions as callbacks
-  'prefer-arrow-callback': 1,
+  'prefer-arrow-callback': 0,
 
   // suggest using const declaration for variables that are never modified after declared
   'prefer-const': 0,
