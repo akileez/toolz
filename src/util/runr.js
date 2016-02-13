@@ -1,7 +1,7 @@
 // adopted from: ygor <https://github.com/shannonmoeller/ygor>
 // © 2016 Shannon Moeller me@shannonmoeller.com (MIT)
 
-var argv = require('./process/argh').argv
+var argv = require('../process/argh').argv
 var clr = require('./colorz')
 
 var cmd = argv.argv || 'default'
