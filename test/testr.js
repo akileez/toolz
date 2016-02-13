@@ -1,7 +1,12 @@
 // use this file to automate the running of tests.
 var runr = require('../src/util/runr')
 var execa = require('../src/cli/execa-commands')
-var timeout = require('../src/function/timOut')
+
+function lint () {
+  execa({
+    lint: {cmd: 'eslint', args: ['*.js']}
+  }, {cwd: '../src/array'})
+}
 
 function arr () {
   execa({
@@ -15,12 +20,6 @@ function arr () {
     cmd7: {cmd: 'node', args: ['equals.js']},
     cmd7: {cmd: 'node', args: ['every.js']}
   }, {cwd: 'array'})
-
-  timeout(150)(() => {
-    execa({
-      lint: {cmd: 'eslint', args: ['-c', '../../.eslintrc.js', '*.js']}
-    }, {cwd: '../src/array'})
-  })
 }
 
 function lang () {
@@ -28,6 +27,12 @@ function lang () {
     cmd1: {cmd: 'node', args: ['clone.js']},
     cmd2: {cmd: 'node', args: ['kind.js']}
   }, {cwd: 'lang'})
+}
+
+function num () {
+  execa({
+    cmd1: {cmd: 'node', args: ['humanize.js']}
+  }, {cwd: 'number'})
 }
 
 function obj () {
@@ -50,6 +55,7 @@ function stamp () {
 function defs () {
   arr()
   lang()
+  num()
   obj()
   stamp()
 }
@@ -58,5 +64,7 @@ runr
   .task('default', defs)
   .task('arr', arr)
   .task('lang', lang)
+  .task('num', num)
   .task('obj', obj)
   .task('stamp', stamp)
+  .task('lint', lint)
