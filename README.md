@@ -6,15 +6,11 @@
 
 > development tools for node, devtoolz. 
 
-This project started off as a semi-complete rewrite of [mout.js](http://moutjs.com), a modularization of [async.js](https://github.com/caolan/async) and a peppering of [lodash](https://lodash.com) (with a couple tibits from underscore.string) all for educational purposes. It has morphed into an everything I might possibly use, including the kitchen sink,
-type of library. 
+This project is an everything I might possibly use, including kitchen sink, type of library. 
+It will forever be experimental with the potential to change at any moment. The code focus is node. Server-side.
 
-At present, my focus is to get a handle on `streams`, `promises`, `factory functions` (in particular `constructors`), `bind`, `apply`, `call`, `errors`, `emitters` and `http`.
-
-This library will forever be experimental with the potential to change at any moment. 
-
-The focus here is node. Server-side use is more inline with my thinking. 
-
+My present interest: `streams`, `async-flow-control`, `generators`, `factory functions`,
+ `bind`, `apply`, `call`, `errors`, `debugging`, `emitters` and `http`.
 
 ## Why?
 Eduction first and foremost. 
@@ -26,10 +22,10 @@ $ npm install akileez\toolz
 ```
 
 ## Usage
-Each method is a separate module, so require only the methods you need (At present the are over 800 modules contained within). The ability to require collections or the entire library has been removed. This collection of toolz has grown too large for loading the entire set.
+Require the methods you need. Each method is a separate module. 
 
 ```js
-// individual methods (recommended)
+// individual methods
 var nameOfDay = require('toolz/src/date/nameOfDay')
 nameOfDay(new Date(), 2) // We (Wednesday)
 
