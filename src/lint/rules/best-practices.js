@@ -1,9 +1,11 @@
-/**
- * Best Practices
- */
+// Best Practices
+
 module.exports = {
   // Enforces getter/setter pairs in objects
   'accessor-pairs': 2,
+
+  // Enforces return statements in callbacks of array's methods
+  'array-callback-return': 0,
 
   // treat var statements as if they were block scoped
   'block-scoped-var': 0,
@@ -68,6 +70,9 @@ module.exports = {
   // disallow unnecessary function binding
   'no-extra-bind': 2,
 
+  // disallow unnecessary labels
+  'no-extra-label': 2,
+
   // disallow fallthrough of case statements
   'no-fallthrough': 2,
 
@@ -76,6 +81,9 @@ module.exports = {
 
   // disallow the type conversions with shorter notations
   'no-implicit-coercion': 0,
+
+  // disallow var and named functions in global scope
+  'no-implicit-globals': 2,
 
   // disallow use of eval()-like methods
   'no-implied-eval': 2,
@@ -87,7 +95,10 @@ module.exports = {
   'no-iterator': 2,
 
   // disallow use of labeled statements
-  'no-labels': 2,
+  'no-labels': [2, {
+    'allowLoop': false,
+    'allowSwitch': false
+  }],
 
   // disallow unnecessary nested blocks
   'no-lone-blocks': 2,
@@ -136,10 +147,13 @@ module.exports = {
   'no-redeclare': 2,
 
   // disallow use of assignment in return statement
-  'no-return-assign': 2,
+  'no-return-assign': [2, 'except-parens'],
 
   // disallow use of javascript: urls.
   'no-script-url': 2,
+
+  // disallow assignments where both sides are exactly the same
+  'no-self-assign': 2,
 
   // disallow comparisons where both sides are exactly the same
   'no-self-compare': 2,
@@ -150,8 +164,14 @@ module.exports = {
   // restrict what can be thrown as an exception
   'no-throw-literal': 2,
 
+  // disallow unmodified conditions of loops
+  'no-unmodified-loop-condition': 2,
+
   // disallow usage of expressions in statement position
   'no-unused-expressions': 2,
+
+  // disallow unused labels
+  'no-unused-labels': 2,
 
   // disallow unnecessary .call() and .apply()
   'no-useless-call': 2,
@@ -179,4 +199,4 @@ module.exports = {
 
   // require or disallow Yoda conditions
   'yoda': [2, 'never']
-};
+}
