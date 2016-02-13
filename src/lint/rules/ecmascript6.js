@@ -47,7 +47,7 @@ module.exports = {
   'no-var': 0,
 
   // disallow unnecessary constructor
-  'no-useless-construtor': 2,
+  'no-useless-constructor': 2,
 
   // require method and property shorthand syntax for object literals
   'object-shorthand': 2,
