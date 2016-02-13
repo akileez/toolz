@@ -1,6 +1,5 @@
-/**
- * Variables
- */
+// Variables
+
 module.exports = {
   // enforce or disallow variable initializations at definition
   'init-declarations': 0,
@@ -37,4 +36,4 @@ module.exports = {
 
   // disallow use of variables before they are defined
   'no-use-before-define': 0
-};
+}

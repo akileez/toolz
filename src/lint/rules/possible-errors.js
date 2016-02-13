@@ -1,6 +1,5 @@
-/**
-* Possible Errors
-*/
+// Possible Errors
+
 module.exports = {
   // disallow or enforce trailing commas
   'comma-dangle': [2, 'never'],
