@@ -3,7 +3,7 @@ var path   = require('path')
 var yauzl  = require('./yauzl')
 var mkdirp = require('../file/mkdirp')
 var concat = require('../stream/concat-stream')
-var debug  = require('../util/debug')('extract-zip')
+var debug  = require('../debug')('extract-zip')
 
 module.exports = function (zipPath, opts, cb) {
   debug('creating target directory', opts.dir)
