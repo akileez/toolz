@@ -6,7 +6,6 @@ const iterate   = require('../async/iterate').each
 const mkdirp    = require('./mkdirp')
 const assert    = require('assert')
 const fs        = require('fs')
-const path      = require('path')
 
 function moveFiles (src, dest, opts, cb) {
   if (typeof opts === 'function') {
