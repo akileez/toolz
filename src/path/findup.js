@@ -8,42 +8,88 @@
 
 'use strict';
 
-// Nodejs libs.
+/**
+ * Module dependencies
+ */
+
+var fs = require('fs');
 var path = require('path');
+var isGlob = require('is-glob');
+var resolveDir = require('resolve-dir');
+var mm = require('micromatch');
 
-// External libs.
-var glob = require('../glob/glob');
+/**
+ * @param  {String|Array} `pattern` Glob pattern or file path(s) to match against.
+ * @param  {Object} `options` Options to pass to [micromatch]. Note that if you want to start in a different directory than the current working directory, specify the `options.cwd` property here.
+ * @return {String} Returns the first matching file.
+ * @api public
+ */
 
-// Search for a filename in the given directory or all parent directories.
 module.exports = function(patterns, options) {
-  // Normalize patterns to an array.
-  if (!Array.isArray(patterns)) { patterns = [patterns]; }
-  // Create globOptions so that it can be modified without mutating the
-  // original object.
-  var globOptions = Object.create(options || {});
-  globOptions.maxDepth = 1;
-  globOptions.cwd = path.resolve(globOptions.cwd || '.');
+  if (typeof patterns === 'string') {
+    return lookup(patterns, options);
+  }
 
-  var files, lastpath;
-  do {
-    // Search for files matching patterns.
-    files = patterns.map(function(pattern) {
-      return glob.sync(pattern, globOptions);
-    }).reduce(function(a, b) {
-      return a.concat(b);
-    }).filter(function(entry, index, arr) {
-      return index === arr.indexOf(entry);
-    });
-    // Return file if found.
-    if (files.length > 0) {
-      return path.resolve(path.join(globOptions.cwd, files[0]));
+  if (!Array.isArray(patterns)) {
+    throw new TypeError('findup-sync expects a string or array as the first argument.');
+  }
+
+  var len = patterns.length, i = -1;
+  while (++i < len) {
+    var res = lookup(patterns[i], options);
+    if (res) {
+      return res;
     }
-    // Go up a directory.
-    lastpath = globOptions.cwd;
-    globOptions.cwd = path.resolve(globOptions.cwd, '..');
-  // If parentpath is the same as basedir, we can't go any higher.
-  } while (globOptions.cwd !== lastpath);
+  }
 
-  // No files were found!
   return null;
 };
+
+function lookup(pattern, options) {
+  options = options || {};
+  var cwd = resolveDir(options.cwd || '');
+  if (isGlob(pattern)) {
+    return matchFile(cwd, pattern, options);
+  } else {
+    return findFile(cwd, pattern);
+  }
+}
+
+function matchFile(cwd, pattern, opts) {
+  var isMatch = mm.matcher(pattern, opts);
+  var files = fs.readdirSync(cwd);
+  var len = files.length, i = -1;
+
+  while (++i < len) {
+    var name = files[i];
+    var fp = path.join(cwd, name);
+    if (isMatch(name) || isMatch(fp)) {
+      return fp;
+    }
+  }
+
+  var dir = path.dirname(cwd);
+  if (dir === cwd) {
+    return null;
+  }
+  return matchFile(dir, pattern, opts);
+}
+
+function findFile(cwd, filename) {
+  var fp = cwd ? (cwd + '/' + filename) : filename;
+  if (fs.existsSync(fp)) {
+    return fp;
+  }
+
+  var segs = cwd.split(path.sep);
+  var len = segs.length;
+
+  while (len--) {
+    cwd = segs.slice(0, len).join('/');
+    fp = cwd + '/' + filename;
+    if (fs.existsSync(fp)) {
+      return fp;
+    }
+  }
+  return null;
+}
