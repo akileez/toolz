@@ -10,7 +10,7 @@ var slice  = require('../array/slice')
 var clrz   = require('../util/colorz')
 var indent = require('../text/indent')
 var nano   = require('../time/nano')
-var t      = require('./tta')
+var t      = require('./claim')
 
 var countTotal = 0
 var countSucc  = 0
