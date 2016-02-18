@@ -1,5 +1,7 @@
-var deglob = require('deglob')
-var eslint = require('eslint')
+var deglob = require('../../glob/deglob')
+var reqf = require('../../path/req-from');
+var resolve = require('../../path/resolve')
+var eslint = require(resolve('eslint', {basedir: '/usr/local/lib/node_modules'}));
 var assign = require('../../object/object-assign')
 
 // https://github.com/sindresorhus/xo/blob/7644b9d9faf517b5b8f049b2083f13e7a803596c/index.js#L12-L21
