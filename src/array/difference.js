@@ -3,7 +3,7 @@
 
 var slice = require('./slice')
 var filter = require('./filter')
-var unique = require('./unique')
+var unique = require('./uniq')
 var some = require('./some')
 var contains = require('./contains')
 
