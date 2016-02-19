@@ -1,15 +1,16 @@
 module.exports = deglob
 
-var extend = require('xtend')
-var findRoot = require('find-root')
+var extend = require('../object/xtend')
+var findRoot = require('../path/find-root')
 var fs = require('fs')
-var glob = require('glob')
-var ignorePkg = require('ignore')
+var glob = require('./glob')
+var ignorePkg = require('./ignore')
 var os = require('os')
-var parallel = require('run-parallel')
+var parallel = require('../async/concurrent').parallel // run-parallel
 var path = require('path')
-var pkgConfig = require('pkg-config')
-var uniq = require('uniq')
+var pkgConfig = require('../path/pkg-config')
+var uniq = require('../array/uneek')
+var map        = require('../array/map')
 
 var DEFAULT_OPTIONS = {
   useGitIgnore: true,
@@ -26,13 +27,51 @@ function deglob (files, opts, cb) {
   if (files.length === 0) return nextTick(cb, null, [])
 
   // traverse filesystem
-  parallel(files.map(function (pattern) {
+//   parallel(files, function (pattern, key, done) {
+//     return glob(pattern, {
+//       cwd: opts.cwd,
+//       ignore: opts._ignore,
+//       nodir: true
+//     }, done)
+//   }, function (err, results) {
+//     if (err) return cb(err)
+
+//     // flatten nested arrays
+//     var files = results.reduce(function (files, result) {
+//       result.forEach(function (file) {
+//         files.push(path.resolve(opts.cwd, file))
+//       })
+//       return files
+//     }, [])
+
+//     // de-dupe
+//     files = uniq(files)
+
+//     if (opts._gitignore) {
+//       files = toRelative(opts.cwd, files)
+//       if (os.platform() === 'win32') files = toUnix(files)
+//       files = opts._gitignore.filter(files)
+//       files = toAbsolute(opts.cwd, files)
+//       if (os.platform() === 'win32') files = toWin32(files)
+//     }
+
+//     return cb(null, files)
+//   })
+// }
+
+  parallel(map(files, function (pattern) {
     return function (callback) {
       glob(pattern, {
         cwd: opts.cwd,
         ignore: opts._ignore,
         nodir: true
-      }, callback)
+      }, function (err, paths) {
+        if (err) {
+          callback(err)
+          return
+        }
+        callback(null, paths)
+      })
     }
   }), function (err, results) {
     if (err) return cb(err)
