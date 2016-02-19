@@ -25,14 +25,14 @@ function asyncReduce (items, seed, iterator, done) {
   var tasks
 
   if (iterator.length === 4) tasks = map(items, (item, key) => {
-    return (acc, cb) => {
-      iterator(acc, item, key, cb)
+    return (acc, next) => {
+      iterator(acc, item, key, next)
     }
   })
 
   else tasks = map(items, (item) => {
-    return (acc, cb) => {
-      iterator(acc, item, cb)
+    return (acc, next) => {
+      iterator(acc, item, next)
     }
   })
 
