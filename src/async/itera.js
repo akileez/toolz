@@ -37,7 +37,6 @@ function addDetails (err) {
 }
 
 function itera (arg) {
-
   var funcs = isArray(arg)
     ? arg
     : isObject(arg)
