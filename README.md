@@ -10,7 +10,7 @@ This project is an everything I might possibly use, including kitchen sink, type
 It will forever be experimental with the potential to change at any moment. The code focus is node. Server-side.
 
 My present interest: `streams`, `async-flow-control`, `generators`, `factory functions`,
- `bind`, `apply`, `call`, `errors`, `debugging`, `emitters` and `http`.
+ `bind`, `apply`, `call`, `errors`, `debugging`, `emitters`, `http` and `testing`.
 
 ## Why?
 Eduction first and foremost. 
