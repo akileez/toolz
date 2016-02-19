@@ -3,17 +3,28 @@ var forOwn = require('../object/forOwn')
 
 function isEmpty (value) {
   if (value == null) return true
-  else if (typeof value === 'string' || isArray(value)) return !value.length
-  else if (typeof value === 'object') {
+  var kind = typeof value
+
+  if (kind === 'boolean') return false
+  if (kind === 'number') return value === 0
+
+  if (kind === 'string'
+    || kind === 'function'
+    || isArray(value)
+  ) return !value.length
+
+  if (kind === 'object') {
     var result = true
+
     forOwn(value, function () {
       result = false
       return false
     })
+
     return result
-  } else {
-    return true
   }
+
+  return true
 }
 
 module.exports = isEmpty
