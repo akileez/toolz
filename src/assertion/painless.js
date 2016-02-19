@@ -1,18 +1,19 @@
-var setAsap = require('../process/set-asap');
-var tap = require('./reporters/tap');
-var dot = require('./reporters/dot');
-var spec = require('./reporters/spec');
-var mspec = require('./reporters/mspec');
-var none = require('./reporters/none');
-// var chai = require('chai');
-var claim = require('./claim')
-// var chaiAsPromised = require('chai-as-promised');
-// var sinon = require('sinon');
-var createHarness = require('./lib/create-harness');
-var path = require('path');
-var minimist = require('../process/minimist');
-var canExit = typeof process !== 'undefined' && process
-  && typeof process.exit === 'function';
+var setAsap        = require('../process/set-asap')
+var minimist       = require('../process/minimist')
+var tap            = require('./reporters/tap')
+var dot            = require('./reporters/dot')
+var spec           = require('./reporters/spec')
+var mspec          = require('./reporters/mspec')
+var none           = require('./reporters/none')
+var createHarness  = require('./lib/create-harness')
+var claim          = require('./claim')
+var chai           = require('./chai')
+var chaiAsPromised = require('./chai/chai-as-promised');
+var sinon          = require('./sinon')
+var path           = require('path')
+
+var canExit = typeof process !== 'undefined'
+  && process && typeof process.exit === 'function'
 
 /* istanbul ignore next */
 var argv = canExit ? minimist(process.argv.slice(2), {
@@ -41,7 +42,7 @@ var reporters = {
   none  : none
 };
 
-// chai.use(chaiAsPromised);
+chai.use(chaiAsPromised)
 
 var harness = createHarness();
 
@@ -95,11 +96,13 @@ if (canExit) {
   });
 }
 
-module.exports.createGroup = harness.createGroup;
-module.exports.assert = claim;
-// module.exports.assert = chai.assert;
-// module.exports.spy = sinon.spy;
-// module.exports.stub = sinon.stub;
-// module.exports.mock = sinon.mock;
-// module.exports.sinon = sinon;
-// module.exports.chai = chai;
+module.exports.createGroup = harness.createGroup
+module.exports.chai = chai
+module.exports.assert = claim
+module.exports.assert.claim = claim
+module.exports.assert.chai = chai.assert
+module.exports.expect = chai.expect
+module.exports.spy = sinon.spy
+module.exports.stub = sinon.stub
+module.exports.mock = sinon.mock
+module.exports.sinon = sinon
