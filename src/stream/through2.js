@@ -1,6 +1,6 @@
 var Transform = require('./readable-stream/transform')
 var inherits  = require('util').inherits
-var xtend     = require('../object/extend')
+var xtend     = require('../object/xtend')
 
 function DestroyableTransform(opts) {
   Transform.call(this, opts)
