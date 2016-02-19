@@ -111,6 +111,7 @@ module.exports = {
   eq: eq,
   ne: ne,
   is: is,
+  equal: is,
   not: not,
   isnt: not,
   same: same,
