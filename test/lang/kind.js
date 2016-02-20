@@ -1,4 +1,6 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var test = painless.createGroup('Test lang/kind')
+var t = painless.assert
 var kind = require('../../src/lang/kind')
 
 var arr = []
@@ -16,7 +18,7 @@ var sym = Symbol('str')
 var buf = new Buffer(' ')
 var nan = NaN
 
-test('kind Nil', function (t) {
+test('kind Nil', function () {
   // default
   t.is(kind.Of(nul), 'null')
   t.is(kind.Of(null), 'null')
@@ -44,7 +46,7 @@ test('kind Nil', function (t) {
   t.is(kind.safe(undefined), 'undefined')
 })
 
-test('kind Booleans', function (t) {
+test('kind Booleans', function () {
   // default
   t.is(kind.Of(bol), 'boolean')
   t.is(kind.Of(true), 'boolean')
@@ -72,7 +74,7 @@ test('kind Booleans', function (t) {
   t.is(kind.safe(new Boolean(true)), 'boolean')
 })
 
-test('kind Numbers', function (t) {
+test('kind Numbers', function () {
   // default
   t.is(kind.Of(num), 'number')
   t.is(kind.Of(42), 'number')
@@ -120,7 +122,7 @@ test('kind Numbers', function (t) {
   t.is(kind.safe(1.342), 'number')
 })
 
-test('kind Symbols', function (t) {
+test('kind Symbols', function () {
   // default
   t.is(kind.Of(sym), 'symbol')
   t.eq(kind.Of(Symbol('a')), 'symbol')
@@ -144,7 +146,7 @@ test('kind Symbols', function (t) {
 
 })
 
-test('kind Strings', function (t) {
+test('kind Strings', function () {
   // default
   t.is(kind.Of(str), 'string')
   t.is(kind.Of('str'), 'string')
@@ -167,7 +169,7 @@ test('kind Strings', function (t) {
   t.is(kind.safe(new String('a')), 'string')
 })
 
-test('kind Arrays', function (t) {
+test('kind Arrays', function () {
   // default
   t.is(kind.Of(arr), 'array')
   t.is(kind.Of([]), 'array')
@@ -195,7 +197,7 @@ test('kind Arrays', function (t) {
   t.is(kind.safe(new Array()), 'array')
 })
 
-test('kind Functions', function (t) {
+test('kind Functions', function () {
   // default
   t.is(kind.Of(fun), 'function')
   t.is(kind.Of(function () {}), 'function')
@@ -218,7 +220,7 @@ test('kind Functions', function (t) {
   t.is(kind.safe(new Function ()), 'function')
 })
 
-test('kind Dates', function (t) {
+test('kind Dates', function () {
   // default
   t.is(kind.Of(dat), 'date')
   t.is(kind.Of(new Date()), 'date')
@@ -241,7 +243,7 @@ test('kind Dates', function (t) {
   t.is(kind.safe(new Date(2017, 2, 19)), 'date')
 })
 
-test('kind RegExps', function (t) {
+test('kind RegExps', function () {
   // default
   t.is(kind.Of(rex), 'regexp')
   t.is(kind.Of(/[\w\s]+/), 'regexp')
@@ -264,7 +266,7 @@ test('kind RegExps', function (t) {
   t.is(kind.safe(new RegExp('^' + 'apple', 'g')), 'regexp')
 })
 
-test('kind Objects', function (t) {
+test('kind Objects', function () {
   // no create test with base, type or objs.
   function Test() {}
   var instance = new Test()
@@ -300,7 +302,7 @@ test('kind Objects', function (t) {
   t.is(kind.safe(create), 'object')
 })
 
-test('kind Arguments', function (t) {
+test('kind Arguments', function () {
   // default
   t.is(kind.Of(arg), 'arguments')
   t.is(kind.Of(arguments), 'arguments')
@@ -333,7 +335,7 @@ test('kind Arguments', function (t) {
   })(), 'arguments')
 })
 
-test('kind Constructors', function (t) {
+test('kind Constructors', function () {
   function Foo () {}
   var foo = new Foo()
 
@@ -354,7 +356,7 @@ test('kind Constructors', function (t) {
   t.is(kind.safe(new Foo()), 'foo')
 })
 
-test('kind Buffer', function (t) {
+test('kind Buffer', function () {
   // default
   t.is(kind.Of(buf), 'uint8array')
   t.is(kind.Of(new Buffer(' ')), 'uint8array')
@@ -372,7 +374,7 @@ test('kind Buffer', function (t) {
   t.is(kind.safe(new Buffer(' ')), 'buffer')
 })
 
-test('kind Map', function (t) {
+test('kind Map', function () {
   var map = new Map()
   t.is(kind.Of(map), 'map')
   t.is(kind.Of(map.set), 'function')
@@ -398,10 +400,9 @@ test('kind Map', function (t) {
   t.is(kind.safe(map.set), 'function')
   t.is(kind.safe(map.get), 'function')
   t.is(kind.safe(map.add), 'undefined')
-  t.end()
 })
 
-test('kind WeakMap', function (t) {
+test('kind WeakMap', function () {
   var weakmap = new WeakMap()
   t.is(kind.Of(weakmap), 'weakmap')
   t.is(kind.Of(weakmap.set), 'function')
@@ -429,7 +430,7 @@ test('kind WeakMap', function (t) {
   t.is(kind.safe(weakmap.add), 'undefined')
 })
 
-test('kind Set', function (t) {
+test('kind Set', function () {
   var set = new Set()
   t.is(kind.Of(set), 'set')
   t.is(kind.Of(set.add), 'function')
@@ -458,7 +459,7 @@ test('kind Set', function (t) {
 
 })
 
-test('kind WeakSet', function (t) {
+test('kind WeakSet', function () {
   var weakset = new WeakSet()
   t.is(kind.Of(weakset), 'weakset')
   t.is(kind.Of(weakset.add), 'function')
@@ -487,7 +488,7 @@ test('kind WeakSet', function (t) {
 })
 
 
-test('kind Int8Array', function (t) {
+test('kind Int8Array', function () {
   var int8array = new Int8Array();
   t.is(kind.Of(int8array), 'int8array')
   t.is(kind.base(int8array), 'int8array')
@@ -496,7 +497,7 @@ test('kind Int8Array', function (t) {
   t.is(kind.safe(int8array), 'int8array')
 });
 
-test('kind Uint8Array', function (t) {
+test('kind Uint8Array', function () {
   var uint8array = new Uint8Array();
   t.is(kind.Of(uint8array), 'uint8array')
   t.is(kind.base(uint8array), 'uint8array')
@@ -505,7 +506,7 @@ test('kind Uint8Array', function (t) {
   t.is(kind.safe(uint8array), 'uint8array')
 });
 
-test('kind Uint8ClampedArray', function (t) {
+test('kind Uint8ClampedArray', function () {
   var uint8clampedarray = new Uint8ClampedArray();
   t.is(kind.Of(uint8clampedarray), 'uint8clampedarray')
   t.is(kind.base(uint8clampedarray), 'uint8clampedarray')
@@ -514,7 +515,7 @@ test('kind Uint8ClampedArray', function (t) {
   t.is(kind.safe(uint8clampedarray), 'uint8clampedarray')
 });
 
-test('kind Int16Array', function (t) {
+test('kind Int16Array', function () {
   var int16array = new Int16Array();
   t.is(kind.Of(int16array), 'int16array')
   t.is(kind.base(int16array), 'int16array')
@@ -523,7 +524,7 @@ test('kind Int16Array', function (t) {
   t.is(kind.safe(int16array), 'int16array')
 });
 
-test('kind Uint16Array', function (t) {
+test('kind Uint16Array', function () {
   var uint16array = new Uint16Array();
   t.is(kind.Of(uint16array), 'uint16array')
   t.is(kind.base(uint16array), 'uint16array')
@@ -532,7 +533,7 @@ test('kind Uint16Array', function (t) {
   t.is(kind.safe(uint16array), 'uint16array')
 });
 
-test('kind Int32Array', function (t) {
+test('kind Int32Array', function () {
   var int32array = new Int32Array();
   t.is(kind.Of(int32array), 'int32array')
   t.is(kind.base(int32array), 'int32array')
@@ -541,7 +542,7 @@ test('kind Int32Array', function (t) {
   t.is(kind.safe(int32array), 'int32array')
 });
 
-test('kind Uint32Array', function (t) {
+test('kind Uint32Array', function () {
   var uint32array = new Uint32Array();
   t.is(kind.Of(uint32array), 'uint32array')
   t.is(kind.base(uint32array), 'uint32array')
@@ -550,7 +551,7 @@ test('kind Uint32Array', function (t) {
   t.is(kind.safe(uint32array), 'uint32array')
 });
 
-test('kind Float32Array', function (t) {
+test('kind Float32Array', function () {
   var float32array = new Float32Array();
   t.is(kind.Of(float32array), 'float32array')
   t.is(kind.base(float32array), 'float32array')
@@ -559,7 +560,7 @@ test('kind Float32Array', function (t) {
   t.is(kind.safe(float32array), 'float32array')
 });
 
-test('kind Float64Array', function (t) {
+test('kind Float64Array', function () {
   var float64array = new Float64Array();
   t.is(kind.Of(float64array), 'float64array')
   t.is(kind.base(float64array), 'float64array')
@@ -567,5 +568,3 @@ test('kind Float64Array', function (t) {
   t.is(kind.objs(float64array), 'float64array')
   t.is(kind.safe(float64array), 'float64array')
 });
-
-test.result()
