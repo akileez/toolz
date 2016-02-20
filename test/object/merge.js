@@ -1,7 +1,10 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var test = painless.createGroup('Test object/merge')
+var t = painless.assert
+
 var merge = require('../../src/object/merge')
 
-test('should merge object properties without affecting any object', function (t) {
+test('should merge object properties without affecting any object', function () {
 
   var obj1 = {a: 0, b: 1}
   var obj2 = {c: 2, d: 3}
@@ -16,14 +19,14 @@ test('should merge object properties without affecting any object', function (t)
 
 })
 
-test('should do a deep merge', function (t) {
+test('should do a deep merge', function () {
   var obj1 = {a: {b: 1, c: 1, d: {e: 1, f: 1}}}
   var obj2 = {a: {b: 2, d : {f : 'yeah'} }}
 
   t.same(merge(obj1, obj2), {a: {b : 2, c : 1, d : {e : 1, f : 'yeah'}}})
 })
 
-test('should clone objects during merge', function (t) {
+test('should clone objects during merge', function () {
   var obj1 = {a: {b :1}}
   var obj2 = {a: {c :2}}
 
@@ -33,7 +36,7 @@ test('should clone objects during merge', function (t) {
   t.diff(out.a, obj2.a)
 })
 
-test('should deep clone arrays during merge', function (t) {
+test('should deep clone arrays during merge', function () {
   var obj1 = {a: [1, 2, [3, 4]]}
   var obj2 = {b : [5, 6]}
 
@@ -48,7 +51,7 @@ test('should deep clone arrays during merge', function (t) {
   t.ne(out.b, obj2.b)
 })
 
-test('should pass lodash example', function (t) {
+test('should pass lodash example', function () {
   var users = {
     'data': [{ 'user': 'barney' }, { 'user': 'fred' }]
   }
@@ -62,5 +65,3 @@ test('should pass lodash example', function (t) {
 
   t.same(result, expected)
 })
-
-test.result()

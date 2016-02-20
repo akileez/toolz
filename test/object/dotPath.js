@@ -1,20 +1,22 @@
-var test = require('../../src/assertion/ttr')
-var dotPath = require('../../src/object/toPath')
-// var dotPath = require('../../src/object/dotPath')
+var painless = require('../../src/assertion/painless')
+var test = painless.createGroup('Test object/toPath')
+var t = painless.assert
 
-test('create object path from a list of strings', function (t) {
+var dotPath = require('../../src/object/toPath')
+
+test('create object path from a list of strings', function () {
   t.is(dotPath('foo', 'bar', 'baz'), 'foo.bar.baz')
 })
 
-test('create object path from an array of strings', function (t) {
+test('create object path from an array of strings', function () {
   t.is(dotPath(['foo', 'bar', 'baz']), 'foo.bar.baz')
 })
 
-test('create object path from a strings', function (t) {
+test('create object path from a strings', function () {
   t.is(dotPath('foo.bar.baz'), 'foo.bar.baz')
 })
 
-test('create object path from a list of arguments', function (t) {
+test('create object path from a list of arguments', function () {
   function foo () {
     return dotPath(arguments)
   }
@@ -22,7 +24,7 @@ test('create object path from a list of arguments', function (t) {
   t.is(foo('foo', 'bar', 'baz'), 'foo.bar.baz')
 })
 
-test('create object path from an array of arguments', function (t) {
+test('create object path from an array of arguments', function () {
   function foo () {
     return dotPath(arguments)
   }
@@ -30,7 +32,7 @@ test('create object path from an array of arguments', function (t) {
   t.is(foo(['foo', 'bar', 'baz']), 'foo.bar.baz')
 })
 
-test('create object path from a mixture of arrays and strings', function (t) {
+test('create object path from a mixture of arrays and strings', function () {
   t.is(dotPath('foo', ['bar', 'baz']), 'foo.bar.baz')
   t.is(dotPath(['foo', 'bar'], 'baz'), 'foo.bar.baz')
   t.is(dotPath(['foo', 'bar'], ['baz']), 'foo.bar.baz')
@@ -38,7 +40,7 @@ test('create object path from a mixture of arrays and strings', function (t) {
   t.is(dotPath(['foo'], 'bar', ['baz']), 'foo.bar.baz')
 })
 
-test('create object path from a mixture of arrays and strings as arguments', function (t) {
+test('create object path from a mixture of arrays and strings as arguments', function () {
   function foo () {
     return dotPath(arguments)
   }
@@ -50,7 +52,7 @@ test('create object path from a mixture of arrays and strings as arguments', fun
   t.is(foo(['foo'], 'bar', ['baz']), 'foo.bar.baz')
 })
 
-test('create object path when arguments is not the first value', function (t) {
+test('create object path when arguments is not the first value', function () {
   function foo () {
     return dotPath('options', arguments)
   }
@@ -58,7 +60,7 @@ test('create object path when arguments is not the first value', function (t) {
   t.is(foo(['foo', 'bar', 'baz']), 'options.foo.bar.baz')
 })
 
-test('create object path discarding any non-string values', function (t) {
+test('create object path discarding any non-string values', function () {
   function foo () {
     return dotPath('options', arguments)
   }
@@ -69,5 +71,3 @@ test('create object path discarding any non-string values', function (t) {
 
   t.is(foo([fn, 'foo', 'bar', 'baz'], fn, new Date(), {a: 1}, 6, null), 'options.foo.bar.baz')
 })
-
-test.result()
