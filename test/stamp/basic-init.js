@@ -1,7 +1,10 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var t        = painless.assert
+var test     = painless.createGroup('Test object/stampit (init)')
+
 var stampit = require('../../src/object/stampit')
 
-test('stampit({ init })', function (t) {
+test('stampit({ init })', function () {
   var obj = stampit({
     init() {
       var secret = 'foo'
@@ -17,7 +20,7 @@ test('stampit({ init })', function (t) {
   t.is(results, expected, 'should set closure')
 })
 
-test('stampit().init()', function (t) {
+test('stampit().init()', function () {
   var obj = stampit()
     .init(function () {
       var secret = 'foo'
@@ -42,7 +45,7 @@ test('stampit().init()', function (t) {
   t.ok(obj.a && obj.b && obj.c, 'should allow chaining and take object literals.')
 })
 
-test('stampit({ init }).init()', (t) => {
+test('stampit({ init }).init()', () => {
   var obj = stampit({init() {
     var secret = 'foo'
     this.getSecret = () => { return secret }
@@ -61,7 +64,7 @@ test('stampit({ init }).init()', (t) => {
   t.ok(obj.a && obj.b && obj.c, 'should allow chaining and take object literals.')
 })
 
-test('stampit({ initializers })', function (t) {
+test('stampit({ initializers })', function () {
   var obj = stampit({
     initializers: {
       function () {
@@ -79,7 +82,7 @@ test('stampit({ initializers })', function (t) {
   t.is(results, expected, 'should set closure')
 })
 
-test('stampit().initializers()', function (t) {
+test('stampit().initializers()', function () {
   var obj = stampit()
     .initializers(function () {
       var secret = 'foo'
@@ -104,7 +107,7 @@ test('stampit().initializers()', function (t) {
   t.ok(obj.a && obj.b && obj.c, 'should allow chaining and take object literals.')
 })
 
-test('stampit({ initializers }).initializers()', (t) => {
+test('stampit({ initializers }).initializers()', () => {
   var obj = stampit({ initializers: {
     function () {
       var secret = 'foo'
@@ -124,5 +127,3 @@ test('stampit({ initializers }).initializers()', (t) => {
   t.is(obj.getSecret(), 'foo', 'should set closure')
   t.ok(obj.a && obj.b && obj.c, 'should allow chaining and take object literals.')
 })
-
-test.result()

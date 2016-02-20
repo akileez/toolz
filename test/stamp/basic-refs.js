@@ -1,16 +1,19 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var t        = painless.assert
+var test     = painless.createGroup('Test object/stampit (refs)')
+
 var stampit = require('../../src/object/stampit')
 
 // Basics refs
 
-test('stampit({ refs })', (t) => {
+test('stampit({ refs })', () => {
   const obj = stampit({ refs: { foo: { bar: 'bar' } } }).create();
 
   t.is(obj.foo.bar, 'bar',
     'Should set default refs.');
 });
 
-test('stampit().refs()', (t) => {
+test('stampit().refs()', () => {
   const obj = stampit().refs({
     foo: { bar: 'bar' },
     refsOverride: false,
@@ -33,7 +36,7 @@ test('stampit().refs()', (t) => {
     'Should mix functions.');
 });
 
-test('stampit({ refs }).refs()', (t) => {
+test('stampit({ refs }).refs()', () => {
   const obj = stampit({ refs: {
     foo: { bar: 'bar' },
     refsOverride: false,
@@ -56,7 +59,7 @@ test('stampit({ refs }).refs()', (t) => {
     'Should mix functions.');
 });
 
-test('stampit().refs(a, b)', (t) => {
+test('stampit().refs(a, b)', () => {
   const obj = stampit().refs({
     a: 'a'
   }, {
@@ -66,5 +69,3 @@ test('stampit().refs(a, b)', (t) => {
   t.ok(obj.a && obj.b,
     'Should mixIn objects when multiple properties are passed.');
 });
-
-test.result()

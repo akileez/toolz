@@ -1,9 +1,12 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var t        = painless.assert
+var test     = painless.createGroup('Test object/stampit (statics)')
+
 var stampit = require('../../src/object/stampit')
 
 // Basics statics
 
-test('stampit().statics()', (t) => {
+test('stampit().statics()', () => {
   const stamp1 = stampit()
     .statics({
       foo() {
@@ -17,7 +20,7 @@ test('stampit().statics()', (t) => {
   t.is(stamp1.bar, 'space', 'Should set proper reference.');
 });
 
-test('stampit({statics})', (t) => {
+test('stampit({statics})', () => {
   const stamp1 = stampit({
     statics: {
       foo: 42
@@ -27,7 +30,7 @@ test('stampit({statics})', (t) => {
   t.is(stamp1.foo, 42, 'Should accept statics in options.');
 });
 
-test('stampit().statics() last override', (t) => {
+test('stampit().statics() last override', () => {
   const stamp1 = stampit()
     .statics({
       foo() {
@@ -43,7 +46,7 @@ test('stampit().statics() last override', (t) => {
   t.is(stamp2.foo(), 'override', 'Should override props during composition.');
 });
 
-test('stampit().statics(arg1, arg2)', (t) => {
+test('stampit().statics(arg1, arg2)', () => {
   const stamp1 = stampit().statics(
     {
       foo1() {}
@@ -57,7 +60,7 @@ test('stampit().statics(arg1, arg2)', (t) => {
   t.ok(stamp1.foo2, 'Should accept multiple args.');
 });
 
-test('stampit.statics(arg1, arg2)', (t) => {
+test('stampit.statics(arg1, arg2)', () => {
   const stamp1 = stampit.statics(
     {
       foo1() {}
@@ -71,7 +74,7 @@ test('stampit.statics(arg1, arg2)', (t) => {
   t.ok(stamp1.foo2, 'Should accept multiple args.');
 });
 
-test('stampit({statics}).statics()', (t) => {
+test('stampit({statics}).statics()', () => {
   const stamp1 = stampit({
     statics: {
       foo1: 'foo1 value'
@@ -86,5 +89,3 @@ test('stampit({statics}).statics()', (t) => {
   t.is(stamp1.foo1, 'foo1 value', 'Should have statics from options.');
   t.is(stamp1.foo2(), 'foo2 value', 'Should have statics form chain method.');
 });
-
-test.result()

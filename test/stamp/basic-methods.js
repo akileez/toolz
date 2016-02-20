@@ -1,7 +1,10 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var t        = painless.assert
+var test     = painless.createGroup('Test object/stampit (methods)')
+
 var stampit = require('../../src/object/stampit')
 
-test('stampit({ methods })', (t) => {
+test('stampit({ methods })', () => {
   const obj = stampit({ methods: {
     foo() { return 'foo'; }
   }}).create();
@@ -10,7 +13,7 @@ test('stampit({ methods })', (t) => {
     'Should set the new object\'s prototype.');
 });
 
-test('stampit().methods()', (t) => {
+test('stampit().methods()', () => {
   const obj = stampit().methods({
     foo() { return 'foo'; },
     methodOverride() { return false; },
@@ -33,7 +36,7 @@ test('stampit().methods()', (t) => {
     'Should mix properties.');
 });
 
-test('stampit({ methods }).methods()', (t) => {
+test('stampit({ methods }).methods()', () => {
   const obj = stampit({ methods: {
     foo() { return 'foo'; },
     methodOverride() { return false; },
@@ -56,7 +59,7 @@ test('stampit({ methods }).methods()', (t) => {
     'Should mix properties.');
 });
 
-test('stampit().methods(a, b)', (t) => {
+test('stampit().methods(a, b)', () => {
   const obj = stampit().methods({
     a() { return 'a'; }
   }, {
@@ -66,5 +69,3 @@ test('stampit().methods(a, b)', (t) => {
   t.ok(obj.a() === 'a' && obj.b() === 'b',
     'Should mixIn objects when multiple methods are passed.');
 });
-
-test.result()
