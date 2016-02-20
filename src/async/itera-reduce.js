@@ -1,7 +1,9 @@
 'use strict'
 
-var itera = require('./itera')
-var map   = require('../array/map')
+const itera = require('./itera')
+const map   = require('../array/map')
+const ovals  = require('../object/values')
+const isObject = require('../lang/isObject')
 
 /**
  Calls provided async iterator function with the accumulator and each item.
@@ -18,11 +20,12 @@ var map   = require('../array/map')
 */
 
 function asyncReduce (items, seed, iterator, done) {
+  if (isObject(items)) items = ovals(items)
   if (!Array.isArray(items)) throw new Error('items must be an Array')
   if (typeof iterator !== 'function') throw new Error('iterator must be a function')
   if (typeof done !== 'function') throw new Error('done must be a function')
 
-  var tasks
+  let tasks
 
   if (iterator.length === 4) tasks = map(items, (item, key) => {
     return (acc, next) => {
