@@ -1,7 +1,9 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var test = painless.createGroup('Test array/convert')
+var t = painless.assert
 var convert = require('../../src/array/convert')
 
-test('convert array like objects into array', function (t) {
+test('convert array like objects into array', function () {
   var obj = {
     '0': 'foo',
     '1': 'bar',
@@ -13,7 +15,7 @@ test('convert array like objects into array', function (t) {
   t.diff(convert(obj), ['foo', 'bar', 'baz'])
 })
 
-test('convert arguments object', function (t) {
+test('convert arguments object', function () {
   var res1
   var res2
   var fn = function (a, b, c) {
@@ -31,7 +33,7 @@ test('convert arguments object', function (t) {
   t.diff(res2, ['foo', 'bar', 123])
 })
 
-test('handle primitives and other objects', function (t) {
+test('handle primitives and other objects', function () {
   var fn = function () {}
 
   t.same(convert('lorem'), ['lorem'])
@@ -41,7 +43,7 @@ test('handle primitives and other objects', function (t) {
   t.same(convert(/\w+/), [/\w+/])
   t.same(convert(new RegExp('\\w+')), [/\w+/])
   t.same(convert({foo:"bar", lorem:123}), [{foo:"bar", lorem:123}])
-  t.same(convert(true), [true])
+  t.same(convert(true), [true], 'expect convert(true) to be [true]')
   t.same(convert(false), [false])
   t.same(convert(fn), [fn])
 
@@ -57,7 +59,7 @@ test('handle primitives and other objects', function (t) {
   t.same(convert.toArray(fn), [fn])
 })
 
-test('handle null or undefined values', function (t) {
+test('handle null or undefined values', function () {
   t.same(convert(null), [])
   t.same(convert(undefined), [])
   t.same(convert(), [])
@@ -67,7 +69,7 @@ test('handle null or undefined values', function (t) {
   t.same(convert.toArray(), [])
 })
 
-test('assertion test', function (t) {
+test('assertion test', function () {
   t.assert(convert('foo')[0] === 'foo')
   t.assert(convert(['foo'])[0] === 'foo')
   t.assert(convert(null)[0] === undefined)
@@ -79,4 +81,4 @@ test('assertion test', function (t) {
   t.assert(convert.toArray(undefined)[0] === undefined)
 })
 
-test.result()
+// test.result()

@@ -1,9 +1,9 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var test = painless.createGroup('Test array/combine')
+var t = painless.assert
 var combine = require('../../src/array/combine')
 
-test.log('Testing array/combine\n')
-
-test('combine items of arr2 with arr1 ignoring dupes', function (t) {
+test('combine items of arr2 with arr1 ignoring dupes', function () {
   var arr1 = [1, 2, 3]
   var arr2 = [3, 4, 5]
   var res
@@ -13,17 +13,16 @@ test('combine items of arr2 with arr1 ignoring dupes', function (t) {
   t.same(arr1, [1, 2, 3, 4, 5])
 })
 
-test('combine null second array', function (t) {
+test('combine null second array', function () {
   var arr1 = [1]
   combine(arr1, null)
   t.same(arr1, [1])
 })
 
-test('combine undefined second array', function (t) {
+test('combine undefined second array', function () {
   var arr1 = [1, 2]
   var undef
   combine(arr1, undef)
   t.same(arr1, [1, 2])
 })
 
-test.result()

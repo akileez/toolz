@@ -1,10 +1,10 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var test = painless.createGroup('Test array/compact and array/compactor')
+var t = painless.assert
 var compact = require('../../src/array/compact')
 var compactor = require('../../src/array/compactor')
 
-test.log('Testing array/compact and array/compactor\n')
-
-test('compact to remove null and undefined items', function (t) {
+test('compact to remove null and undefined items', function () {
   var arr = [1, 2, null, false, '', 'foo', undefined]
   arr[10] = 'bar'
 
@@ -15,12 +15,10 @@ test('compact to remove null and undefined items', function (t) {
   t.same(compactor(arr), [1, 2, 'foo', 'bar'])
 })
 
-test('return empty array if source array is null/undefined', function (t) {
+test('return empty array if source array is null/undefined', function () {
   t.same(compact(null), [])
   t.same(compact(undefined), [])
 
   t.same(compactor(null), [])
   t.same(compactor(undefined), [])
 })
-
-test.result()

@@ -1,11 +1,11 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var test = painless.createGroup('Test array/every and collection/every')
+var t = painless.assert
 var every = require('../../src/array/every')
 var everc = require('../../src/collection/every')
 var isEven = require('../../src/number/isEven')
 
-test.log('Testing array/every and collection/every\n')
-
-test('should work on normal array', (t) => {
+test('should work on normal array', () => {
   var a1 = [1, 2, 3]
   var a2 = [1, 3, 5]
   var a3 = [2, 4, 6]
@@ -19,7 +19,7 @@ test('should work on normal array', (t) => {
   t.is(everc(a3, isEven), true)
 })
 
-test('should iterate over sparse items', (t) => {
+test('should iterate over sparse items', () => {
   var a1 = [1, 2, 3]
   a1[10] = 8
   var a2 = [1, 3, 5]
@@ -45,13 +45,13 @@ test('should iterate over sparse items', (t) => {
   }), true)
 })
 
-test('should work on empty arrays', (t) => {
+test('should work on empty arrays', () => {
   //it is vacuously true that all elements of the empty set satisfy any given condition.
   t.is(every([], isEven), true)
   t.is(everc([], isEven), true)
 })
 
-test('should work on null/undefined array', (t) => {
+test('should work on null/undefined array', () => {
   t.is(every(null, isEven), true)
   t.is(every(undefined, isEven), true)
 
@@ -62,7 +62,7 @@ test('should work on null/undefined array', (t) => {
   t.is(everc.arr(undefined, isEven), true)
 })
 
-test('should loop forwards to avoid undesired behavior', (t) => {
+test('should loop forwards to avoid undesired behavior', () => {
   // not that the loop order should matter on a truth check over all elements
   var a1 = [1, 3, 7]
   var res1 = []
@@ -83,18 +83,16 @@ test('should loop forwards to avoid undesired behavior', (t) => {
   t.same(res2, [1, 3, 7])
 })
 
-test('collection-every.arr should allow shorthand object syntax', function (t) {
+test('collection-every.arr should allow shorthand object syntax', function () {
   var arr = [{a:3}, {a:3,b:2}, {a:3,b:4}, {a:3,b:1}]
 
   t.is(everc(arr, {a:3}), true)
   t.is(everc(arr, {b:2}), false)
 })
 
-test('collection-every.arr should allow shorthand string syntax', function (t) {
+test('collection-every.arr should allow shorthand string syntax', function () {
   var arr = [{a:3}, {a:3,b:2}, {a:3,b:4}, {a:3,b:1}]
 
   t.is(everc(arr, 'a'), true)
   t.is(everc(arr, 'b'), false)
 })
-
-test.result()
