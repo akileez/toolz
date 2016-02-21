@@ -1,5 +1,5 @@
 var painless = require('../../src/assertion/painless')
-var test = painless.createGroup('Test lang/kind')
+var test = painless.createGroup('Test lang/clone')
 var t = painless.assert
 var clone = require('../../src/lang/clone')
 
