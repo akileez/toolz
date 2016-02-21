@@ -2,8 +2,10 @@
 /*jshint asi: true */
 
 var painless = require('../../src/assertion/painless')
-var test = painless.createGroup('Test async/itera')
-var t = painless.assert.chai
+var t        = painless.assert
+var test     = painless.createGroup('Test async/itera')
+var tseed    = painless.createGroup('Test async/itera [seed]')
+
 
 var itera = require('../../src/async/itera')
 var unofails
@@ -233,4 +235,50 @@ test('second callback has syntax error', function (done) {
 
     done()
   })
+})
+
+tseed('seeding one value ', function (done) {
+  itera(itera.seed(1), function (err, val) {
+    t.notOk(err, 'no error')
+    t.equal(val, 1, 'passes seed as value to next function in chain')
+    done()
+  })
+})
+
+tseed('seeding three values', function (done) {
+  itera(itera.seed(1, 2, 3), function (err, uno, dos, tres) {
+    t.notOk(err, 'no error')
+    t.equal(uno, 1, 'passes first')
+    t.equal(dos, 2, 'passes second')
+    t.equal(tres, 3, 'passes third')
+    done()
+  })
+})
+
+tseed('async reduce long running computations', function (next) {
+  var computations = [ '1 + 2', '2 + 3', '3 + 4'  ]
+
+  var tasks = computations.map(
+    function (op) {
+      return function compute (acc, cb) {
+        // long running computation ;)
+
+        setTimeout(function () {
+          var args = op.split('+');
+          acc[op] = parseInt(args[0], 10) + parseInt(args[1], 10);
+          cb(null, acc)
+        }, 10);
+
+      };
+    });
+
+  itera(
+    [ itera.seed({}) ]
+      .concat(tasks)
+      .concat(function done (err, res) {
+        t.notOk(err, 'no error')
+        t.same(res, { '1 + 2': 3, '2 + 3': 5, '3 + 4': 7 })
+        next()
+      })
+  )
 })
