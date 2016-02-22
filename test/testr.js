@@ -43,6 +43,12 @@ function func () {
   execa(files, opts(dir))
 }
 
+function gen () {
+  var dir = 'generator'
+  var files = map(glob.sync(['generator/*.js', '!generator/lint*.js']), mapr)
+  execa(files, opts(dir))
+}
+
 function lang () {
   var dir = 'lang'
   var files = map(glob.sync(['lang/*.js', '!lang/lint*.js']), mapr)
@@ -77,6 +83,7 @@ function defs () {
   arr()
   async1()
   func()
+  gen()
   lang()
   num()
   obj()
@@ -93,6 +100,7 @@ runr
   .task('arr', arr)
   .task('async', async1)
   .task('func', func)
+  .task('gen', gen)
   .task('lang', lang)
   .task('num', num)
   .task('obj', obj)
