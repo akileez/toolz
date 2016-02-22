@@ -1,154 +1,156 @@
-var test = require('../../src/assertion/ttr')
+var painless = require('../../src/assertion/painless')
+var t        = painless.assert
+var test     = painless.createGroup('Test lang/class-utils')
+
 var utils = require('../../src/lang/class-utils')
 
 // isObject tests
 
-test('test Object Is Object', function(t) {
-    var o = new Object();
-    t.is(true, utils.isObject(o));
-});
-
-test('test Object Literal Is Object', function (t) {
-    var o = {}
-
-    t.is(true, utils.isObject(o))
+test('test Object Is Object', function() {
+  var o = new Object();
+  t.is(true, utils.isObject(o))
 })
 
-test('test Array Object', function (t) {
+test('test Object Literal Is Object', function () {
+  var o = {}
+
+  t.is(true, utils.isObject(o))
+})
+
+test('test Array Object', function () {
+  var o = new Array()
+
+  t.is(true, utils.isObject(o))
+})
+
+test('test Array Literal Is Object', function() {
+  var o = []
+
+  t.is(true, utils.isObject(o))
+})
+
+test('test String Is Not Object', function() {
+  var o = "abc"
+
+  t.is(false, utils.isObject(o))
+})
+
+test('test Function Is Not Object', function() {
+  var o = function() {}
+
+  t.is(false, utils.isObject(o))
+})
+
+// isFunction
+
+test('test Object Is Not Function', function() {
+  var o = new Object()
+
+  t.is(false, utils.isFunction(o))
+})
+
+test('test Object Literal Is Not Function', function() {
+  var o = {}
+
+  t.is(false, utils.isFunction(o))
+})
+
+
+test('test Array Is Not Function', function() {
     var o = new Array()
 
-    t.is(true, utils.isObject(o))
+    t.is(false, utils.isFunction(o))
 })
 
-// exports.testArrayLiterallIsObject = function(beforeExit, assert) {
-//     var o = [];
+test('test Array Literall Is Not Function', function() {
+    var o = []
 
-//     assert.equal(true, utils.isObject(o));
-// };
+    t.is(false, utils.isFunction(o))
+})
 
-// exports.testStringIsNotObject = function(beforeExit, assert) {
-//     var o = "abc";
+test('test String Is Not Function', function() {
+    var o = "abc"
 
-//     assert.equal(false, utils.isObject(o));
-// };
+    t.is(false, utils.isFunction(o))
+})
 
-// exports.testFunctionIsNotObject = function(beforeExit, assert) {
-//     var o = function() {};
+test('test Function Is Object', function() {
+    var o = function() {}
 
-//     assert.equal(false, utils.isObject(o));
-// };
-
-// // isFunction
-
-// exports.testObjectIsNotFunction = function(beforeExit, assert) {
-//     var o = new Object();
-
-//     assert.equal(false, utils.isFunction(o));
-// };
-
-// exports.testObjectLiteralIsNotFunction = function(beforeExit, assert) {
-//     var o = {};
-
-//     assert.equal(false, utils.isFunction(o));
-// };
-
-// exports.testArrayIsNotFunction = function(beforeExit, assert) {
-//     var o = new Array();
-
-//     assert.equal(false, utils.isFunction(o));
-// };
-
-// exports.testArrayLiterallIsNotFunction = function(beforeExit, assert) {
-//     var o = [];
-
-//     assert.equal(false, utils.isFunction(o));
-// };
-
-// exports.testStringIsNotFunction = function(beforeExit, assert) {
-//     var o = "abc";
-
-//     assert.equal(false, utils.isFunction(o));
-// };
-
-// exports.testFunctionIsObject = function(beforeExit, assert) {
-//     var o = function() {};
-
-//     assert.equal(true, utils.isFunction(o));
-// };
+    t.is(true, utils.isFunction(o))
+})
 
 // // isString
 
-// exports.testObjectIsNotString = function(beforeExit, assert) {
-//     var o = new Object();
+test('test Object Is Not String', function() {
+    var o = new Object()
 
-//     assert.equal(false, utils.isString(o));
-// };
+    t.is(false, utils.isString(o))
+})
 
-// exports.testObjectLiteralIsNotString = function(beforeExit, assert) {
-//     var o = {};
+test('test Object Literal Is Not String', function() {
+    var o = {}
 
-//     assert.equal(false, utils.isString(o));
-// };
+    t.is(false, utils.isString(o))
+})
 
-// exports.testArrayIsNotString = function(beforeExit, assert) {
-//     var o = new Array();
+test('test Array Is Not String', function() {
+    var o = new Array()
 
-//     assert.equal(false, utils.isString(o));
-// };
+    t.is(false, utils.isString(o))
+})
 
-// exports.testArrayLiterallIsNotString = function(beforeExit, assert) {
-//     var o = [];
+test('test Array Literall Is Not String', function() {
+    var o = []
 
-//     assert.equal(false, utils.isString(o));
-// };
+    t.is(false, utils.isString(o))
+})
 
-// exports.testStringIsString = function(beforeExit, assert) {
-//     var o = "abc";
+test('test String Is String', function() {
+    var o = "abc"
 
-//     assert.equal(true, utils.isString(o));
-// };
+    t.is(true, utils.isString(o))
+})
 
-// exports.testFunctionIsNotString = function(beforeExit, assert) {
-//     var o = function() {};
+test('test Function Is Not String', function() {
+    var o = function() {}
 
-//     assert.equal(false, utils.isString(o));
-// };
+    t.is(false, utils.isString(o))
+})
 
 // // isMethod - TODO:
 
 // // mergeProperites
-// exports.testMergeProperties = function(beforeExit, assert) {
-//     var obj = { a: 1, b: 2, c: 3 };
-//     var props = { a: 10, d: 20 };
-//     var result = utils.mergeProperties(props, obj);
+test('test Merge Properties', function () {
+    var obj = { a: 1, b: 2, c: 3 };
+    var props = { a: 10, d: 20 };
+    var result = utils.mergeProperties(props, obj);
 
-//     assert.equal(true, result.hasOwnProperty('a'));
-//     assert.equal(10, result.a);
+    t.is(true, result.hasOwnProperty('a'));
+    t.is(10, result.a);
 
-//     assert.equal(true, result.hasOwnProperty('b'));
-//     assert.equal(2, result.b);
+    t.is(true, result.hasOwnProperty('b'));
+    t.is(2, result.b);
 
-//     assert.equal(true, result.hasOwnProperty('c'));
-//     assert.equal(3, result.c);
+    t.is(true, result.hasOwnProperty('c'));
+    t.is(3, result.c);
 
-//     assert.equal(true, result.hasOwnProperty('d'));
-//     assert.equal(20, result.d);
-// };
+    t.is(true, result.hasOwnProperty('d'));
+    t.is(20, result.d);
+})
 
 // // inherit
-// exports.testMergeProperties = function(beforeExit, assert) {
-//     var props = { a: 10, d: 20 };
-//     var result = utils.inherit(props);
+test('test Inherit Properties', function () {
+    var props = { a: 10, d: 20 }
+    var result = utils.inherit(props)
 
-//     assert.equal(false, result.hasOwnProperty('a'));
-//     assert.equal(true, 'a' in result);
-//     assert.equal(10, result.a);
+    t.is(false, result.hasOwnProperty('a'))
+    t.is(true, 'a' in result)
+    t.is(10, result.a)
 
-//     assert.equal(false, result.hasOwnProperty('d'));
-//     assert.equal(true, 'd' in result);
-//     assert.equal(20, result.d);
-// };
+    t.is(false, result.hasOwnProperty('d'))
+    t.is(true, 'd' in result)
+    t.is(20, result.d)
+})
 
 // defineSubclass - TODO
-
-test.result()
