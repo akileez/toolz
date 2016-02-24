@@ -4,8 +4,8 @@ var globby = require('globby');
 var isPathCwd = require('is-path-cwd');
 var isPathInCwd = require('is-path-in-cwd');
 var objectAssign = require('object-assign');
-var Promise = require('pinkie-promise');
-var pify = require('pify');
+var Promise = require('../promise/pinkie-promise');
+var pify = require('../promise/pify');
 var rimraf = require('rimraf');
 var rimrafP = pify(rimraf, Promise);
 
