@@ -1,4 +1,4 @@
-var PinkiePromise = require('../async/pinkie-promise');
+var PinkiePromise = require('../promise/pinkie-promise');
 
 /**
  * slice() reference.
