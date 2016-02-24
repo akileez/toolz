@@ -8,7 +8,7 @@
 // that I haven't designed for. Things like spanning archives, non-DEFLATE
 // compression, encryption, etc.
 var fs = require('../../file/graceful-fs');
-var Q = require('../../async/q');
+var Q = require('../../promise/q');
 var path = require('path');
 var util = require('util');
 var events = require('events');

@@ -3,7 +3,7 @@ if (!stream.Readable) {
     var stream = require('../../stream/readable-stream');
 }
 var fs = require('../../file/graceful-fs');
-var Q = require('../../async/q');
+var Q = require('../../promise/q');
 var path = require('path');
 var zlib = require('zlib');
 var touch = Q.denodeify(require('../../file/touch'));
