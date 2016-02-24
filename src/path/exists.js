@@ -1,7 +1,7 @@
 // path-exists
 'use strict';
 var fs = require('fs');
-var Promise = require('../async/pinkie-promise');
+var Promise = require('../promise/pinkie-promise');
 
 module.exports = function (fp) {
   var fn = typeof fs.access === 'function' ? fs.access : fs.stat;
