@@ -5,8 +5,8 @@
 var fs = require('fs');
 var path = require('path');
 var arrify = require('../array/convert');
-var pify = require('../async/pify');
-var Promise = require('../async/pinkie-promise');
+var pify = require('../promise/pify');
+var Promise = require('../promise/pinkie-promise');
 
 // Convert directories to glob compatible strings
 
