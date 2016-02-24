@@ -5,7 +5,7 @@
 
 const gunzipMaybe = require('./gunzip-maybe')
 const fstream     = require('../file/fstream')
-const pify        = require('../async/pify')
+const pify        = require('../promise/pify')
 const mkdirp      = pify(require('../file/mkdirp'))
 const which       = pify(require('../file/which'))
 
