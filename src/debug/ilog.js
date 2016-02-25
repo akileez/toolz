@@ -4,8 +4,20 @@
 'use strict'
 
 const format = require('util').format
-const slice = Array.prototype.slice
-const levels = ['EMERGENCY', 'ALERT', 'CRITICAL', 'ERROR', 'WARNING', 'NOTICE', 'INFO', 'DEBUG']
+const jlog = require('../util/jcolorz')
+const ccase = require('../string/sentenceCase')
+const slice = require('../array/slice')
+
+const levels = [
+  'FATAL',    // level 0
+  'CRITICAL', // level 1
+  'ERROR',    // level 2
+  'WARNING',  // level 3
+  'ALERT',    // level 4
+  'NOTICE',   // level 5
+  'INFO',     // level 6
+  'DEBUG'     // level 7
+  ]
 
 function ilog () {
   if (arguments.length) {
@@ -13,15 +25,33 @@ function ilog () {
   }
 }
 
+ilog.display = true
 ilog.level = 7
 ilog.levels = levels.slice()
 
-// ilog.emergency, ilog.alert, ilog.critical, ilog.error, ilog.warning
+// ilog.fatal, ilog.critical, ilog.error, ilog.warning, ilog.alert
 levels.slice(0, 5).map((level, index) => {
-  ilog[level.toLowerCase()] = function (error) {
+  ilog[level.toLowerCase()] = function (error, stack) {
     if (error != null && index <= ilog.level) {
-      error = ilog._stringify(ilog._errorify(error))
-      ilog._stderr.write(ilog._assembleLog(error, level, ilog._time(new Date())))
+      // allow the ability to pass a debugging message of this level
+      if (typeof error === 'string') error = {message: error}
+      if (stack) error.stack = ilog._errorify(stack)
+
+      error.name = ccase(level)
+
+      if (ilog.display) {
+        // reformatting output for jcolorz
+        // error = ilog._stringify(ilog._errorify(error))
+        error = ilog._errorify(error)
+
+        ilog._stderr.write(ilog._assembleLog(error.message, level, ilog._time(new Date())))
+        jlog(error)
+      }
+
+      else {
+        error = ilog._stringify(ilog._errorify(error))
+        ilog._stderr.write(ilog._assembleLog(error, level, ilog._time(new Date())))
+      }
     }
   }
 })
@@ -38,16 +68,44 @@ levels.slice(5, 7).map((level, index) => {
 })
 
 ilog.debug = function () {
-  if (arguments.length && ilog.level >= 7) {
-    let messages = arguments.length === 1
-      ? ilog._stringify(arguments[0]) : format.apply(null, arguments)
+  if (arguments.length && (ilog.level >= 7 || ilog.level === -1)) {
+    let messages
+
+    if (arguments.length === 1) {
+      messages = ilog._stringify(arguments[0])
+    }
+
+    else if (arguments.length === 2
+      && typeof arguments[1] === 'object'
+      && 'name' in arguments[1]
+      && 'message' in arguments[1]
+    ) {
+      messages = arguments[0]
+      var stack = {
+        message: arguments[0],
+        stack: ilog._errorify(arguments[1])
+      }
+    }
+
+    else messages = format.apply(null, arguments)
+
+
     ilog._stdout.write(ilog._assembleLog(messages, 'DEBUG', ilog._time(new Date())))
+    if (stack) jlog(stack)
+  }
+}
+
+ilog.trace = function () {
+  if (arguments.length && ilog.level >= 8) {
+    let messages = format.apply(null, arguments)
+
+    ilog._stdout.write(ilog._assembleLog(messages, 'TRACE', ilog._time(new Date())))
   }
 }
 
 ilog.auto = function (error) {
   if (error instanceof Error) return ilog.error(error)
-  let args = slice.call(arguments, +(error == null))
+  let args = slice(arguments, +(error == null))
   if (args.length === 1) ilog.info(args[0])
   else if (args.length > 1) ilog.debug.apply(null, args)
 }
@@ -55,9 +113,12 @@ ilog.auto = function (error) {
 ilog.log = ilog
 ilog._stdout = process.stdout
 ilog._stderr = process.stderr
+ilog._procname = process.argv[1].split('/').pop()
 
 ilog._time = function (time) {
-  return `[${time.toISOString()}]`
+  return `${ilog._procname} »`
+  // making generic
+  // return `[${time.toISOString()}]`
 }
 
 ilog._stringify = function (obj) {
@@ -69,9 +130,13 @@ ilog._stringify = function (obj) {
 }
 
 ilog._assembleLog = function (log, level, time) {
-  log = `${log}\n`
   if (level) log = `${level} ${log}`
-  if (time) log = `${time} ${log}`
+
+  // doing this to enable "time" to be configured as
+  // a generic component prompt
+  if (time) log = `${time} ${log}\n`
+  else log = `${ilog._time()} ${log}\n`
+
   return log
 }
 
