@@ -1,5 +1,5 @@
 // use this file to automate the running of tests.
-var runr     = require('../src/util/runr')
+var runr     = require('../src/task/runr')
 var execa    = require('../src/cli/execa-commands')
 var spawn    = require('../src/cli/spawn-commands')
 var concur   = require('../src/async/concurrent').each
@@ -77,6 +77,10 @@ function lint () {
   spawn([
     {cmd: 'node', args: ['lint.js', '-a']}
   ], {cwd: 'array', concurrent: true})
+
+  spawn([
+    {cmd: 'node', args: ['lint.js', '-a']}
+  ], {cwd: 'lang', concurrent: true})
 }
 
 function defs () {
