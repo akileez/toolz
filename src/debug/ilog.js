@@ -68,22 +68,25 @@ levels.slice(5, 7).map((level, index) => {
 })
 
 ilog.debug = function () {
-  if (arguments.length && (ilog.level >= 7 || ilog.level === -1)) {
+  // ilog.level === -1 turns off all levels
+  // ilog.level === -2 turns on debug logging
+  if (arguments.length && (ilog.level >= 7 || ilog.level === -2)) {
     let messages
 
     if (arguments.length === 1) {
       messages = ilog._stringify(arguments[0])
     }
 
-    else if (arguments.length === 2
-      && typeof arguments[1] === 'object'
-      && 'name' in arguments[1]
-      && 'message' in arguments[1]
+    else if (arguments.length === 3
+      && typeof arguments[2] === 'object'
+      && 'name' in arguments[2]
+      && 'message' in arguments[2]
     ) {
-      messages = arguments[0]
+      messages = arguments[1]
       var stack = {
-        message: arguments[0],
-        stack: ilog._errorify(arguments[1])
+        name: arguments[0]
+        message: arguments[1],
+        stack: ilog._errorify(arguments[2])
       }
     }
 

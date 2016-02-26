@@ -2,7 +2,8 @@
 // © 2016 Shannon Moeller me@shannonmoeller.com (MIT)
 
 var argv = require('../process/argh').argv
-var clr = require('./colorz')
+var clr = require('../util/colorz')
+var assert = require('assert')
 
 var cmd = argv.argv || 'default'
 var tasks = Object.create(null)
@@ -23,10 +24,8 @@ function run (name) {
 }
 
 function task (name, callback) {
-  if (typeof name !== 'string')
-    throw new Error('Task name must be a string')
-  if (typeof callback !== 'function')
-    throw new Error('Task callback must be a function')
+  assert(typeof name, 'string', 'Task name must be a string')
+  assert(typeof callback, 'function', 'Task callback must be a function')
 
   tasks[name] = callback
 
