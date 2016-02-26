@@ -4,9 +4,9 @@
 'use strict'
 
 const format = require('util').format
-const jlog = require('../util/jcolorz')
-const ccase = require('../string/sentenceCase')
-const slice = require('../array/slice')
+const jlog   = require('../util/jcolorz')
+const ccase  = require('../string/sentenceCase')
+const slice  = require('../array/slice')
 
 const levels = [
   'FATAL',    // level 0
@@ -44,7 +44,7 @@ levels.slice(0, 5).map((level, index) => {
         // error = ilog._stringify(ilog._errorify(error))
         error = ilog._errorify(error)
 
-        ilog._stderr.write(ilog._assembleLog(error.message, level, ilog._time(new Date())))
+        ilog._stderr.write(ilog._assembleLog(error.message, '\u001b[31m'+level+'\u001b[39m', ilog._time(new Date())))
         jlog(error)
       }
 
@@ -62,7 +62,7 @@ levels.slice(5, 7).map((level, index) => {
   ilog[level.toLowerCase()] = function (message) {
     if (message != null && index <= ilog.level) {
       message = ilog._stringify(message)
-      ilog._stdout.write(ilog._assembleLog(message, level, ilog._time(new Date())))
+      ilog._stdout.write(ilog._assembleLog(message, '\u001b[90m'+level+'\u001b[39m', ilog._time(new Date())))
     }
   }
 })
@@ -77,23 +77,23 @@ ilog.debug = function () {
       messages = ilog._stringify(arguments[0])
     }
 
-    else if (arguments.length === 3
-      && typeof arguments[2] === 'object'
-      && 'name' in arguments[2]
-      && 'message' in arguments[2]
+    else if (arguments.length === 2
+      && typeof arguments[1] === 'object'
+      && 'name' in arguments[1]
+      && 'message' in arguments[1]
     ) {
-      messages = arguments[1]
+      messages = arguments[0]
       var stack = {
-        name: arguments[0]
-        message: arguments[1],
-        stack: ilog._errorify(arguments[2])
+        name: 'Debug',
+        message: arguments[0],
+        stack: ilog._errorify(arguments[1])
       }
     }
 
     else messages = format.apply(null, arguments)
 
 
-    ilog._stdout.write(ilog._assembleLog(messages, 'DEBUG', ilog._time(new Date())))
+    ilog._stdout.write(ilog._assembleLog(messages, '\u001b[34mDEBUG\u001b[39m', ilog._time(new Date())))
     if (stack) jlog(stack)
   }
 }
