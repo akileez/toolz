@@ -1,8 +1,9 @@
-var forEach = require('../array/forEach')
-var keys    = require('../object/keys')
+'use strict'
 
-var colorz = {}
-var styles = {
+const forEach = require('../array/forEach')
+const keys    = require('../object/keys')
+
+const styles = {
   // modifiers
   reset         : [0, 0],
   bold          : [1, 22],
@@ -14,8 +15,8 @@ var styles = {
   strikethrough : [9, 29],
   // foregrounds
   black         : [30, 39],
-  gray          : [30, 39],
-  grey          : [30, 39],
+  gray          : [90, 39],
+  grey          : [90, 39],
   red           : [31, 39],
   green         : [32, 39],
   yellow        : [33, 39],
@@ -58,12 +59,26 @@ var styles = {
   bbWhite       : [107, 49]
 }
 
-forEach(keys(styles), function (style) {
-  var open = '\u001b[' + styles[style][0] + 'm'
-  var clos = '\u001b[' + styles[style][1] + 'm'
+let colorz = {}
 
-  colorz[style] = function (msg) {
-    return open + msg + clos
+/*
+    var open = '\u001b[' + styles[style][0] + 'm'
+    var clos = '\u001b[' + styles[style][1] + 'm'
+
+    colorz[style] = function (msg) {
+      return open + msg + clos
+    }
+    // reduces to...
+    return '\u001b[' + styles[style][0] + 'm' + msg + '\u001b[' + styles[style][1] + 'm'
+
+    // and finally ES6...
+    return `\u001b[${styles[style][0]}m${msg}\u001b[${styles[style][1]}m`
+
+*/
+
+forEach(keys(styles), (style) => {
+  colorz[style] = (msg) => {
+    return `\u001b[${styles[style][0]}m${msg}\u001b[${styles[style][1]}m`
   }
 })
 
@@ -86,11 +101,11 @@ function expose (style, str, noColor) {
       .replace(/(\\u001b\[\d+m)/g, colorz[style](['$1']))
 }
 
-function colorize (str, style) {
+function wrap (str, style) {
   if (!style) return str
 
   if (Array.isArray(style) && style.length > 1) {
-    return colorize(colorz[style[0]](str), style.slice(1))
+    return wrap(colorz[style[0]](str), style.slice(1))
   } else {
     return colorz[Array.isArray(style) ? style[0] : style](str)
   }
@@ -99,6 +114,4 @@ function colorize (str, style) {
 module.exports = colorz
 module.exports.strip = strip
 module.exports.expose = expose
-module.exports.wrap = colorize
-module.exports.colorize = colorize
-module.exports.format = colorize
+module.exports.wrap = wrap
