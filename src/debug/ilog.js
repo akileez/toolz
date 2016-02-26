@@ -102,8 +102,20 @@ ilog.trace = function () {
   if (arguments.length && ilog.level >= 8) {
     let messages = format.apply(null, arguments)
 
-    ilog._stdout.write(ilog._assembleLog(messages, 'TRACE', ilog._time(new Date())))
+    ilog._stdout.write(ilog._assembleLog(messages, 'LOGR', ilog._time(new Date())))
   }
+}
+
+ilog.assert = function (expression, label) {
+  var title = 'Assertion expression'
+  var stack = {
+    name: 'Assert',
+    message: label,
+    result: !!expression
+  }
+
+  if (!!expression) ilog.debug(title, stack)
+  else ilog.error(title, stack)
 }
 
 ilog.auto = function (error) {
@@ -117,9 +129,29 @@ ilog.log = ilog
 ilog._stdout = process.stdout
 ilog._stderr = process.stderr
 ilog._procname = process.argv[1].split('/').pop()
+ilog._pointer = {
+  tick: '✔',
+  check: '√',
+  cross: '✖',
+  star: '★',
+  bullet: '*',
+  info: 'i',
+  info2: 'ℹ',
+  warning: '‼',
+  warning2: '⚠',
+  clip: '❯',
+  single: '›',
+  double: '»',
+  arrowUp: '↑',
+  arrowDown: '↓',
+  arrowLeft: '←',
+  arrowRight: '→',
+  radioOn: '◉',
+  radioOff: '◯',
+}
 
 ilog._time = function (time) {
-  return `${ilog._procname} »`
+  return `${ilog._procname} ${ilog._pointer.double}`
   // making generic
   // return `[${time.toISOString()}]`
 }
