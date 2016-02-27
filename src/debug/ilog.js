@@ -51,7 +51,8 @@ ilog.log = function () {
 // options for display, preserving the original functionality by reversing values.
 ilog.display = {
   colors: true,
-  dates: false
+  dates: false,
+  jlog: true
 }
 
 // ilog.level === -1 turns off all levels
@@ -84,7 +85,7 @@ map(levels.slice(0, 5), (level, index) => {
       }
 
       ilog._stderr.write(ilog._assembleLog(type(error), color, label))
-      if (ilog.display.colors) jlog(error)
+      if (ilog.display.colors && ilog.display.jlog) jlog(error)
     }
   }
 })
@@ -136,7 +137,7 @@ ilog.debug = function () {
       : ilog._label()
 
     ilog._stdout.write(ilog._assembleLog(messages, color, label))
-    if (ilog.display.colors && stack) jlog(stack)
+    if (ilog.display.colors && ilog.display.jlog && stack) jlog(stack)
   }
 }
 
@@ -175,9 +176,11 @@ ilog.auto = function (error) {
 
 // expose json-colorz
 ilog.jlog = function () {
-  map(slice(arguments), (arg) => {
-    jlog(arg)
-  })
+  if (ilog.display.jlog) {
+    map(slice(arguments), (arg) => {
+      jlog(arg)
+    })
+  }
 }
 
 ilog._stdout = process.stdout
