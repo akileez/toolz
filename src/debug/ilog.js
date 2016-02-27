@@ -21,16 +21,16 @@ const levels = [
 ]
 
 const clrs = {
-  black   : [30, 39],
-  gray    : [90, 39],
-  grey    : [90, 39],
-  red     : [31, 39],
-  green   : [32, 39],
-  yellow  : [33, 39],
-  blue    : [34, 39],
-  magenta : [35, 39],
-  cyan    : [36, 39],
-  white   : [37, 39]
+  black   : 30,
+  gray    : 90,
+  grey    : 90,
+  red     : 31,
+  green   : 32,
+  yellow  : 33,
+  blue    : 34,
+  magenta : 35,
+  cyan    : 36,
+  white   : 37
 }
 
 // Original version
@@ -159,14 +159,16 @@ ilog.trace = function () {
 }
 
 ilog.assert = function (expression, label) {
-  let title = 'Assertion expression'
+  let result = !!expression
   let stack = {
     name: 'Assert',
     message: label,
-    result: !!expression
+    actual: result,
+    expected: true
   }
 
-  ilog.debug(title, stack)
+  if (result) ilog.debug('Assertion Passed', stack)
+  else ilog.error('Assertion Failed', stack)
 }
 
 ilog.auto = function (error) {
@@ -210,7 +212,7 @@ ilog._pointer = {
 }
 
 ilog._color = function (label, color) {
-  return `\u001b[${clrs[color][0]}m${label}\u001b[${clrs[color][1]}m`
+  return `\u001b[${clrs[color]}m${label}\u001b[39m`
 }
 
 ilog._label = function (label) {
