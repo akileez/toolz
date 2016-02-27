@@ -52,7 +52,7 @@ Documentation has been eliminated. Another solution is being developed.
 [marm-url]: https://github.com/akileez/eslint-config-marm
 [stability-image]: https://img.shields.io/badge/stability-experimental-orange.svg?style=flat-square
 [stability-url]: https://github.com/akileez/toolz
-[phase-image]: https://img.shields.io/badge/phase-expansion-red.svg?style=flat-square
+[phase-image]: https://img.shields.io/badge/phase-frozen-red.svg?style=flat-square
 [phase-url]: https://github.com/akileez/toolz
 [license-img]: https://img.shields.io/badge/license-ISC-blue.svg?style=flat-square
 [license-url]: https://github.com/akileez/toolz/blob/master/license.md
