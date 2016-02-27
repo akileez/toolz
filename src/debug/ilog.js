@@ -172,6 +172,13 @@ ilog.auto = function (error) {
   else if (args.length > 1) ilog.debug.apply(null, args)
 }
 
+// expose json-colorz
+ilog.jclr = function () {
+  map(slice(arguments), (arg) => {
+    jlog(arg)
+  })
+}
+
 ilog._stdout = process.stdout
 ilog._stderr = process.stderr
 ilog._procname = process.argv[1].split('/').pop()
