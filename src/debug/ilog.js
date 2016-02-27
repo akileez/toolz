@@ -1,11 +1,12 @@
-// **Github:** https://github.com/teambition/ilog
-//
-// **License:** MIT
+// adopted from: ilog <https://github.com/teambition/ilog>
+// Copyright (c) 2015 Teambition (License: MIT)
+
 'use strict'
 
 const format = require('util').format
 const jlog   = require('../util/jcolorz')
 const ccase  = require('../string/sentenceCase')
+const map    = require('../array/map')
 const slice  = require('../array/slice')
 
 const levels = [
@@ -17,59 +18,91 @@ const levels = [
   'NOTICE',   // level 5
   'INFO',     // level 6
   'DEBUG'     // level 7
-  ]
+]
 
+const clrs = {
+  black   : [30, 39],
+  gray    : [90, 39],
+  grey    : [90, 39],
+  red     : [31, 39],
+  green   : [32, 39],
+  yellow  : [33, 39],
+  blue    : [34, 39],
+  magenta : [35, 39],
+  cyan    : [36, 39],
+  white   : [37, 39]
+}
+
+// Original version
 function ilog () {
   if (arguments.length) {
     ilog._stdout.write(ilog._assembleLog(format.apply(null, arguments)))
   }
 }
 
-ilog.display = true
+// Own version: meant for raw string output to log
+ilog.log = function () {
+  if (arguments.length) {
+    ilog._stdout.write(ilog._assembleLog(slice(arguments).join(' ')))
+  }
+}
+
+// options for display, preserving the original functionality by reversing values.
+ilog.display = {
+  colors: true,
+  dates: false
+}
+
 ilog.level = 7
 ilog.levels = levels.slice()
 
 // ilog.fatal, ilog.critical, ilog.error, ilog.warning, ilog.alert
-levels.slice(0, 5).map((level, index) => {
+map(levels.slice(0, 5), (level, index) => {
   ilog[level.toLowerCase()] = function (error, stack) {
     if (error != null && index <= ilog.level) {
-      // allow the ability to pass a debugging message of this level
+      // allow the ability to pass debugging messages as strings
       if (typeof error === 'string') error = {message: error}
       if (stack) error.stack = ilog._errorify(stack)
 
       error.name = ccase(level)
 
-      if (ilog.display) {
-        // reformatting output for jcolorz
-        // error = ilog._stringify(ilog._errorify(error))
-        error = ilog._errorify(error)
+      let color = ilog.display.colors ? ilog._color(level, 'red') : level
+      let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
 
-        ilog._stderr.write(ilog._assembleLog(error.message, '\u001b[31m'+level+'\u001b[39m', ilog._time(new Date())))
-        jlog(error)
+      error = ilog.display.colors
+        ? ilog._errorify(error)
+        : ilog._stringify(ilog._errorify(error))
+
+      let type = function (obj) {
+        return typeof obj === 'string'
+          ? obj
+          : obj.message
       }
 
-      else {
-        error = ilog._stringify(ilog._errorify(error))
-        ilog._stderr.write(ilog._assembleLog(error, level, ilog._time(new Date())))
-      }
+      ilog._stderr.write(ilog._assembleLog(type(error), color, label))
+      if (ilog.display.colors) jlog(error)
     }
   }
 })
 
 // ilog.notice, ilog.info
-levels.slice(5, 7).map((level, index) => {
+map(levels.slice(5, 7), (level, index) => {
   index += 5
   ilog[level.toLowerCase()] = function (message) {
     if (message != null && index <= ilog.level) {
       message = ilog._stringify(message)
-      ilog._stdout.write(ilog._assembleLog(message, '\u001b[90m'+level+'\u001b[39m', ilog._time(new Date())))
+
+      let color = ilog.display.colors ? ilog._color(level, 'grey') : level
+      let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
+
+      ilog._stdout.write(ilog._assembleLog(message, color, label))
     }
   }
 })
 
 ilog.debug = function () {
   // ilog.level === -1 turns off all levels
-  // ilog.level === -2 turns on debug logging
+  // ilog.level === -2 turns on debug logging only
   if (arguments.length && (ilog.level >= 7 || ilog.level === -2)) {
     let messages
 
@@ -92,30 +125,44 @@ ilog.debug = function () {
 
     else messages = format.apply(null, arguments)
 
+    let color = ilog.display.colors
+      ? ilog._color('DEBUG', 'blue')
+      : 'DEBUG'
 
-    ilog._stdout.write(ilog._assembleLog(messages, '\u001b[34mDEBUG\u001b[39m', ilog._time(new Date())))
-    if (stack) jlog(stack)
+    let label = ilog.display.dates
+      ? ilog._label(new Date())
+      : ilog._label()
+
+    ilog._stdout.write(ilog._assembleLog(messages, color, label))
+    if (ilog.display.colors && stack) jlog(stack)
   }
 }
 
 ilog.trace = function () {
   if (arguments.length && ilog.level >= 8) {
+    // contruct components
     let messages = format.apply(null, arguments)
+    let color = ilog.display.color ? ilog._color('LOGR', 'yellow') : 'LOGR'
+    let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
 
-    ilog._stdout.write(ilog._assembleLog(messages, 'LOGR', ilog._time(new Date())))
+    // compose message
+    let assemble = ilog._assembleLog(messages, color, label)
+
+    // log message
+    ilog._stdout.write(assemble)
   }
 }
 
 ilog.assert = function (expression, label) {
-  var title = 'Assertion expression'
-  var stack = {
+  let title = 'Assertion expression'
+  let stack = {
     name: 'Assert',
     message: label,
     result: !!expression
   }
 
   if (!!expression) ilog.debug(title, stack)
-  else ilog.error(title, stack)
+  else ilog.alert(title, stack)
 }
 
 ilog.auto = function (error) {
@@ -125,7 +172,6 @@ ilog.auto = function (error) {
   else if (args.length > 1) ilog.debug.apply(null, args)
 }
 
-ilog.log = ilog
 ilog._stdout = process.stdout
 ilog._stderr = process.stderr
 ilog._procname = process.argv[1].split('/').pop()
@@ -150,10 +196,20 @@ ilog._pointer = {
   radioOff: '◯',
 }
 
-ilog._time = function (time) {
+ilog._color = function (label, color) {
+  return `\u001b[${clrs[color][0]}m${label}\u001b[${clrs[color][1]}m`
+}
+
+ilog._label = function (label) {
   return `${ilog._procname} ${ilog._pointer.double}`
-  // making generic
-  // return `[${time.toISOString()}]`
+}
+
+ilog._assembleLog = function (log, level, label) {
+  if (level) log = `${level} ${log}`
+  if (label) log = `${label} ${log}\n`
+  else log = `${ilog._label()} ${log}\n`
+
+  return log
 }
 
 ilog._stringify = function (obj) {
@@ -162,17 +218,6 @@ ilog._stringify = function (obj) {
   } catch (e) {
     return format(obj)
   }
-}
-
-ilog._assembleLog = function (log, level, time) {
-  if (level) log = `${level} ${log}`
-
-  // doing this to enable "time" to be configured as
-  // a generic component prompt
-  if (time) log = `${time} ${log}\n`
-  else log = `${ilog._time()} ${log}\n`
-
-  return log
 }
 
 ilog._errorify = function (error) {
