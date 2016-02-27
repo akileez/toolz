@@ -58,6 +58,7 @@ ilog.display = {
 // ilog.level === -1 turns off all levels
 // ilog.level === -2 turns on debug logging only
 // ilog.level === -3 turns on debug and trace logging
+// ilog.level === -4 adds notice and info logging
 ilog.level = 7
 ilog.levels = levels.slice()
 
@@ -94,7 +95,7 @@ map(levels.slice(0, 5), (level, index) => {
 map(levels.slice(5, 7), (level, index) => {
   index += 5
   ilog[level.toLowerCase()] = function (message) {
-    if (message != null && index <= ilog.level) {
+    if (message != null && (index <= ilog.level || ilog.level <= -4)) {
       message = ilog._stringify(message)
 
       let color = ilog.display.colors ? ilog._color(level, 'grey') : level
@@ -141,6 +142,7 @@ ilog.debug = function () {
   }
 }
 
+// trace logging [level 8]
 ilog.trace = function () {
   if (arguments.length && (ilog.level >= 8 || ilog.level <= -3)) {
     // contruct components
@@ -187,24 +189,24 @@ ilog._stdout = process.stdout
 ilog._stderr = process.stderr
 ilog._procname = process.argv[1].split('/').pop()
 ilog._pointer = {
-  tick: '✔',
-  check: '√',
-  cross: '✖',
-  star: '★',
-  bullet: '*',
-  info: 'i',
-  info2: 'ℹ',
-  warning: '‼',
-  warning2: '⚠',
-  clip: '❯',
-  single: '›',
-  double: '»',
-  arrowUp: '↑',
-  arrowDown: '↓',
-  arrowLeft: '←',
-  arrowRight: '→',
-  radioOn: '◉',
-  radioOff: '◯',
+  tick       : '✔',
+  check      : '√',
+  cross      : '✖',
+  star       : '★',
+  bullet     : '*',
+  info       : 'i',
+  info2      : 'ℹ',
+  warning    : '‼',
+  warning2   : '⚠',
+  clip       : '❯',
+  single     : '›',
+  double     : '»',
+  arrowUp    : '↑',
+  arrowDown  : '↓',
+  arrowLeft  : '←',
+  arrowRight : '→',
+  radioOn    : '◉',
+  radioOff   : '◯'
 }
 
 ilog._color = function (label, color) {
