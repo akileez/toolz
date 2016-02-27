@@ -174,7 +174,7 @@ ilog.auto = function (error) {
 }
 
 // expose json-colorz
-ilog.jclr = function () {
+ilog.jlog = function () {
   map(slice(arguments), (arg) => {
     jlog(arg)
   })
