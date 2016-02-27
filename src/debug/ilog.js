@@ -42,9 +42,10 @@ function ilog () {
 
 // Own version: meant for raw string output to log
 ilog.log = function () {
-  if (arguments.length) {
-    ilog._stdout.write(ilog._assembleLog(slice(arguments).join(' ')))
-  }
+  // don't penalize a single string/template being passed as a param
+  arguments.length > 1
+    ? ilog._stdout.write(ilog._assembleLog(slice(arguments).join(' ')))
+    : ilog._stdout.write(ilog._assembleLog(arguments[0]))
 }
 
 // options for display, preserving the original functionality by reversing values.
