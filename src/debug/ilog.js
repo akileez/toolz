@@ -53,6 +53,9 @@ ilog.display = {
   dates: false
 }
 
+// ilog.level === -1 turns off all levels
+// ilog.level === -2 turns on debug logging only
+// ilog.level === -3 turns on debug and trace logging
 ilog.level = 7
 ilog.levels = levels.slice()
 
@@ -101,9 +104,7 @@ map(levels.slice(5, 7), (level, index) => {
 })
 
 ilog.debug = function () {
-  // ilog.level === -1 turns off all levels
-  // ilog.level === -2 turns on debug logging only
-  if (arguments.length && (ilog.level >= 7 || ilog.level === -2)) {
+  if (arguments.length && (ilog.level >= 7 || ilog.level <= -2)) {
     let messages
 
     if (arguments.length === 1) {
@@ -139,10 +140,10 @@ ilog.debug = function () {
 }
 
 ilog.trace = function () {
-  if (arguments.length && ilog.level >= 8) {
+  if (arguments.length && (ilog.level >= 8 || ilog.level <= -3)) {
     // contruct components
     let messages = format.apply(null, arguments)
-    let color = ilog.display.color ? ilog._color('LOGR', 'yellow') : 'LOGR'
+    let color = ilog.display.colors ? ilog._color('LOGR', 'yellow') : 'LOGR'
     let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
 
     // compose message
@@ -161,8 +162,7 @@ ilog.assert = function (expression, label) {
     result: !!expression
   }
 
-  if (!!expression) ilog.debug(title, stack)
-  else ilog.alert(title, stack)
+  ilog.debug(title, stack)
 }
 
 ilog.auto = function (error) {
