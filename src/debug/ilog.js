@@ -204,7 +204,7 @@ ilog.strt = function time (label) {
   }
 }
 
-ilog.end = function timeEnd (label) {
+ilog.stop = function timeEnd (label) {
   var diff = process.hrtime(ilog.timeTables[label])
   var diffMs = nano(diff, 'ms', 3)
   ilog.log(`${label} took: ${ilog._color(diffMs, 'grey')} ms`)
