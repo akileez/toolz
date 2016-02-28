@@ -5,11 +5,9 @@
 
 const format = require('util').format
 const nano   = require('../time/nano')
-const map    = require('../array/map')
 const slice  = require('../array/slice')
 const jlog   = require('../util/jcolorz')
 const apply  = require('../function/apply')
-const ccase  = require('../string/sentenceCase')
 
 const levels = [
   'FATAL',    // level 0
@@ -43,7 +41,7 @@ function ilog () {
 }
 
 // Own version: meant for raw string output to log
-ilog.log = function () {
+function logr () {
   // don't penalize a single string/template being passed as a param
   arguments.length > 1
     ? ilog._stdout.write(ilog._assembleLog(slice(arguments).join(' ')))
@@ -51,16 +49,13 @@ ilog.log = function () {
 }
 
 // options for display, preserving the original functionality by reversing values.
-ilog.display = {
-  colors: true,
-  dates: false,
-  jlog: true
-}
+ilog.dates = false
+ilog.colors = true
+ilog.verbose = true
 
 // ilog.level === -1 turns off all levels
-// ilog.level === -2 turns on debug logging only
-// ilog.level === -3 turns on debug and trace logging
-// ilog.level === -4 adds notice and info logging
+// ilog.level === -2 turns on debug and trace logging
+// ilog.level === -3 adds notice and info logging
 ilog.level = 7
 ilog.levels = levels.slice()
 
@@ -72,9 +67,9 @@ map(levels.slice(0, 5), (level, index) => {
       if (typeof error === 'string') error = {message: error}
       if (stack) error.stack = ilog._errorify(stack)
 
-      error.name = ccase(level)
+      error.name = level.charAt(0) + level.slice(1).toLowerCase()
 
-      error = ilog.display.colors
+      error = ilog.colors && ilog.verbose
         ? ilog._errorify(error)
         : ilog._stringify(ilog._errorify(error))
 
@@ -86,7 +81,7 @@ map(levels.slice(0, 5), (level, index) => {
 
       ilog._outputDisplay(type(error), {name: level, color: 'red'})
 
-      if (ilog.display.colors && ilog.display.jlog) jlog(error)
+      if (ilog.colors) ilog.inspect(error)
     }
   }
 })
@@ -95,7 +90,7 @@ map(levels.slice(0, 5), (level, index) => {
 map(levels.slice(5, 7), (level, index) => {
   index += 5
   ilog[level.toLowerCase()] = function (message) {
-    if (message != null && (index <= ilog.level || ilog.level <= -4)) {
+    if (message != null && (index <= ilog.level || ilog.level <= -3)) {
       message = ilog._stringify(message)
 
       ilog._outputDisplay(message, {name: level, color: 'grey'})
@@ -106,67 +101,77 @@ map(levels.slice(5, 7), (level, index) => {
 ilog.debug = function () {
   if (arguments.length && (ilog.level >= 7 || ilog.level <= -2)) {
     let messages
+    let stack = false
 
     if (arguments.length === 1) {
       messages = ilog._stringify(arguments[0])
     }
 
-    else if (arguments.length === 2
-      && typeof arguments[1] === 'object'
-      && 'name' in arguments[1]
-      && 'message' in arguments[1]
-    ) {
+    else  {
       messages = arguments[0]
-      var stack = {
-        name: 'Debug',
-        message: arguments[0],
-        stack: ilog._errorify(arguments[1])
-      }
+      stack = true
     }
 
-    else messages = apply(format, null, slice(arguments))
+    if (!ilog.colors || !ilog.verbose) messages = apply(format, null, slice(arguments))
 
-    ilog._outputDisplay(messages, {name: 'DEBUG', color: 'blue'})
+    ilog._outputDisplay(messages, {name: 'DEBUG', color: 'cyan'})
 
-    if (ilog.display.colors && ilog.display.jlog && stack) jlog(stack)
+    if (stack && ilog.colors) {
+      forEach(slice(arguments, 1), (view) => {
+        ilog.inspect(ilog._inspectify(view))
+      })
+    }
+  }
+}
+
+ilog.assert = function (expression, label) {
+  if (ilog.level >= 7 || ilog.level <= -2) {
+    let result = !!expression
+    let stack = {
+      name: 'Assertion Test',
+      message: label,
+      actual: result,
+      expected: true
+    }
+
+    let msg = ilog.colors && ilog.verbose
+      ? label
+      : ilog._stringify(stack)
+
+    ilog._outputDisplay(msg, {name: 'ASERT', color: 'cyan'})
+    if (ilog.colors) ilog.inspect(stack)
   }
 }
 
 // trace logging [level 8]
 ilog.trace = function () {
-  if (arguments.length && (ilog.level >= 8 || ilog.level <= -3)) {
+  if (arguments.length && (ilog.level >= 8 || ilog.level <= -2)) {
     let messages = apply(format, null, slice(arguments))
 
     ilog._outputDisplay(messages, {name: 'LOGR', color: 'yellow'})
   }
 }
 
-ilog.assert = function (expression, label) {
-  let result = !!expression
-  let stack = {
-    name: 'Assert',
-    message: label,
-    actual: result,
-    expected: true
-  }
-
-  if (result) ilog.debug('Assertion Passed', stack)
-  else ilog.error('Assertion Failed', stack)
-}
-
 ilog.auto = function (error) {
   if (error instanceof Error) return ilog.error(error)
+
   let args = slice(arguments, +(error == null))
+
   if (args.length === 1) ilog.info(args[0])
-  else if (args.length > 1) ilog.debug.apply(null, args)
+  else apply(ilog.debug, null, args)
 }
 
-// expose json-colorz
-ilog.jlog = function (desc) {
-  if (ilog.display.jlog) {
-    ilog.log(desc)
-    map(slice(arguments, 1), (arg) => {
-      jlog(arg)
+ilog.inspect = function (description) {
+  if (ilog.verbose && ilog.level !== -1) {
+    if (arguments.length > 1) {
+      ilog.log(description)
+      map(slice(arguments, 1), (arg) => {
+        ilog._inspector(arg)
+      })
+    }
+
+    else map(slice(arguments), (arg) => {
+        ilog._inspector(arg)
     })
   }
 }
@@ -192,9 +197,15 @@ ilog.stop = function timeEnd (label) {
   let diffMs = nano(diff, 'ms', 3)
   let msg = `${label} took: ${ilog._color(diffMs, 'grey')} ms`
 
-  ilog._outputDisplay(msg, {name: 'TIMR', color: 'yellow'})
+  if (ilog.level !== -1) {
+    ilog._outputDisplay(msg, {name: 'TIMER', color: 'white'})
+  }
+
+  return diffMs
 }
 
+ilog.log = logr
+ilog._inspector = jlog // expose json-colorz
 ilog._stdout = process.stdout
 ilog._stderr = process.stderr
 ilog._procname = process.argv[1].split('/').pop()
@@ -225,14 +236,11 @@ ilog._pointer = {
 
 ilog._outputDisplay = function (logMsg, levelObj, labelDisp) {
   // contruct components
-  let level = ilog.display.colors ? ilog._color(levelObj.name, levelObj.color) : levelObj.name
-  let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
+  let level = ilog.colors ? ilog._color(levelObj.name, levelObj.color) : levelObj.name
+  let label = ilog.dates ? ilog._label(new Date()) : ilog._label()
 
-  // compose message
-  let assemble = ilog._assembleLog(logMsg, level, label)
-
-  // log message
-  ilog._stdout.write(assemble)
+  // compose and log message
+  ilog._stdout.write(ilog._assembleLog(logMsg, level, label))
 }
 
 ilog._color = function (label, color) {
@@ -259,6 +267,24 @@ ilog._stringify = function (obj) {
   }
 }
 
+ilog._inspectify = function (obj) {
+  return new Inspectified(obj)
+}
+
+function Inspectified (obj) {
+  let type = Object.prototype.toString.call(obj)
+  this.type = type.replace(/^\[object |\]$/g, '').toLowerCase()
+  this.inspector = {}
+  if (type !== '[object Object]') {
+    this.inspector[this.type] = obj
+  } else if (type === '[object Object]'){
+    this.inspector[this.type] = {}
+    Object.keys(obj).map((key) => {
+      if (!this.inspector[this.type][key]) this.inspector[this.type][key] = obj[key]
+    })
+  }
+}
+
 ilog._errorify = function (error) {
   return new Errorify(error)
 }
@@ -277,6 +303,26 @@ function Errorify (error) {
     })
   }
   if (error.stack) this.stack = error.stack
+}
+
+function forEach (array, iterator) {
+  var i = -1
+  var len = array >= 0 ? array : array.length
+
+  while (++i < len) iterator(array[i], i)
+}
+
+function map (arr, fn) {
+  var results = []
+  if (arr == null) return results
+
+  var i = -1
+  var len = arr.length
+
+  while (++i < len) {
+    results[i] = fn(arr[i], i, arr)
+  }
+  return results
 }
 
 module.exports = ilog
