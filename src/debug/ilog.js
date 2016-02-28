@@ -8,6 +8,7 @@ const jlog   = require('../util/jcolorz')
 const ccase  = require('../string/sentenceCase')
 const map    = require('../array/map')
 const slice  = require('../array/slice')
+const nano   = require('../time/nano')
 
 const levels = [
   'FATAL',    // level 0
@@ -185,6 +186,28 @@ ilog.jlog = function () {
       jlog(arg)
     })
   }
+}
+
+// implement base start and stop times
+// adopted from debug-logger
+ilog.timeTables = {}
+
+ilog.strt = function time (label) {
+  if (Array.isArray(label)) {
+    map(label, (lab) => {
+      ilog.timeTables[lab] = process.hrtime()
+    })
+  }
+
+  else {
+    ilog.timeTables[label] = process.hrtime()
+  }
+}
+
+ilog.end = function timeEnd (label) {
+  var diff = process.hrtime(ilog.timeTables[label])
+  var diffMs = nano(diff, 'ms', 3)
+  ilog.log(`${label} took: ${ilog._color(diffMs, 'grey')} ms`)
 }
 
 ilog._stdout = process.stdout
