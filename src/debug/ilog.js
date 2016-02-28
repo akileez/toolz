@@ -4,11 +4,12 @@
 'use strict'
 
 const format = require('util').format
-const jlog   = require('../util/jcolorz')
-const ccase  = require('../string/sentenceCase')
+const nano   = require('../time/nano')
 const map    = require('../array/map')
 const slice  = require('../array/slice')
-const nano   = require('../time/nano')
+const jlog   = require('../util/jcolorz')
+const apply  = require('../function/apply')
+const ccase  = require('../string/sentenceCase')
 
 const levels = [
   'FATAL',    // level 0
@@ -37,7 +38,7 @@ const clrs = {
 // Original version
 function ilog () {
   if (arguments.length) {
-    ilog._stdout.write(ilog._assembleLog(format.apply(null, arguments)))
+    ilog._stdout.write(ilog._assembleLog(apply(format, null, slice(arguments))))
   }
 }
 
@@ -73,9 +74,6 @@ map(levels.slice(0, 5), (level, index) => {
 
       error.name = ccase(level)
 
-      let color = ilog.display.colors ? ilog._color(level, 'red') : level
-      let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
-
       error = ilog.display.colors
         ? ilog._errorify(error)
         : ilog._stringify(ilog._errorify(error))
@@ -86,7 +84,8 @@ map(levels.slice(0, 5), (level, index) => {
           : obj.message
       }
 
-      ilog._stderr.write(ilog._assembleLog(type(error), color, label))
+      ilog._outputDisplay(type(error), {name: level, color: 'red'})
+
       if (ilog.display.colors && ilog.display.jlog) jlog(error)
     }
   }
@@ -99,10 +98,7 @@ map(levels.slice(5, 7), (level, index) => {
     if (message != null && (index <= ilog.level || ilog.level <= -4)) {
       message = ilog._stringify(message)
 
-      let color = ilog.display.colors ? ilog._color(level, 'grey') : level
-      let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
-
-      ilog._stdout.write(ilog._assembleLog(message, color, label))
+      ilog._outputDisplay(message, {name: level, color: 'grey'})
     }
   }
 })
@@ -128,17 +124,10 @@ ilog.debug = function () {
       }
     }
 
-    else messages = format.apply(null, arguments)
+    else messages = apply(format, null, slice(arguments))
 
-    let color = ilog.display.colors
-      ? ilog._color('DEBUG', 'blue')
-      : 'DEBUG'
+    ilog._outputDisplay(messages, {name: 'DEBUG', color: 'blue'})
 
-    let label = ilog.display.dates
-      ? ilog._label(new Date())
-      : ilog._label()
-
-    ilog._stdout.write(ilog._assembleLog(messages, color, label))
     if (ilog.display.colors && ilog.display.jlog && stack) jlog(stack)
   }
 }
@@ -146,16 +135,9 @@ ilog.debug = function () {
 // trace logging [level 8]
 ilog.trace = function () {
   if (arguments.length && (ilog.level >= 8 || ilog.level <= -3)) {
-    // contruct components
-    let messages = format.apply(null, arguments)
-    let color = ilog.display.colors ? ilog._color('LOGR', 'yellow') : 'LOGR'
-    let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
+    let messages = apply(format, null, slice(arguments))
 
-    // compose message
-    let assemble = ilog._assembleLog(messages, color, label)
-
-    // log message
-    ilog._stdout.write(assemble)
+    ilog._outputDisplay(messages, {name: 'LOGR', color: 'yellow'})
   }
 }
 
@@ -206,9 +188,11 @@ ilog.strt = function time (label) {
 }
 
 ilog.stop = function timeEnd (label) {
-  var diff = process.hrtime(ilog.timeTables[label])
-  var diffMs = nano(diff, 'ms', 3)
-  ilog.log(`${label} took: ${ilog._color(diffMs, 'grey')} ms`)
+  let diff = process.hrtime(ilog.timeTables[label])
+  let diffMs = nano(diff, 'ms', 3)
+  let msg = `${label} took: ${ilog._color(diffMs, 'grey')} ms`
+
+  ilog._outputDisplay(msg, {name: 'TIMR', color: 'yellow'})
 }
 
 ilog._stdout = process.stdout
@@ -235,11 +219,23 @@ ilog._pointer = {
   radioOff   : '◯'
 }
 
+ilog._outputDisplay = function (logMsg, levelObj, labelDisp) {
+  // contruct components
+  let level = ilog.display.colors ? ilog._color(levelObj.name, levelObj.color) : levelObj.name
+  let label = ilog.display.dates ? ilog._label(new Date()) : ilog._label()
+
+  // compose message
+  let assemble = ilog._assembleLog(logMsg, level, label)
+
+  // log message
+  ilog._stdout.write(assemble)
+}
+
 ilog._color = function (label, color) {
   return `\u001b[${clrs[color]}m${label}\u001b[39m`
 }
 
-ilog._label = function (label) {
+ilog._label = function () {
   return `${ilog._procname} ${ilog._pointer.double}`
 }
 
