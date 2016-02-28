@@ -180,9 +180,10 @@ ilog.auto = function (error) {
 }
 
 // expose json-colorz
-ilog.jlog = function () {
+ilog.jlog = function (desc) {
   if (ilog.display.jlog) {
-    map(slice(arguments), (arg) => {
+    ilog.log(desc)
+    map(slice(arguments, 1), (arg) => {
       jlog(arg)
     })
   }
