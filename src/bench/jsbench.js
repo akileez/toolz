@@ -1,21 +1,25 @@
 // **Github:** https://github.com/zensh/jsbench
 // **License:** MIT
 
-/* global module, define, console */
-;(function (root, factory) {
-  'use strict'
+'use strict'
 
-  if (typeof module === 'object' && module.exports) module.exports = factory(require('../function/thunks'))
-  else if (typeof define === 'function' && define.amd) define(['thunks'], factory)
-  else root.JSBench = factory(root.thunks)
-}(typeof window === 'object' ? window : this, function (thunks) {
-  'use strict'
+var thunks = require('../function/thunks')
+var clr    = require('../util/colorz')
+
+function factory (thunks) {
 
   var thunk = thunks()
 
   function forEach (array, iterator) {
-    for (var i = 0, len = array >= 0 ? array : array.length; i < len; i++) iterator(array[i], i)
+    var i = -1
+    var len = array >= 0 ? array : array.length
+
+    while (++i < len) iterator(array[i], i)
   }
+
+  // function forEach (array, iterator) {
+  //   for (var i = 0, len = array >= 0 ? array : array.length; i < len; i++) iterator(array[i], i)
+  // }
 
   function JSBench () {
     this._list = []
@@ -56,19 +60,19 @@
       ctx.on('complete', function (e) {
         console.log('\nJSBench Results:')
         forEach(e.ranking, function (test) {
-          console.log(test.name + ': ' + test.message)
+          console.log(' ' + clr.grey(test.name) + ': ' + test.message)
         })
         console.log(e.result)
       })
     }
 
     // 按顺序串行执行各个测试
-    console.log('\nJSBench Start, ' + cycles + ' cycles:')
+    console.log('\nJSBench Start, ' + clr.blue(cycles) + ' cycles:')
     return thunk.seq(list.map(function (test) {
       // 异步执行每一个测试
       return function (callback) {
         return thunk.delay()(function () {
-          console.log('Test ' + test.name + '...')
+          console.log(' Test ' + clr.yellow(test.name) + '...')
           test.startTime = Date.now()
           test.cycles = test.error = test.endTime = test.ops = null
 
@@ -113,7 +117,7 @@
         else {
           ms = (test.endTime - test.startTime) / test.cycles
           test.ops = 1000 / ms
-          test.message = test.cycles + ' cycles, ' + ms + ' ms/cycle, ' + test.ops.toFixed(3) + ' ops/sec'
+          test.message = clr.green(test.cycles) + ' cycles, ' + clr.green(ms) + ' ms/cycle, ' + clr.green(test.ops.toFixed(3)) + ' ops/sec'
         }
       })
       // 对结果进行排序对比
@@ -123,10 +127,10 @@
 
       forEach(ranking, function (test) {
         if (!test.ops) return
-        if (base) result += ' ' + test.name + ': ' + (test.ops * 100 / base).toFixed(2) + '%;'
+        if (base) result += ' ' + clr.magenta(test.name) + ': ' + (test.ops * 100 / base).toFixed(2) + '%;\n'
         else {
           base = test.ops
-          result = '\n' + test.name + ': 100%;'
+          result = '\n ' + test.name + ': 100%;\n'
         }
       })
 
@@ -137,4 +141,6 @@
   }
 
   return JSBench
-}))
+}
+
+module.exports = factory(thunks)
