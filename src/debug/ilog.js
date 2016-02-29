@@ -148,7 +148,7 @@ ilog.trace = function () {
   if (arguments.length && (ilog.level >= 8 || ilog.level <= -2)) {
     let messages = apply(format, null, slice(arguments))
 
-    ilog._outputDisplay(messages, {name: 'LOGR', color: 'yellow'})
+    ilog._outputDisplay(messages, {name: 'TRACE', color: 'yellow'})
   }
 }
 
