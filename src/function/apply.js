@@ -6,42 +6,42 @@
 
 function fastApply (fn, context, args) {
   var something = {
-    0: function () {
+    0: () => {
       return context
         ? fn.call(context)
         : fn()
     },
-    1: function () {
+    1: () => {
       return context
         ? fn.call(context, args[0])
         : fn(args[0])
     },
-    2: function () {
+    2: () => {
       return context
         ? fn.call(context, args[0], args[1])
         : fn(args[0], args[1])
     },
-    3: function () {
+    3: () => {
       return context
         ? fn.call(context, args[0], args[1], args[2])
         : fn(args[0], args[1], args[2])
     },
-    4: function () {
+    4: () => {
       return context
         ? fn.call(context, args[0], args[1], args[2], args[3])
         : fn(args[0], args[1], args[2], args[3])
     },
-    5: function () {
+    5: () => {
       return context
         ? fn.call(context, args[0], args[1], args[2], args[3], args[4])
         : fn(args[0], args[1], args[2], args[3], args[4])
     },
-    6: function () {
+    6: () => {
       return context
         ? fn.call(context, args[0], args[1], args[2], args[3], args[4], args[5])
         : fn(args[0], args[1], args[2], args[3], args[4], args[5])
     },
-    defaults: function () {
+    defaults: () => {
       return fn.apply(context, args)
     }
   }
