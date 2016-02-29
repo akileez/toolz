@@ -161,18 +161,20 @@ ilog.auto = function (error) {
   else apply(ilog.debug, null, args)
 }
 
-ilog.inspect = function (description) {
+ilog.inspect = function () {
   if (ilog.verbose && ilog.level !== -1) {
-    if (arguments.length > 1) {
-      ilog.log(description)
+    if (arguments.length > 1 && typeof arguments[0] === 'string') {
+      ilog._outputDisplay(`Inspecting ${arguments[0]}: `, {name: 'LOGGR', color: 'white'})
       map(slice(arguments, 1), (arg) => {
         ilog._inspector(arg)
       })
     }
 
-    else map(slice(arguments), (arg) => {
+    else {
+      map(slice(arguments), (arg) => {
         ilog._inspector(arg)
-    })
+      })
+    }
   }
 }
 
