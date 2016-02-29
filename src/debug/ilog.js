@@ -308,6 +308,24 @@ function Errorify (error) {
   if (error.stack) this.stack = error.stack
 }
 
+// ilog._standardize () {
+//   return new Standardize()
+// }
+
+// function Standardize (level, msg) {
+//   const os       = require('os')
+//   const pid      = process.pid
+//   const hostname = os.hostname()
+
+//   this.pid = pid
+//   this.hostname = hostname
+//   this.name = name
+//   this.level = level
+//   this.msg = msg && msg.toString()
+//   this.time = new Date()
+//   this.v = 0
+// }
+
 function forEach (array, iterator) {
   var i = -1
   var len = array >= 0 ? array : array.length
