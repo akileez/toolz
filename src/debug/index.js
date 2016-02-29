@@ -11,7 +11,7 @@ var util = require('util');
  * Expose `debug()` as the module.
  */
 
-exports = module.exports = require('./core');
+exports = module.exports = require('./debug');
 exports.log = log;
 exports.formatArgs = formatArgs;
 exports.save = save;
