@@ -347,6 +347,25 @@ function Inspectified (obj) {
   }
 }
 
+// Setup a standardized message for low level logging
+ilog._standardize = function (message) {
+  return new Standardize(message)
+}
+
+function Standardize (msg) {
+  // const os       = require('os')
+  const pid      = process.pid
+  // const hostname = os.hostname()
+
+  this.pid = process.pid
+  // this.hostname = hostname
+  this.name = msg.name
+  this.lvl = msg.level
+  this.msg = msg.message
+  this.time = ilog.dates ? new Date() : undefined
+  this.v = 0
+}
+
 ilog._errorify = function (error) {
   return new Errorify(error)
 }
@@ -366,24 +385,6 @@ function Errorify (error) {
   }
   if (error.stack) this.stack = error.stack
 }
-
-// ilog._standardize () {
-//   return new Standardize()
-// }
-
-// function Standardize (level, msg) {
-//   const os       = require('os')
-//   const pid      = process.pid
-//   const hostname = os.hostname()
-
-//   this.pid = pid
-//   this.hostname = hostname
-//   this.name = name
-//   this.level = level
-//   this.msg = msg && msg.toString()
-//   this.time = new Date()
-//   this.v = 0
-// }
 
 function forEach (array, iterator) {
   var i = -1
