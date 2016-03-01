@@ -67,10 +67,14 @@ map(levels.slice(0, 5), (level, index) => {
     if (error != null && index <= ilog.level) {
       // allow the ability to pass debugging messages as strings
       if (typeof error === 'string') error = {message: error}
-      if (stack) error.stack = ilog._errorify(stack)
 
       error.name = level.charAt(0) + level.slice(1).toLowerCase()
       error.level = index
+
+      if (stack) {
+        stack.level = index
+        error.stack = ilog._errorify(stack)
+      }
 
       error = ilog.colors && ilog.verbose
         ? ilog._errorify(error)
