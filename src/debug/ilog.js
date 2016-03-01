@@ -160,8 +160,11 @@ ilog.trace = function () {
 }
 
 ilog.tracer = function (prefix, prompt) {
-  if (prompt == null) prompt = `${ilog._pointer.double}`
-  if (prefix == null) prefix = 'LOGGR'
+  if (prompt == null) prompt = ilog._pointer.double
+  if (prefix == null) {
+    prefix =  '' //['LOGGR', 'black']
+    prompt =  ' ' + prompt
+  }
 
   return (nsp, clrs) => {
     return function () {
