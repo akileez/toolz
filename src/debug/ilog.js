@@ -280,21 +280,21 @@ ilog._assembleLvl = function (lvlo) {
   let prefix
   let prompt
 
+  // the prompt is essentially a separator.
   if (lvlo.prompt) {
     if (Array.isArray(lvlo.prompt)) {
-      prompt = `${ilog._color(lvlo.prompt[0], lvlo.prompt[1])}`
+      prompt = ilog._color(lvlo.prompt[0], lvlo.prompt[1])
     } else {
-      prompt = `${ilog._color(lvlo.prompt)}`
+      prompt = ilog._color(lvlo.prompt)
     }
   } else {
     prompt = ''
   }
   if (lvlo.prefix) {
     if (Array.isArray(lvlo.prefix)) {
-      prefix = `${ilog._color(lvlo.prefix[0], lvlo.prefix[1])}` + ' '+prompt + ' '
-    }
-    else {
-      prefix = `${ilog._color(lvlo.prefix, 'black')}` + ' '+prompt + ' '
+      prefix = ilog._color(lvlo.prefix[0], lvlo.prefix[1]) + ' '+prompt + ' '
+    } else {
+      prefix = ilog._color(lvlo.prefix) + ' '+prompt + ' '
     }
   } else {
     prefix = ''
@@ -302,18 +302,19 @@ ilog._assembleLvl = function (lvlo) {
 
   if (Array.isArray(lvlo.name)) {
     construct = map(lvlo.name, (lvlname, idx) => {
+      let sp
       let prompto = ' '+prompt+' '
       if (idx === lvlo.name.length - 1) prompto = ' '+prompt
+      if (idx === 0) sp = ''
+      else sp = prefix ? '' : ' '
 
-      return ilog._color(lvlname, lvlo.color[idx]) + (prefix ? prompto : prompt)
+      return sp + ilog._color(lvlname, lvlo.color[idx]) + (prefix ? prompto : prompt)
     }).join('')
   } else {
-    construct = `${ilog._color(lvlo.name, lvlo.color)}` + (prefix ? ' '+prompt : prompt)
+    construct = ilog._color(lvlo.name, lvlo.color) + (prefix ? ' '+prompt : prompt)
   }
 
-  let construction = prefix + construct
-
-  return construction
+  return prefix + construct
 }
 
 ilog._color = function (label, color) {
