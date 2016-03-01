@@ -297,7 +297,7 @@ ilog._assembleLvl = function (lvlo) {
       return ilog._color(lvlname, lvlo.color[idx]) + (prefix ? prompto : prompt)
     }).join('')
   } else {
-    construct = `${ilog._color(lvlo.name, lvlo.color)}` + ' ' +  prompt
+    construct = `${ilog._color(lvlo.name, lvlo.color)}` + (prefix ? ' '+prompt : prompt)
   }
 
   let construction = prefix + construct
