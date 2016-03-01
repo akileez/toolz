@@ -255,8 +255,8 @@ ilog._pointer = {
 }
 
 ilog._outputDisplay = function (logMsg, levelObj, labelDisp) {
-  // contruct components
-  let level = ilog.colors ? ilog._color(levelObj.name, levelObj.color) : levelObj.name
+  // construct components
+  let level = ilog._assembleLvl(levelObj)
   let label = ilog.dates ? ilog._label(new Date()) : ilog._label()
 
   // compose and log message
