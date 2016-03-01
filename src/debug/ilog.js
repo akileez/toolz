@@ -222,10 +222,12 @@ ilog.strt = function time (label) {
 ilog.stop = function timeEnd (label) {
   let diff = process.hrtime(ilog.timeTables[label])
   let diffMs = nano(diff, 'ms', 3)
-  let msg = `${label} took: ${ilog._color(diffMs, 'grey')} ms`
 
-  if (ilog.level !== -1) {
-    ilog._outputDisplay(msg, {name: 'TIMER', color: 'white'})
+  if (ilog.level !== -1 && ilog.timer) {
+    let msg = `${label} took: ${ilog._color(diffMs, 'grey')} ms`
+    let frmt = {name: 'TIMER', color: 'white'}
+
+    ilog._outputDisplay(msg, frmt)
   }
 
   return diffMs
