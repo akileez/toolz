@@ -152,6 +152,21 @@ ilog.trace = function () {
   }
 }
 
+ilog.tracer = function (prefix, prompt) {
+  if (prompt == null) prompt = `${ilog._pointer.double}`
+  if (prefix == null) prefix = 'LOGGR'
+
+  return (nsp, clrs) => {
+    return function () {
+      if (arguments.length && (ilog.level >= 8 || ilog.level <= -2)) {
+        let messages = apply(format, null, slice(arguments))
+
+        ilog._outputDisplay(messages, {prefix: prefix, prompt: prompt, name: nsp, color: clrs})
+      }
+    }
+  }
+}
+
 ilog.auto = function (error) {
   if (error instanceof Error) return ilog.error(error)
 
