@@ -90,7 +90,7 @@ map(levels.slice(0, 5), (level, index) => {
 map(levels.slice(5, 7), (level, index) => {
   index += 5
   ilog[level.toLowerCase()] = function (message) {
-    if (message != null && (index <= ilog.level || ilog.level <= -3)) {
+    if (message != null && (index <= ilog.level || ilog.level <= -4)) {
       message = ilog._stringify(message)
 
       ilog._outputDisplay(message, {name: level, color: 'grey'})
@@ -99,7 +99,7 @@ map(levels.slice(5, 7), (level, index) => {
 })
 
 ilog.debug = function () {
-  if (arguments.length && (ilog.level >= 7 || ilog.level <= -2)) {
+  if (arguments.length && (ilog.level >= 7 || ilog.level <= -3)) {
     let messages
     let stack = false
 
@@ -125,7 +125,7 @@ ilog.debug = function () {
 }
 
 ilog.assert = function (expression, label) {
-  if (ilog.level >= 7 || ilog.level <= -2) {
+  if (ilog.level >= 7 || ilog.level <= -3) {
     let result = !!expression
     let stack = {
       name: 'Assertion Test',
