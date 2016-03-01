@@ -68,10 +68,11 @@ map(levels.slice(0, 5), (level, index) => {
       if (stack) error.stack = ilog._errorify(stack)
 
       error.name = level.charAt(0) + level.slice(1).toLowerCase()
+      error.level = index
 
       error = ilog.colors && ilog.verbose
         ? ilog._errorify(error)
-        : ilog._stringify(ilog._errorify(error))
+        : ilog._stringify(ilog._standardize(error))
 
       let type = function (obj) {
         return typeof obj === 'string'
