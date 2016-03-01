@@ -25,6 +25,17 @@
       console.log();
     }
 
+    baz in /Volumes/BigStor/Developer/tmp/tmp/mix/idx20.js:15
+    bar in /Volumes/BigStor/Developer/tmp/tmp/mix/idx20.js:10
+    foo in /Volumes/BigStor/Developer/tmp/tmp/mix/idx20.js:6
+    anonymous in /Volumes/BigStor/Developer/tmp/tmp/mix/idx20.js:3
+    Module._compile in module.js:397
+    Module._extensions..js in module.js:404
+    Module.load in module.js:343
+    Module._load in module.js:300
+    Module.runMain in module.js:429
+    startup in node.js:139
+
 */
 
 module.exports = function () {
