@@ -52,10 +52,12 @@ function logr () {
 ilog.dates = false
 ilog.colors = true
 ilog.verbose = true
+ilog.timer = false
 
 // ilog.level === -1 turns off all levels
-// ilog.level === -2 turns on debug and trace logging
-// ilog.level === -3 adds notice and info logging
+// ilog.level === -2 turns on trace logging only
+// ilog.level === -3 adds debug logging
+// ilog.level === -4 adds notice and info levels
 ilog.level = 7
 ilog.levels = levels.slice()
 
