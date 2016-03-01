@@ -4,23 +4,23 @@
 "use strict";
 
 /*
-debug with a default namespace consisting of the <application name>:<current filename>.
+  debug with a default namespace consisting of the <application name>:<current filename>.
 
-Instead of doing:
+  Instead of doing:
 
-  var debug = require('debug')('myApp:file');
+    var debug = require('debug')('myApp:file');
 
-..use debug-app instead:
+  ..use debug-app instead:
 
-  var debug = require('debug-app')();
+    var debug = require('debug-app')();
 
-The result is identical, but you won't have to type the app name and the filename over and over again. This is also future-proof in case your app name / filename change.
+  The result is identical, but you won't have to type the app name and the filename over and over again. This is also future-proof in case your app name / filename change.
 
 */
 
-var debug = require('./');
-var stack = require('./callsite');
-var path = require('path');
+var debug = require('./node') //debug
+var stack = require('./callsite')
+var path  = require('path')
 
 function debugApp() {
   var appPath = path.resolve(__dirname + '/../../')
