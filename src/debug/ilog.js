@@ -263,7 +263,49 @@ ilog._outputDisplay = function (logMsg, levelObj, labelDisp) {
   ilog._stdout.write(ilog._assembleLog(logMsg, level, label))
 }
 
+ilog._assembleLvl = function (lvlo) {
+  let construct
+  let prefix
+  let prompt
+
+  if (lvlo.prompt) {
+    if (Array.isArray(lvlo.prompt)) {
+      prompt = `${ilog._color(lvlo.prompt[0], lvlo.prompt[1])}`
+    } else {
+      prompt = `${ilog._color(lvlo.prompt)}`
+    }
+  } else {
+    prompt = ''
+  }
+  if (lvlo.prefix) {
+    if (Array.isArray(lvlo.prefix)) {
+      prefix = `${ilog._color(lvlo.prefix[0], lvlo.prefix[1])}` + ' '+prompt + ' '
+    }
+    else {
+      prefix = `${ilog._color(lvlo.prefix, 'black')}` + ' '+prompt + ' '
+    }
+  } else {
+    prefix = ''
+  }
+
+  if (Array.isArray(lvlo.name)) {
+    construct = map(lvlo.name, (lvlname, idx) => {
+      let prompto = ' '+prompt+' '
+      if (idx === lvlo.name.length - 1) prompto = ' '+prompt
+
+      return ilog._color(lvlname, lvlo.color[idx]) + (prefix ? prompto : prompt)
+    }).join('')
+  } else {
+    construct = `${ilog._color(lvlo.name, lvlo.color)}` + ' ' +  prompt
+  }
+
+  let construction = prefix + construct
+
+  return construction
+}
+
 ilog._color = function (label, color) {
+  if (!color || !ilog.colors) return label
   return `\u001b[${clrs[color]}m${label}\u001b[39m`
 }
 
