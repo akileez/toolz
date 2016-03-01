@@ -373,9 +373,9 @@ function Standardize (msg) {
   this.pid = process.pid
   // this.hostname = hostname
   this.name = msg.name
-  this.lvl = msg.level
-  this.msg = msg.message
-  this.time = ilog.dates ? new Date() : undefined
+  this.level = msg.level
+  this.message = msg.message
+  if (ilog.dates) this.time = new Date()
   this.v = 0
 }
 
@@ -385,6 +385,7 @@ ilog._errorify = function (error) {
 
 function Errorify (error) {
   this.name = error.name || 'Error'
+  this.level = error.level
   this.message = error.message || format(error)
 
   if (error.code) this.code = error.code
