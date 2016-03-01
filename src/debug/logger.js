@@ -1,7 +1,7 @@
 'use strict';
 
 var util = require('util')
-var vmDebug = require('./')
+var vmDebug = require('./node') // debug
 var streamSpy = require('./stream-spy')
 
 exports = module.exports = debugLogger
