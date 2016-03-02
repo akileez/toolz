@@ -74,8 +74,7 @@ map(levels.slice(0, 5), (level, index) => {
       error.level = index
 
       if (stack) {
-        stack.level = index
-        error.stack = ilog._errorify(stack)
+        error.stack = stack
       }
 
       error = ilog.colors && ilog.verbose
@@ -88,7 +87,7 @@ map(levels.slice(0, 5), (level, index) => {
           : obj.message
       }
 
-      ilog._outputDisplay(type(error), {name: level, color: 'red'})
+      ilog._outputDisplay(type(error), {name: clrz.brRed(level), color: ''})
 
       if (ilog.colors) ilog.inspect(error)
     }
