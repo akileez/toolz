@@ -266,52 +266,52 @@ ilog._pointer = {
   radioOff   : '◯'
 }
 
-ilog._outputDisplay = function (logMsg, levelObj, labelDisp) {
+ilog._outputDisplay = function (log, level, label) {
   // construct components
-  let level = ilog._assembleLvl(levelObj)
-  let label = ilog.dates ? ilog._label(new Date()) : ilog._label()
+  level = ilog._assembleLvl(level)
+  label = ilog.dates ? ilog._label(new Date()) : ilog._label()
 
   // compose and log message
-  ilog._stdout.write(ilog._assembleLog(logMsg, level, label))
+  ilog._stdout.write(ilog._assembleLog(log, level, label))
 }
 
-ilog._assembleLvl = function (lvlo) {
+ilog._assembleLvl = function (obj) {
   let construct
   let prefix
   let prompt
 
   // the prompt is essentially a separator.
-  if (lvlo.prompt) {
-    if (Array.isArray(lvlo.prompt)) {
-      prompt = ilog._color(lvlo.prompt[0], lvlo.prompt[1])
+  if (obj.prompt) {
+    if (Array.isArray(obj.prompt)) {
+      prompt = ilog._color(obj.prompt[0], obj.prompt[1])
     } else {
-      prompt = ilog._color(lvlo.prompt)
+      prompt = ilog._color(obj.prompt)
     }
   } else {
     prompt = ''
   }
-  if (lvlo.prefix) {
-    if (Array.isArray(lvlo.prefix)) {
-      prefix = ilog._color(lvlo.prefix[0], lvlo.prefix[1]) + ' '+prompt + ' '
+  if (obj.prefix) {
+    if (Array.isArray(obj.prefix)) {
+      prefix = ilog._color(obj.prefix[0], obj.prefix[1]) + ' '+prompt + ' '
     } else {
-      prefix = ilog._color(lvlo.prefix) + ' '+prompt + ' '
+      prefix = ilog._color(obj.prefix) + ' '+prompt + ' '
     }
   } else {
     prefix = ''
   }
 
-  if (Array.isArray(lvlo.name)) {
-    construct = map(lvlo.name, (lvlname, idx) => {
+  if (Array.isArray(obj.name)) {
+    construct = map(obj.name, (lvlname, idx) => {
       let sp
       let prompto = ' '+prompt+' '
-      if (idx === lvlo.name.length - 1) prompto = ' '+prompt
+      if (idx === obj.name.length - 1) prompto = ' '+prompt
       if (idx === 0) sp = ''
       else sp = prefix ? '' : ' '
 
-      return sp + ilog._color(lvlname, lvlo.color[idx]) + (prefix ? prompto : prompt)
+      return sp + ilog._color(lvlname, obj.color[idx]) + (prefix ? prompto : prompt)
     }).join('')
   } else {
-    construct = ilog._color(lvlo.name, lvlo.color) + (prefix ? ' '+prompt : prompt)
+    construct = ilog._color(obj.name, obj.color) + (prefix ? ' '+prompt : prompt)
   }
 
   return prefix + construct
