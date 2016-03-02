@@ -230,6 +230,7 @@ ilog.stop = function timeEnd (label) {
     ilog._outputDisplay(msg, frmt)
   }
 
+  delete ilog.timeTables[label]
   return diffMs
 }
 
