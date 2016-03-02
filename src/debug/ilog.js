@@ -3,10 +3,12 @@
 
 'use strict'
 
-const format = require('util').format
+const format = require('../util/sprintf').sprintf
+const callr  = require('./callsite')
 const nano   = require('../time/nano')
 const slice  = require('../array/slice')
 const jlog   = require('../util/jcolorz')
+const clrz   = require('../util/colorz')
 const apply  = require('../function/apply')
 
 const levels = [
