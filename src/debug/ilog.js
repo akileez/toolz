@@ -342,24 +342,6 @@ ilog._stringify = function (obj) {
   }
 }
 
-ilog._inspectify = function (obj) {
-  return new Inspectified(obj)
-}
-
-function Inspectified (obj) {
-  let type = Object.prototype.toString.call(obj)
-  this.type = type.replace(/^\[object |\]$/g, '').toLowerCase()
-  this.inspector = {}
-  if (type !== '[object Object]') {
-    this.inspector[this.type] = obj
-  } else if (type === '[object Object]'){
-    this.inspector[this.type] = {}
-    Object.keys(obj).map((key) => {
-      if (!this.inspector[this.type][key]) this.inspector[this.type][key] = obj[key]
-    })
-  }
-}
-
 // Setup a standardized message for low level logging
 ilog._standardize = function (message) {
   return new Standardize(message)
