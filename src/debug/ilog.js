@@ -370,7 +370,7 @@ ilog._errorify = function (error) {
 function Errorify (error) {
   this.name = error.name || 'Error'
   this.level = error.level
-  this.message = error.message || format(error)
+  this.message = error.message || apply(format,null, error)
 
   if (error.code) this.code = error.code
   if (error.errno) this.errno = error.errno
