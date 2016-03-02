@@ -111,8 +111,8 @@ ilog.debug = function () {
     let messages
     let stack = false
 
-    if (arguments.length === 1) {
-      messages = ilog._stringify(arguments[0])
+    if (arguments.length === 1 || (!ilog.colors || !ilog.verbose)) {
+      messages = ilog._stringify(slice(arguments).join(' '))
     }
 
     else  {
@@ -120,34 +120,13 @@ ilog.debug = function () {
       stack = true
     }
 
-    if (!ilog.colors || !ilog.verbose) messages = apply(format, null, slice(arguments))
-
-    ilog._outputDisplay(messages, {name: 'DEBUG', color: 'cyan'})
+    ilog._outputDisplay(messages, {name: 'DEBUG', color: 'green'})
 
     if (stack && ilog.colors) {
       forEach(slice(arguments, 1), (view) => {
-        ilog.inspect(ilog._inspectify(view))
+        ilog.inspect(view)
       })
     }
-  }
-}
-
-ilog.assert = function (expression, label) {
-  if (ilog.level >= 7 || ilog.level <= -3) {
-    let result = !!expression
-    let stack = {
-      name: 'Assertion Test',
-      message: label,
-      actual: result,
-      expected: true
-    }
-
-    let msg = ilog.colors && ilog.verbose
-      ? label
-      : ilog._stringify(stack)
-
-    ilog._outputDisplay(msg, {name: 'ASERT', color: 'cyan'})
-    if (ilog.colors) ilog.inspect(stack)
   }
 }
 
@@ -157,13 +136,21 @@ ilog.trace = function () {
     let messages = apply(format, null, slice(arguments))
 
     ilog._outputDisplay(messages, {name: 'TRACE', color: 'yellow'})
+
+    forEach(callr(), function (site) {
+      ilog._stdout.write(format('  \u001b[36m%s\u001b[90m in %s at line \u001b[32m%d\u001b[0m\n',
+        site.getFunctionName() || 'anonymous',
+        site.getFileName(),
+        site.getLineNumber()
+      ))
+    })
   }
 }
 
-ilog.tracer = function (prefix, prompt) {
+ilog.trak = function (prefix, prompt) {
   if (prompt == null) prompt = ilog._pointer.double
   if (prefix == null) {
-    prefix =  '' //['LOGGR', 'black']
+    prefix =  ''
     prompt =  ' ' + prompt
   }
 
