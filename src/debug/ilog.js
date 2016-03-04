@@ -11,6 +11,7 @@ const jlog   = require('../util/jcolorz')
 const clrz   = require('../util/colorz')
 const apply  = require('../function/apply')
 
+const diff   = require('../assertion/variable-diff')
 const levels = [
   'FATAL',    // level 0
   'CRITICAL', // level 1
@@ -65,6 +66,54 @@ ilog.levels = levels.slice()
 
 // ilog.fatal, ilog.critical, ilog.error, ilog.warning, ilog.alert
 map(levels.slice(0, 5), (level, index) => {
+ilog.log = logr
+ilog.diff = diff
+ilog._inspector = jlog // expose json-colorz
+ilog._colorizr = clrz // expose colorz
+ilog._stdout = process.stdout
+ilog._stderr = process.stderr
+ilog._procname = process.argv[1].split('/').pop()
+ilog._pointer = {
+  tick       : '✔',
+  check      : '√',
+  cross      : '✖',
+  star       : '★',
+  bullet     : '*',
+  dot        : '․',
+  line       : '─',
+  dash       : '-',
+  ellipsis   : '…',
+  info       : 'i',
+  info2      : 'ℹ',
+  warning    : '‼',
+  warning2   : '⚠',
+  flag       : '⚑',
+  mark       : '✗',
+  tilde      : '~',
+  clip       : '❯',
+  single     : '›',
+  double     : '»',
+  arrowUp    : '↑',
+  arrowDown  : '↓',
+  arrowLeft  : '←',
+  arrowRight : '→',
+  radioOn    : '◉',
+  radioOff   : '◯'
+}
+
+ilog.blk = clrz.black
+ilog.blu = clrz.cyan
+ilog.mag = clrz.magenta
+ilog.yel = clrz.yellow
+ilog.red = clrz.red
+ilog.grn = clrz.green
+ilog.gry = clrz.grey
+ilog.cyn = clrz.cyan
+ilog.fmt = clrz.wrap
+ilog.dim = (str) => {
+  return clrz.wrap(str, ['dim', 'black'])
+}
+
   ilog[level.toLowerCase()] = function (error, stack) {
     if (error != null && index <= ilog.level) {
       // allow the ability to pass debugging messages as strings
@@ -220,39 +269,6 @@ ilog.stop = function timeEnd (label) {
 
   delete ilog.timeTables[label]
   return diffMs
-}
-
-ilog.log = logr
-ilog._inspector = jlog // expose json-colorz
-ilog._stdout = process.stdout
-ilog._stderr = process.stderr
-ilog._procname = process.argv[1].split('/').pop()
-ilog._pointer = {
-  tick       : '✔',
-  check      : '√',
-  cross      : '✖',
-  star       : '★',
-  bullet     : '*',
-  dot        : '․',
-  line       : '─',
-  dash       : '-',
-  ellipsis   : '…',
-  info       : 'i',
-  info2      : 'ℹ',
-  warning    : '‼',
-  warning2   : '⚠',
-  flag       : '⚑',
-  mark       : '✗',
-  tilde      : '~',
-  clip       : '❯',
-  single     : '›',
-  double     : '»',
-  arrowUp    : '↑',
-  arrowDown  : '↓',
-  arrowLeft  : '←',
-  arrowRight : '→',
-  radioOn    : '◉',
-  radioOff   : '◯'
 }
 
 ilog._outputDisplay = function (log, level, label) {
