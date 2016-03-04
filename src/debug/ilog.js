@@ -338,7 +338,7 @@ ilog._standardize = function (message) {
 
 function Standardize (msg) {
   // const os       = require('os')
-  const pid      = process.pid
+  // const pid      = process.pid
   // const hostname = os.hostname()
 
   this.pid = process.pid
