@@ -440,7 +440,7 @@ function Standardize (msg) {
   // const pid      = process.pid
   // const hostname = os.hostname()
 
-  this.pid = process.pid
+  // this.pid = process.pid
   // this.hostname = hostname
   this.name = msg.name
   this.level = msg.level
