@@ -71,8 +71,6 @@ function executeGroup(group, options) {
     return function onResult(info) {
       var i, lines, newLines;
 
-      info.success = !info.error;
-
       if (!info.success) {
         newLines = [];
         lines = String(info.error.stack).split('\n');
@@ -127,7 +125,6 @@ function executeGroup(group, options) {
     var resultFn = createOnResult(testIndex);
     sequentialTests(group.beforeEach, group.tests[testIndex], group.afterEach)
       .then(resultFn)
-      .catch(resultFn);
 
     testIndex++;
   }
