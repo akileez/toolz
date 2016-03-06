@@ -1,0 +1,26 @@
+#!/usr/bin/env node
+
+var path = require('path');
+var glob = require('../glob/globby');
+var resolveCwd = require('../path/resolve-cwd');
+var argv = require('../process/minimist')(process.argv.slice(2), {
+  alias: {
+    i: 'include'
+  }
+});
+
+if (argv.include) {
+  var include = resolveCwd(argv.include);
+  if (!include) {
+    throw new Error('Unable to find include ' + argv.include);
+  }
+  require(include);
+}
+
+process.argv.slice(2).forEach(function onEach(arg) {
+  glob(arg, function onGLob(err, files) {
+    files.forEach(function onFile(file) {
+      require(path.resolve(process.cwd(), file));
+    });
+  });
+});
