@@ -378,7 +378,7 @@ dlogr.stop = function timeEnd (label) {
     let msg = `took: ${dlogr._color(diffMs, 'grey')} ms`
 
     let frmt = {
-      prefix: ['timer', 'white'],
+      prefix: [dlogr.gry('timer')],
       prompt: [dlogr._pointer.double, 'red'],
       name: label,
       color: 'grey'
