@@ -37,7 +37,7 @@ function asyncReduce (items, seed, iterator, done) {
   if (isObject(items)) items = øvals(items)
 
   // check requirements
-  assert.is(Array.isArray(items), true)
+  assert.is(Array.isArray(items), true, 'items must be an array')
   assert.is(typeof iterator, 'function', 'iterator must be a function')
   assert.is(typeof done, 'function', 'done must be a function')
 
