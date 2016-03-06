@@ -106,17 +106,17 @@ dlogr._pointer = {
   radioOff   : '◯'
 }
 
-dlogr.blk = clrz.black
-dlogr.blu = clrz.cyan
-dlogr.mag = clrz.magenta
-dlogr.yel = clrz.yellow
-dlogr.red = clrz.red
-dlogr.grn = clrz.green
-dlogr.gry = clrz.grey
-dlogr.cyn = clrz.cyan
-dlogr.fmt = clrz.wrap
+dlogr.blk = dlogr._colorizr.black
+dlogr.blu = dlogr._colorizr.cyan
+dlogr.mag = dlogr._colorizr.magenta
+dlogr.yel = dlogr._colorizr.yellow
+dlogr.red = dlogr._colorizr.red
+dlogr.grn = dlogr._colorizr.green
+dlogr.gry = dlogr._colorizr.grey
+dlogr.cyn = dlogr._colorizr.cyan
+dlogr.fmt = dlogr._colorizr.wrap
 dlogr.dim = (str) => {
-  return clrz.wrap(str, ['dim', 'black'])
+  return dlogr._colorizr.wrap(str, ['dim', 'black'])
 }
 
 dlogr.trace = function () {
