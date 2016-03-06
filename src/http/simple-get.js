@@ -71,7 +71,7 @@ module.exports.concat = function (opts, cb) {
     })
 
     res.on('end', function () {
-      cb(null, Buffer.concat(chunks), res)
+      cb(null, res, Buffer.concat(chunks))
     })
   })
 }
