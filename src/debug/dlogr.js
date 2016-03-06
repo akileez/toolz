@@ -263,67 +263,66 @@ dlogr.detector = function (level) {
 
 dlogr.inspector = function (level) {
   return function inspector () {
+    if (dlogr.level < 7 && dlogr.level >= -2) return
     level = level || {}
 
     let defs = {
-      prefix: ['debug', 'green'],
-      prompt: [dlogr._pointer.double, ''],
-      name: 'inspect',
-      color: 'cyan',
-      stack: false
+      prefix : ['debug', 'green'],
+      prompt : [dlogr._pointer.double, ''],
+      name   : 'loggr',
+      color  : 'cyan',
+      stack  : false
     }
 
     level = xtend(defs, level)
 
-    if (dlogr.level !== -1 && (dlogr.level >= 7 || dlogr.level <= -3)) {
-      const chk = dlogr.colors && dlogr.verbose
-      let log = {}
-      let out = () => {
-        dlogr._stdout.write(dlogr._log(
-          map(slice(arguments), (arg) => {return format(' obj: %j', arg)}),
+    const chk = dlogr.colors && dlogr.verbose
+    let log = {}
+    let out = () => {
+      dlogr._stdout.write(dlogr._log(
+        map(slice(arguments), (arg) => {return format(' obj: %j', arg)}),
+        dlogr._level(level),
+        dlogr._label()
+      ))
+      // dlogr._assemble(map(slice(arguments), (arg) => {return format(' obj: %j', arg)}), level)
+
+      if (chk) map(slice(arguments), (arg) => {
+        dlogr._inspector(arg)
+      })
+    }
+
+    if (arguments.length > 1) {
+      if (typeof arguments[0] === 'string') {
+
+        log.message = arguments[0]
+        log.args = slice(arguments, 1)
+
+        if (hasFormattingElements(log.message)) {
+          log.message = apply(format, null, slice(arguments))
+        }
+
+        dlogr._stdout.write(dlogr._log(log.message,
           dlogr._level(level),
           dlogr._label()
         ))
 
-        if (chk) map(slice(arguments), (arg) => {
+        if (chk) map(log.args, (arg) => {
           dlogr._inspector(arg)
         })
-      }
-
-      if (arguments.length > 1) {
-        if (typeof arguments[0] === 'string') {
-
-          log.message = arguments[0]
-          log.args = slice(arguments, 1)
-
-          if (hasFormattingElements(log.message)) {
-            log.message = apply(format, null, slice(arguments))
-          }
-
-          dlogr._stdout.write(dlogr._log(
-            log.message,
-            dlogr._level(level),
-            dlogr._label()
-          ))
-
-          if (chk) map(log.args, (arg) => {
-            dlogr._inspector(arg)
-          })
-        } else out()
       } else out()
+    } else out()
 
-      // show a callsite trace
-      if (level.stack && chk) {
-        dlogr._stdout.write('\n')
-        forEach(callr(), function (site) {
-          dlogr._stdout.write(format('  \u001b[36m%s\u001b[90m in %s at line \u001b[32m%d\u001b[0m\n',
-            site.getFunctionName() || 'anonymous',
-            site.getFileName(),
-            site.getLineNumber()
-          ))
-        })
-        dlogr._stdout.write('\n')
-      }
+    // show a callsite trace
+    if (level.stack && chk) {
+      dlogr._stdout.write('\n')
+      forEach(callr(), function (site) {
+        dlogr._stdout.write(format('  \u001b[36m%s\u001b[90m in %s at line \u001b[32m%d\u001b[0m\n',
+          site.getFunctionName() || 'anonymous',
+          site.getFileName(),
+          site.getLineNumber()
+        ))
+      })
+      dlogr._stdout.write('\n')
     }
   }
 }
