@@ -202,7 +202,20 @@ dlogr.trakor = function (prefix, prompt) {
 
 dlogr.detector = function (level) {
   return function detector () {
-    if (arguments.length === 0 || arguments[0] == null) return
+    if (dlogr.level <= -1
+      || arguments.length === 0
+      || arguments[0] == null
+    ) return
+
+    const chk = dlogr.colors && dlogr.verbose
+    const callsite = ['\n'].concat(map(callr(), (site) => {
+      return format('  \u001b[36m%s\u001b[90m in %s at line \u001b[32m%d\u001b[0m\n',
+        site.getFunctionName() || 'anonymous',
+        site.getFileName(),
+        site.getLineNumber()
+      )
+    }))
+
     level = level || {}
 
     let defs = {
@@ -216,46 +229,35 @@ dlogr.detector = function (level) {
 
     level = xtend(defs, level)
 
-    if (dlogr.level !== -1) {
-      const chk = dlogr.colors && dlogr.verbose
-      const callsite = ['\n'].concat(map(callr(), (site) => {
-        return format('  \u001b[36m%s\u001b[90m in %s at line \u001b[32m%d\u001b[0m\n',
-          site.getFunctionName() || 'anonymous',
-          site.getFileName(),
-          site.getLineNumber()
-        )
-      }))
+    let log = {}
 
-      let log = {}
+    if (Array.isArray(level.name)) {
+      log.name = level.name[0].toUpperCase()
+      log.type = level.name[1]
+    } else log.name = level.name.toUpperCase()
 
-      if (Array.isArray(level.name)) {
-        log.name = level.name[0].toUpperCase()
-        log.type = level.name[1]
-      } else log.name = level.name.toUpperCase()
+    log.level = levels.indexOf(log.name)
+    if (log.level === -1) log.level = level.lvl
 
-      log.level = levels.indexOf(log.name)
-      if (log.level === -1) log.level = level.lvl
+    if (!(log.level <= dlogr.level)) return
 
-      if (!(log.level <= dlogr.level)) return
+    log.message = arguments[0].toString().replace('Error: ', '')
 
-      log.message = arguments[0].toString().replace('Error: ', '')
-
-      // show a stack [callsite trace] if enabled
-      if (arguments[1] != null) {
-        log.stack = arguments[1]
-        if (level.stack && chk) log.trace = callsite
-      } else {
-        if (level.stack && chk) log.stack = callsite
-      }
-
-      dlogr._stdout.write(dlogr._log(
-        chk ? log.message : dlogr._stringify(dlogr._standardize(log)),
-        dlogr._level(level),
-        dlogr._label()
-      ))
-
-      if (chk) dlogr._inspector(dlogr._errorify(log))
+    // show a stack [callsite trace] if enabled
+    if (arguments[1] != null) {
+      log.stack = arguments[1]
+      if (level.stack && chk) log.trace = callsite
+    } else {
+      if (level.stack && chk) log.stack = callsite
     }
+
+    dlogr._stdout.write(dlogr._log(
+      chk ? log.message : dlogr._stringify(dlogr._standardize(log)),
+      dlogr._level(level),
+      dlogr._label()
+    ))
+
+    if (chk) dlogr._inspector(dlogr._errorify(log))
   }
 }
 
