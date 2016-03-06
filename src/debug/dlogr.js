@@ -327,13 +327,20 @@ dlogr.inspector = function (level) {
   }
 }
 
-dlogr.eros    = dlogr.detector({stack: true})
-dlogr.jlog    = dlogr.inspector()
-dlogr.dbug    = dlogr.inspector({stack: true})
-dlogr.diffs   = dlogr.inspector({stack: true, name: 'diff', color: 'cyan'})
-dlogr.inspect = dlogr.inspector({name: 'inspect', color: 'cyan'})
-dlogr.assert  = dlogr.trak({prefix: '', name: ['debug', 'assert'], color: ['green', 'cyan']})
-dlogr.info    = dlogr.trak({name: 'info', color: 'blue'})
+dlogr.error    = dlogr.detector()
+dlogr.eros     = dlogr.detector({stack: true})
+dlogr.alrt     = dlogr.detector({name: 'alert'})
+dlogr.warn     = dlogr.detector({name: 'warn'})
+dlogr.crit     = dlogr.detector({stack: true, name: 'critical'})
+dlogr.fatal    = dlogr.detector({stack: true, name: 'fatal'})
+dlogr.jlog     = dlogr.inspector()
+dlogr.dbug     = dlogr.inspector({stack: true})
+dlogr.diff     = dlogr.inspector({name: 'diff', color: 'cyan'})
+dlogr.diffs    = dlogr.inspector({stack: true, name: ['diff', 'stack'], color: ['cyan', 'magenta']})
+dlogr.inspect  = dlogr.inspector({name: 'inspect', color: 'cyan'})
+dlogr.assertit = dlogr.inspector({name: ['assert'], color: ['magenta']})
+dlogr.info     = dlogr.trak({name: 'info', color: 'blue'})
+dlogr.notice   = dlogr.trak({name: 'notice', color: 'grey'})
 
 dlogr.auto = function (error) {
   if (error instanceof Error) return apply(dlogr.eros, null, slice(arguments))
