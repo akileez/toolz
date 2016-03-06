@@ -404,7 +404,18 @@ dlogr.differ = function differ (msg, a, b) {
     ? clrz.green(res.changed)
     : clrz.red(res.changed)
 
-  dlogr.diffs(dlogr.frmt('did objects change? %s', txt), res.text, a, b)
+  if (res.changed) {
+    dlogr.diffs(dlogr.frmt(msg, txt), res.text, a, b)
+  } else {
+    dlogr.diff(dlogr.frmt(msg, txt), 'no change', a)
+  }
+}
+
+dlogr.assert = function assertit (msg, expression) {
+  let res = !!expression
+  let clr = res ? 'green' : 'red'
+
+  dlogr.assertit(msg, dlogr._color(res, clr))
 }
 
 dlogr._trace = function () {
