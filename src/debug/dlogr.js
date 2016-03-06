@@ -150,18 +150,47 @@ dlogr.trace = function () {
 
 dlogr.trak = function (level) {
   return function trak () {
+    if (arguments.length === 0
+      || arguments[0] == null
+      || (dlogr.level < 5 && (dlogr.level > -2  || dlogr.level === -3))
+    ) return
+
     let defs = {
-      prefix: ['trak', 'brBlue'],
-      prompt: [dlogr._pointer.double, ''],
-      name: '',
-      color: ''
+      prefix : ['trak', 'brBlue'],
+      prompt : [dlogr._pointer.double, ''],
+      name   : '',
+      color  : ''
     }
+
     level = xtend(defs, level || {})
 
-    if (arguments.length && (dlogr.level >= 5 || dlogr.level <= -2)) {
-      let messages = hasFormattingElements(arguments[0])
-        ? apply(format, null, slice(arguments))
-        : arguments[0] + map(slice(arguments, 1), (arg) => format(' %j', arg))
+    let messages = hasFormattingElements(arguments[0])
+      ? apply(format, null, slice(arguments))
+      : arguments[0] + map(slice(arguments, 1), (arg) => format(' %j', arg))
+
+    dlogr._stdout.write(dlogr._log(messages,
+      dlogr._level(level),
+      dlogr._label()
+    ))
+  }
+}
+
+dlogr.trakor = function (prefix, prompt) {
+  if (prompt == null) prompt = dlogr._pointer.double
+  if (prefix == null) {
+    prefix =  ''
+    prompt =  ' ' + prompt
+  }
+
+  return (nsp, clrs) => {
+    return function () {
+      if (arguments.length === 0
+        || arguments[0] == null
+        || (dlogr.level < 5 && (dlogr.level > -2  || dlogr.level === -3))
+      ) return
+
+      let messages = apply(format, null, slice(arguments))
+      let level = {prefix: prefix, prompt: prompt, name: nsp, color: clrs}
 
       dlogr._stdout.write(dlogr._log(messages,
         dlogr._level(level),
