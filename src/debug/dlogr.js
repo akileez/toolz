@@ -10,7 +10,6 @@ const slice  = require('../array/slice')
 const jlog   = require('../util/jcolorz')
 const clrz   = require('../util/colorz')
 const xtend  = require('../object/xtend')
-const reduce = require('../array/reduce')
 const apply  = require('../function/apply')
 const diff   = require('../assertion/variable-diff')
 
