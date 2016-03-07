@@ -14,7 +14,7 @@ module.exports = {
   'complexity': 2,
 
   // require return statements to either always or never specify values
-  'consistent-return': 2,
+  'consistent-return': 0,
 
   // specify curly brace conventions for all control statements
   // Standard uses multi-line. Turning off.
