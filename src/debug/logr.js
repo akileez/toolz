@@ -95,10 +95,10 @@ logr.stop = function timeEnd (label) {
     let msg = `took: ${logr._color(diffMs, 'grey')} ms`
 
     let frmt = {
-      prefix: ['timer', 'white'],
-      prompt: [logr._pointer.double, 'red'],
-      name: label,
-      color: 'grey'
+      prefix : ['timer', 'grey'],
+      prompt : [logr._pointer.double, 'red'],
+      name   : label,
+      color  : 'grey'
     }
 
     logr._stdout.write(logr._log(msg,
