@@ -1,13 +1,14 @@
 'use strict'
+
 const defaultOptions = {
   realpath: true,
-  ignore: [ 'node_modules/**', 'bower_components/**' ]
+  ignore: ['node_modules/**', 'bower_components/**']
 }
 
 function filez (glob, userOptions) {
   return () => {
     return function files (log) {
-      const globby = require('../glob/globbieP');
+      const globby = require('../glob/globbieP')
 
       const options = Object.assign({}, defaultOptions, userOptions)
 
@@ -16,9 +17,9 @@ function filez (glob, userOptions) {
       //   return result;
       // })
 
-      return globby(glob, options).then(result => {
-        log(result);
-        return result;
+      return globby(glob, options).then((result) => {
+        log(result)
+        return result
       })
     }
   }
