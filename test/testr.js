@@ -7,6 +7,11 @@ var glob     = require('../src/glob/globby')
 var map      = require('../src/array/map')
 var segments = require('../src/path/segments')
 
+function execute (dir) {
+  var files = map(glob.sync([`${dir}/*.js`, `!${dir}/lint*.js`]), mapr)
+  execa(files, opts(dir))
+}
+
 function mapr (v, k) {
   return {cmd: 'node', args: [segments.last(v)]}
 }
@@ -16,61 +21,44 @@ function opts (dir) {
 }
 
 function arr () {
-  var dir = 'array'
-  var files = map(glob.sync(['array/*.js', '!array/lint*.js']), mapr)
-
-  // console.log(files)
-
-  concur([
-    // execute tests
-    execa(files, opts(dir)),
-    // lint files
-    spawn([{cmd: 'node', args: ['lint.js', '-a']}], opts(dir))
-  ], () => {
-    // noop
-  })
+  execute('array')
+  // spawn([{cmd: 'node', args: ['lint.js', '-a']}], opts('array'))
+  // concur([
+  //   // lint files
+  //   spawn([{cmd: 'node', args: ['lint.js', '-a']}], opts('array')),
+  //   // execute tests
+  //   execute('array')
+  // ], () => {
+  //   // noop
+  // })
 }
 
 function async1 () {
-  var dir = 'async'
-  var files = map(glob.sync(['async/*.js', '!async/lint*.js']), mapr)
-  execa(files, opts(dir))
+  execute('async')
 }
 
 function func () {
-  var dir = 'function'
-  var files = map(glob.sync(['function/*.js', '!function/lint*.js']), mapr)
-  execa(files, opts(dir))
+  execute('function')
 }
 
 function gen () {
-  var dir = 'generator'
-  var files = map(glob.sync(['generator/*.js', '!generator/lint*.js']), mapr)
-  execa(files, opts(dir))
+  execute('generator')
 }
 
 function lang () {
-  var dir = 'lang'
-  var files = map(glob.sync(['lang/*.js', '!lang/lint*.js']), mapr)
-  execa(files, opts(dir))
+  execute('lang')
 }
 
 function num () {
-  var dir = 'number'
-  var files = map(glob.sync(['number/*.js', '!number/lint*.js']), mapr)
-  execa(files, opts(dir))
+  execute('number')
 }
 
 function obj () {
-  var dir = 'object'
-  var files = map(glob.sync(['object/*.js', '!object/lint*.js']), mapr)
-  execa(files, opts(dir))
+  execute('object')
 }
 
 function stamp () {
-  var dir = 'stamp'
-  var files = map(glob.sync(['stamp/basic*.js', '!stamp/lint*.js']), mapr)
-  execa(files, opts(dir))
+  execute('stamp')
 }
 
 function lint () {
