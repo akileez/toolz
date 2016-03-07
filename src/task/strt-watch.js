@@ -1,13 +1,13 @@
 function watchr (callback)  {
   return (input) => {
-    return function watch(log) {
+    return function watch (log) {
       const reqf = require('../path/req-from')
       const chokidar = reqf('/usr/local/lib/node_modules', 'chokidar')
 
       return new Promise((resolve, reject) => {
-        function init() {
+        function init () {
           chokidar
-            .watch(input, { persistent: true })
+            .watch(input, {persistent: true})
             .on('change', callback)
             .on('error', reject)
             .on('ready', () => {
