@@ -14,8 +14,8 @@ function logr () {
 
 function loggr () {
   logr._stdout.write(logr._log(
-    slice(arguments, 1).join(' '),
-    logr._level({name: arguments[0]}),
+    slice(arguments).join(' '),
+    logr._level(),
     logr._label()
   ))
 }
