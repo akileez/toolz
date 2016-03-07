@@ -8,7 +8,7 @@ module.exports = {
   'no-cond-assign': 2,
 
   // disallow use of console in the node environment
-  'no-console': 1,
+  'no-console': 0,
 
   // disallow use of constant expressions in conditions
   'no-constant-condition': 1,
