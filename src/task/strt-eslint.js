@@ -6,7 +6,7 @@ function eslintr (options, formatter) {
 
       return new Promise((resolve, reject) => {
         const cli = new CLIEngine(options)
-        const files = input.filter((file) => { !cli.isPathIgnored(file) })
+        const files = input.filter((file) => !cli.isPathIgnored(file))
         const report = cli.executeOnFiles(files)
         const format = cli.getFormatter(formatter)
 
