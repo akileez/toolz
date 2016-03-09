@@ -1,9 +1,10 @@
 {
   "name": "toolz",
-  "version": "0.2.52",
+  "version": "0.2.53",
   "description": "basic javascript utils for working with arrays, objects, functions, types and other",
   "main": "index.js",
   "scripts": {
+    "test": "src/bin/painless test/**/*.js"
   },
   "engines": {
     "node": ">=0.10.0"
