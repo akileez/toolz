@@ -2,14 +2,20 @@
 
 const itera = require('./itera')
 const map   = require('../array/map')
-const ovals  = require('../object/values')
+const øvals  = require('../object/values')
 const isObject = require('../lang/isObject')
 
 function asyncEach (items, iterator, done) {
-  if (isObject(items)) items = ovals(items)
+  if (isObject(items)) items = øvals(items)
   if (typeof done !== 'function') done = function () {}
 
   let tasks
+
+  if (iterator.length === 4) tasks = map(items, (item, key, items) => {
+    return (cb) => {
+      iterator(item, key, items, cb)
+    }
+  })
 
   if (iterator.length === 3) tasks = map(items, (item, key) => {
     return (cb) => {
@@ -35,4 +41,25 @@ function asyncEach (items, iterator, done) {
   )
 }
 
+function concurEach (items, iterator, done) {
+  const forEach = require('../array/forEach')
+
+  if (isObject(items)) items = øvals(items)
+  if (typeof done !== 'function') done = function () {}
+
+  var tasks = map(items, (item, key) => {
+    return (cb) => {
+      iterator(item, key, cb)
+    }
+  })
+
+  forEach(tasks, function (task) {
+    itera(task, noop)
+  })
+
+  function noop () {
+  }
+}
+
 module.exports = asyncEach
+module.exports.concur = concurEach
