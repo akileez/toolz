@@ -24,7 +24,7 @@ function zip (arr) {
     }))
   }
 
-  return zip
+  return results
 }
 
 module.exports = zip
