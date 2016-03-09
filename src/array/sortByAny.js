@@ -48,8 +48,6 @@ function sortBy (data) {
         property = props.shift()
         return result
       }
-
-      return 0
     }
   }
 }
