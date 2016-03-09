@@ -1,7 +1,7 @@
 // Exclusive OR. Returns items that are present in a single array.
 // It will remove duplicates.
 
-var unique = require('./unique')
+var unique = require('./uniq')
 var filter = require('./filter')
 var contains = require('./contains')
 
