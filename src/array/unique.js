@@ -2,8 +2,10 @@
 // IMPORTANT: duplicates are removed starting from begining of array.
 
 var filter = require('./filter')
+var convert = require('./convert')
 
 function unique (array, compare) {
+  array = convert(array)
   compare = compare || isEqual
   var len = array.length
 
