@@ -61,4 +61,4 @@ function unique_eq (list) {
   return list
 }
 
-module.exports = unique;
+module.exports = unique
