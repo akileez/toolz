@@ -291,25 +291,22 @@ dlogr.inspector = function (level) {
       })
     }
 
-    if (arguments.length > 1) {
-      if (typeof arguments[0] === 'string') {
+    if (arguments.length > 1 && typeof arguments[0] === 'string') {
+      log.message = arguments[0]
+      log.args = slice(arguments, 1)
 
-        log.message = arguments[0]
-        log.args = slice(arguments, 1)
+      if (hasFormattingElements(log.message)) {
+        log.message = apply(format, null, slice(arguments))
+      }
 
-        if (hasFormattingElements(log.message)) {
-          log.message = apply(format, null, slice(arguments))
-        }
+      dlogr._stdout.write(dlogr._log(log.message,
+        dlogr._level(level),
+        dlogr._label()
+      ))
 
-        dlogr._stdout.write(dlogr._log(log.message,
-          dlogr._level(level),
-          dlogr._label()
-        ))
-
-        if (chk) map(log.args, (arg) => {
-          dlogr._inspector(arg)
-        })
-      } else out()
+      if (chk) map(log.args, (arg) => {
+        dlogr._inspector(arg)
+      })
     } else out()
 
     // show a callsite trace
