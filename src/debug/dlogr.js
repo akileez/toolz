@@ -72,6 +72,7 @@ dlogr.level = 7
 dlogr.levels = levels.slice()
 
 dlogr.log = logr
+dlogr.nano = nano
 dlogr.vdiff = diff
 dlogr._inspector = jlog // expose json-colorz
 dlogr._colorizr = clrz // expose colorz
@@ -219,12 +220,12 @@ dlogr.detector = function (level) {
     level = level || {}
 
     let defs = {
-      prefix: ['error', 'brRed'],
-      prompt: [dlogr._pointer.double, ''],
-      name: 'eros',
-      color: 'brRed',
-      lvl: 3,
-      stack: false
+      prefix : ['error', 'brRed'],
+      prompt : [dlogr._pointer.double, ''],
+      name   : 'eros',
+      color  : 'brRed',
+      lvl    : 3,
+      stack  : false
     }
 
     level = xtend(defs, level)
