@@ -215,7 +215,7 @@ dlogr.detector = function (level) {
         site.getFileName(),
         site.getLineNumber()
       )
-    }))
+    })).join(' ')
 
     level = level || {}
 
