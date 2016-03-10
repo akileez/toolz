@@ -22,15 +22,6 @@ function opts (dir) {
 
 function arr () {
   execute('array')
-  // spawn([{cmd: 'node', args: ['lint.js', '-a']}], opts('array'))
-  // concur([
-  //   // lint files
-  //   spawn([{cmd: 'node', args: ['lint.js', '-a']}], opts('array')),
-  //   // execute tests
-  //   execute('array')
-  // ], () => {
-  //   // noop
-  // })
 }
 
 function async1 () {
@@ -66,9 +57,9 @@ function lint () {
     {cmd: 'node', args: ['lint.js', '-a']}
   ], {cwd: 'array', concurrent: true})
 
-  spawn([
-    {cmd: 'node', args: ['lint.js', '-a']}
-  ], {cwd: 'lang', concurrent: true})
+  // spawn([
+  //   {cmd: 'node', args: ['lint.js', '-a']}
+  // ], {cwd: 'lang', concurrent: true})
 }
 
 function defs () {
