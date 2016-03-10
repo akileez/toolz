@@ -41,14 +41,16 @@ function asyncReduce (items, seed, iterator, done) {
   assert.is(typeof iterator, 'function', 'iterator must be a function')
   assert.is(typeof done, 'function', 'done must be a function')
 
-  // // portable requirement checks
-  // if (!Array.isArray(items)) throw new Error('items must be an Array')
-  // if (typeof iterator !== 'function') throw new Error('iterator must be a function')
-  // if (typeof done !== 'function') throw new Error('done must be a function')
-
   let tasks
 
-  if (iterator.length === 4) tasks = map(items, (item, key) => {
+  // iterator parameters requirements
+  if (iterator.length === 5) tasks = map(items, (item, key, items) => {
+    return (acc, next) => {
+      iterator(acc, item, key, items, next)
+    }
+  })
+
+  else if (iterator.length === 4) tasks = map(items, (item, key) => {
     return (acc, next) => {
       iterator(acc, item, key, next)
     }
@@ -64,27 +66,6 @@ function asyncReduce (items, seed, iterator, done) {
     .concat(tasks)
     .concat(done)
   )
-
-  // var tasks = map(items, (item, key) => {
-  //   return (acc, cb) => {
-  //     if (len === 4) iterator(acc, item, key, cb)
-  //     else iterator(acc, item, cb)
-  //   }
-  // })
-
-  // var tasks = map(items, function (item) {
-  //   return function (acc, cb) {
-  //     iterator(acc, item, cb)
-  //   }
-  // })
-
-  // var tasks = items.map(function (item) {
-  //   return function (acc, cb) {
-  //     iterator(acc, item, cb)
-  //   }
-  // })
-
-
 }
 
 module.exports = asyncReduce
