@@ -46,9 +46,9 @@ testProm('co(* -> yield <promise>) with several promise yields', () => {
 
 testArr('co(* -> yield []) should aggregate several promises', function(){
   return co(function* (){
-    var a = pify(read)('../../package.json', 'utf8').then(data => data)
-    var b = pify(read)('../../LICENSE', 'utf8').then(data => data)
-    var c = pify(read)('../../package.json', 'utf8').then(data => data)
+    var a = pify(read)('package.json', 'utf8').then(data => data)
+    var b = pify(read)('LICENSE', 'utf8').then(data => data)
+    var c = pify(read)('package.json', 'utf8').then(data => data)
 
     var res = yield [a, b, c];
     t.is(3, res.length);
