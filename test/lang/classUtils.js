@@ -1,7 +1,10 @@
-var test = require('../../src/assertion/ttr')
-var cu = require('../../src/lang/classUtils')
+var painless = require('../../src/assertion/painless')
+var t        = painless.assert
+var test     = painless.createGroup('Test lang/classUtils')
 
-test('cu should extend', function (t) {
+var cu       = require('../../src/lang/classUtils')
+
+test('cu should extend', function () {
   var Parent;
   var Ctor;
   // var proto;
@@ -29,5 +32,3 @@ test('cu should extend', function (t) {
   t.assert(typeof Ctor.prototype.b === 'function');
   t.assert(typeof Ctor.prototype.c === 'function');
 })
-
-test.result()
