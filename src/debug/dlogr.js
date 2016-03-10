@@ -317,8 +317,8 @@ dlogr.diff     = dlogr.inspector({name: 'diff', color: 'cyan'})
 dlogr.diffs    = dlogr.inspector({stack: true, name: ['diff', 'stack'], color: ['cyan', 'magenta']})
 dlogr.inspect  = dlogr.inspector({name: 'inspect', color: 'cyan'})
 dlogr.assertit = dlogr.inspector({name: ['assert'], color: ['magenta']})
-dlogr.info     = dlogr.trak({name: 'info', color: 'blue'})
-dlogr.note     = dlogr.trak({name: 'note', color: 'grey'})
+dlogr.info     = dlogr.trak({name: 'info', color: 'blue', lvl: 6})
+dlogr.note     = dlogr.trak({name: 'note', color: 'grey', lvl: 5})
 
 dlogr.auto = function (error) {
   if (error instanceof Error) return apply(dlogr.eros, null, slice(arguments))
