@@ -133,7 +133,7 @@ dlogr.trak = function (level) {
   return function trak () {
     if (arguments.length === 0
       || arguments[0] == null
-      || (dlogr.level < 5 && (dlogr.level > -2  || dlogr.level === -3))
+      || (dlogr.level < 5 && dlogr.level > -4 )
     ) return
 
     let defs = {
@@ -167,7 +167,7 @@ dlogr.trakor = function (prefix, prompt) {
     return function () {
       if (arguments.length === 0
         || arguments[0] == null
-        || (dlogr.level < 5 && (dlogr.level > -2  || dlogr.level === -3))
+        || (dlogr.level < 8 && (dlogr.level > -2  || dlogr.level === -3))
       ) return
 
       let messages = apply(format, null, slice(arguments))
@@ -204,7 +204,7 @@ dlogr.detector = function (level) {
       prompt : [dlogr._pointer.double, ''],
       name   : 'eros',
       color  : 'brRed',
-      lvl    : 3,
+      lvl    : 2,
       stack  : false
     }
 
