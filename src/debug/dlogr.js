@@ -24,26 +24,6 @@ const levels = [
   'DEBUG'     // level 7
 ]
 
-const clrs = {
-  black     : 30,
-  gray      : 90,
-  grey      : 90,
-  red       : 31,
-  green     : 32,
-  yellow    : 33,
-  blue      : 34,
-  magenta   : 35,
-  cyan      : 36,
-  white     : 37,
-  brRed     : 91,
-  brGreen   : 92,
-  brYellow  : 93,
-  brBlue    : 94,
-  brMagenta : 95,
-  brCyan    : 96,
-  brWhite   : 97
-}
-
 // Original version
 function dlogr () {
   if (arguments.length) {
@@ -430,8 +410,7 @@ dlogr._trace = function () {
 
 dlogr._color = function (label, color) {
   if (!color || !dlogr.colors) return label
-  // return dlogr._colorizr[color](label)
-  return `\u001b[${clrs[color]}m${label}\u001b[39m`
+  return dlogr._colorizr[color](label)
 }
 
 dlogr._log = function (log, level, label) {
