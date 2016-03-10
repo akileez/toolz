@@ -14,14 +14,14 @@ const apply  = require('../function/apply')
 const diff   = require('../assertion/variable-diff')
 
 const levels = [
-  'FATAL',    // level 0
-  'CRITICAL', // level 1
-  'ERROR',    // level 2
-  'WARNING',  // level 3
-  'ALERT',    // level 4
-  'NOTICE',   // level 5
-  'INFO',     // level 6
-  'DEBUG'     // level 7
+  'fatal',    // level 0
+  'critical', // level 1
+  'error',    // level 2
+  'warn',     // level 3
+  'alrt',     // level 4
+  'note',     // level 5
+  'info',     // level 6
+  'debug'     // level 7
 ]
 
 // Original version
@@ -213,9 +213,9 @@ dlogr.detector = function (level) {
     let log = {}
 
     if (Array.isArray(level.name)) {
-      log.name = level.name[0].toUpperCase()
+      log.name = level.name[0]
       log.type = level.name[1]
-    } else log.name = level.name.toUpperCase()
+    } else log.name = level.name
 
     log.level = levels.indexOf(log.name)
     if (log.level === -1) log.level = level.lvl
@@ -307,7 +307,7 @@ dlogr.inspector = function (level) {
 
 dlogr.error    = dlogr.detector()
 dlogr.eros     = dlogr.detector({stack: true})
-dlogr.alrt     = dlogr.detector({name: 'alert'})
+dlogr.alrt     = dlogr.detector({name: 'alrt'})
 dlogr.warn     = dlogr.detector({name: 'warn'})
 dlogr.crit     = dlogr.detector({stack: true, name: 'critical'})
 dlogr.fatal    = dlogr.detector({stack: true, name: 'fatal'})
@@ -318,7 +318,7 @@ dlogr.diffs    = dlogr.inspector({stack: true, name: ['diff', 'stack'], color: [
 dlogr.inspect  = dlogr.inspector({name: 'inspect', color: 'cyan'})
 dlogr.assertit = dlogr.inspector({name: ['assert'], color: ['magenta']})
 dlogr.info     = dlogr.trak({name: 'info', color: 'blue'})
-dlogr.notice   = dlogr.trak({name: 'notice', color: 'grey'})
+dlogr.note     = dlogr.trak({name: 'note', color: 'grey'})
 
 dlogr.auto = function (error) {
   if (error instanceof Error) return apply(dlogr.eros, null, slice(arguments))
@@ -501,7 +501,7 @@ dlogr._errorify = function (error) {
 }
 
 function Errorify (error) {
-  this.name = error.name || 'Error'
+  this.name = error.name.toUpperCase() || 'Error'
   this.level = error.level
   this.message = error.message || apply(format,null, error)
 
