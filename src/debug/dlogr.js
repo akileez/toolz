@@ -261,11 +261,10 @@ dlogr.inspector = function (level) {
     let log = {}
     let out = () => {
       dlogr._stdout.write(dlogr._log(
-        map(slice(arguments), (arg) => {return format(' obj: %j', arg)}),
+        map(slice(arguments), (arg) => format(' obj: %j', arg)),
         dlogr._level(level),
         dlogr._label()
       ))
-      // dlogr._assemble(map(slice(arguments), (arg) => {return format(' obj: %j', arg)}), level)
 
       if (chk) map(slice(arguments), (arg) => {
         dlogr._inspector(arg)
