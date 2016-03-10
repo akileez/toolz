@@ -1,9 +1,9 @@
 'use strict'
 
-const forEach = require('../array/forEach')
-const keys    = require('../object/keys')
+var forEach = require('../array/forEach')
+var keys    = require('../object/keys')
 
-const styles = {
+var styles = {
   // modifiers
   reset         : [0, 0],
   bold          : [1, 22],
@@ -59,7 +59,7 @@ const styles = {
   bbWhite       : [107, 49]
 }
 
-let colorz = {}
+var colorz = {}
 
 /*
     var open = '\u001b[' + styles[style][0] + 'm'
@@ -77,9 +77,15 @@ let colorz = {}
 */
 
 forEach(keys(styles), (style) => {
-  colorz[style] = (msg) => {
-    return `\u001b[${styles[style][0]}m${msg}\u001b[${styles[style][1]}m`
+  var open = '\u001b[' + styles[style][0] + 'm'
+  var clos = '\u001b[' + styles[style][1] + 'm'
+
+  colorz[style] = function (msg) {
+    return open + msg + clos
   }
+  // colorz[style] = (msg) => {
+  //   return `\u001b[${styles[style][0]}m${msg}\u001b[${styles[style][1]}m`
+  // }
 })
 
 function strip (str) {
