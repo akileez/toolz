@@ -24,19 +24,19 @@ const levels = [
   'debug'     // level 7
 ]
 
-// Original version
-function dlogr () {
-  if (arguments.length) {
-    dlogr._stdout.write(dlogr._log(apply(format, null, slice(arguments))))
-  }
-}
-
 // Own version: meant for raw string output to log
-function logr () {
+function dlogr () {
   // don't penalize a single string/template being passed as a param
   arguments.length > 1
     ? dlogr._stdout.write(dlogr._log(slice(arguments).join(' ')))
     : dlogr._stdout.write(dlogr._log(arguments[0]))
+}
+
+// Original version
+function logr () {
+  if (arguments.length) {
+    dlogr._stdout.write(dlogr._log(apply(format, null, slice(arguments))))
+  }
 }
 
 // options for display, preserving the original functionality by reversing values.
