@@ -1,23 +1,12 @@
 // use this file to automate the running of tests.
-var runr     = require('../src/task/runr')
-var execa    = require('../src/cli/execa-commands')
-var spawn    = require('../src/cli/spawn-commands')
-var concur   = require('../src/async/concurrent').each
-var glob     = require('../src/glob/globby')
-var map      = require('../src/array/map')
-var segments = require('../src/path/segments')
+var runr     = require('./src/task/runr')
+var execa    = require('./src/cli/execa-commands')
+var spawn    = require('./src/cli/spawn-commands')
+var concur   = require('./src/async/concurrent').each
+var painless = require('./src/bin/painless')
 
 function execute (dir) {
-  var files = map(glob.sync([`${dir}/*.js`, `!${dir}/lint*.js`]), mapr)
-  execa(files, opts(dir))
-}
-
-function mapr (v, k) {
-  return {cmd: 'node', args: [segments.last(v)]}
-}
-
-function opts (dir) {
-  return {cwd: dir, concurrent: false}
+  execa([{cmd: './src/bin/painless', args: [`test/${dir}/*.js`]}])
 }
 
 function arr () {
