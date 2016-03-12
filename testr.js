@@ -2,11 +2,16 @@
 var runr     = require('./src/task/runr')
 var execa    = require('./src/cli/execa-commands')
 var spawn    = require('./src/cli/spawn-commands')
-var concur   = require('./src/async/concurrent').each
 var painless = require('./src/bin/painless')
 
 function execute (dir) {
-  execa([{cmd: './src/bin/painless', args: [`test/${dir}/*.js`]}])
+  execa([{cmd: './src/bin/painless', args: [`test/${dir}/*.js`]}], () => {
+    if (runr.args.lint) {
+      process.nextTick(() => {
+        spawn([{cmd: './src/bin/painless', args: [`test/lint/${dir}.js`, '-a']}])
+      })
+    }
+  })
 }
 
 function arr () {
@@ -41,16 +46,6 @@ function stamp () {
   execute('stamp')
 }
 
-function lint () {
-  spawn([
-    {cmd: 'node', args: ['lint.js', '-a']}
-  ], {cwd: 'array', concurrent: true})
-
-  // spawn([
-  //   {cmd: 'node', args: ['lint.js', '-a']}
-  // ], {cwd: 'lang', concurrent: true})
-}
-
 function defs () {
   arr()
   async1()
@@ -64,7 +59,6 @@ function defs () {
 
 function all () {
   defs()
-  lint()
 }
 
 runr
@@ -77,5 +71,3 @@ runr
   .task('num'     , num)
   .task('obj'     , obj)
   .task('stamp'   , stamp)
-  .task('lint'    , lint)
-  .task('all'     , all)
