@@ -28,6 +28,11 @@
   },
   "devDependencies": {
   },
+  "nyc": {
+    "include": [
+      "**/array/*.js"
+    ]
+  },
   "files": [
     "index.js",
     "src"
