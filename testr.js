@@ -6,11 +6,9 @@ var painless = require('./src/bin/painless')
 
 function execute (dir) {
   execa([{cmd: './src/bin/painless', args: [`test/${dir}/*.js`]}], () => {
-    if (runr.args.lint) {
-      process.nextTick(() => {
-        spawn([{cmd: './src/bin/painless', args: [`test/lint/${dir}.js`, '-a']}])
-      })
-    }
+    if (runr.args.lint) process.nextTick(() => {
+      spawn([{cmd: './src/bin/painless', args: [`test/lint/${dir}.js`, '-a']}])
+    })
   })
 }
 
