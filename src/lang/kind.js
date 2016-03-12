@@ -9,7 +9,10 @@ function base (value) {
 
   if (Array.isArray(value)) return 'array'
 
-  var type = value.constructor.name
+  var type = typeof value.constructor !== 'undefined'
+    ? value.constructor.name
+    : Object.prototype.toString.call(value)
+      .replace(/^\[object |\]$/g, '')
 
   if (type === 'String') return 'string'
   if (type === 'Boolean') return 'boolean'
@@ -30,14 +33,15 @@ function kind (value) {
   // Does not handle arguments.
   if (value === null) return 'null'
   if (value === undefined) return 'undefined'
-
   if (Array.isArray(value)) return 'array'
 
-  if (typeof value === 'string') return 'string'
-  if (typeof value === 'boolean') return 'boolean'
-  if (typeof value === 'number') return 'number'
-  if (typeof value === 'symbol') return 'symbol'
-  if (typeof value === 'function') return 'function'
+  var type = typeof value
+
+  if (type === 'string') return 'string'
+  if (type === 'boolean') return 'boolean'
+  if (type === 'number') return 'number'
+  if (type === 'symbol') return 'symbol'
+  if (type === 'function') return 'function'
 
   return objType(value)
 }
@@ -61,11 +65,13 @@ function safe (value) {
 
   if (Array.isArray(value)) return 'array'
 
-  if (typeof value === 'string') return 'string'
-  if (typeof value === 'boolean') return 'boolean'
-  if (typeof value === 'number') return 'number'
-  if (typeof value === 'symbol') return 'symbol'
-  if (typeof value === 'function') return 'function'
+  var type = typeof value
+
+  if (type === 'string') return 'string'
+  if (type === 'boolean') return 'boolean'
+  if (type === 'number') return 'number'
+  if (type === 'symbol') return 'symbol'
+  if (type === 'function') return 'function'
 
   return objSafe(value)
 }
@@ -75,7 +81,11 @@ function objType (value) {
   // quicker than a toString.call() but marginally slower
   // than the base implementation. Fails on arguments,
   // not really though --> arguments [object]
-  var type = value.constructor.name
+
+  var type = typeof value.constructor !== 'undefined'
+    ? value.constructor.name
+    : Object.prototype.toString.call(value)
+      .replace(/^\[object |\]$/g, '')
 
   if (type === 'Object') return 'object'
   if (type === 'RegExp') return 'regexp'
@@ -89,23 +99,22 @@ function objSafe (value) {
   if (typeof value.pipe === 'function') return 'stream'
   // Object.create(null) throws an error. Code below
   // prevents this from happening. Handles arguments.
-  try {
-    var type = value.constructor.name
+  var type = typeof value.constructor !== 'undefined'
+    ? value.constructor.name
+    : Object.prototype.toString.call(value)
+      .replace(/^\[object |\]$/g, '')
 
-    if (type === 'Object') {
-      return isArrayLike(value)
-        ? 'arguments'
-        : 'object'
-    }
-
-    if (type === 'RegExp') return 'regexp'
-    if (type === 'Date') return 'date'
-    if (type === 'Buffer') return 'buffer'
-
-    return type.toLowerCase()
-  } catch (err) {
-    return kindOf(value)
+  if (type === 'Object') {
+    return isArrayLike(value)
+      ? 'arguments'
+      : 'object'
   }
+
+  if (type === 'RegExp') return 'regexp'
+  if (type === 'Date') return 'date'
+  if (type === 'Buffer') return 'buffer'
+
+  return type.toLowerCase()
 }
 
 function kindOf (value) {
