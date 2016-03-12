@@ -22,7 +22,7 @@ function arrMin (arr, fn, thisObj) {
   var i = -1
   var len = arr.length
 
-  while (i++ < len) {
+  while (++i < len) {
     value = arr[i]
     temp = fn(value, i, arr)
 
