@@ -4,8 +4,8 @@ var precise = require('../number/enforcePrecision')
   convert a high resolution time in nanoseconds to another unit of time
 
   val            : high resolution time diff (process.hrtime(process.hrtime())
-  conversionUnit : convert to specified time units. default: seconds
-  precision      : number of decimal places. default: 9
+  conversionUnit : convert to specified time units. default: milliseconds
+  precision      : number of decimal places. default: 3
 
   ------------------------------------------------------------------------
 
@@ -14,6 +14,8 @@ var precise = require('../number/enforcePrecision')
 
   process.nextTick(() => {
     var end = process.hrtime(start)
+    console.log('elasped time took %d seconds', convert(end))
+    // or for second convertison with 9 decimal places
     console.log('elasped time took %d seconds', convert(end, 's', 9))
   })
 
@@ -26,11 +28,11 @@ function convertDiff (diffHRTimes, conversionUnit, precision) {
 
   if (arguments.length === 2 && typeof conversionUnit === 'number') {
     precision = conversionUnit
-    conversionUnit = 'second'
+    conversionUnit = 'ms'
   }
 
-  conversionUnit = conversionUnit || 'second'
-  precision = precision || 9
+  conversionUnit = conversionUnit || 'ms'
+  precision = precision || 3
 
   var getUnit = {
     'm'      : 6e10,
