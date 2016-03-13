@@ -46,6 +46,13 @@ test('should return whole array if end is higher than length', function () {
   t.same(slice(arr, 0, 8), [1, 2, 3])
 })
 
+test('should return whole array if start and end are undefined', function () {
+  var arr = [1, 2, 3]
+  var strt
+  var end
+  t.same(slice(arr, strt, end), [1, 2, 3])
+})
+
 test('should NOT skip sparse array indexes', function () {
   var arr = [1]
   arr[4] = 4
@@ -59,3 +66,14 @@ test('should convert array-like object to array', function () {
   t.same(result, ['a', 'b', 'c'])
   t.is(result.constructor, Array)
 })
+
+test('should convert arguments to array', function () {
+  function foo () {
+    return slice(arguments)
+  }
+  var result = foo('a', 'b', 'c')
+
+  t.same(result, ['a', 'b', 'c'])
+  t.is(result.constructor, Array)
+})
+
