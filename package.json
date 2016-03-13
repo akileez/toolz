@@ -30,7 +30,8 @@
   },
   "nyc": {
     "include": [
-      "**/array/*.js"
+      "**/array/*.js",
+      "**/lang/*.js"
     ]
   },
   "files": [
