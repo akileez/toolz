@@ -15,7 +15,7 @@ test('should loop and pass params to callback', function () {
   t.is(result, 15)
 })
 
-test('should normalize sparse arrays behavior. see #64', function () {
+test('should normalize sparse arrays behavior', function () {
   // IMPORTANT!
   // ----------
   // this behavior is different than ES5 Array#forEach
@@ -39,7 +39,7 @@ test('should normalize sparse arrays behavior. see #64', function () {
   t.same(result.length, 11)
 })
 
-test('should allow exiting the iteration early. see #94', function () {
+test('should allow exiting the iteration early', function () {
   var arr = [1, 2, 3, 4, 5]
   var count = 0
   forEach(arr, function () {
@@ -51,7 +51,7 @@ test('should allow exiting the iteration early. see #94', function () {
   t.is(count, 2)
 })
 
-test('should not execute loop if array is null/undefined. match collection/forEach behavior. see #93', function () {
+test('should not execute loop if array is null/undefined. match collection/forEach behavior', function () {
   var count = 0
   var testFunc = function () { count++ }
   forEach(null, testFunc)
