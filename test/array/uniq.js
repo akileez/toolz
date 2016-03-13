@@ -33,33 +33,40 @@ test('unique should remove duplicates', function () {
   t.same(res, expected)
 });
 
-// test('uneek should remove duplicates', function () {
-//   var source = ['a', 1, 2, 'c', 'b', 2, 1, 'b', 'c']
+test('uneek should remove duplicates', function () {
+  var source = ['a', 1, 2, 'c', 'b', 2, 1, 'b', 'c']
 
-//   var res = uneek(source)
-//   var expected = ['a', 1, 2, 'c', 'b']
+  var res = uneek(source)
+  var expected = [1, 2, 'a', 'b', 'c']
 
-//   // should not affect original array
-//   // t.is(source.length, 9)
+  // should affect original array
+  t.is(source.length, 5)
 
-//   // duplicates are removed starting from begining of array!
-//   t.same(res, expected)
-// });
+  // duplicates are removed starting from begining of array!
+  t.same(res, expected)
+  t.is(uneek([1,1,2,3,5,5,7]).join(), [1,2,3,5,7].join())
+  t.is(uneek([]).join(), [].join())
+  t.is(uneek([1,1,1]).join(), [1].join())
+  t.is(uneek([1,1,1,2,2,2], function(a,b) { return (a^b)&1 }).join(), [2,1].join())
+});
 
 test('uniq should return empty array if source array is null/undefined', function () {
   t.same(uniq(null), [])
   t.same(uniq(undefined), [])
+  t.same(uniq([]), [])
 });
 
 test('unique should return empty array if source array is null/undefined', function () {
   t.same(unique(null), [])
   t.same(unique(undefined), [])
+  t.same(unique([]), [])
 });
 
-// test('uneek should return empty array if source array is null/undefined', function () {
-//   t.same(uneek(null), [])
-//   t.same(uneek(undefined), [])
-// });
+test('uneek should return empty array if source array is null/undefined', function () {
+  t.same(uneek(null), [])
+  t.same(uneek(undefined), [])
+  t.same(uneek([]), [])
+});
 
 test('unique should support custom compare function', function () {
   var arr = [{ name: 'foo' }, { name: 'bar' }, { name: 'foo' }];
@@ -68,4 +75,13 @@ test('unique should support custom compare function', function () {
   });
   // note that it removes duplicates starting from begin of array
   t.same(result, arr.slice(1, 3));
+});
+
+test('uneek should support custom compare function', function () {
+  var arr = [{ name: 'foo' }, { name: 'bar' }, { name: 'foo' }];
+  var result = uneek(arr, function (a, b) {
+    return a.name === b.name;
+  });
+  // note that it removes duplicates starting from begin of array
+  t.same(result, arr.slice(0, 2));
 });
