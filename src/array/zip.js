@@ -5,6 +5,7 @@
 
 var max = require('./max')
 var map = require('./map')
+var slice = require('./slice')
 
 function getLength (arr) {
   return arr == null ? 0 : arr.length
@@ -14,12 +15,13 @@ function getLength (arr) {
 // the values at the corresponding position
 
 function zip (arr) {
-  var len = arr ? max(map(arguments, getLength)) : 0
+  var args = slice(arguments)
+  var len = arr ? max(map(args, getLength)) : 0
   var results = []
   var i = -1
 
   while (++i < len) {
-    results.push(map(arguments, function (item) {
+    results.push(map(args, function (item) {
       return item == null ? undefined : item[i]
     }))
   }
