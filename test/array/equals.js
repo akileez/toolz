@@ -14,6 +14,13 @@ test('should consider empty arrays as equal', () => {
   t.is(equals([], []), true)
 })
 
+test('should test for items other than an array', () => {
+  t.is(equals(1, 2), false)
+  t.is(equals(1, 1), true)
+  t.is(equals(true, true), true)
+  t.is(equals(false, true), false)
+})
+
 test('should allow custom compare functions', function () {
   var a = [1, 'bar', {}]
   var b = ['1', 'bar', {}]
