@@ -1,4 +1,4 @@
-var make = require('./_make')
+var make = require('./_make_new')
 var arrContains = require('../array/contains')
 var objContains = require('../object/contains')
 var strContains = require('../string/contains')
