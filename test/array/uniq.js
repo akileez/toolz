@@ -89,3 +89,8 @@ test('uneek should support custom compare function and sort option', function ()
   // note that it removes duplicates starting from begin of array
   t.same(result, arr.slice(0, 2));
 });
+
+test('uneek should support sort option only', function () {
+  t.is(uneek([1,1,1,2,2,2], true).join(), [1,2].join())
+
+});
