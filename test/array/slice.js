@@ -41,6 +41,12 @@ test('should return empty array if start/end is higher than array length', funct
   t.same(slice(arr, 5, 15), [])
 })
 
+test('should return empty array if start/end is higher than array length', function () {
+  var arr = [1, 2, 3]
+  t.same(slice(arr, 5), [])
+  t.same(slice(arr, 15, 5), [])
+})
+
 test('should return whole array if end is higher than length', function () {
   var arr = [1, 2, 3]
   t.same(slice(arr, 0, 8), [1, 2, 3])
@@ -51,6 +57,13 @@ test('should return whole array if start and end are undefined', function () {
   var strt
   var end
   t.same(slice(arr, strt, end), [1, 2, 3])
+})
+
+test('should return [] if start and end are null', function () {
+  var arr = [1, 2, 3]
+  var strt = null
+  var end = null
+  t.same(slice(arr, strt, end), [])
 })
 
 test('should NOT skip sparse array indexes', function () {
