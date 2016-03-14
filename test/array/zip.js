@@ -25,4 +25,5 @@ test('should use undefined for null/undefined argument values', function () {
         [2, undefined, undefined]
     ]
     t.same(zip([1, 2], null, undefined), output)
+    t.same(zip(null, null, undefined), [])
 })
