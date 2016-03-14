@@ -77,7 +77,11 @@ test('unique should support custom compare function', function () {
   t.same(result, arr.slice(1, 3));
 });
 
-test('uneek should support custom compare function', function () {
+test('uneek should support custom compare function and sort option', function () {
+  t.is(uneek([1,1,1,2,2,2], function(a,b) {
+    return (a^b)&1
+  }, true).join(), [1,2].join())
+
   var arr = [{ name: 'foo' }, { name: 'bar' }, { name: 'foo' }];
   var result = uneek(arr, function (a, b) {
     return a.name === b.name;
