@@ -4,7 +4,6 @@
 'use strict'
 
 /*
-
   Removes all duplicates from a sorted array in place.
     - array is the array to remove items from
     - compare is an optional comparison function that returns 0 when two items are equal, and something non-zero when they are different. If unspecified, then the default equals will be used.
@@ -13,14 +12,24 @@
   This library updates the array in place without making an extra copy (and so it is faster for large arrays)
   It also accepts a custom comparison function so you can remove duplicates from arrays containing object
 
+  Note this function depends on this list array to be sorted in order to perform its magic.
+  If list array is already sorted, pass 'true' for sorted parameter
+
 */
 
 function unique (list, compare, sorted) {
   if (list == null || list.length === 0) return []
 
+  sorted = !!sorted
+
   if (compare && typeof compare === 'function') {
     if (!sorted) list.sort(compare)
     return unique_pred(list, compare)
+  }
+
+  if (compare && typeof compare === 'boolean') {
+    sorted = compare
+    compare = null
   }
 
   if (!sorted) list.sort()
