@@ -1,5 +1,5 @@
 // returns a boolean indicating a matching record exists
-// this differs from array/contains where the qurey item
+// this differs from array/contains. Here, the qurey item
 // can be a string, regex, array, plain object, number
 
 var testval = require('../lang/testval')
