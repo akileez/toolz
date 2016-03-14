@@ -18,7 +18,7 @@
 function unique (list, compare, sorted) {
   if (list == null || list.length === 0) return []
 
-  if (compare) {
+  if (compare && typeof compare === 'function') {
     if (!sorted) list.sort(compare)
     return unique_pred(list, compare)
   }
@@ -38,6 +38,7 @@ function unique_pred (list, compare) {
     a = list[i]
 
     if (compare(a, b)) {
+      /* istanbul ignore if  */
       if (i === ptr) {
         ptr++
         continue
@@ -61,6 +62,7 @@ function unique_eq (list) {
     a = list[i]
 
     if (a !== b) {
+      /* istanbul ignore if  */
       if (i === ptr) {
         ptr++
         continue
