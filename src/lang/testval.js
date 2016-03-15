@@ -60,4 +60,10 @@ function testValue (val, test) {
   return test === val
 }
 
+testValue.cb = function (test) {
+  return function (value) {
+    return testValue(value, test)
+  }
+}
+
 module.exports = testValue
