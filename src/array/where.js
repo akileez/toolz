@@ -8,11 +8,13 @@ var filter  = require('./filter')
 var testval = require('../lang/testval')
 
 function where (arr, query) {
-  arr = convert(arr)
+  return filter(convert(arr), filterd(query))
+}
 
-  return filter(arr, function (item) {
-    return testval(item, query)
-  })
+function filterd (query) {
+  return function (element) {
+    return testval(element, query)
+  }
 }
 
 module.exports = where
