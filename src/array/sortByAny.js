@@ -5,49 +5,46 @@
 // this function assumes a flat object structure for the items
 // in the array.
 
-var rest = require('../function/rest')
-var kindOf = require('../lang/kindOf')
+var sort    = require('./sort')
+var convert = require('./convert')
+var isUndef = require('../lang/isUndefined')
+var get     = require('../object/get')
 
-function sortBy (data) {
-  return rest(function (args) {
-    if (kindOf(args[args.length - 1]) === 'object') {
-      var customOrder = args.pop()
+function sortBy (records, columns, order) {
+  return sort(records, sortByFunc(convert(columns), order))
+}
+
+function sortByFunc (properties, order) {
+  var props = properties.slice(0)
+  var property = props.shift()
+
+  return function sorter (a, b) {
+    var result
+    var x = get(a, property)
+    var y = get(b, property)
+
+    if (isUndef(x) && !isUndef(y)) result = -1
+    else if (!isUndef(x) && isUndef(y)) result = 1
+    else if (isUndef(x) && isUndef(y)) result = 0
+    else if (order && order[property]) {
+      result = order[property].indexOf(x) - order[property].indexOf(y)
+    } else {
+      result = x < y ? -1 : x > y ? 1 : 0
     }
 
-    var columns = [].concat(args)
-    return data.sort(sortByFunc(columns, customOrder))
-  })
-
-  function sortByFunc (properties, customOrder) {
-    var props = properties.slice(0)
-    var property = props.shift()
-
-    return function tryIt (a, b) {
-      var result
-      var x = a[property]
-      var y = b[property]
-
-      if (typeof x === 'undefined' && typeof y !== 'undefined') result = -1
-      else if (typeof x !== 'undefined' && typeof y === 'undefined') result = 1
-      else if (typeof x === 'undefined' && typeof y === 'undefined') result = 0
-      else if (customOrder && customOrder[property]) {
-        result = customOrder[property].indexOf(x) - customOrder[property].indexOf(y)
-      } else {
-        result = x < y ? -1 : x > y ? 1 : 0
-      }
-
-      if (result === 0) {
-        if (props.length) {
-          property = props.shift()
-          return tryIt(a, b)
-        } else {
-          return 0
-        }
+    if (result === 0) {
+      if (props.length) {
+        property = props.shift()
+        return sorter(a, b)
       } else {
         props = properties.slice(0)
         property = props.shift()
-        return result
+        return 0
       }
+    } else {
+      props = properties.slice(0)
+      property = props.shift()
+      return result
     }
   }
 }
