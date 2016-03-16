@@ -1,3 +1,6 @@
+// adopted from: runnel <https://github.com/thlorenz/runnel>
+// Copyright 2013 Thorsten Lorenz. (MIT)
+
 'use strict'
 
 var slice    = require('../array/slice')
