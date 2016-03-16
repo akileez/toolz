@@ -1,22 +1,29 @@
+// arr-union <https://github.com/jonschlinkert/arr-union>
+// Copyright (c) 2014-2016, Jon Schlinkert. (MIT)
+
 function unionized (arrs) {
-  var results = []
-  var i = -1
-  var j = -1
-  var k = -1
+  if (!Array.isArray(arrs)) {
+    arrs = [arrs]
+  }
+
   var len = arguments.length
+  var i = 0
 
   while (++i < len) {
-    var arg = toArray(arguments[i])
-    while (++j < arg.length) {
+    var arg = arguments[i]
+    if (!arg) continue;
+
+    if (!Array.isArray(arg)) {
+      arg = [arg]
+    }
+
+    for (var j = 0; j < arg.length; j++) {
       var ele = arg[j]
-      if (results.indexOf(ele) === -1) results[++k] = ele
+      if (arrs.indexOf(ele) >= 0) continue;
+      arrs.push(ele)
     }
   }
-  return results
-}
-
-function toArray (val) {
-  return Array.isArray(val) ? val : [val]
+  return arrs
 }
 
 module.exports = unionized
