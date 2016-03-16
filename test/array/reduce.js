@@ -3,7 +3,7 @@ var test = painless.createGroup('Test array/reduce and collection/reduce')
 var t = painless.assert
 
 var reduce = require('../../src/array/reduce')
-var redice = require('../../src/collection/reduce')
+var reduce2 = require('../../src/array/reduce2')
 
 
 test('should reduce array into a single value', function () {
@@ -26,6 +26,26 @@ test('should reduce array into a single value', function () {
   t.same(compare2, [1, 2, 6])
 })
 
+test('[reduce2] should reduce array into a single value', function () {
+  var arr = [1, 2, 3, 4]
+  var compare1 = []
+  var compare2 = []
+
+  function sum (prev, cur, idx, arr) {
+    compare1.push(prev)
+    return prev + cur
+  }
+
+  function mult (prev, cur, idx, arr) {
+    compare2.push(prev)
+    return prev * cur
+  }
+  t.is(reduce2(arr, sum), 10)
+  t.is(reduce2(arr, mult), 24)
+  t.same(compare1, [1, 3, 6])
+  t.same(compare2, [1, 2, 6])
+})
+
 test('should allow init value', function () {
   var arr = [1, 2, 3, 4]
 
@@ -38,6 +58,20 @@ test('should allow init value', function () {
   }
   t.is(reduce(arr, sum, 10), 20)
   t.is(reduce(arr, mult, 10), 240)
+})
+
+test('[reduce2] should allow init value', function () {
+  var arr = [1, 2, 3, 4]
+
+  function sum (prev, cur, idx, arr) {
+    return prev + cur
+  }
+
+  function mult (prev, cur, idx, arr) {
+    return prev * cur
+  }
+  t.is(reduce2(arr, 10, sum), 20)
+  t.is(reduce2(arr, 10, mult), 240)
 })
 
 test('should pass proper params to callback', function () {
