@@ -12,8 +12,7 @@ function join (items, separator) {
 }
 
 function isValidString (value) {
-  // return (value != null && value != '')
-  return (value != null)
+  return (value != null && value !== '')
 }
 
 module.exports = join
