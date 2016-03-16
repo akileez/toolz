@@ -2,18 +2,17 @@ var slice = require('./slice')
 var randInt = require('../random/randInt')
 
 /**
- *  var arr = [1,2,3,4,5,6,7,8]
- *
- *  pick.first(arr)     // [ 1 ]
- *  pick.first(arr, 3)  // [ 1, 2, 3 ]
- *  pick.last(arr)      // [ 8 ]
- *  pick.last(arr, 3)   // [ 6, 7, 8 ]
- *  pick.before(arr, 4) // [ 1, 2, 3, 4 ]
- *  pick.after(arr, 3)  // [ 4, 5, 6, 7, 8 ]
- *  pick.between(arr, 1, 3) // [ 2, 3 ]
- *  pick.rand(arr)      // [ 4 ]
- *  pick.rand(arr, 3)   // [ 8, 3, 6 ]
- */
+    var arr = [1,2,3,4,5,6,7,8]
+    pick.first(arr)     // [ 1 ]
+    pick.first(arr, 3)  // [ 1, 2, 3 ]
+    pick.last(arr)      // [ 8 ]
+    pick.last(arr, 3)   // [ 6, 7, 8 ]
+    pick.before(arr, 4) // [ 1, 2, 3, 4 ]
+    pick.after(arr, 3)  // [ 4, 5, 6, 7, 8 ]
+    pick.between(arr, 1, 3) // [ 2, 3 ]
+    pick.rand(arr)      // [ 4 ]
+    pick.rand(arr, 3)   // [ 8, 3, 6 ]
+*/
 
 // Returns the first item, or first `num` items of an array.
 function first (arr, num) {
