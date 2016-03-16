@@ -5,10 +5,7 @@ function xconcat () {
   var target = []
 
   while (++i < len) {
-    arg = arguments[i]
-    if (!arg) continue
-
-    target[i] = arg
+    target[i] = arguments[i]
   }
 
   return target
