@@ -5,52 +5,37 @@
 // add type check for `function` to prevent errors by using identity
 
 function fastApply (fn, context, args) {
-  var something = {
-    0: () => {
+  switch (args ? args.length : 0) {
+    case 0:
       return context
         ? fn.call(context)
         : fn()
-    },
-    1: () => {
+    case 1:
       return context
         ? fn.call(context, args[0])
         : fn(args[0])
-    },
-    2: () => {
+    case 2:
       return context
         ? fn.call(context, args[0], args[1])
         : fn(args[0], args[1])
-    },
-    3: () => {
+    case 3:
       return context
         ? fn.call(context, args[0], args[1], args[2])
         : fn(args[0], args[1], args[2])
-    },
-    4: () => {
+    case 4:
       return context
         ? fn.call(context, args[0], args[1], args[2], args[3])
         : fn(args[0], args[1], args[2], args[3])
-    },
-    5: () => {
+    case 5:
       return context
         ? fn.call(context, args[0], args[1], args[2], args[3], args[4])
         : fn(args[0], args[1], args[2], args[3], args[4])
-    },
-    6: () => {
+    case 6:
       return context
         ? fn.call(context, args[0], args[1], args[2], args[3], args[4], args[5])
         : fn(args[0], args[1], args[2], args[3], args[4], args[5])
-    },
-    defaults: () => {
-      return fn.apply(context, args)
-    }
+    defaults: return fn.apply(context, args)
   }
-  var things = args ? args.length : 0
-  // console.log(things, (context ? 'true' : 'false'))
-
-  return (typeof something[things] !== 'function')
-    ? something.defaults()
-    : something[things]()
 }
 
 // concept adopted from: https://github.com/wilmoore/apply-or.js
