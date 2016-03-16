@@ -1,30 +1,32 @@
 // Apply a function simultaneously against two values of the array
 // (from right-to-left) as to reduce it to a single value.
 
-function reduceRight (arr, fn, initVal) {
-  var hasInit = arguments.length > 2
+function reduceRight (arr, fn, acc) {
+  var init = arguments.length > 2
 
   if (arr == null || !arr.length) {
-    if (hasInit) return initVal
-    else throw new Error('reduce of empty array with no initial value')
+    if (init)
+      return acc
+    else
+      throw new Error('reduce of empty array with no initial value')
   }
 
-  var i = arr.length
-  var result = initVal
-  var value
+  var i   = arr.length
+  var res = acc
+  var val
 
   while (--i >= 0) {
-    value = arr[i]
+    val = arr[i]
 
-    if (!hasInit) {
-      result = value
-      hasInit = true
+    if (!init) {
+      res = val
+      init = true
     } else {
-      result = fn(result, value, i, arr)
+      res = fn(res, val, i, arr)
     }
   }
 
-  return result
+  return res
 }
 
 module.exports = reduceRight
