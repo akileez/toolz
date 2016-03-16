@@ -17,6 +17,7 @@ var isObjectLike = require('../lang/isObjectLike')
  */
 
 function flattener (arr, isDeep, isStrict, result) {
+  if (arr == null || arr.length < 1) return []
   result = result || []
 
   var idx = -1
@@ -24,12 +25,16 @@ function flattener (arr, isDeep, isStrict, result) {
 
   while (++idx < len) {
     var val = arr[idx]
-    if (isObjectLike(val) && isArrayLike(val)
-      && (isStrict || isArray(val) || isArguments(val))) {
-      // recursively flatten arrays (susceptable to call stack limits)
+
+    if (isObjectLike(val)
+      && isArrayLike(val)
+      && (isStrict || isArray(val) || isArguments(val)))
+    { // recursively flatten arrays (susceptable to call stack limits)
       if (isDeep) flattener(val, isDeep, isStrict, result)
       else arrPush(result, val)
-    } else if (!isStrict) result[result.length] = val
+    } else {
+      if (!isStrict) result[result.length] = val
+    }
   }
   return result
 }
