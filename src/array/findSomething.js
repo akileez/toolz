@@ -38,7 +38,7 @@ function pick (records, props) {
     return some(props, (prop) => {
       return get(obj, prop) !== undefined
     })
-  }) , (obj) => {
+  }), (obj) => {
     var output = {}
     forEach(props, (prop) => {
       var val = get(obj, prop)
