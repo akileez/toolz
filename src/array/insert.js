@@ -14,7 +14,7 @@ function insert (arr, items) {
 
   if (diff.length) push(arr, diff)
 
-  return [arr.length, arr]
+  return arr.length
 }
 
 module.exports = insert
