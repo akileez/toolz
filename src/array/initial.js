@@ -4,6 +4,7 @@
 var pick = require('./pick').initial
 
 function initial (arr) {
+  if (arr == null || arr.length < 1) return undefined
   return pick(arr)
 }
 
