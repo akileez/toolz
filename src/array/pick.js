@@ -56,7 +56,8 @@ function rand (arr, num) {
 
 function pickOne (arr) {
   var idx = randInt(0, arr.length - 1)
-  return arr.splice(idx, 1)[0]
+  // dont mutate array
+  return [arr[idx]]
 }
 
 exports.first   = first
