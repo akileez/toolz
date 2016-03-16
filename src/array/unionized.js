@@ -11,7 +11,7 @@ function unionized (arrs) {
 
   while (++i < len) {
     var arg = arguments[i]
-    if (!arg) continue;
+    if (!arg) continue
 
     if (!Array.isArray(arg)) {
       arg = [arg]
@@ -19,7 +19,7 @@ function unionized (arrs) {
 
     for (var j = 0; j < arg.length; j++) {
       var ele = arg[j]
-      if (arrs.indexOf(ele) >= 0) continue;
+      if (arrs.indexOf(ele) >= 0) continue
       arrs.push(ele)
     }
   }
