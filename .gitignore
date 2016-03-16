@@ -13,6 +13,7 @@ pids/
 logs/
 results/
 coverage/
+.nyc_output/
 
 # node.js
 node_modules/
