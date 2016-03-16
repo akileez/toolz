@@ -47,7 +47,7 @@ function unique_pred (list, compare) {
     a = list[i]
 
     if (compare(a, b)) {
-      /* istanbul ignore if  */
+      // istanbul ignore if
       if (i === ptr) {
         ptr++
         continue
@@ -71,7 +71,7 @@ function unique_eq (list) {
     a = list[i]
 
     if (a !== b) {
-      /* istanbul ignore if  */
+      // istanbul ignore if
       if (i === ptr) {
         ptr++
         continue
