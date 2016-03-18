@@ -28,13 +28,11 @@ function flattener (arr, isDeep, isStrict, result) {
 
     if (isObjectLike(val)
       && isArrayLike(val)
-      && (isStrict || isArray(val) || isArguments(val)))
-    { // recursively flatten arrays (susceptable to call stack limits)
+      && (isStrict || isArray(val) || isArguments(val))
+    ) { // recursively flatten arrays (susceptable to call stack limits)
       if (isDeep) flattener(val, isDeep, isStrict, result)
       else arrPush(result, val)
-    } else {
-      if (!isStrict) result[result.length] = val
-    }
+    } else if (!isStrict) result[result.length] = val
   }
   return result
 }
