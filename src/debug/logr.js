@@ -6,7 +6,6 @@ const jlog   = require('../util/jcolorz')
 const clrz   = require('../util/colorz')
 
 function logr () {
-  // don't penalize a single string/template being passed as a param
   arguments.length > 1
     ? logr._stdout.write(logr._log(slice(arguments).join(' ')))
     : logr._stdout.write(logr._log(arguments[0]))
@@ -19,18 +18,21 @@ function loggr () {
     logr._label()
   ))
 }
-logr.log = loggr
-logr.level = 1
-logr.colors = true
-logr.timer = false
 
-logr.nano = nano // expose nano
+// Config
+logr.verbose    = true
+logr.colors     = true
+logr.timer      = false
+logr.log        = loggr
+logr.nano       = nano // expose nano
+
+// Options
 logr._inspector = jlog // expose json-colorz
-logr._colorizr = clrz // expose colorz
-logr._stdout = process.stdout
-logr._stderr = process.stderr
-logr._procname = process.argv[1].split('/').pop()
-logr._pointer = {
+logr._colorizr  = clrz // expose colorz
+logr._stdout    = process.stdout
+logr._stderr    = process.stderr
+logr._procname  = process.argv[1].split('/').pop()
+logr._pointer   = {
   tick       : '✔',
   check      : '√',
   cross      : '✖',
@@ -58,21 +60,21 @@ logr._pointer = {
   radioOff   : '◯'
 }
 
-logr.blk = clrz.black
-logr.blu = clrz.cyan
-logr.mag = clrz.magenta
-logr.yel = clrz.yellow
-logr.red = clrz.red
-logr.grn = clrz.green
-logr.gry = clrz.grey
-logr.cyn = clrz.cyan
-logr.fmt = clrz.wrap
-logr.dim = (str) => {
+// Colors
+logr.blk        = clrz.black
+logr.blu        = clrz.cyan
+logr.mag        = clrz.magenta
+logr.yel        = clrz.yellow
+logr.red        = clrz.red
+logr.grn        = clrz.green
+logr.gry        = clrz.grey
+logr.cyn        = clrz.cyan
+logr.fmt        = clrz.wrap
+logr.dim        = (str) => {
   return clrz.wrap(str, ['dim', 'black'])
 }
 
-// implement base start and stop times
-// adopted from debug-logger
+// start and stop times adopted from debug-logger
 logr.timeTables = {}
 
 logr.strt = function time (label) {
@@ -91,7 +93,7 @@ logr.stop = function timeEnd (label) {
   let diff = process.hrtime(logr.timeTables[label])
   let diffMs = nano(diff, 'ms', 3)
 
-  if (logr.level !== -1 && logr.timer) {
+  if (logr.verbose && logr.timer) {
     let msg = `took: ${logr._color(diffMs, 'grey')} ms`
 
     let frmt = {
