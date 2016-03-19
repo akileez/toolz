@@ -9,13 +9,12 @@ function makeCollectionMethod (arr, obj, str, rex) {
       array    : arr,
       object   : obj,
       string   : str,
-      regexp   : rex,
-      defaults : noop
+      regexp   : rex
     }
 
     return types[type]
       ? apply(types[type], null, slice(arguments))
-      : types.defaults()
+      : noop()
   }
 }
 
