@@ -1,9 +1,3 @@
 {
-  "extends": "marm",
-
-  "rules": {
-    "curly": [0, "multi-line"],
-    "eqeqeq": [2, "smart"],
-    "space-before-keywords": [0, "always"]
-  }
+  "extends": "marm"
 }
