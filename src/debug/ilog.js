@@ -280,6 +280,49 @@ ilog._outputDisplay = function (log, level, label) {
   ilog._stdout.write(ilog._assembleLog(log, level, label))
 }
 
+ilog._level = function (obj) {
+  let msg
+  let prefix
+  let prompt
+  obj = obj || {}
+
+  // the prompt is essentially a separator.
+  if (obj.prompt) {
+    if (Array.isArray(obj.prompt)) {
+      prompt = ilog._color(obj.prompt[0], obj.prompt[1])
+    } else {
+      prompt = ilog._color(obj.prompt)
+    }
+  } else {
+    prompt = ''
+  }
+  if (obj.prefix) {
+    if (Array.isArray(obj.prefix)) {
+      prefix = ilog._color(obj.prefix[0], obj.prefix[1]) + ' '+prompt + ' '
+    } else {
+      prefix = ilog._color(obj.prefix) + ' '+prompt + ' '
+    }
+  } else {
+    prefix = ''
+  }
+
+  if (Array.isArray(obj.name)) {
+    msg = map(obj.name, (lvlname, idx) => {
+      let sp
+      let prompto = ' '+prompt+' '
+      if (idx === obj.name.length - 1) prompto = ' '+prompt
+      if (idx === 0) sp = ''
+      else sp = prefix ? '' : ' '
+
+      return sp + ilog._color(lvlname, obj.color[idx]) + (prefix ? prompto : prompt)
+    }).join('')
+  } else {
+    msg = ilog._color(obj.name, obj.color) + (prefix ? ' '+prompt : prompt)
+  }
+
+  return obj.name ? prefix + msg : clrz.cyan('inspect ') + ilog._pointer.double
+}
+
 ilog._assembleLvl = function (obj) {
   let construct
   let prefix
