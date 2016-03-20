@@ -9,9 +9,10 @@ const nano   = require('../time/nano')
 const slice  = require('../array/slice')
 const jlog   = require('../util/jcolorz')
 const clrz   = require('../util/colorz')
+const xtend  = require('../object/xtend')
 const apply  = require('../function/apply')
-
 const diff   = require('../assertion/variable-diff')
+
 const levels = [
   'FATAL',    // level 0
   'CRITICAL', // level 1
@@ -64,8 +65,6 @@ ilog.timer = false
 ilog.level = 7
 ilog.levels = levels.slice()
 
-// ilog.fatal, ilog.critical, ilog.error, ilog.warning, ilog.alert
-map(levels.slice(0, 5), (level, index) => {
 ilog.log = logr
 ilog.diff = diff
 ilog._inspector = jlog // expose json-colorz
@@ -114,6 +113,8 @@ ilog.dim = (str) => {
   return clrz.wrap(str, ['dim', 'black'])
 }
 
+// ilog.fatal, ilog.critical, ilog.error, ilog.warning, ilog.alert
+map(levels.slice(0, 5), (level, index) => {
   ilog[level.toLowerCase()] = function (error, stack) {
     if (error != null && index <= ilog.level) {
       // allow the ability to pass debugging messages as strings
@@ -155,36 +156,96 @@ map(levels.slice(5, 7), (level, index) => {
   }
 })
 
-ilog.debug = function () {
-  if (arguments.length && (ilog.level >= 7 || ilog.level <= -3)) {
-    let messages
-    let stack = false
+ilog.debug = function (level) {
+  level = level || {}
 
-    if (arguments.length === 1 || (!ilog.colors || !ilog.verbose)) {
-      messages = ilog._stringify(slice(arguments).join(' '))
-    }
+  let defs = {
+    prefix: ['debug', 'green'],
+    prompt: [ilog._pointer.double, ''],
+    name: 'logr',
+    color: 'cyan',
+    stack: false
+  }
 
-    else  {
-      messages = arguments[0]
-      stack = true
-    }
+  return function () {
+    if (ilog.level !== -1 && (ilog.level >= 7 || ilog.level <= -3)) {
+      const chk = ilog.colors && ilog.verbose
+      let log = {}
+      let out = () => {
+        ilog._stdout.write(ilog._assembleLog(
+          map(slice(arguments), (arg) => {return format(' obj: %j', arg)}),
+          ilog._level(level),
+          ilog._label()
+        ))
 
-    ilog._outputDisplay(messages, {name: 'DEBUG', color: 'green'})
+        if (chk) map(slice(arguments), (arg) => {
+          ilog._inspector(arg)
+        })
+      }
 
-    if (stack && ilog.colors) {
-      forEach(slice(arguments, 1), (view) => {
-        ilog.inspect(view)
-      })
+      if (arguments.length > 1) {
+        // normal debugging
+        if (typeof arguments[0] === 'string') {
+
+          log.message = arguments[0]
+          log.args = slice(arguments, 1)
+
+          if (hasFormattingElements(log.message)) {
+            log.message = apply(format, null, slice(arguments))
+          }
+
+          level = xtend(defs, level)
+
+          ilog._stdout.write(ilog._assembleLog(
+            log.message,
+            ilog._level(level),
+            ilog._label()
+          ))
+
+          if (chk) map(log.args, (arg) => {
+            ilog._inspector(arg)
+          })
+        } else out()
+      } else out()
+
+      // show a callsite trace
+      if (level.stack && chk) {
+        ilog._stdout.write(clrz.wrap('\nstack trace:\n', ['underline', 'magenta']))
+        ilog.trace()
+      }
     }
   }
 }
 
+function hasFormattingElements(str){
+  if(!str) return false
+  var res = false
+
+  forEach(['%s', '%d', '%j', '%t'], function (elem) {
+    if(str.indexOf(elem) >= 0) res = true
+  })
+
+  return res;
+}
+
 // trace logging [level 8]
 ilog.trace = function () {
-  if (arguments.length && (ilog.level >= 8 || ilog.level <= -2)) {
-    let messages = apply(format, null, slice(arguments))
+  if (ilog.level >= 8 || ilog.level <= -2) {
+    if (arguments.length) {
+      let messages = apply(format, null, slice(arguments))
+      let level = {
+        prefix: ['debug', 'green'],
+        prompt: ilog._pointer.double,
+        name: 'stack',
+        color: 'cyan'
+      }
 
-    ilog._outputDisplay(messages, {name: 'TRACE', color: 'yellow'})
+      ilog._stdout.write(ilog._assembleLog(
+        messages,
+        ilog._level(level),
+        ilog._label()
+      ))
+    }
 
     forEach(callr(), function (site) {
       ilog._stdout.write(format('  \u001b[36m%s\u001b[90m in %s at line \u001b[32m%d\u001b[0m\n',
@@ -207,8 +268,13 @@ ilog.trak = function (prefix, prompt) {
     return function () {
       if (arguments.length && (ilog.level >= 8 || ilog.level <= -2)) {
         let messages = apply(format, null, slice(arguments))
+        let level = {prefix: prefix, prompt: prompt, name: nsp, color: clrs}
 
-        ilog._outputDisplay(messages, {prefix: prefix, prompt: prompt, name: nsp, color: clrs})
+        ilog._stdout.write(ilog._assembleLog(
+          messages,
+          ilog._level(level),
+          ilog._label()
+        ))
       }
     }
   }
@@ -223,21 +289,15 @@ ilog.auto = function (error) {
   else apply(ilog.debug, null, args)
 }
 
-ilog.inspect = function () {
-  if (ilog.verbose && ilog.level !== -1) {
-    if (arguments.length > 1 && typeof arguments[0] === 'string') {
-      ilog._outputDisplay(`Inspecting ${arguments[0]}: `, {name: 'LOGGR', color: 'white'})
-      map(slice(arguments, 1), (arg) => {
-        ilog._inspector(arg)
-      })
-    }
+ilog.jlog = ilog.debug()
+ilog.dbug = ilog.debug({stack: true})
+ilog.diffs = ilog.debug({name: 'diff', color: 'cyan'})
+ilog.inspect = ilog.debug({name: 'inspect', color: 'cyan'})
+ilog.assert = ilog.trak()(['debug', 'assert'], ['green', 'cyan'])
 
-    else {
-      map(slice(arguments), (arg) => {
-        ilog._inspector(arg)
-      })
-    }
-  }
+
+ilog.frmt = function () {
+  return apply(format, null, slice(arguments))
 }
 
 // implement base start and stop times
@@ -261,10 +321,21 @@ ilog.stop = function timeEnd (label) {
   let diffMs = nano(diff, 'ms', 3)
 
   if (ilog.level !== -1 && ilog.timer) {
-    let msg = `${label} took: ${ilog._color(diffMs, 'grey')} ms`
-    let frmt = {name: 'TIMER', color: 'white'}
+    let msg = `took: ${ilog._color(diffMs, 'grey')} ms`
 
-    ilog._outputDisplay(msg, frmt)
+    let frmt = {
+      prefix: [ilog.gry('timer')],
+      prompt: [ilog._pointer.double, 'red'],
+      name: label,
+      color: 'grey'
+    }
+
+
+    ilog._stdout.write(ilog._assembleLog(
+      msg,
+      ilog._level(frmt),
+      ilog._label()
+    ))
   }
 
   delete ilog.timeTables[label]
@@ -273,7 +344,7 @@ ilog.stop = function timeEnd (label) {
 
 ilog._outputDisplay = function (log, level, label) {
   // construct components
-  level = ilog._assembleLvl(level)
+  level = ilog._level(level)
   label = ilog.dates ? ilog._label(new Date()) : ilog._label()
 
   // compose and log message
