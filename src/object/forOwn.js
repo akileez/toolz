@@ -1,18 +1,15 @@
-function forOwn (obj, fn, thisObj) {
-  var key
+var hasOwn = require('./hasOwn')
+var forIn  = require('./forIn')
 
-  if (thisObj === undefined) {
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        fn(obj[key], key, obj)
-      }
-    }
+function forOwn (obj, fn, thisObj) {
+  if (thisObj == undefined) {
+    forIn(obj, function (val, key) {
+      if (hasOwn(obj, key)) fn(obj[key], key, obj)
+    })
   } else {
-    for (key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        fn.call(thisObj, obj[key], key, obj)
-      }
-    }
+    forIn(obj, function (val, key) {
+      if (hasOwn(obj, key)) fn.call(thisObj, obj[key], key, obj)
+    })
   }
 }
 
