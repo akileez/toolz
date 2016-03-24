@@ -4,7 +4,7 @@
   "description": "basic javascript utils for working with arrays, objects, functions, types and other",
   "main": "index.js",
   "scripts": {
-    "test": "src/bin/painless test/**/*.js"
+    "test": "src/bin/painless test/spec/**/*.js"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -30,11 +30,14 @@
   },
   "nyc": {
     "include": [
-      "**/array/*.js"
+      "**/array/*.js",
+      "**/function/*.js",
+      "**/helper/ent/*.js",
+      "**/lang/*.js"
     ]
   },
   "files": [
-    "index.js",
-    "src"
+    "src",
+    "test/assertion"
   ]
 }
