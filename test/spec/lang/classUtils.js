@@ -1,4 +1,4 @@
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test lang/classUtils')
 

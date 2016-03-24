@@ -1,4 +1,4 @@
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/every and collection/every')
 var t = painless.assert
 var every = require('../../src/array/every')

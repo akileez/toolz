@@ -1,7 +1,7 @@
 'use strict';
 /*jshint asi: true */
 
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test async/itera')
 var tseed    = painless.createGroup('Test async/itera [seed]')

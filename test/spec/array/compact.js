@@ -1,4 +1,4 @@
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/compact and array/compactor')
 var t = painless.assert
 var compact = require('../../src/array/compact')

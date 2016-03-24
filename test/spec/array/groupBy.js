@@ -1,4 +1,4 @@
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/groupBy')
 var t = painless.assert
 var groupBy = require('../../src/array/groupBy')

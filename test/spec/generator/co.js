@@ -1,4 +1,4 @@
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var t = painless.assert
 var testArgs = painless.createGroup('Test generator/co: Arguments')
 var testProm = painless.createGroup('Test generator/co: Promises')

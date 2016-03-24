@@ -1,4 +1,4 @@
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/lastIndexOf')
 var t = painless.assert
 var lastIdx = require('../../src/array/lastIndexOf')

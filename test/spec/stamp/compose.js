@@ -1,4 +1,4 @@
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test object/stampit::compose')
 var t = painless.assert
 var stampit = require('../../src/object/stampit')

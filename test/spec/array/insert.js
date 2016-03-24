@@ -1,4 +1,4 @@
-var painless = require('../../src/assertion/painless')
+var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/insert')
 var t = painless.assert
 var insert = require('../../src/array/insert')
