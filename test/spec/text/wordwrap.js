@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test text/wordwrap')
 var t = painless.assert
-var wrap = require('../../src/text/wordwrap')
+var wrap = require('../../../src/text/wordwrap')
 
 var bars = "I'm rapping. I'm rapping. I'm rap rap rapping. I'm rap rap rap rap rappity rapping."
 

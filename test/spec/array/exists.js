@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/exists')
 var t = painless.assert
 
-var exists = require('../../src/array/exists')
+var exists = require('../../../src/array/exists')
 
 var f = {
   recordset: [

@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/sort')
 var t = painless.assert
-var sort = require('../../src/array/sort')
+var sort = require('../../../src/array/sort')
 
 test('should sort numerically by default', function () {
   var arr = [187, 23, 47, 987, 12, 59, 0];

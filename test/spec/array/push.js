@@ -2,9 +2,9 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/push and array/push1')
 var t = painless.assert
 
-var push = require('../../src/array/push')
-var push1 = require('../../src/array/push1')
-var xcat = require('../../src/array/xcat')
+var push = require('../../../src/array/push')
+var push1 = require('../../../src/array/push1')
+var xcat = require('../../../src/array/xcat')
 
 test('push something', () => {
   var arr = []

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isObject')
 var t = painless.assert
 
-var isObject = require('../../src/lang/isObject')
+var isObject = require('../../../src/lang/isObject')
 
 test('should detect if value is an object', function () {
   t.is(isObject({}), true)

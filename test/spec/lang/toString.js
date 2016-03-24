@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/toString')
 var t = painless.assert
 
-var toString = require('../../src/lang/toString')
+var toString = require('../../../src/lang/toString')
 
 test('should convert null to empty string', function(){
   t.is(toString(null), '')

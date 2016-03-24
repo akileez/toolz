@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test function/fnName')
 
-var fnName   = require('../../src/function/fnName')
+var fnName   = require('../../../src/function/fnName')
 
 test('is exported as a function', function () {
   t.equal(typeof fnName, 'function');

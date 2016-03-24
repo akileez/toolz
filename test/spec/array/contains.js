@@ -1,8 +1,8 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/contains and collection/contains')
 var t = painless.assert
-var contains = require('../../src/array/contains')
-var collection = require('../../src/collection/contains')
+var contains = require('../../../src/array/contains')
+var collection = require('../../../src/collection/contains')
 
 test('should check for existance', () => {
   var arr = [1, 2, 3]

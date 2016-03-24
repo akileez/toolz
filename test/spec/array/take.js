@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/take')
 var t = painless.assert
-var take = require('../../src/array/take')
+var take = require('../../../src/array/take')
 
 test('should iterate a given amount of times passing the index and total', function () {
   var amount = 5

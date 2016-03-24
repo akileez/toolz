@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/extract')
 var t = painless.assert
 
-var extract = require('../../src/array/extract')
+var extract = require('../../../src/array/extract')
 
 test('extract where test returns true', function () {
   var arr = [

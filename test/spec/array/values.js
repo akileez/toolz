@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/values')
 var t = painless.assert
 
-var values = require('../../src/array/values')
+var values = require('../../../src/array/values')
 
 test('should get values from array of objects', () => {
   var arr = [{a: 1, b: 2}, {a: 'foo', b: 'baz'}, {c: true, d: false}]

@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/max')
 var t = painless.assert
 
-var max = require('../../src/array/max')
-var maxc = require('../../src/collection/max')
+var max = require('../../../src/array/max')
+var maxc = require('../../../src/collection/max')
 
 test('should return maximum value', function () {
   t.is(max([100, 2, 1, 3, 200]), 200)

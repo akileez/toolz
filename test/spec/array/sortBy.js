@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/sortBy')
 var t = painless.assert
-var sortBy = require('../../src/array/sortBy')
+var sortBy = require('../../../src/array/sortBy')
 
 test('should sort array with function', function () {
   var arr = [

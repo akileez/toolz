@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/groupBy')
 var t = painless.assert
-var groupBy = require('../../src/array/groupBy')
+var groupBy = require('../../../src/array/groupBy')
 
 test('should bucket appropriately', function () {
   function floor(num) {

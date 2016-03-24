@@ -2,9 +2,9 @@ var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test array/uniq')
 
-var uniq   = require('../../src/array/uniq')
-var unique = require('../../src/array/unique')
-var uneek  = require('../../src/array/uneek')
+var uniq   = require('../../../src/array/uniq')
+var unique = require('../../../src/array/unique')
+var uneek  = require('../../../src/array/uneek')
 
 test('uniq should remove duplicates', function () {
   var source = ['a', 1, 2, 'c', 'b', 2, 1, 'b', 'c']

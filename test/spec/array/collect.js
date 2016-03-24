@@ -1,8 +1,8 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/collect and collection/collect')
 var t = painless.assert
-var collect = require('../../src/array/collect')
-var collection = require('../../src/collection/collect')
+var collect = require('../../../src/array/collect')
+var collection = require('../../../src/collection/collect')
 
 test('collect [map] items and concat results', function () {
   var src = [0, 1, 2, 3]

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/toLookup')
 var t = painless.assert
 
-var toLookup = require('../../src/array/toLookup')
+var toLookup = require('../../../src/array/toLookup')
 
 test('should create an object with the key specified as a string', function () {
   var arr = [{ name: 'a', thing: 1 }, { name: 'b', thing: 2 }];

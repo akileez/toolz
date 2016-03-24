@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/testval')
 var t = painless.assert
 
-var testval = require('../../src/lang/testval')
+var testval = require('../../../src/lang/testval')
 
 function TestClass () {
   this.one = 1

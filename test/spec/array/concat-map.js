@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/concat-map')
 var t = painless.assert
 
-var concatMap = require('../../src/array/concat-map')
+var concatMap = require('../../../src/array/concat-map')
 
 test('empty or not', function () {
     var xs = [ 1, 2, 3, 4, 5, 6 ];

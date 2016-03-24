@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/createObject')
 var t = painless.assert
 
-var createObject = require('../../src/lang/createObject')
+var createObject = require('../../../src/lang/createObject')
 
 test('should create an object', function(){
 

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/unionized')
 var t = painless.assert
 
-var union = require('../../src/array/unionized')
+var union = require('../../../src/array/unionized')
 
 test('should add elements to the original array:', function() {
   var arr = ['a'];

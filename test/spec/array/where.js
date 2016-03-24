@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/where')
 var t = painless.assert
 
-var where = require('../../src/array/where')
+var where = require('../../../src/array/where')
 
 var f = {
   arr: [ 1, 1, 2, 3, 4 ],

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test object/stampit (init)')
 
-var stampit = require('../../src/object/stampit')
+var stampit = require('../../../src/object/stampit')
 
 test('stampit({ init })', function () {
   var obj = stampit({

@@ -7,7 +7,7 @@ var test     = painless.createGroup('Test async/itera')
 var tseed    = painless.createGroup('Test async/itera [seed]')
 
 
-var itera = require('../../src/async/itera')
+var itera = require('../../../src/async/itera')
 var unofails
 var dosfails
 var tresfails

@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/split')
 var t = painless.assert
-var split = require('../../src/array/split')
+var split = require('../../../src/array/split')
 
 test('should split array into segments', function () {
   var arr = [1, 2, 3, 4, 5, 6]

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/toNumber')
 var t = painless.assert
 
-var toNumber = require('../../src/lang/toNumber')
+var toNumber = require('../../../src/lang/toNumber')
 
 test('should convert null to zero', function(){
     t.is(toNumber(null), 0)

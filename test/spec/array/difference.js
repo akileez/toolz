@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/difference')
 var t = painless.assert
-var difference = require('../../src/array/difference')
+var difference = require('../../../src/array/difference')
 
 test('difference should keep only items that are present on first array but not present on other arrays', () => {
   var a = ['a', 'b', 'c']

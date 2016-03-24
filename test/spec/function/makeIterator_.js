@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test function/makeIterator_')
 var t = painless.assert
-var makeIterator_ = require('../../src/function/makeIterator_')
+var makeIterator_ = require('../../../src/function/makeIterator_')
 
 test('should return source argument if it is already a function with no context', function () {
   var fn = function () {};

@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/range')
 var t = painless.assert
-var range = require('../../src/array/range')
+var range = require('../../../src/array/range')
 
 test('should return an array with range steps', function () {
   t.same(range(0, 10), [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/sortByAny')
 var t = painless.assert
 
-var sortBy = require('../../src/array/sortByAny')
+var sortBy = require('../../../src/array/sortByAny')
 
 test('sortBy', function () {
   var fixture = [

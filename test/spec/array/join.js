@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/join')
 var t = painless.assert
-var join = require('../../src/array/join')
+var join = require('../../../src/array/join')
 
 test('should join strings in the array', function () {
   var arr = ['foo', 'bar'];

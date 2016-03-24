@@ -3,7 +3,7 @@ var test = painless.createGroup('Test helper/ent')
 var t = painless.assert
 
 var punycode = require('punycode')
-var ent = require('../../src/helper/ent')
+var ent = require('../../../src/helper/ent')
 
 test('amp', function () {
     var a = 'a & b & c';

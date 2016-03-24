@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test lang/classUtils')
 
-var cu       = require('../../src/lang/classUtils')
+var cu       = require('../../../src/lang/classUtils')
 
 test('cu should extend', function () {
   var Parent;

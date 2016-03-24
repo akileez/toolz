@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/clone')
 var t = painless.assert
-var clone = require('../../src/lang/clone')
+var clone = require('../../../src/lang/clone')
 
 test('should not return source object', function() {
   var src = {};

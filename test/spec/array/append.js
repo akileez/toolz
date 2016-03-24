@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/append')
 var t = painless.assert
 
-var append = require('../../src/array/append')
+var append = require('../../../src/array/append')
 
 test('failing test', () => {
   t.same({a: 1}, {a:1}, 'expact {a: 1} to be {a: 1}')

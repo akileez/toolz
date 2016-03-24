@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/equals')
 var t = painless.assert
-var equals = require('../../src/array/equals')
+var equals = require('../../../src/array/equals')
 
 test('should check if array contains same elements', () => {
   t.is(equals([1, 2], [1, 2]), true)

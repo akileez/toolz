@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/map and collection/map')
 var t = painless.assert
 
-var map = require('../../src/array/map')
-var mapc = require('../../src/collection/map')
+var map = require('../../../src/array/map')
+var mapc = require('../../../src/collection/map')
 
 test('should return a new array with modified items', function () {
   var base = [1, 2, 3, 4, 5]

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test number/humanize')
 var t = painless.assert
 
-var humanize = require('../../src/number/humanize')
+var humanize = require('../../../src/number/humanize')
 
 test('humanize(n, options) should delimit thousandths', function () {
   t.is(humanize(1000), '1,000')

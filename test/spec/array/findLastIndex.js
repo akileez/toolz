@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/findLastIndex and collection/findLastIndex')
 var t = painless.assert
 
-var findLastIndex = require('../../src/array/findLastIndex')
-var filast = require('../../src/collection/findLastIndex')
+var findLastIndex = require('../../../src/array/findLastIndex')
+var filast = require('../../../src/collection/findLastIndex')
 
 test('should return index of first match starting from end of array', function () {
   var items = [1, {a: 1}, 1, 'foo', 'bar', {a: 1}]

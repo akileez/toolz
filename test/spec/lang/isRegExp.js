@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isRegExp')
 var t = painless.assert
 
-var isRegExp = require('../../src/lang/isRegExp')
+var isRegExp = require('../../../src/lang/isRegExp')
 
 test('should detect if value is a RegExp', function () {
   t.is( isRegExp(/\w+/), true)

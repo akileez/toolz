@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/toArray')
 var t = painless.assert
 
-var toArray = require('../../src/lang/toArray')
+var toArray = require('../../../src/lang/toArray')
 
 test('should convert array like objects into array', function () {
     var obj = {

@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/convert')
 var t = painless.assert
-var convert = require('../../src/array/convert')
+var convert = require('../../../src/array/convert')
 
 test('convert array like objects into array', function () {
   var obj = {

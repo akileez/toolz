@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/findSomething')
 var t = painless.assert
 
-var pick = require('../../src/array/findSomething')
+var pick = require('../../../src/array/findSomething')
 
 var f = {
   recordset: [

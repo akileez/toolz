@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/insert')
 var t = painless.assert
-var insert = require('../../src/array/insert')
+var insert = require('../../../src/array/insert')
 
 test('should push item if not present and return the length', function () {
   var arr = [1, 2, 3]

@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/intersection')
 var t = painless.assert
-var intersection = require('../../src/array/intersection')
+var intersection = require('../../../src/array/intersection')
 
 test('should keep only items that are present on all arrays', function () {
   var a = ['a', 'b', 1],

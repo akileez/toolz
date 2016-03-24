@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/find and collection/find')
 var t = painless.assert
 
-var find = require('../../src/array/find')
-var finder = require('../../src/collection/find')
+var find = require('../../../src/array/find')
+var finder = require('../../../src/collection/find')
 
 test('should return first match', function () {
   var obj = { a: 'b' }

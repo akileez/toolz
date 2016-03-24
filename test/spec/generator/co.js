@@ -4,8 +4,8 @@ var testArgs = painless.createGroup('Test generator/co: Arguments')
 var testProm = painless.createGroup('Test generator/co: Promises')
 var testArr  = painless.createGroup('Test generator/co: Arrays')
 
-var co = require('../../src/generator/co')
-var pify = require('../../src/promise/pify')
+var co = require('../../../src/generator/co')
+var pify = require('../../../src/promise/pify')
 var read = require('fs').readFile
 
 // pify(read)

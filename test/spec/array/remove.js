@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/remove')
 var t = painless.assert
-var remove = require('../../src/array/remove')
+var remove = require('../../../src/array/remove')
 
 test('should work in normal array', function () {
   var arr = [1, 'a', 2, 'b']

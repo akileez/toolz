@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/shuffle')
 var t = painless.assert
 
-var shuffle = require('../../src/array/shuffle')
-var mockRandom = require('../../src/random/mockRandom')
+var shuffle = require('../../../src/array/shuffle')
+var mockRandom = require('../../../src/random/mockRandom')
 
 test.beforeEach(function (){
   mockRandom.start()

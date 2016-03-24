@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isInteger')
 var t = painless.assert
 
-var isInteger = require('../../src/lang/isInteger')
+var isInteger = require('../../../src/lang/isInteger')
 
 test('should return false if value isn\'t an integer', function(){
   t.is(isInteger(false), false)

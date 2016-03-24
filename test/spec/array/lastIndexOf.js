@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/lastIndexOf')
 var t = painless.assert
-var lastIdx = require('../../src/array/lastIndexOf')
+var lastIdx = require('../../../src/array/lastIndexOf')
 
 test('should work in regular arrays', function () {
   var arr = [1, 'a', 2, 'b'];

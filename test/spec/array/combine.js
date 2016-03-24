@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/combine')
 var t = painless.assert
-var combine = require('../../src/array/combine')
+var combine = require('../../../src/array/combine')
 
 test('combine items of arr2 with arr1 ignoring dupes', function () {
   var arr1 = [1, 2, 3]

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test object/merge')
 var t = painless.assert
 
-var merge = require('../../src/object/merge')
+var merge = require('../../../src/object/merge')
 
 test('should merge object properties without affecting any object', function () {
 

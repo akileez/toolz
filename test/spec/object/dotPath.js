@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test object/toPath')
 var t = painless.assert
 
-var dotPath = require('../../src/object/toPath')
+var dotPath = require('../../../src/object/toPath')
 
 test('create object path from a list of strings', function () {
   t.is(dotPath('foo', 'bar', 'baz'), 'foo.bar.baz')

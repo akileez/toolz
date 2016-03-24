@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/reduce and collection/reduce')
 var t = painless.assert
 
-var reduce = require('../../src/array/reduce')
-var reduce2 = require('../../src/array/reduce2')
+var reduce = require('../../../src/array/reduce')
+var reduce2 = require('../../../src/array/reduce2')
 
 
 test('should reduce array into a single value', function () {

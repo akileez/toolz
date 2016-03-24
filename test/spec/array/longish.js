@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/longish')
 var t = painless.assert
-var longish = require('../../src/array/longish')
+var longish = require('../../../src/array/longish')
 
 var arr = [{a: 'b'}, {a: 'bb'}, {a: 'bbbb'}, {a: 'bbb'}, {a: 'bb'}]
 var obj = {a: 'b', c: 'dd', e: 'fff', g: 'hhhh', i: 'jjjjj', k: 'k', l: 'l'}

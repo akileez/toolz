@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/last')
 var t = painless.assert
-var last = require('../../src/array/last')
+var last = require('../../../src/array/last')
 
 test('should return the last element of an array', function () {
   t.eq(last(['one', 'two']), 'two');

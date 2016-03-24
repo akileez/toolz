@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isNumber')
 var t = painless.assert
 
-var isNumber = require('../../src/lang/isNumber')
+var isNumber = require('../../../src/lang/isNumber')
 
 test('should detect if value is a Number', function () {
   t.is( isNumber(0), true)

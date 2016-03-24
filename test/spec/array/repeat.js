@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/repeat')
 var t = painless.assert
 
-var repeat = require('../../src/array/repeat')
+var repeat = require('../../../src/array/repeat')
 
 test('should repeat the given string:', function () {
   t.same(repeat('a', 5), ['a', 'a', 'a', 'a', 'a']);

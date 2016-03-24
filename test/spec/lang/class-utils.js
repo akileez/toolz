@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test lang/class-utils')
 
-var utils = require('../../src/lang/class-utils')
+var utils = require('../../../src/lang/class-utils')
 
 // isObject tests
 

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/flattener')
 var t = painless.assert
 
-var flatten = require('../../src/array/flattener')
+var flatten = require('../../../src/array/flattener')
 
 test('should recursively flatten the array', function () {
   var arr = [1, [2], [3, [4], 5]]

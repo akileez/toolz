@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/findLast and collection/findLast')
 var t = painless.assert
 
-var findLast = require('../../src/array/findLast')
-var filast = require('../../src/collection/findLast')
+var findLast = require('../../../src/array/findLast')
+var filast = require('../../../src/collection/findLast')
 
 test('should return last match', function () {
   var obj = {a: 'b'}

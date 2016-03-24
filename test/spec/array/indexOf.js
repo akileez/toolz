@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/indexOf')
 var t = painless.assert
 
-var idx = require('../../src/array/indexOf')
+var idx = require('../../../src/array/indexOf')
 
 test('should work in regular arrays', function(){
     var arr = [1, 'a', 2, 'b'];

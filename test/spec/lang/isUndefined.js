@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isUndefined')
 var t = painless.assert
 
-var isUndefined = require('../../src/lang/isUndefined')
+var isUndefined = require('../../../src/lang/isUndefined')
 
 test('should detect if value is undefined', function () {
     t.is(isUndefined(undefined), true)

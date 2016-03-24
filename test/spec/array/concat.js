@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/concat and array/copy')
 var t = painless.assert
 
-var concat = require('../../src/array/concat')
-var dupe = require('../../src/array/copy')
+var concat = require('../../../src/array/concat')
+var dupe = require('../../../src/array/copy')
 
 test('should concat arrays', function () {
   var arr1 = [1,2,3,4]

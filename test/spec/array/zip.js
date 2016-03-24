@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/zip')
 var t = painless.assert
 
-var zip = require('../../src/array/zip')
+var zip = require('../../../src/array/zip')
 
 test('should group elements from different arrays', function(){
     var output = [ ['a', 1], ['b', 2], ['c', 3] ]

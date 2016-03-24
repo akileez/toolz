@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test object/stampit::immutability')
 var t = painless.assert
-var stampit = require('../../src/object/stampit')
+var stampit = require('../../../src/object/stampit')
 
 // Immutability
 

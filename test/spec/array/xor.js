@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/xor')
 var t = painless.assert
 
-var xor = require('../../src/array/xor')
+var xor = require('../../../src/array/xor')
 
 test('should keep only items that are present in a single array', function () {
   var a = ['a', 'b', 1]

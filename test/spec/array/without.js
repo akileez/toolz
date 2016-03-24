@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/without')
 var t = painless.assert
 
-var without = require('../../src/array/without')
+var without = require('../../../src/array/without')
 
 var f = {
   num: [ 1, 2, 3, 4 ],

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isPlainObject')
 var t = painless.assert
 
-var isPlainObject = require('../../src/lang/isPlainObject')
+var isPlainObject = require('../../../src/lang/isPlainObject')
 
 test('should return true when plain object', function () {
   t.is(isPlainObject({}), true)

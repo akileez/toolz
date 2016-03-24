@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/forEach')
 var t = painless.assert
 
-var forEach = require('../../src/array/forEach')
+var forEach = require('../../../src/array/forEach')
 
 test('should loop and pass params to callback', function () {
   var result = 0

@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/remove-unordered')
 var t = painless.assert
 
-var remove = require('../../src/array/remove-unordered')
+var remove = require('../../../src/array/remove-unordered')
 
 test('remove', function () {
   var list = [0, 1, 2]

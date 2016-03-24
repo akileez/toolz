@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/min')
 var t = painless.assert
 
-var min = require('../../src/array/min')
-var minc = require('../../src/collection/min')
+var min = require('../../../src/array/min')
+var minc = require('../../../src/collection/min')
 
 test('should return maximum value', function () {
   t.is(min([100, 2, 1, 3, 200]), 1)

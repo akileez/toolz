@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/findWhere')
 var t = painless.assert
 
-var findWhere = require('../../src/array/findWhere')
+var findWhere = require('../../../src/array/findWhere')
 
 test('findWhere', function () {
   var arr = [

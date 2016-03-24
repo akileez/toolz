@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isNaN')
 var t = painless.assert
 
-var isNaN = require('../../src/lang/isNaN')
+var isNaN = require('../../../src/lang/isNaN')
 
 test('should return true for everything that isn\'t a number', function () {
   t.is(isNaN(true), true)

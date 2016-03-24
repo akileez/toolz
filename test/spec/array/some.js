@@ -2,9 +2,9 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/some and collection/some')
 var t = painless.assert
 
-var some = require('../../src/array/some')
-var collection = require('../../src/collection/some')
-var isEven = require('../../src/number/isEven')
+var some = require('../../../src/array/some')
+var collection = require('../../../src/collection/some')
+var isEven = require('../../../src/number/isEven')
 
 test('should work on normal array', function () {
   var a1 = [1, 2, 3];

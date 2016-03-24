@@ -1,8 +1,8 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/reject')
 var t = painless.assert
-var reject = require('../../src/array/reject')
-var collection = require('../../src/collection/reject')
+var reject = require('../../../src/array/reject')
+var collection = require('../../../src/collection/reject')
 
 test('should reject items', function () {
   var items = [1, 2, 3, 4, 5],

@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var t = painless.assert
 var test = painless.createGroup('Test array/filter')
 
-var filter = require('../../src/array/filter')
-var filterd = require('../../src/collection/filter')
+var filter = require('../../../src/array/filter')
+var filterd = require('../../../src/collection/filter')
 
 test('should filter items', function () {
   var items = [1, 2, 3, 4, 5];

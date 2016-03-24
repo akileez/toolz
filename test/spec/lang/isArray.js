@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isArray')
 var t = painless.assert
 
-var isArray = require('../../src/lang/isArray')
-var isArr = require('../../src/lang/isArray').isArr
+var isArray = require('../../../src/lang/isArray')
+var isArr = require('../../../src/lang/isArray').isArr
 
 test('should detect if value is an Array', function () {
   t.is(isArray([1, 'foo']), true )

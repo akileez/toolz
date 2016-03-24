@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isFunction')
 var t = painless.assert
 
-var isFunction = require('../../src/lang/isFunction')
+var isFunction = require('../../../src/lang/isFunction')
 
 test('should detect if value is a function', function () {
     t.is(isFunction(function () {}), true)

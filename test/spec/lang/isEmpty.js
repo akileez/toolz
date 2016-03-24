@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isEmpty')
 var t = painless.assert
 
-var isEmpty = require('../../src/lang/isEmpty')
+var isEmpty = require('../../../src/lang/isEmpty')
 
 test('handles arrays', function () {
   t.is(isEmpty([]), true)

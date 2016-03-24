@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/splarse')
 var t = painless.assert
 
-var splarse = require('../../src/array/splarse')
+var splarse = require('../../../src/array/splarse')
 
 test('removes an element from the array', function () {
   var arr = [1, 2, 3, 4]

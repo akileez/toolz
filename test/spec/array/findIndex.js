@@ -2,8 +2,8 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/findIndex')
 var t = painless.assert
 
-var findIndex = require('../../src/array/findIndex')
-var fidx = require('../../src/collection/findIndex')
+var findIndex = require('../../../src/array/findIndex')
+var fidx = require('../../../src/collection/findIndex')
 
 
 test('should return index of first match', function () {

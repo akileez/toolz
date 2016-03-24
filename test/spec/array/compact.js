@@ -1,8 +1,8 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/compact and array/compactor')
 var t = painless.assert
-var compact = require('../../src/array/compact')
-var compactor = require('../../src/array/compactor')
+var compact = require('../../../src/array/compact')
+var compactor = require('../../../src/array/compactor')
 
 test('compact to remove null and undefined items', function () {
   var arr = [1, 2, null, false, '', 'foo', undefined]

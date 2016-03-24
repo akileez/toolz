@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/slice')
 var t = painless.assert
 
-var slice = require('../../src/array/slice')
+var slice = require('../../../src/array/slice')
 
 test('should return slice of array', function () {
   var arr = [1, 2, 3, 4, 5]

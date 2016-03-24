@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test lang/isString')
 var t = painless.assert
 
-var isString = require('../../src/lang/isString')
+var isString = require('../../../src/lang/isString')
 
 test('should detect if value is a string', function () {
   t.is(isString('foo'), true)

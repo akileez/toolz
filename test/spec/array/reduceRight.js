@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test array/reduceRight')
 var t = painless.assert
-var reduceRight = require('../../src/array/reduceRight')
+var reduceRight = require('../../../src/array/reduceRight')
 
 test('should reduce array into a single value', function () {
   var arr = [1, 2, 3, 4];
