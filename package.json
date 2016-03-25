@@ -30,10 +30,18 @@
   },
   "nyc": {
     "include": [
-      "**/array/*.js",
-      "**/function/*.js",
-      "**/helper/ent/*.js",
-      "**/lang/*.js"
+      "src/array/*.js",
+      "src/collection/*.js",
+      "src/function/*.js",
+      "src/helper/ent/*.js",
+      "src/lang/*.js",
+      "src/math/*.js",
+      "src/number/*.js",
+      "src/object/*.js",
+      "src/random/*.js",
+      "src/string/*.js",
+      "src/text/*.js",
+      "src/time/*.js"
     ]
   },
   "files": [
