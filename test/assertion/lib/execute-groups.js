@@ -1,8 +1,8 @@
 'use strict';
 
-var through = require('../../stream/through');
+var through = require('../../../src/stream/through');
 var sequentialTests = require('./sequential-tests');
-var setAsap = require('../../process/set-asap');
+var setAsap = require('../../../src/process/set-asap');
 var GROUP_START = 'group.start';
 var GROUP_END = 'group.end';
 var TEST_END = 'test.end';
