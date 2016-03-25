@@ -3,8 +3,8 @@
 
 'use strict'
 
-var thunks = require('../function/thunks')
-var clr    = require('../util/colorz')
+var thunks = require('./thunks')
+var clr    = require('../../src/util/colorz')
 
 function factory (thunks) {
 
