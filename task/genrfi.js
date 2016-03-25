@@ -2,9 +2,9 @@
 
 'use strict'
 
-var split     = require('../stream/split2')
-var walker    = require('../path/walker')
-var mkdirp    = require('../file/mkdirp')
+var split     = require('../src/stream/split2')
+var walker    = require('../src/path/walker')
+var mkdirp    = require('../src/file/mkdirp')
 var path      = require('path')
 var fs        = require('fs')
 
