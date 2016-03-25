@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 var path = require('path');
-var glob = require('../glob/globby');
-var resolveCwd = require('../path/resolve-cwd');
-var argv = require('../process/minimist')(process.argv.slice(2), {
+var glob = require('../src/glob/globby');
+var resolveCwd = require('../src/path/resolve-cwd');
+var argv = require('../src/process/minimist')(process.argv.slice(2), {
   alias: {
     i: 'include'
   }
