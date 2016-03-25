@@ -1,9 +1,9 @@
 'use strict';
 
 var fnDone = require('../done');
-var objectAssign = require('../../object/object-assign');
+var objectAssign = require('../../../src/object/object-assign');
 /* istanbul ignore next */
-var PromiseM = typeof Promise === 'function' ? Promise : require('../../async/promise-polyfill');
+var PromiseM = typeof Promise === 'function' ? Promise : require('../../../src/async/promise-polyfill');
 
 function getError(fnObj, time, error) {
   var res = getSuccess(fnObj, time);
