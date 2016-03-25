@@ -12,9 +12,9 @@
 //    its ttr and tta combined which is what I planned to do
 
 var assert = require('assert')
-var map    = require('../array/map')
-var reduce = require('../array/reduce2')
-var keys   = require('../object/keys')
+var map    = require('../../src/array/map')
+var reduce = require('../../src/array/reduce2')
+var keys   = require('../../src/object/keys')
 
 var tests = []
 var ran = false
