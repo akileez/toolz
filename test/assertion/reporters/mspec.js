@@ -1,8 +1,8 @@
 // var chalk = require('../../../../util/colorz');
-var clrz = require('../../util/colorz')
-var map = require('../../array/map')
+var clrz = require('../../../src/util/colorz')
+var map = require('../../../src/array/map')
 var diff = require('../variable-diff');
-var figures = require('../../string/figures');
+var figures = require('../../../src/string/figures');
 var helper = require('../report-helper');
 // var INDENT = '  ';
 

@@ -1,6 +1,6 @@
-var chalk = require('../../util/colorz');
+var chalk = require('../../../src/util/colorz');
 var diff = require('../variable-diff');
-var figures = require('../../string/figures');
+var figures = require('../../../src/string/figures');
 var helper = require('../report-helper');
 var INDENT = '  ';
 
