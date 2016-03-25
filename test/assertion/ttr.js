@@ -6,10 +6,10 @@
 // async functions? maybe. but doubt it if everything runs well inside present setup
 // promise functions? same as above.
 
-var slice  = require('../array/slice')
-var clrz   = require('../util/colorz')
-var indent = require('../text/indent')
-var nano   = require('../time/nano')
+var slice  = require('../../src/array/slice')
+var clrz   = require('../../src/util/colorz')
+var indent = require('../../src/text/indent')
+var nano   = require('../../src/time/nano')
 var t      = require('./claim')
 
 var countTotal = 0
