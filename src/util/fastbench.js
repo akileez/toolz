@@ -3,8 +3,8 @@
 
 'use strict'
 
-var fastseries = require('./fastseries')
-var chalk = require('../util/colorz')
+var fastseries = require('../async/fastseries')
+var chalk = require('./colorz')
 var colors = ['red', 'green', 'magenta', 'blue', 'yellow', 'cyan', 'white', 'gray']
 var console = require('console')
 
