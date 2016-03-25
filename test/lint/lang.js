@@ -1,5 +1,5 @@
 // test suite
-var painless = require('../../src/assertion/painless')
+var painless = require('../assertion/painless')
 var test     = painless.createGroup('Lint lang collection')
 var t        = painless.assert
 
@@ -11,8 +11,8 @@ var map      = require('../../src/array/map')
 var segments = require('../../src/path/segments')
 
 // parameters
-var opts = {cwd: './src/lang'}
-var files = map(glob.sync('./src/lang/*.js'), function (v, k) {
+var opts = {cwd: '../src/lang'}
+var files = map(glob.sync('../src/lang/*.js'), function (v, k) {
   return segments.last(v)
 })
 
