@@ -34,6 +34,6 @@ function task (name, callback) {
 
 exports.run = run
 exports.task = task
-exports.args = argv
+exports.opts = argv
 
 process.nextTick(run.bind(null, cmd))
