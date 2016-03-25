@@ -1,7 +1,7 @@
 'use strict'
 
 var xtend = require('../object/xtend')
-var reusify = require('./reusify')
+var reusify = require('../function/reusify')
 var defaults = {
   released: nop,
   results: true
