@@ -2,12 +2,12 @@
 var runr     = require('../src/task/runr')
 var execa    = require('../src/cli/execa-commands')
 var spawn    = require('../src/cli/spawn-commands')
-var painless = require('../src/bin/painless')
+var painless = require('./painless')
 
 function execute (dir) {
-  execa([{cmd: '../src/bin/painless', args: [`spec/${dir}/*.js`]}], () => {
+  execa([{cmd: './painless', args: [`spec/${dir}/*.js`]}], () => {
     if (runr.args.lint) process.nextTick(() => {
-      spawn([{cmd: '../src/bin/painless', args: [`lint/${dir}.js`, '-a']}])
+      spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}])
     })
   })
 }
