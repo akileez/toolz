@@ -1,8 +1,8 @@
 'use strict';
-const chalk = require('../../../util/colorz');
-const assign = require('../../../object/extend');
-const indentString = require('../../../text/indent');
-const ansiEscapes = require('../../../string/ansi-escape');
+const chalk = require('../../../src/util/colorz');
+const assign = require('../../../src/object/extend');
+const indentString = require('../../../src/text/indent');
+const ansiEscapes = require('../../../src/string/ansi-escape');
 const duration = require('./util/duration');
 const symbols = require('./util/symbols');
 
