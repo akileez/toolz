@@ -6,7 +6,7 @@ var painless = require('./painless')
 
 function execute (dir) {
   execa([{cmd: './painless', args: [`spec/${dir}/*.js`]}], () => {
-    if (runr.args.lint) process.nextTick(() => {
+    if (runr.opts.lint) process.nextTick(() => {
       spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}])
     })
   })
