@@ -1,8 +1,8 @@
 // adopted from: ygor <https://github.com/shannonmoeller/ygor>
 // © 2016 Shannon Moeller me@shannonmoeller.com (MIT)
 
-var argv = require('../process/argh').argv
-var clr = require('../util/colorz')
+var argv = require('../src/process/argh').argv
+var clr = require('../src/util/colorz')
 var assert = require('assert')
 
 var cmd = argv.argv || 'default'
