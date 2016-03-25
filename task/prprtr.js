@@ -1,8 +1,8 @@
 'use strict'
 const path =  require('path');
-const decamelize =  require('../string/unCamelCase');
-const clr =  require('../util/colorz');
-const StackUtils =  require('../error/stack-utils');
+const decamelize =  require('../src/string/unCamelCase');
+const clr =  require('../src/util/colorz');
+const StackUtils =  require('../src/error/stack-utils');
 
 function prettyReporter () {
   let options = arguments.length <= 0 || arguments[0] === undefined
