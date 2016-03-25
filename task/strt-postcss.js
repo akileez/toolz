@@ -6,8 +6,8 @@ function postprocess (plugins, userOptions) {
     return function postcss (log) {
       // reminder: need postcss globally
       const Postcss = require('postcss')
-      const extend = require('../object/extend')
-      const map = require('../array/map')
+      const extend = require('../src/object/extend')
+      const map = require('../src/array/map')
 
       return Promise.all(
         map(input, (file) => {
