@@ -4,7 +4,7 @@
   "description": "basic javascript utils for working with arrays, objects, functions, types and other",
   "main": "index.js",
   "scripts": {
-    "test": "src/bin/painless test/spec/**/*.js"
+    "test": "test/painless test/spec/**/*.js"
   },
   "engines": {
     "node": ">=0.10.0"
