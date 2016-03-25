@@ -1,7 +1,7 @@
 'use strict';
 
-var chalk = require('../util/colorz');
-var objectAssign = require('../object/object-assign');
+var chalk = require('../../src/util/colorz');
+var objectAssign = require('../../src/object/object-assign');
 
 var typeColors = {
   modified: 'yellow',
