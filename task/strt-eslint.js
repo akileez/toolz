@@ -1,7 +1,7 @@
 function eslintr (options, formatter) {
   return (input) => {
     return function eslint (log) {
-      const reqf = require('../path/req-from')
+      const reqf = require('../src/path/req-from')
       const CLIEngine = reqf('/usr/local/lib/node_modules', 'eslint').CLIEngine
 
       return new Promise((resolve, reject) => {
