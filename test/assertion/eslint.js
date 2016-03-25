@@ -1,7 +1,7 @@
-var deglob = require('../glob/deglob')
-var reqf   = require('../path/reqf')
+var deglob = require('../../src/glob/deglob')
+var reqf   = require('../../src/path/reqf')
 var eslint = reqf('/usr/local/lib/node_modules', 'eslint')
-var assign = require('../object/object-assign')
+var assign = require('../../src/object/object-assign')
 
 // https://github.com/sindresorhus/xo/blob/7644b9d9faf517b5b8f049b2083f13e7a803596c/index.js#L12-L21
 var DEFAULT_IGNORE = [
