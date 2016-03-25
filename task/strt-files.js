@@ -8,7 +8,7 @@ const defaultOptions = {
 function filez (glob, userOptions) {
   return () => {
     return function files (log) {
-      const globby = require('../glob/globbieP')
+      const globby = require('../src/glob/globbieP')
 
       const options = Object.assign({}, defaultOptions, userOptions)
 
