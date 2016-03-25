@@ -1,6 +1,6 @@
 'use strict'
 
-var reusify = require('reusify')
+var reusify = require('../function/reusify')
 var empty = []
 
 function fastfall (context, template) {
