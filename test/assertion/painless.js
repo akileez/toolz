@@ -1,5 +1,5 @@
-var setAsap        = require('../process/set-asap')
-var minimist       = require('../process/minimist')
+var setAsap        = require('../../src/process/set-asap')
+var minimist       = require('../../src/process/minimist')
 var tap            = require('./reporters/tap')
 var dot            = require('./reporters/dot')
 var spec           = require('./reporters/spec')
