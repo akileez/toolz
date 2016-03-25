@@ -1,8 +1,8 @@
 'use strict';
 
 const promisify = require('./promisify');
-const merge = require('../../../object/extend');
-const isPlanObject = require('../../../lang/isPlainObject');
+const merge = require('../../../src/object/extend');
+const isPlanObject = require('../../../src/lang/isPlainObject');
 
 function assertPlanNotRunning(planNode) {
     if (planNode.info && planNode.info.startedAt) {

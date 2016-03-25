@@ -1,6 +1,6 @@
 'use strict';
-const through = require('../../../promise/promtie/through');
-const each = require('../../../promise/promtie/each');
+const through = require('../../../src/promise/promtie/through');
+const each = require('../../../src/promise/promtie/each');
 const stdio = require('./stdio');
 
 function calculateSpeed(node) {

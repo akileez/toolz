@@ -1,7 +1,7 @@
 'use strict';
-const get       = require('../../../object/get');
-const set       = require('../../../object/set');
-const cloneDeep = require('../../../lang/deepClone');
+const get       = require('../../../src/object/get');
+const set       = require('../../../src/object/set');
+const cloneDeep = require('../../../src/lang/deepClone');
 
 function promisify(fn, length) {
   // Check if this is callback usage
