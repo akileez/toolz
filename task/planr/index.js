@@ -2,11 +2,11 @@
 
 /* eslint global-require:0 */
 'use strict';
-const nodeify       = require('../../promise/promtie/nodeify');
-const through       = require('../../promise/promtie/through');
-const merge         = require('../../object/merge-util');
-const get           = require('../../object/get');
-const isPlainObject = require('../../lang/isPlainObject');
+const nodeify       = require('../../src/promise/promtie/nodeify');
+const through       = require('../../src/promise/promtie/through');
+const merge         = require('../../src/object/merge-util');
+const get           = require('../../src/object/get');
+const isPlainObject = require('../../src/lang/isPlainObject');
 const run           = require('./lib/run');
 const promisify     = require('./lib/promisify');
 const build         = require('./lib/build');
