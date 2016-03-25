@@ -1,13 +1,13 @@
 // use this file to automate the running of tests.
-var runr     = require('./src/task/runr')
-var execa    = require('./src/cli/execa-commands')
-var spawn    = require('./src/cli/spawn-commands')
-var painless = require('./src/bin/painless')
+var runr     = require('../src/task/runr')
+var execa    = require('../src/cli/execa-commands')
+var spawn    = require('../src/cli/spawn-commands')
+var painless = require('../src/bin/painless')
 
 function execute (dir) {
-  execa([{cmd: './src/bin/painless', args: [`test/${dir}/*.js`]}], () => {
+  execa([{cmd: '../src/bin/painless', args: [`spec/${dir}/*.js`]}], () => {
     if (runr.args.lint) process.nextTick(() => {
-      spawn([{cmd: './src/bin/painless', args: [`test/lint/${dir}.js`, '-a']}])
+      spawn([{cmd: '../src/bin/painless', args: [`lint/${dir}.js`, '-a']}])
     })
   })
 }
