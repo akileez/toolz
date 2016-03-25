@@ -1,5 +1,5 @@
 // test suite
-var painless = require('../../src/assertion/painless')
+var painless = require('../assertion/painless')
 var test     = painless.createGroup('Lint array collection')
 var t        = painless.assert
 
@@ -11,8 +11,8 @@ var map      = require('../../src/array/map')
 var segments = require('../../src/path/segments')
 
 // parameters
-var opts = {cwd: './src/array'}
-var files = map(glob.sync('./src/array/*.js'), function (v, k) {
+var opts = {cwd: '../src/array'}
+var files = map(glob.sync('../src/array/*.js'), function (v, k) {
   return segments.last(v)
 })
 
