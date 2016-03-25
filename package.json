@@ -38,7 +38,7 @@
   },
   "files": [
     "src",
-    "task"
+    "task",
     "test/assertion"
   ]
 }
