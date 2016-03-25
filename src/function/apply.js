@@ -1,7 +1,6 @@
 // adopted from: fast-apply <"https://github.com/JayceTDE/fast-apply>
 // copyright: Jayce Pulsipher <jaycemp@gmail.com> (MIT)
 
-// altered switch statement to plain object.
 // add type check for `function` to prevent errors by using identity
 
 function fastApply (fn, context, args) {
@@ -34,7 +33,7 @@ function fastApply (fn, context, args) {
       return context
         ? fn.call(context, args[0], args[1], args[2], args[3], args[4], args[5])
         : fn(args[0], args[1], args[2], args[3], args[4], args[5])
-    defaults: return fn.apply(context, args)
+    default: return fn.apply(context, args)
   }
 }
 
