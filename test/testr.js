@@ -12,6 +12,14 @@ function execute (dir) {
   })
 }
 
+function cover () {
+  spawn([{cmd: 'nyc', args: [
+    `--reporter=html`,
+    `./painless`,
+    `spec/**/*.js`
+  ]}])
+}
+
 function arr () {
   execute('array')
 }
@@ -69,3 +77,4 @@ runr
   .task('num'     , num)
   .task('obj'     , obj)
   .task('stamp'   , stamp)
+  .task('cov'     , cover)
