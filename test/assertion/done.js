@@ -2,11 +2,11 @@
 
 var domain = require('domain');
 
-var eos = require('../stream/end-of-stream');
-var setAsap = require('../process/set-asap');
-var co = require('../generator/co'); // co-with-promise
-var once = require('../glob/glob/once');
-var exhaust = require('../stream/exhaust');
+var eos = require('../../src/stream/end-of-stream');
+var setAsap = require('../../src/process/set-asap');
+var co = require('../../src/generator/co'); // co-with-promise
+var once = require('../../src/glob/glob/once');
+var exhaust = require('../../src/stream/exhaust');
 
 var eosConfig = {
   error: false
