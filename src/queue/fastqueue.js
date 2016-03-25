@@ -1,6 +1,6 @@
 'use strict'
 
-var reusify = require('./reusify')
+var reusify = require('../function/reusify')
 
 function fastqueue (context, worker, concurrency) {
   if (typeof context === 'function') {
