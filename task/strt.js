@@ -1,6 +1,6 @@
 'use strict'
 
-var reduce = require('../array/reduce')
+var reduce = require('../src/array/reduce')
 
 function strt () {
   var reporter = arguments.length <= 0 || arguments[0] === undefined
