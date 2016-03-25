@@ -1,8 +1,8 @@
-var runr = require('../src/task/runr')
-var strt = require('../src/task/strt')
-var pp = require('../src/task/prprtr')
-var files = require('../src/task/strt-files')
-var eslint = require('../src/task/strt-eslint')
+var runr = require('../task/runr')
+var strt = require('../task/strt')
+var pp = require('../task/prprtr')
+var files = require('../task/strt-files')
+var eslint = require('../task/strt-eslint')
 
 function show () {
   return strt(pp())(
