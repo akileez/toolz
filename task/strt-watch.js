@@ -1,7 +1,7 @@
 function watchr (callback)  {
   return (input) => {
     return function watch (log) {
-      const reqf = require('../path/req-from')
+      const reqf = require('../src/path/req-from')
       const chokidar = reqf('/usr/local/lib/node_modules', 'chokidar')
 
       return new Promise((resolve, reject) => {
