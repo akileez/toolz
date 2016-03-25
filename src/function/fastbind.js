@@ -1,6 +1,6 @@
 'use strict'
 
-var reusify = require('reusify')
+var reusify = require('./reusify')
 
 function fastbind (dest) {
   var queue = reusify(Holder)
