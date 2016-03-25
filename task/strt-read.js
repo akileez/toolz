@@ -1,8 +1,8 @@
 function readr () {
   return (input) => {
     return function read (log) {
-      const pify = require('../promise/pify');
-      const readFile = pify(require('../file/graceful-fs').readFile)
+      const pify = require('../src/promise/pify');
+      const readFile = pify(require('../src/file/graceful-fs').readFile)
 
       return Promise.all(
         input.map(file => {
