@@ -1,5 +1,5 @@
 // use this file to automate the running of tests.
-var runr     = require('../src/task/runr')
+var runr     = require('../task/runr')
 var execa    = require('../src/cli/execa-commands')
 var spawn    = require('../src/cli/spawn-commands')
 var painless = require('./painless')
