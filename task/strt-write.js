@@ -9,9 +9,9 @@ function writer (outRootDir, userSourcemapOptions) {
   return (input) => {
     return function write (log) {
       const path = require('path')
-      const pify = require('../promise/pify')
-      const makeDir = pify(require('../file/mkdirp'))
-      const writeFile = pify(require('../file/graceful-fs').writeFile)
+      const pify = require('../src/promise/pify')
+      const makeDir = pify(require('../src/file/mkdirp'))
+      const writeFile = pify(require('../src/file/graceful-fs').writeFile)
 
       return Promise.all(
         input.map((file) => {
