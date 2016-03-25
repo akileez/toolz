@@ -1,4 +1,4 @@
-var through = require('../stream/through'); // through2
+var through = require('../../src/stream/through'); // through2
 
 function reporterHelper(eventObj) {
   return function(stream) {
