@@ -38,6 +38,7 @@
   },
   "files": [
     "src",
+    "task"
     "test/assertion"
   ]
 }
