@@ -17,8 +17,8 @@ function asyncMap (obj, iterator, done) {
     })
   }
 
-  let seed
-  let mapIterator
+  var seed
+  var mapIterator
 
   if (Array.isArray(obj)) {
     seed = []
