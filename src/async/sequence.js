@@ -550,36 +550,36 @@ module.exports = (function DEF (name, context) {
     }
 
     function internals (name, value) {
-      // console.log('internals were called with:', name)
       var set = (arguments.length > 1)
-      var names = {
-        'seq_error': function () {
+
+      switch (name) {
+        case 'seq_error':
           if (set) seq_error = value
           else return seq_error
-        },
-        'seq_aborted': function () {
-          if (set) seq_error = value
-          else return seq_error
-        },
-        'then_ready': function () {
+          break
+
+        case 'seq_aborted':
+          if (set) seq_aborted = value
+          else return seq_aborted
+          break
+
+        case 'then_ready':
           if (set) then_ready = value
           else return then_ready
-        },
-        'then_queue': function () {
-          return then_queue
-        },
-        'or_queue': function () {
-          return or_queue
-        },
-        'sequence_messages': function () {
-          return sequence_messages
-        },
-        'sequence_errors': function () {
-          return sequence_errors
-        }
-      }
+          break
 
-      names[name]
+        case 'then_queue':
+          return then_queue
+
+        case 'or_queue':
+          return or_queue
+
+        case 'sequence_messages':
+          return sequence_messages
+
+        case 'sequence_errors':
+          return sequence_errors
+      }
     }
 
     function includeExtensions () {
