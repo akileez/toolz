@@ -5,13 +5,13 @@
 
 const format = require('../util/sprintf').sprintf
 const callr  = require('./callsite')
+const diff   = require('./var-diff')
 const nano   = require('../time/nano')
 const slice  = require('../array/slice')
 const jlog   = require('../util/jcolorz')
 const clrz   = require('../util/colorz')
 const xtend  = require('../object/xtend')
 const apply  = require('../function/apply')
-const diff   = require('../assertion/variable-diff')
 
 const levels = [
   'FATAL',    // level 0
