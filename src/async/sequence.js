@@ -537,6 +537,12 @@ module.exports = (function DEF (name, context) {
       return sq
     }
 
+    function unpause() {
+      apply(sequence_messages.push, sequence_messages, arguments)
+      if (seq_tick === true) seq_tick = null
+      scheduleSequenceTick()
+    }
+
     // opt-out of global error reporting for this sequence
     function defer () {
       or_queue.push(function ignored () {
