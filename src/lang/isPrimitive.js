@@ -9,9 +9,4 @@ function isPrimitive (value) {
     || typeof value === 'undefined'
 }
 
-function isReference (value) {
-  return !isPrimitive(value)
-}
-
 module.exports = isPrimitive
-module.exports.Not = isReference
