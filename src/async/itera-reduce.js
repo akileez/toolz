@@ -1,6 +1,6 @@
 'use strict'
 
-const assert   = require('../assertion/claim')
+const assert   = require('assert')
 const itera    = require('./itera')
 const map      = require('../array/map')
 const øvals    = require('../object/values')
@@ -37,9 +37,9 @@ function asyncReduce (items, seed, iterator, done) {
   if (isObject(items)) items = øvals(items)
 
   // check requirements
-  assert.is(Array.isArray(items), true, 'items must be an array')
-  assert.is(typeof iterator, 'function', 'iterator must be a function')
-  assert.is(typeof done, 'function', 'done must be a function')
+  assert(Array.isArray(items), 'items must be an array')
+  assert(typeof iterator === 'function', 'iterator must be a function')
+  assert(typeof done === 'function', 'done must be a function')
 
   let tasks
 
