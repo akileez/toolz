@@ -544,10 +544,9 @@ module.exports = (function DEF (name, context) {
     }
 
     // opt-out of global error reporting for this sequence
-    function defer () {
-      or_queue.push(function ignored () {
-        return sequence_api
-      })
+    function defer() {
+      or_queue.push(function ignored () {})
+      return sequence_api
     }
 
     function internals (name, value) {
