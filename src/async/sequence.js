@@ -12,7 +12,7 @@ module.exports = (function DEF (name, context) {
   var scheduling_queue
   var timer = (typeof setImmediate !== 'undefined')
     ? function $$timer (fn) { return setImmediate(fn) }
-    : process.nextTick //setTimeout
+    : process.nextTick
 
   // Note: using a queue instead of array for efficiency
   function Queue () {
