@@ -1,5 +1,5 @@
 var hasOwn   = require('./hasOwn')
-var every    = require('./every')
+var every    = require('../collection/every')
 var isObject = require('../lang/isObject')
 var is       = require('../lang/is')
 
@@ -16,7 +16,7 @@ function checkProperties (value, key) {
   return hasOwn(this, key)
 }
 
-// checks if two objecs have the same keys and values
+// checks if two objects have the same keys and values
 
 function equals (a, b, fn) {
   fn = fn || is
