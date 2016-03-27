@@ -119,6 +119,35 @@ test('test Function Is Not String', function() {
 })
 
 // // isMethod - TODO:
+test('test isMethod', function () {
+  var obj = {
+    greet: 'Hello',
+    say: function () {
+      return this.greet
+    }
+  }
+  t.is(utils.isMethod(obj, 'say'), true)
+  t.is(utils.isMethod(obj, 'greet'), false)
+})
+
+test('test conformsToInterface', function () {
+  // checking if given methods conforms to object Interface
+  // does not check properties
+  var obj = {
+    greet: 'Hello',
+    say: function () {
+      return this.greet
+    },
+    listen: function () {
+      return 'i am listening'
+    }
+  }
+
+  t.is(utils.conformsToInterface(1, ['say']), false)
+  t.is(utils.conformsToInterface(obj, ['say']), true)
+  t.is(utils.conformsToInterface(obj, ['listen', 'say']), true)
+  t.is(utils.conformsToInterface(obj, ['say', 'greet']), false)
+})
 
 // // mergeProperites
 test('test Merge Properties', function () {
