@@ -1,4 +1,4 @@
-var stampit  = require('../object/stampit')
+var stampit  = require('../object/stamp')
 var api      = require('../factory/api-chain')
 
 // stampit(methods, state, enclose);

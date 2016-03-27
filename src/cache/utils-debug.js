@@ -1,4 +1,4 @@
-var stamp  = require('../object/stampit')
+var stamp  = require('../object/stamp')
 var jlog = require('../util/jcolorz')
 
 // debugging toolz

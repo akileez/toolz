@@ -1,4 +1,4 @@
-var stampit  = require('../object/stampit')
+var stampit  = require('../object/stamp')
 var has      = require('../object/has')
 
 module.exports = stampit()

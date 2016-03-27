@@ -1,4 +1,4 @@
-var stampit  = require('../object/stampit')
+var stampit  = require('../object/stamp')
 var slice    = require('../array/slice')
 var flatten  = require('../array/flatten')
 var kindOf   = require('../lang/kindOf')

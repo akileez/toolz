@@ -1,7 +1,7 @@
 // adopted from namespace-emitter <https://github.com/sethvincent/namespace-emitter>
 // Copyright (c) 2015 Seth Vincent
 
-var stamp   = require('../object/stampit')
+var stamp   = require('../object/stamp')
 var keys    = require('../object/keys')
 var slice   = require('../array/slice')
 var forEach = require('../array/forEach')

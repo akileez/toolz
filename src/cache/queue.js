@@ -1,7 +1,7 @@
 // adopted from map-config <https://github.com/doowb/map-config>
 // Copyright (c) 2015, Brian Woodward
 
-var stampit  = require('../object/stampit')
+var stampit  = require('../object/stamp')
 var forEach  = require('../collection/forEach')
 
 // process-queue for the primary way I use this: bot.process(bot.queue)

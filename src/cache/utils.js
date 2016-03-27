@@ -1,4 +1,4 @@
-var stamp  = require('../object/stampit')
+var stamp  = require('../object/stamp')
 
 module.exports = stamp.methods({
   // reset keys on the cache property

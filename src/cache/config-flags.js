@@ -1,4 +1,4 @@
-var stampit  = require('../object/stampit')
+var stampit  = require('../object/stamp')
 var toFlags  = require('../string/toFlags')
 var keys = require('../object/keys')
 
