@@ -54,22 +54,22 @@ function isMethod(item, methodName) {
  *  @param {Array<String>} methodNames
  */
 function conformsToInterface(item, methodNames) {
-    var result = false;
+  if (!isObject(item)) return false
+  var result = true
 
-    if (isObject(item)) {
-        result = true;
+  for (var i = 0; i < methodNames.length; i++) {
+    var methodName = methodNames[i];
 
-        for (var i = 0; i < methodNames.length; i++) {
-            var methodName = methodNames[i];
-
-            if (isString(methodName) === false || (methodName in item) === false || isFunction(item[methodName]) === false) {
-                result = false;
-                break;
-            }
-        }
+    if (isString(methodName) === false
+      || (methodName in item) === false
+      || isFunction(item[methodName]) === false
+    ) {
+      result = false;
+      break;
     }
+  }
 
-    return result;
+  return result;
 }
 
 /**
