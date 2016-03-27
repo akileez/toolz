@@ -2,7 +2,7 @@
 //
 'use strict'
 
-var isPrimitive = require('../lang/isPrimitive')
+var isReference = require('../lang/isReference')
 
 function isEqual (a, b) {
   if (!a && !b) return true
@@ -14,7 +14,7 @@ function isEqual (a, b) {
 
   for (key in b) {
     numB++
-    if (isPrimitive.Not(b[key])
+    if (isReference(b[key])
       || !a.hasOwnProperty(key)
       || (a[key] !== b[key])
     ) return false
