@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test object/stampit (methods)')
 
-var stampit = require('../../../src/object/stampit')
+var stampit = require('../../../src/object/stamp')
 
 test('stampit({ methods })', () => {
   const obj = stampit({ methods: {

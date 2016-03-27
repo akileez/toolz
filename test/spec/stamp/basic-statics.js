@@ -2,7 +2,7 @@ var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test object/stampit (statics)')
 
-var stampit = require('../../../src/object/stampit')
+var stampit = require('../../../src/object/stamp')
 
 // Basics statics
 
