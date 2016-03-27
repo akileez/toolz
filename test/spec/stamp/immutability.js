@@ -1,7 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test object/stampit::immutability')
 var t = painless.assert
-var stampit = require('../../../src/object/stampit')
+var stampit = require('../../../src/object/stamp')
 
 // Immutability
 
@@ -9,12 +9,13 @@ test('Basic stamp immutability', () => {
   const methods = { f() {} };
   const refs = { s: { deep: 1 } };
   const props = { p: { deep: 1 } };
-  const stamp1 = stampit({ methods: methods, refs: refs, deepProps: props });
+  const init = () => {}
+  const stamp1 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
 
   methods.f = () => {};
   refs.s.deep = 2;
   props.p.deep = 2;
-  const stamp2 = stampit({ methods: methods, refs: refs, deepProps: props });
+  const stamp2 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
 
   t.ne(stamp1.compose.methods, stamp2.compose.methods);
   t.ne(stamp1.compose.methods.f, stamp2.compose.methods.f);
@@ -31,8 +32,9 @@ test('Stamp immutability made of same source', () => {
   const methods = { f() {} };
   const refs = { s: { deep: 1 } };
   const props = { p: { deep: 1 } };
-  const stamp1 = stampit({ methods: methods, refs: refs, deepProps: props });
-  const stamp2 = stampit({ methods: methods, refs: refs, deepProps: props });
+  const init = () => {};
+  const stamp1 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
+  const stamp2 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
 
   t.ne(stamp1.compose.methods, stamp2.compose.methods);
   t.ne(stamp1.compose.properties, stamp2.compose.properties);
