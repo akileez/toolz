@@ -1,4 +1,3 @@
-var isArray = require('./isArray')
 var forOwn = require('../object/forOwn')
 
 function isEmpty (value) {
@@ -10,21 +9,17 @@ function isEmpty (value) {
 
   if (kind === 'string'
     || kind === 'function'
-    || isArray(value)
+    || Array.isArray(value)
   ) return !value.length
 
-  if (kind === 'object') {
-    var result = true
+  var result = true
 
-    forOwn(value, function () {
-      result = false
-      return false
-    })
-
+  forOwn(value, function () {
+    result = false
     return result
-  }
+  })
 
-  return true
+  return result
 }
 
 module.exports = isEmpty
