@@ -1,7 +1,7 @@
 'use strict';
 
 const util = require('util');
-const chalk = require('../../../../util/colorz');
+const chalk = require('../../../../src/util/colorz');
 
 const colors = {
     slow: 'red',
