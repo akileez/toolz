@@ -6,7 +6,7 @@ var forOwn        = require('../object/forOwn')
 function deepClone (value, instanceClone) {
   switch (kindOf(value)) {
     case 'object' : return cloneDeepObject(value, instanceClone)
-    case 'array ' : return cloneDeepArray(value, instanceClone)
+    case 'array'  : return cloneDeepArray(value, instanceClone)
     default       : return clone(value)
   }
 }
