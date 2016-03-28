@@ -1,3 +1,6 @@
+// stamp-it version 3 <https://github.com/stampit-org/stampit>
+// stamp-specification <https://github.com/stampit-org/stamp-specification>
+
 'use strict'
 
 const slice            = require('../array/slice')
