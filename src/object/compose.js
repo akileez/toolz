@@ -1,4 +1,8 @@
+// stamp-it version 3 <https://github.com/stampit-org/stampit>
+// stamp-specification <https://github.com/stampit-org/stamp-specification>
+
 'use strict'
+
 /*
   This is an example implementation of the Stamp Specifications.
   See https://github.com/stampit-org/stamp-specification
