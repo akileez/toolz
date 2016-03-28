@@ -2,12 +2,11 @@
   "name": "toolz",
   "version": "0.2.58",
   "description": "basic javascript utils for working with arrays, objects, functions, types and other",
-  "main": "index.js",
   "scripts": {
     "test": "test/painless test/spec/**/*.js"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4.2"
   },
   "repository": {
     "type": "git",
