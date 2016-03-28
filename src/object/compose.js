@@ -26,6 +26,7 @@
 const isFunction = require('../lang/isFunction')
 const apply      = require('../function/apply')
 const reduce     = require('../array/reduce')
+const filter     = require('../array/filter')
 const slice      = require('../array/slice')
 const mergeWith  = require('./mergeWith')
 const isObject   = require('./is-object')
@@ -107,7 +108,7 @@ function mergeComposable (dstDescriptor, srcComposable) {
 
   if (Array.isArray(srcDescriptor.initializers)) {
     if (!Array.isArray(dstDescriptor.initializers)) dstDescriptor.initializers = []
-    apply(dstDescriptor.initializers.push, dstDescriptor.initializers, srcDescriptor.initializers.filter(isFunction))
+    apply(dstDescriptor.initializers.push, dstDescriptor.initializers, filter(srcDescriptor.initializers, isFunction))
   }
 
   return dstDescriptor
@@ -115,7 +116,6 @@ function mergeComposable (dstDescriptor, srcComposable) {
 
 module.exports = function compose () {
   let composables = slice(arguments)
-  const descriptor = reduce([this].concat(composables), mergeComposable, {})
-  // const descriptor = [this].concat(composables).reduce(mergeComposable, {})
+  const descriptor = reduce(filter([this].concat(composables), isObject), mergeComposable, {})
   return createStamp(descriptor, compose)
 }
