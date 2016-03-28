@@ -42,6 +42,8 @@ const merge = (dst, src) => mergeWith(dst, src, (dstValue, srcValue) => {
 
 function createFactory (descriptor) {
   return function Stamp (options) {
+    const shared = {}
+
     let args = slice(arguments, 1)
     let obj = Object.create(descriptor.methods || {})
 
@@ -52,9 +54,16 @@ function createFactory (descriptor) {
     if (!descriptor.initializers || descriptor.initializers.length === 0) return obj
 
     return reduce(descriptor.initializers, (resultingObj, initializer) => {
-      const returnedValue = initializer.call(resultingObj, options,
-        {instance: resultingObj, stamp: Stamp, args: [options].concat(args)})
-      return returnedValue === undefined ? resultingObj : returnedValue
+      const returnedValue = initializer.call(resultingObj, options, {
+        instance: resultingObj,
+        stamp: Stamp,
+        args: [options].concat(args),
+        shared: shared
+      })
+
+      return returnedValue === undefined
+        ? resultingObj
+        : returnedValue
     }, obj)
   }
 }
