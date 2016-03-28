@@ -76,11 +76,14 @@ function createStamp (descriptor, composeFunction) {
   assign(Stamp, descriptor.staticProperties)
   Object.defineProperties(Stamp, descriptor.staticPropertyDescriptors || {})
 
-  const composeImplementation = isFunction(Stamp.compose) ? Stamp.compose : composeFunction
+  const composeImplementation = isFunction(Stamp.compose)
+    ? Stamp.compose
+    : composeFunction
+
   Stamp.compose = function () {
     return apply(composeImplementation, this, arguments)
-    // return composeImplementation.apply(this, arguments)
   }
+
   assign(Stamp.compose, descriptor)
 
   return Stamp
