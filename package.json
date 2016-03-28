@@ -1,6 +1,6 @@
 {
   "name": "toolz",
-  "version": "0.2.58",
+  "version": "0.2.59",
   "description": "basic javascript utils for working with arrays, objects, functions, types and other",
   "scripts": {
     "test": "test/painless test/spec/**/*.js"
