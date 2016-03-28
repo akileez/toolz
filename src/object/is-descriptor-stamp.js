@@ -8,7 +8,7 @@ function isStampDescriptor (obj) {
     || obj.deepProperties
     || obj.propertyDescriptors
     || obj.staticProperties
-    || obj.deepStaticProperties
+    || obj.staticDeepProperties
     || obj.staticPropertyDescriptors
     || obj.initializers
     || obj.configuration
