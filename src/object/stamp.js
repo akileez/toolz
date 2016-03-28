@@ -10,31 +10,31 @@ const isComposable     = require('./is-composable')
 const extractFunctions = require('./extract-functions')
 
 const rawUtilities = {
-  methods : function methods() {
+  methods : function methods () {
     let methodsObject = slice(arguments)
-    return (this.compose || compose).call(this, {methods: apply(assign, undefined, [{}].concat(methodsObject))});
+    return (this.compose || compose).call(this, {methods: apply(assign, undefined, [{}].concat(methodsObject))})
   },
-  properties : function properties() {
+  properties : function properties () {
     let propertiesObject = slice(arguments)
-    return (this.compose || compose).call(this, {properties: apply(assign, undefined, [{}].concat(propertiesObject))});
+    return (this.compose || compose).call(this, {properties: apply(assign, undefined, [{}].concat(propertiesObject))})
   },
-  initializers : function initializers() {
+  initializers : function initializers () {
     let args = slice(arguments)
-    return (this.compose || compose).call(this, {initializers: apply(extractFunctions, undefined, args)});
+    return (this.compose || compose).call(this, {initializers: apply(extractFunctions, undefined, args)})
   },
-  deepProperties : function deepProperties() {
+  deepProperties : function deepProperties () {
     let propertiesObject = slice(arguments)
-    return (this.compose || compose).call(this, {deepProperties: apply(merge, undefined, [{}].concat(propertiesObject))});
+    return (this.compose || compose).call(this, {deepProperties: apply(merge, undefined, [{}].concat(propertiesObject))})
   },
-  staticProperties : function staticProperties() {
+  staticProperties : function staticProperties () {
     let propertiesObject = slice(arguments)
-    return (this.compose || compose).call(this, {staticProperties: apply(assign, undefined, [{}].concat(propertiesObject))});
+    return (this.compose || compose).call(this, {staticProperties: apply(assign, undefined, [{}].concat(propertiesObject))})
   },
-  staticDeepProperties : function staticDeepProperties() {
+  staticDeepProperties : function staticDeepProperties () {
     let propertiesObject = slice(arguments)
-    return (this.compose || compose).call(this, {staticDeepProperties: apply(merge, undefined, [{}].concat(propertiesObject))});
+    return (this.compose || compose).call(this, {staticDeepProperties: apply(merge, undefined, [{}].concat(propertiesObject))})
   }
-};
+}
 
 const baseStampit = compose({
   staticProperties: assign({
@@ -48,7 +48,7 @@ const baseStampit = compose({
       return apply(this, undefined, arguments)
     }
   }, rawUtilities)
-});
+})
 
 function stampit () {
   let _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0]
@@ -73,15 +73,15 @@ function stampit () {
 
   const p = isObject(props) || isObject(refs) || isObject(properties)
     ? assign({}, props, refs, properties)
-    : undefined;
+    : undefined
 
   const dp = isObject(deepProps) || isObject(deepProperties)
     ? merge({}, deepProps, deepProperties)
-    : undefined;
+    : undefined
 
   const sp = isObject(statics) || isObject(staticProperties)
     ? assign({}, statics, staticProperties)
-    : undefined;
+    : undefined
 
   return apply(baseStampit.compose, baseStampit, [{
     methods: methods,
