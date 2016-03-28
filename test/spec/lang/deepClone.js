@@ -45,7 +45,7 @@ test('should deep clone arrays', function () {
   t.same(b.b, a.b)
   t.ne(b.b, a.b)
   t.same(b.b[2], a.b[2])
-  t.diff(b.b[2], a.b[2])
+  t.ne(b.b[2], a.b[2])
   t.same(b.b[2][1], a.b[2][1])
   t.ne(b.b[2][1], a.b[2][1])
 })
@@ -60,7 +60,7 @@ test('should handle RegExp', function () {
   t.same(b, a)
   t.ne(b, a)
   t.is(b.b.test('foo/bar/ipsum-123'), true)
-  t.diff(b.b, a.b)
+  t.ne(b.b, a.b)
 })
 
 test('should handle Date', function () {
@@ -71,9 +71,9 @@ test('should handle Date', function () {
   var b = deepClone(a)
 
   t.same(b, a)
-  t.diff(b, a)
+  t.ne(b, a)
   t.same(b.b, a.b)
-  t.diff(b.b, a.b)
+  t.ne(b.b, a.b)
 })
 
 test('should invoke function to clone instances', function () {
