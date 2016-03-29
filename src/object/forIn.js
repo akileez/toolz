@@ -1,8 +1,16 @@
-function forIn (obj, fn) {
+function forIn (obj, fn, ctx) {
   var key
 
-  for (key in obj) {
-    if (fn(obj[key], key, obj) === false) break
+  if (!ctx) {
+    for (key in obj) {
+      if (fn(obj[key], key, obj) === false) break
+    }
+  }
+
+  else {
+    for (key in obj) {
+      if (fn.call(ctx, obj[key], key, obj) === false) break
+    }
   }
 }
 
