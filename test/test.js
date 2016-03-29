@@ -4,12 +4,8 @@ var execa    = require('../src/cli/execa-commands')
 var spawn    = require('../src/cli/spawn-commands')
 var painless = require('./painless')
 
-function execute (dir) {
-  execa([{cmd: './painless', args: [`spec/${dir}/*.js`]}], () => {
-    if (runr.opts.lint) process.nextTick(() => {
-      spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}])
-    })
-  })
+function defs () {
+  spawn([{cmd: './painless', args: [`spec/**/*.js`]}])
 }
 
 function cover () {
@@ -20,61 +16,22 @@ function cover () {
   ]}])
 }
 
-function arr () {
-  execute('array')
-}
-
-function async1 () {
-  execute('async')
-}
-
-function func () {
-  execute('function')
-}
-
-function gen () {
-  execute('generator')
-}
-
-function lang () {
-  execute('lang')
-}
-
-function num () {
-  execute('number')
-}
-
-function obj () {
-  execute('object')
-}
-
-function stamp () {
-  execute('stamp')
-}
-
-function defs () {
-  arr()
-  async1()
-  func()
-  gen()
-  lang()
-  num()
-  obj()
-  stamp()
-}
-
-function all () {
-  defs()
+function test (dir) {
+  execa([{cmd: './painless', args: [`spec/${dir}/*.js`]}], () => {
+    if (runr.opts.lint) process.nextTick(() => {
+      spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}])
+    })
+  })
 }
 
 runr
   .task('default' , defs)
-  .task('arr'     , arr)
-  .task('async'   , async1)
-  .task('func'    , func)
-  .task('gen'     , gen)
-  .task('lang'    , lang)
-  .task('num'     , num)
-  .task('obj'     , obj)
-  .task('stamp'   , stamp)
+  .task('arr'     , () => test('array'))
+  .task('async'   , () => test('async'))
+  .task('func'    , () => test('function'))
+  .task('gen'     , () => test('generator'))
+  .task('lang'    , () => test('lang'))
+  .task('num'     , () => test('number'))
+  .task('obj'     , () => test('object'))
+  .task('stamp'   , () => test('stamp'))
   .task('cov'     , cover)
