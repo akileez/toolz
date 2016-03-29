@@ -1,3 +1,5 @@
+var hasOwn = require('./hasOwn')
+
 // get object size
 
 function size (obj) {
@@ -5,7 +7,7 @@ function size (obj) {
   var key
 
   for (key in obj) {
-    if (obj.hasOwnProperty(key)) count++
+    if (hasOwn(obj, key)) count++
   }
 
   return count
