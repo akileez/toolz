@@ -1,9 +1,10 @@
 function map (obj, fn) {
+  var hasOwn = Object.prototype.hasOwnProperty
   var result = {}
   var key
 
   for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (hasOwn.call(obj, key)) {
       result[key] = fn(obj[key], key, obj)
     }
   }
