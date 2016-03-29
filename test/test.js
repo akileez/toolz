@@ -2,7 +2,6 @@
 var runr     = require('../task/runr')
 var execa    = require('../src/cli/execa-commands')
 var spawn    = require('../src/cli/spawn-commands')
-var painless = require('./painless')
 
 function defs () {
   spawn([{cmd: './painless', args: [`spec/**/*.js`]}])
