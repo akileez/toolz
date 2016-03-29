@@ -8,9 +8,10 @@ var filter = require('../array/filter')
 function scrub (arr) {
   if (!Array.isArray(arr)) throw new Error('math/scrub.js Expects an array')
 
-  return filter(arr, function (value) {
-    return isNumber(value)
-  })
+  return filter(arr, isNumber)
+  // return filter(arr, function (value) {
+  //   return isNumber(value)
+  // })
 }
 
 module.exports = scrub
