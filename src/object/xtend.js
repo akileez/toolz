@@ -1,6 +1,7 @@
 // immutable extending
 
 function extend () {
+  var hasOwn = Object.prototype.hasOwnProperty
   var arg
   var key
   var len = arguments.length
@@ -12,7 +13,7 @@ function extend () {
     if (!arg) continue
 
     for (key in arg) {
-      if (arg.hasOwnProperty(key)) target[key] = arg[key]
+      if (hasOwn.call(arg, key)) target[key] = arg[key]
     }
   }
 
