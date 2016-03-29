@@ -9,8 +9,10 @@ function defs () {
 }
 
 function cover () {
+  var type = runr.opts.text ? 'text' : 'html'
+
   spawn([{cmd: 'nyc', args: [
-    `--reporter=html`,
+    `--reporter=${type}`,
     `./painless`,
     `spec/**/*.js`
   ]}])
