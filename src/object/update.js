@@ -1,3 +1,5 @@
+var hasOwn = require('./hasOwn')
+
 // updates own properties of a target object from multiple sources
 
 function defaults (target) {
@@ -11,7 +13,7 @@ function defaults (target) {
     if (!arg) continue
 
     for (key in target) {
-      if (target.hasOwnProperty(key)) {
+      if (hasOwn(target, key)) {
         if (arg[key]) target[key] = arg[key]
       }
     }
