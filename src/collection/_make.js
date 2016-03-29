@@ -1,26 +1,23 @@
-var isInteger = require('../lang/isInteger')
 var apply = require('../function/apply')
+var slice = require('../array/slice')
+var kind  = require('../lang/kind')
 
-function makeCollectionMethod (arr, obj, str, rex, def) {
-  if (arguments.length === 2) {
-    return function (list) {
-      return (isInteger(list.length))
-      ? apply(arr, null, arguments)
-      : apply(obj, null, arguments)
-    }
-  }
-
+function makeCollectionMethod (arr, obj, str, rex) {
   return function (list) {
-    // this will be an excellent use of the spread operator.
-    // will be able to get rid of apply
-    if (list == null) return def
-    if (typeof list === 'string') return apply(str, null, arguments)
-    if (list instanceof RegExp) return apply(rex, null, arguments)
+    var type = kind.Of(list)
+    var types = {
+      array    : arr,
+      object   : obj,
+      string   : str,
+      regexp   : rex
+    }
 
-    return (isInteger(list.length))
-      ? apply(arr, null, arguments)
-      : apply(obj, null, arguments)
+    return types[type]
+      ? apply(types[type], null, slice(arguments))
+      : noop()
   }
 }
+
+function noop () {}
 
 module.exports = makeCollectionMethod
