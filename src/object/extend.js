@@ -9,6 +9,7 @@ function extend (target) {
     if (!arg) continue
 
     for (key in arg) {
+      // istanbul ignore else
       if (arg.hasOwnProperty(key)) target[key] = arg[key]
     }
   }
