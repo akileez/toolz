@@ -7,15 +7,15 @@
 // Iteration can occur by SimplePropertyRetriever.theGetMethodYouWant(obj).forEach(function (value, prop) {}); (or use filter(), map(), etc.)
 
 var SimplePropertyRetriever = {
-    getOwnEnumerables: getOwnEnumerables,
-    getOwnNonenumerables: getOwnNonenumerables,
-    getOwnEnumerablesAndNonenumerables: getOwnEnumerablesAndNonenumerables,
-    getPrototypeEnumerables: getPrototypeEnumerables,
-    getPrototypeNonenumerables: getPrototypeNonenumerables,
-    getPrototypeEnumerablesAndNonenumerables: getPrototypeEnumerablesAndNonenumerables,
-    getOwnAndPrototypeEnumerables: getOwnAndPrototypeEnumerables,
-    getOwnAndPrototypeNonenumerables: getOwnAndPrototypeNonenumerables,
-    getOwnAndPrototypeEnumerablesAndNonenumerables: getOwnAndPrototypeEnumerablesAndNonenumerables
+  getOwnEnumerables: getOwnEnumerables,
+  getOwnNonenumerables: getOwnNonenumerables,
+  getOwnEnumerablesAndNonenumerables: getOwnEnumerablesAndNonenumerables,
+  getPrototypeEnumerables: getPrototypeEnumerables,
+  getPrototypeNonenumerables: getPrototypeNonenumerables,
+  getPrototypeEnumerablesAndNonenumerables: getPrototypeEnumerablesAndNonenumerables,
+  getOwnAndPrototypeEnumerables: getOwnAndPrototypeEnumerables,
+  getOwnAndPrototypeNonenumerables: getOwnAndPrototypeNonenumerables,
+  getOwnAndPrototypeEnumerablesAndNonenumerables: getOwnAndPrototypeEnumerablesAndNonenumerables
 }
 
 function getOwnEnumerables (obj) {
@@ -86,7 +86,7 @@ function getAllPropertyNames (obj, iterateSelfBool, iteratePrototypeBool, includ
       break
     }
     iterateSelfBool = true
-  } while (obj = Object.getPrototypeOf(obj))
+  } while ((obj = Object.getPrototypeOf(obj)))
 
   return props
 }
