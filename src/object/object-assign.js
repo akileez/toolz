@@ -1,8 +1,8 @@
-'use strict';
+'use strict'
 var hasOwnProperty = Object.prototype.hasOwnProperty
 var propIsEnumerable = Object.prototype.propertyIsEnumerable
 
-function toObject(val) {
+function toObject (val) {
   if (val === null || val === undefined) {
     throw new TypeError('Object.assign cannot be called with null or undefined')
   }
