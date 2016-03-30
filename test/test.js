@@ -4,7 +4,7 @@ var execa    = require('../src/cli/execa-commands')
 var spawn    = require('../src/cli/spawn-commands')
 
 function defs () {
-  spawn([{cmd: './painless', args: [`spec/**/*.js`]}])
+  spawn([{cmd: './painless', args: ['spec/**/*.js']}])
 }
 
 function cover () {
@@ -12,8 +12,8 @@ function cover () {
 
   spawn([{cmd: 'nyc', args: [
     `--reporter=${type}`,
-    `./painless`,
-    `spec/**/*.js`
+    './painless',
+    'spec/**/*.js'
   ]}])
 }
 
@@ -26,13 +26,13 @@ function test (dir) {
 }
 
 runr
-  .task('default' , defs)
-  .task('arr'     , () => test('array'))
-  .task('async'   , () => test('async'))
-  .task('func'    , () => test('function'))
-  .task('gen'     , () => test('generator'))
-  .task('lang'    , () => test('lang'))
-  .task('num'     , () => test('number'))
-  .task('obj'     , () => test('object'))
-  .task('stamp'   , () => test('stamp'))
-  .task('cov'     , cover)
+  .task('default', defs)
+  .task('arr',     () => test('array'))
+  .task('async',   () => test('async'))
+  .task('func',    () => test('function'))
+  .task('gen',     () => test('generator'))
+  .task('lang',    () => test('lang'))
+  .task('num',     () => test('number'))
+  .task('obj',     () => test('object'))
+  .task('stamp',   () => test('stamp'))
+  .task('cov',     cover)
