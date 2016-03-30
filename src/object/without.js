@@ -12,7 +12,7 @@ function without (obj, props) {
       props = keys(props)
       break
     case 'array' :
-      props = props
+      // props = props
       break
     case 'string' :
       props = slice(arguments, 1)
