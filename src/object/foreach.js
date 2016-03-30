@@ -8,10 +8,11 @@
 // keys(obj).forEach(callback), or using values: values(obj).forEach(cb)
 
 function foreach (obj, fn) {
+  var hasOwn = Object.prototype.hasOwnProperty
   var key
 
   for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    if (hasOwn.call(obj, key)) {
       fn(obj[key], key, obj)
     }
   }
