@@ -1,35 +1,67 @@
-// adopted from: <https://github.com/jonschlinkert/merge-value>
-// Copyright (c) 2015, Jon Schlinkert. (MIT)
+var isObj = require('./is-object')
+var hasOwnProperty = Object.prototype.hasOwnProperty
+var propIsEnumerable = Object.prototype.propertyIsEnumerable
 
-var isUndef = require('../lang/isUndefined')
-var isObj   = require('../lang/isPlainObject')
-var isStr   = require('../lang/isString')
-var kindOf  = require('../lang/kindOf')
-var yoda    = require('../lang/yoda')
-var deepEx  = require('./deepExtend')
-var merge   = require('./merge')
-var get     = require('./get')
-var set     = require('./set')
-var assert  = require('assert')
-
-function mergeValue (obj, prop, val) {
-  assert(isObj(obj), 'expected an object as first param, got ' + kindOf(obj))
-
-  if (yoda.and('undefined', typeof prop, typeof val)) return obj
-
-  if (isUndef(val) && isObj(prop)) return merge(obj, prop)
-
-  var target = deepEx({}, obj)
-
-  if (isStr(val)) {
-    set(target, prop, val)
-    return target
+function toObject (val) {
+  if (val === null || val === undefined) {
+    throw new TypeError('Sources cannot be null or undefined')
   }
 
-  var curr = get(target, prop)
-  var rest = merge(curr, val)
-  set(target, prop, rest)
-  return target
+  return Object(val)
 }
 
-module.exports = mergeValue
+function assignKey (to, from, key) {
+  var val = from[key]
+
+  if (val === undefined || val === null) {
+    return
+  }
+
+  if (hasOwnProperty.call(to, key)) {
+    if (to[key] === undefined || to[key] === null) {
+      throw new TypeError('Cannot convert undefined or null to object (' + key + ')')
+    }
+  }
+
+  if (!hasOwnProperty.call(to, key) || !isObj(val)) {
+    to[key] = val
+  } else {
+    to[key] = assign(Object(to[key]), from[key])
+  }
+}
+
+function assign (to, from) {
+  if (to === from) {
+    return to
+  }
+
+  from = Object(from)
+
+  for (var key in from) {
+    if (hasOwnProperty.call(from, key)) {
+      assignKey(to, from, key)
+    }
+  }
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(from)
+
+    for (var i = 0; i < symbols.length; i++) {
+      if (propIsEnumerable.call(from, symbols[i])) {
+        assignKey(to, from, symbols[i])
+      }
+    }
+  }
+
+  return to
+}
+
+module.exports = function deepAssign (target) {
+  target = toObject(target)
+
+  for (var s = 1; s < arguments.length; s++) {
+    assign(target, arguments[s])
+  }
+
+  return target
+}
