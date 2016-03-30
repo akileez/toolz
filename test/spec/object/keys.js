@@ -4,7 +4,6 @@ var test = painless.createGroup('Test object/keys')
 var t = painless.assert
 
 var keys = require('../../../src/object/keys')
-var collection = require('../../../src/collection/keys')
 var contains = require('../../../src/array/contains')
 
 test('should get object keys', function () {
