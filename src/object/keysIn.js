@@ -18,7 +18,7 @@ function keysIn (obj) {
 
   var Ctor = obj.constructor
   var idx = -1
-  var isProto = typeof Ctor == 'function' && Ctor.prototype === obj
+  var isProto = typeof Ctor === 'function' && Ctor.prototype === obj
   var result = Array(len)
   var skipIndexes = len > 0
 
