@@ -29,6 +29,4 @@ function isDataDescriptor (obj, prop) {
   }
 }
 
-
-
 module.exports = isDataDescriptor
