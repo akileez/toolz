@@ -63,7 +63,7 @@ function rimraf (p, options, cb) {
     if (!er)
       return afterGlob(null, [p])
 
-    glob(p, opts.glob, afterGlob)
+    glob(p, options.glob, afterGlob)
   })
 
   function next (er) {
