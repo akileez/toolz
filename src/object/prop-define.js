@@ -73,7 +73,7 @@ function definePropDefaults (obj) {
   var options = {
     configurable: true,
     enumerable: true,
-    writable: false,
+    writable: true,
     value: undefined,
     get: undefined,
     set: undefined
