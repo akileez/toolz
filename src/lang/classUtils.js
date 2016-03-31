@@ -2,7 +2,7 @@
 // Copyright © 2016 Jon Schlinkert Released under the MIT license
 
 var util     = require('util')
-var define   = require('../object/defineProp')
+var define   = require('../object/prop-define')
 var isObj    = require('./isObject')
 var convert  = require('../array/convert')
 var noop     = require('../function/noop')
