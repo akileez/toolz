@@ -10,7 +10,9 @@ function toObject (val) {
   return Object(val)
 }
 
-module.exports = Object.assign || function (target, source) {
+module.exports = function (target, source) {
+  // pure function now. Object.assign is in node and therefore
+  // I will use directly. Otherwise this.
   var from
   var to = toObject(target)
   var symbols
