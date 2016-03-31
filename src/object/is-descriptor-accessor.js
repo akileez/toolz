@@ -9,15 +9,6 @@ function isAccessorDescriptor (obj, prop) {
 
   if (typeof prop === 'string') {
     var val = Object.getOwnPropertyDescriptor(obj, prop)
-
-    if (hasOwn(val, 'value') || hasOwn(val, 'writable')) return false
-    if (!hasOwn(val, 'get') || typeof val.get !== 'function') return false
-
-    if (hasOwn(val, 'set')
-      && typeof val['set'] !== 'function'
-      && typeof val['set'] !== 'undefined'
-    ) return false
-
     return typeof val !== 'undefined'
   }
 
