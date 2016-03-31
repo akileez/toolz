@@ -1,32 +1,41 @@
-// adopted from: <https://github.com/jonschlinkert/assign-value>
-// Copyright (c) 2015, Jon Schlinkert. (MIT)
+'use strict'
 
-var isUndefined = require('../lang/isUndefined')
-var isObject    = require('../lang/isPlainObject')
-var isString    = require('../lang/isString')
-var kindOf      = require('../lang/kindOf')
-var yoda        = require('../lang/yoda')
-var extend      = require('./extend')
-var get         = require('./get')
-var set         = require('./set')
-var assert      = require('assert')
+var hasSymbols = require('./has-symbols')
+var forOwn     = require('./forOwn')
+var toObject   = require('../lang/toObject')
 
-function assignValue (obj, prop, value) {
-  assert(isObject(obj), 'expected an object as first param, got ' + kindOf(obj))
+var propIsEnumerable = Object.prototype.propertyIsEnumerable
 
-  if (yoda.and('undefined', typeof prop, typeof value)) return obj
+// pure function now. Object.assign is in node and therefore
+// I will use directly. Otherwise this. Differs from object/extend
+// in that this will handle smybols.
 
-  if (isUndefined(value) && isObject(prop)) return extend(obj, prop)
+module.exports = function (target, source) {
+  var from
+  var to = toObject(target)
+  var symbols
+  var s = 0
+  var alen = arguments.length
 
-  if (isString(value)) {
-    set(obj, prop, value)
-    return obj
+  while (++s < alen) {
+    from = Object(arguments[s])
+
+    forOwn(from, (val, key) => {
+      to[key] = from[key]
+    })
+
+    if (hasSymbols(from)) {
+      symbols = hasSymbols(from)
+      var i = -1
+      var slen = symbols.length
+
+      while (++i < slen) {
+        if (propIsEnumerable.call(from, symbols[i])) {
+          to[symbols[i]] = from[symbols[i]]
+        }
+      }
+    }
   }
 
-  var curr = get(obj, prop)
-  var rest = extend({}, curr, value)
-  set(obj, prop, rest)
-  return obj
+  return to
 }
-
-module.exports = assignValue
