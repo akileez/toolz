@@ -1,14 +1,9 @@
-var isObj = require('./is-object')
-var hasOwnProperty = Object.prototype.hasOwnProperty
+var hasSymbols = require('./has-symbols')
+var hasOwn     = require('./hasOwn')
+var toObject   = require('../lang/toObject')
+var isObj      = require('./is-object')
+
 var propIsEnumerable = Object.prototype.propertyIsEnumerable
-
-function toObject (val) {
-  if (val === null || val === undefined) {
-    throw new TypeError('Sources cannot be null or undefined')
-  }
-
-  return Object(val)
-}
 
 function assignKey (to, from, key) {
   var val = from[key]
@@ -17,13 +12,13 @@ function assignKey (to, from, key) {
     return
   }
 
-  if (hasOwnProperty.call(to, key)) {
+  if (hasOwn(to, key)) {
     if (to[key] === undefined || to[key] === null) {
       throw new TypeError('Cannot convert undefined or null to object (' + key + ')')
     }
   }
 
-  if (!hasOwnProperty.call(to, key) || !isObj(val)) {
+  if (!hasOwn(to, key) || !isObj(val)) {
     to[key] = val
   } else {
     to[key] = assign(Object(to[key]), from[key])
@@ -38,15 +33,17 @@ function assign (to, from) {
   from = Object(from)
 
   for (var key in from) {
-    if (hasOwnProperty.call(from, key)) {
+    if (hasOwn(from, key)) {
       assignKey(to, from, key)
     }
   }
 
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(from)
+  if (hasSymbols(from)) {
+    var symbols = hasSymbols(from)
+    var i = -1
+    var len = symbols.length
 
-    for (var i = 0; i < symbols.length; i++) {
+    while (++i < len) {
       if (propIsEnumerable.call(from, symbols[i])) {
         assignKey(to, from, symbols[i])
       }
@@ -58,10 +55,10 @@ function assign (to, from) {
 
 module.exports = function deepAssign (target) {
   target = toObject(target)
+  var s = 0
+  var len = arguments.length
 
-  for (var s = 1; s < arguments.length; s++) {
-    assign(target, arguments[s])
-  }
+  while (++s < len) assign(target, arguments[s])
 
   return target
 }
