@@ -13,7 +13,7 @@ function defaults (target) {
     if (!arg) continue
 
     forOwn(target, function (val, key) {
-      if (arg[key]) target[key] = arg[key]
+      if (arg.hasOwnProperty(key)) target[key] = arg[key]
     })
   }
   return target
