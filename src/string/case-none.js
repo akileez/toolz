@@ -1,6 +1,7 @@
 // test whether a string is camel-case
 var hasSpace = /\s/
 var hasSeparator = /[\W_]/
+var hasCamel = /([a-z][A-Z]|[A-Z][a-z])/
 // separator splitter
 var separatorSplitter = /[\W_]+(.|$)/g
 // camelcase splitter
@@ -11,7 +12,8 @@ var camelSpitter = /(.)([A-Z]+)/g
 function toNoCase (str) {
   if (hasSpace.test(str)) return str.toLowerCase()
   if (hasSeparator.test(str)) return (unseparate(str) || str).toLowerCase()
-  return uncamelize(str).toLowerCase
+  if (hasCamel.test(string)) return uncamelize(string).toLowerCase()
+  return str.toLowerCase()
 }
 
 // un-separate a 'string'
