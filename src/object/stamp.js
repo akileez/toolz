@@ -6,11 +6,11 @@
 const slice            = require('../array/slice')
 const apply            = require('../function/apply')
 const merge            = require('./merge')
-const assign           = require('./extend')
+const assign           = require('./assign')
 const compose          = require('./compose')
 const isObject         = require('./is-object')
 const isComposable     = require('./is-composable')
-const extractFunctions = require('./extract-functions')
+const extractFunctions = require('./extract')
 
 const rawUtilities = {
   methods : function methods () {
