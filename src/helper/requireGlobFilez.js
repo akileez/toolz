@@ -6,7 +6,7 @@
 var globby         = require('../glob/globby')
 var removeNonWord  = require('../string/removeNonWord')
 var replaceAccents = require('../string/replaceAccents')
-var upperCase      = require('../string/upperCase')
+var upperCase      = require('../string/case-upper')
 var set            = require('../object/set')
 var path           = require('path')
 
