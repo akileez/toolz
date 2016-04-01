@@ -39,7 +39,7 @@ function assign (to, from) {
   }
 
   if (hasSymbols(from)) {
-    var symbols = hasSymbols(from)
+    var symbols = Object.getOwnPropertySymbols(from)
     var i = -1
     var len = symbols.length
 
