@@ -1,4 +1,4 @@
-var toSnakeCase = require('./to-snake-case')
+var toSnakeCase = require('./case-snake')
 
 // convert a string to constant case
 
