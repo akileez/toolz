@@ -1,6 +1,6 @@
 var toString = require('../lang/toString')
-var lowerCase = require('./lowerCase')
-var upperCase = require('./upperCase')
+var lowerCase = require('./case-lower')
+var upperCase = require('./case-upper')
 
 function properCase (str) {
   str = toString(str)
