@@ -1,8 +1,8 @@
 var toString       = require('../lang/toString')
 var replaceAccents = require('./replaceAccents')
 var removeNonWord  = require('./removeNonWord')
-var upperCase      = require('./upperCase')
-var lowerCase      = require('./lowerCase')
+var upperCase      = require('./case-upper')
+var lowerCase      = require('./case-lower')
 
 function camelCase (str) {
   str = toString(str)
