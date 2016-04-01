@@ -1,4 +1,4 @@
-var toNoCase = require('./to-no-case')
+var toNoCase = require('./case-none')
 
 // ianstormtaylor/to-space-case
 // convert a 'string' to space case
