@@ -1,6 +1,6 @@
 var toString = require('../lang/toString')
-var camelCase = require('./camelCase')
-var upperCase = require('./upperCase')
+var camelCase = require('./case-camelize')
+var upperCase = require('./case-upper')
 
 function pascalCase (str) {
   str = toString(str)
