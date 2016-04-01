@@ -1,4 +1,4 @@
-var toNoCase = require('./to-no-case')
+var toNoCase = require('./case-none')
 
 // convert a 'string' to capital case
 
