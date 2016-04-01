@@ -1,16 +1,15 @@
 'use strict'
 
-var hasSymbols = require('./has-symbols')
-var forOwn     = require('./forOwn')
-var toObject   = require('../lang/toObject')
-
-var propIsEnumerable = Object.prototype.propertyIsEnumerable
+var isPropEnumerable = require('./is-prop-enumerable')
+var hasSymbols       = require('./has-symbols')
+var forOwn           = require('./forOwn')
+var toObject         = require('../lang/toObject')
 
 // pure function now. Object.assign is in node and therefore
 // I will use directly. Otherwise this. Differs from object/extend
-// in that this will handle smybols.
+// and object/xtend in that assign will handle smybols.
 
-module.exports = function (target, source) {
+function assign (target, source) {
   var from
   var to = toObject(target)
   var symbols
@@ -25,12 +24,12 @@ module.exports = function (target, source) {
     })
 
     if (hasSymbols(from)) {
-      symbols = hasSymbols(from)
+      symbols = Object.getOwnPropertySymbols(from)
       var i = -1
       var slen = symbols.length
 
       while (++i < slen) {
-        if (propIsEnumerable.call(from, symbols[i])) {
+        if (isPropEnumerable(from, symbols[i])) {
           to[symbols[i]] = from[symbols[i]]
         }
       }
@@ -39,3 +38,5 @@ module.exports = function (target, source) {
 
   return to
 }
+
+module.exports = assign
