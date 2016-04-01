@@ -1,4 +1,4 @@
-var toSpaceCase = require('./to-space-case')
+var toSpaceCase = require('./case-space')
 
 // convert a 'string' to camel case
 
