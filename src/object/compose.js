@@ -1,11 +1,9 @@
-// stamp-it version 3 <https://github.com/stampit-org/stampit>
-// stamp-specification <https://github.com/stampit-org/stamp-specification>
-
 'use strict'
 
 /*
   This is an example implementation of the Stamp Specifications.
   See https://github.com/stampit-org/stamp-specification
+  and https://github.com/stampit-org/stampit <stamp-it version 3>
   The code is optimized to be as readable as possible.
 
   createFactory: Creates new factory instance.
@@ -34,7 +32,7 @@ const filter     = require('../array/filter')
 const slice      = require('../array/slice')
 const mergeWith  = require('./mergeWith')
 const isObject   = require('./is-object')
-const assign     = require('./extend')
+const assign     = require('./assign')
 
 const isDescriptor = isObject
 
