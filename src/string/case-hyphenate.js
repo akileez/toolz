@@ -1,6 +1,6 @@
 var toString = require('../lang/toString')
-var slugify = require('./slugify')
-var unCamelCase = require('./unCamelCase')
+var slugify = require('./case-slugify')
+var unCamelCase = require('./case-uncamelize')
 
 // Replaces spaces with hyphens, split camelCase text, remove non-word chars, remove accents and convert to lower case.
 
