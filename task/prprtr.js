@@ -1,6 +1,6 @@
 'use strict'
 const path =  require('path');
-const decamelize =  require('../src/string/unCamelCase');
+const decamelize =  require('../src/string/case-uncamelize');
 const clr =  require('../src/util/colorz');
 const StackUtils =  require('../src/error/stack-utils');
 
