@@ -8,7 +8,7 @@ var name      = require('../path/name')
 var segments  = require('../path/segments')
 var eachAsync = require('../async/iterate').map
 var randHex   = require('../random/randHex')
-var rename    = require('../string/placeholders')
+var rename    = require('../text/placeholders')
 
 // THIS STILL NEEDS WORK!!
 // optional rename function or parent path segment instead of randHex.
