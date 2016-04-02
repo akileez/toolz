@@ -1,6 +1,6 @@
 var isObject = require('../lang/isObject')
 var longish  = require('../array/longish')
-var pad      = require('../string/padRight')
+var pad      = require('../string/pad-right')
 var keys     = require('../object/keys')
 var assert   = require('assert')
 
