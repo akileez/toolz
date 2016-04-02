@@ -8,7 +8,7 @@ module.exports = {
     indent_inner_html: true,
     indent_scripts: 'normal',
     indent_size: 2,
-    max_preserve_newlines: 0,
+    max_preserve_newlines: 2,
     preserve_newlines: true,
     unformatted: [
       'abbr',
@@ -53,7 +53,7 @@ module.exports = {
 
   js: {
     allowed_file_extensions: ['js', 'json', 'jshintrc', 'jsbeautifyrc'],
-    brace_style: 'collapse',
+    brace_style: 'collapse-preserve-inline',
     break_chained_methods: false,
     e4x: false,
     end_with_newline: false,
@@ -65,9 +65,9 @@ module.exports = {
     jslint_happy: false,
     keep_array_indentation: false,
     keep_function_indentation: false,
-    max_preserve_newlines: 10,
+    max_preserve_newlines: 2,
     preserve_newlines: true,
-    space_after_anon_function: false,
+    space_after_anon_function: true,
     space_before_conditional: true,
     space_in_empty_paren: false,
     space_in_paren: false,
