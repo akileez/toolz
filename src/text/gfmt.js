@@ -12,7 +12,7 @@ var some     = require('../array/some')
 var map      = require('../array/map')
 var keys     = require('../object/keys')
 var fill     = require('../string/repeat')
-var rpad     = require('../string/padRight')
+var rpad     = require('../string/pad-right')
 
 /*
     var gfmt = require('gfmt')
