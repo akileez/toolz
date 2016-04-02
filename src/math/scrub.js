@@ -4,14 +4,11 @@
 
 var isNumber = require('../number/isFinite')
 var filter = require('../array/filter')
+var assert = require('assert')
 
 function scrub (arr) {
-  if (!Array.isArray(arr)) throw new Error('math/scrub.js Expects an array')
-
+  assert(Array.isArray(arr), 'math/scrub.js Expects an array')
   return filter(arr, isNumber)
-  // return filter(arr, function (value) {
-  //   return isNumber(value)
-  // })
 }
 
 module.exports = scrub
