@@ -2,7 +2,7 @@
 // Copyright (c) 2015 Lloyd Brookes <75pound@gmail.com> (MIT)
 
 var wrap        = require('./wordwrap')
-var padRight    = require('../string/rpad')
+var padRight    = require('../string/pad-right')
 var extend      = require('../object/extend')
 var foreach     = require('../object/forEach')
 var forEach     = require('../array/forEach')
