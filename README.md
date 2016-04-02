@@ -13,7 +13,8 @@ My present interest: `streams`, `async-flow-control`, `generators`, `factory fun
  `bind`, `apply`, `call`, `errors`, `debugging`, `emitters`, `http` and `testing`.
 
 ## Why?
-Eduction first and foremost. 
+Eduction first and foremost.  
+Secondly, in just about every other discipline, craftspeople are expected to maintain their own tools.
 
 
 ## Installation
