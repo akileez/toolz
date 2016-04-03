@@ -16,7 +16,7 @@ var slug = module.exports = function slug (incString, separator, preserved) {
     s = separator;
   }
 
-  return incString.toLowerCase().
+  return incString.toLowerCase()
     .replace(/ü/g, 'ue')
     .replace(/ä/g, 'ae')
     .replace(/ö/g, 'oe')
