@@ -1,6 +1,6 @@
-var sentence = require('case-sentence')
-var escrex = require('esc-regex')
-var minors = require('case-minors')
+var sentence = require('./case-sentence')
+var escrex = require('./esc-regex')
+var minors = require('./case-minors')
 
 var escaped = minors.map(escrex)
 var minorMatcher = new RegExp('[^^]\\b(' + escaped.join('|') + ')\\b', 'ig')
