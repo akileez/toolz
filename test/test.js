@@ -35,4 +35,5 @@ runr
   .task('num',     () => test('number'))
   .task('obj',     () => test('object'))
   .task('stamp',   () => test('stamp'))
+  .task('str',     () => test('string'))
   .task('cov',     cover)
