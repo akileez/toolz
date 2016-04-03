@@ -2,9 +2,7 @@
 // Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT)
 // Unicode symbols with Windows CMD fallbacks
 
-var platform = process.platform
-
-var main = {
+module.exports =  {
   tick: '✔',
   cross: '✖',
   star: '★',
@@ -41,52 +39,20 @@ var main = {
   checkboxOff: '☐',
   checkboxCircleOn: 'ⓧ',
   checkboxCircleOff: 'Ⓘ',
-  questionMarkPrefix: '?⃝'
+  questionMarkPrefix: '?⃝',
+  wtick: '√',
+  wcross: '×',
+  wstar: '*',
+  wellipsis: '...',
+  wpointer: '>',
+  wpointerSmall: '»',
+  winfo: 'i',
+  wwarning: '‼',
+  wradioOn: '(*)',
+  wradioOff: '( )',
+  wcheckboxOn: '[×]',
+  wcheckboxOff: '[ ]',
+  wcheckboxCircleOn: '(×)',
+  wcheckboxCircleOff: '( )',
+  wquestionMarkPrefix: '？'
 }
-
-var win = {
-  tick: '√',
-  cross: '×',
-  star: '*',
-  square: '█',
-  squareSmall: '[ ]',
-  squareSmallFilled: '[█]',
-  circle: '( )',
-  circleFilled: '(*)',
-  circleDotted: '( )',
-  circleDouble: '( )',
-  circleCircle: '(○)',
-  circleCross: '(×)',
-  circlePipe: '(│)',
-  circleQuestionMark: '(?)',
-  bullet: '*',
-  dot: '.',
-  line: '─',
-  ellipsis: '...',
-  pointer: '>',
-  pointerSmall: '»',
-  info: 'i',
-  warning: '‼',
-  hamburger: '≡',
-  smiley: '☺',
-  mustache: '┌─┐',
-  heart: main.heart,
-  arrowUp: main.arrowUp,
-  arrowDown: main.arrowDown,
-  arrowLeft: main.arrowLeft,
-  arrowRight: main.arrowRight,
-  radioOn: '(*)',
-  radioOff: '( )',
-  checkboxOn: '[×]',
-  checkboxOff: '[ ]',
-  checkboxCircleOn: '(×)',
-  checkboxCircleOff: '( )',
-  questionMarkPrefix: '？'
-}
-
-if (platform === 'linux') {
-  // the main one doesn't look that good on Ubuntu
-  main.questionMarkPrefix = '?'
-}
-
-module.exports = platform === 'win32' ? win : main
