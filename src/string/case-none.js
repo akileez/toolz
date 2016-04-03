@@ -12,7 +12,7 @@ var camelSpitter = /(.)([A-Z]+)/g
 function toNoCase (str) {
   if (hasSpace.test(str)) return str.toLowerCase()
   if (hasSeparator.test(str)) return (unseparate(str) || str).toLowerCase()
-  if (hasCamel.test(string)) return uncamelize(string).toLowerCase()
+  if (hasCamel.test(str)) return uncamelize(str).toLowerCase()
   return str.toLowerCase()
 }
 
