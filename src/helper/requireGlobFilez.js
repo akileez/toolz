@@ -4,8 +4,8 @@
 'use strict'
 
 var globby         = require('../glob/globby')
-var removeNonWord  = require('../string/removeNonWord')
-var replaceAccents = require('../string/replaceAccents')
+var removeNonWord  = require('../string/remove-non-word')
+var replaceAccents = require('../string/replace-accents')
 var upperCase      = require('../string/case-upper')
 var set            = require('../object/set')
 var path           = require('path')
