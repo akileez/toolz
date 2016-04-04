@@ -1,9 +1,12 @@
-var toString = require('../lang/toString')
+var stringify = require('./stringify')
+var normalize = require('./case-normalize')
 
 // underscore.string titleize.js
 
 function titleize (str) {
-  return toString(str).toLowerCase().replace(/(?:^|\s|-)\S/g, function (c) {
+  return stringify(str)
+    .toLowerCase()
+    .replace(/(?:^|\s|-)\S/g, function (c) {
     return c.toUpperCase()
   })
 }
