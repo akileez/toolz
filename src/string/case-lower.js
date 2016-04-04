@@ -1,8 +1,7 @@
-var toString = require('../lang/toString')
+var stringify = require('./stringify')
 
 function lowerCase (str) {
-  str = toString(str)
-  return str.toLowerCase()
+  return stringify(str).toLowerCase()
 }
 
 module.exports = lowerCase
