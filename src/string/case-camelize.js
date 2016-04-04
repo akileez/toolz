@@ -1,11 +1,11 @@
-var toString       = require('../lang/toString')
-var replaceAccents = require('./replaceAccents')
-var removeNonWord  = require('./removeNonWord')
+var stringify      = require('./stringify')
+var replaceAccents = require('./replace-accents')
+var removeNonWord  = require('./remove-non-word')
 var upperCase      = require('./case-upper')
 var lowerCase      = require('./case-lower')
 
 function camelCase (str) {
-  str = toString(str)
+  str = stringify(str)
   str = replaceAccents(str)
   str = removeNonWord(str)
     .replace(/[\-_]/g, ' ')         // convert all hyphens and underscores to spaces
