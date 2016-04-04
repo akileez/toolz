@@ -1,17 +1,16 @@
-var toString = require('../lang/toString')
+var stringify    = require('./stringify')
 var WHITE_SPACES = require('./WHITE_SPACES')
 
 // remove white spaces from beginning and end of string
-
 function trim (str, chars) {
-  str = toString(str)
+  str = stringify(str)
   chars = chars || WHITE_SPACES
   return ltrim(rtrim(str, chars), chars)
 }
 
 // remove chars from beginning of string
 function ltrim (str, chars) {
-  str = toString(str)
+  str = stringify(str)
   chars = chars || WHITE_SPACES
 
   var start = 0
@@ -39,7 +38,7 @@ function ltrim (str, chars) {
 
 // remove chars from end of string
 function rtrim (str, chars) {
-  str = toString(str)
+  str = stringify(str)
   chars = chars || WHITE_SPACES
 
   var end = str.length - 1
