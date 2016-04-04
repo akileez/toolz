@@ -1,6 +1,5 @@
 // use this file to automate the running of tests.
 var runr     = require('../task/runr')
-var execa    = require('../src/cli/execa-commands')
 var spawn    = require('../src/cli/spawn-commands')
 
 function defs () {
@@ -18,11 +17,15 @@ function cover () {
 }
 
 function test (dir) {
-  execa([{cmd: './painless', args: [`spec/${dir}/*.js`]}], () => {
-    if (runr.opts.lint) process.nextTick(() => {
-      spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}])
+  if (runr.opts.lint) {
+    spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}], () => {
+      process.nextTick(() => {
+        spawn([{cmd: './painless', args: [`spec/${dir}/*.js`]}])
+      })
     })
-  })
+  } else {
+    spawn([{cmd: './painless', args: [`spec/${dir}/*.js`]}])
+  }
 }
 
 runr
