@@ -1,8 +1,7 @@
-var toString = require('../lang/toString')
+var stringify = require('./stringify')
 
 function upperCase (str) {
-  str = toString(str)
-  return str.toUpperCase()
+  return stringify(str).toUpperCase()
 }
 
 module.exports = upperCase
