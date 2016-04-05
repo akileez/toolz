@@ -1,19 +1,12 @@
-var clean = require('./case-none')
+var stringify = require('./stringify')
+var lowerCase = require('./case-lower')
+var upperCase = require('./case-upper')
 
-/*
-  Returns the string converted to sentence case, preserving punctuation.
+// replace first char of each sentence (new line or after '.\s+') to
+// UPPERCASE and lowercase other chars
 
-    var toSentenceCase = require('to-sentence-case')
-
-    toSentenceCase('the catcher, in the rye.')
-    // "The catcher, in the rye."
-
-*/
-
-function toSentenceCase(string) {
-  return clean(string).replace(/[a-z]/i, function (letter) {
-    return letter.toUpperCase()
-  }).trim()
+function sentenceCase (str) {
+  return lowerCase(stringify(str)).replace(/(^\w)|\.\s+(\w)/gm, upperCase)
 }
 
-module.exports = toSentenceCase
+module.exports = sentenceCase
