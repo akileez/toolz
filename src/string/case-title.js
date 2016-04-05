@@ -1,13 +1,13 @@
-var sentence = require('./case-sentence')
-var escrex = require('./esc-regex')
-var minors = require('./case-minors')
+var humanize = require('./case-humanize')
+var escrex   = require('./esc-regex')
+var minors   = require('./case-minors')
 
 var escaped = minors.map(escrex)
 var minorMatcher = new RegExp('[^^]\\b(' + escaped.join('|') + ')\\b', 'ig')
 var punctuationMatcher = /:\s*(\w)/g
 
 function toTitleCase(string) {
-  return sentence(string)
+  return humanize(string)
     .replace(/(^|\s)(\w)/g, function (matches, previous, letter) {
       return previous + letter.toUpperCase()
     })
