@@ -2,7 +2,7 @@
 var clrz = require('../../../src/util/colorz')
 var map = require('../../../src/array/map')
 var diff = require('../variable-diff');
-var figures = require('../../../src/string/figures');
+var figures = require('../../../src/string/FIGURES');
 var helper = require('../report-helper');
 // var INDENT = '  ';
 
