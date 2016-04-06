@@ -1,5 +1,5 @@
 var stampit  = require('../object/stamp')
-var toFlags  = require('../string/toFlags')
+var toFlags  = require('../string/to-flags')
 var keys = require('../object/keys')
 
 module.exports = stampit()
