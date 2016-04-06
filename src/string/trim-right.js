@@ -15,4 +15,4 @@ function trimRight (str) {
   return str.slice(0, tail)
 }
 
-module.exports = trimLeft
+module.exports = trimRight
