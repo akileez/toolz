@@ -1,0 +1,26 @@
+var painless = require('../../assertion/painless')
+var test = painless.createGroup('Test number/numberFormat')
+var t = painless.assert
+
+var numberFormat = require('../../../src/number/numberFormat')
+
+test('underscore.string numberFormat tests', function() {
+  t.eq(numberFormat(9000), '9,000')
+  t.eq(numberFormat(9000, 0), '9,000')
+  t.eq(numberFormat(9000, 0, '', ''), '9000')
+  t.eq(numberFormat(90000, 2), '90,000.00')
+  t.eq(numberFormat(1000.754), '1,001')
+  t.eq(numberFormat(1000.754, 2), '1,000.75')
+  t.eq(numberFormat(1000.755, 2), '1,000.75')
+  t.eq(numberFormat(1000.756, 2), '1,000.76')
+  t.eq(numberFormat(1000.754, 0, ',', '.'), '1.001')
+  t.eq(numberFormat(1000.754, 2, ',', '.'), '1.000,75')
+  t.eq(numberFormat(1000000.754, 2, ',', '.'), '1.000.000,75')
+  t.eq(numberFormat(1000000000), '1,000,000,000')
+  t.eq(numberFormat(100000000), '100,000,000')
+  t.eq(numberFormat('not number'), '')
+  t.eq(numberFormat(), '')
+  t.eq(numberFormat(null, '.', ','), '')
+  t.eq(numberFormat(undefined, '.', ','), '')
+  t.eq(numberFormat(new Number(5000)), '5,000')
+})
