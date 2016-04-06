@@ -2,7 +2,7 @@
 // Copyright (c) 2015, Jon Schlinkert. (MIT)
 
 var isPlainObject = require('../lang/isPlainObject')
-var toArg = require('./toArg')
+var toArg = require('./format-args')
 
 function toFlags (obj, keys) {
   if (!isPlainObject(obj)) throw new TypeError('toFlags expects an object')
