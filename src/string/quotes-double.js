@@ -1,3 +1,5 @@
+// https://github.com/sindresorhus/to-double-quotes
+
 var replace = require('../regex/replace')
 
 function doubleQuotes (str) {
