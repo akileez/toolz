@@ -1,6 +1,8 @@
 // adopted from trim-newlines <>
 // Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT)
 
+var replace = require('../regex/replace')
+
 function trimNL (str) {
   return end(start(str))
 }
@@ -13,6 +15,6 @@ function end (str) {
   return replace(str, /[\r\n]+$/, '')
 }
 
-exports.trim = trimNL
-exports.start = start
-exports.end = end
+module.exports = trimNL
+module.exports.start = start
+module.exports.end = end
