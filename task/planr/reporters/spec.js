@@ -2,7 +2,7 @@
 const chalk = require('../../../src/util/colorz');
 const assign = require('../../../src/object/extend');
 const indentString = require('../../../src/text/indent');
-const ansiEscapes = require('../../../src/string/ansi-escape');
+const ansiEscapes = require('../../../src/util/ansi-escape');
 const duration = require('./util/duration');
 const symbols = require('./util/symbols');
 
