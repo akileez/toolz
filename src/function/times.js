@@ -5,7 +5,6 @@ function times (n, fn, thisObj) {
   while (++i < n) {
     if (fn.call(thisObj, i) === false) break
   }
-  return times
 }
 
 module.exports = times
