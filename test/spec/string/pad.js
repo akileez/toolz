@@ -7,15 +7,15 @@ var pad = require('../../../src/string/pad')
 // fix tests as I have changed the function signature.
 
 test('underscore.string pad test', function () {
-  t.eq(pad('1', 8), '       1')
-  t.eq(pad(1, 8), '       1')
-  t.eq(pad('1', 8, '0'), '00000001')
-  t.eq(pad('1', 8, '0', 'left'), '00000001')
-  t.eq(pad('1', 8, '0', 'right'), '10000000')
-  t.eq(pad('1', 8, '0', 'both'), '00001000')
-  t.eq(pad('foo', 8, '0', 'both'), '000foo00')
-  t.eq(pad('foo', 7, '0', 'both'), '00foo00')
-  t.eq(pad('foo', 7, '!@$%dofjrofj', 'both'), '!!foo!!')
+  t.eq(pad('1', 8), '    1   ')
+  t.eq(pad(1, 8), '    1   ')
+  t.eq(pad('1', 8, '0'), '00001000')
+  // t.eq(pad('1', 8, '0', 'left'), '00000001')
+  // t.eq(pad('1', 8, '0', 'right'), '10000000')
+  t.eq(pad('1', 8, '0'), '00001000')
+  t.eq(pad('foo', 8, '0'), '000foo00')
+  t.eq(pad('foo', 7, '0'), '00foo00')
+  t.eq(pad('foo', 7, '!@$%dofjrofj'), '!!foo!!')
 })
 
 test('test for null/undefined', function () {
