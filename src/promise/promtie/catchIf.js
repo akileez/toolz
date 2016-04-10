@@ -1,16 +1,16 @@
-'use strict';
+'use strict'
 
 /*
- * Returns a function that will handle an error if it passes the predicate function test,
- * or if it matches the object.
- * If the predicate returns false, the error is propagated.
- */
-module.exports = function (predicateFn, fn) {
-    return function (err) {
-        if ((err instanceof Error && err instanceof predicateFn) || predicateFn(err)) {
-            return fn(err);
-        }
+  Returns a function that will handle an error if it passes
+  the predicate function test, or if it matches the object.
+  If the predicate returns false, the error is propagated.
 
-        throw err;
-    };
-};
+*/
+
+module.exports = (predicateFn, fn) => err => {
+  if ((err instanceof Error && err instanceof predicateFn) || predicateFn(err)) {
+    return fn(err)
+  }
+
+  throw err
+}
