@@ -1,45 +1,38 @@
-'use strict';
+'use strict'
 
-var isPromise = require('./util/isPromise');
+var isPromise = require('./util/isPromise')
 
-function each(array, fn) {
-    var promiseEach = Promise.resolve();
+function each (array, fn) {
+  var promiseEach = Promise.resolve()
 
-    return Promise.all(array.map(function (value, i) {
-        promiseEach = promiseEach.then(function () {
-            if (isPromise(value)) {
-                return value.then(function (value) {
-                    return fn(value, i, array.length);
-                });
-            }
+  return Promise.all(array.map((value, i) => {
+    promiseEach = promiseEach.then(() => {
+      if (isPromise(value)) {
+        return value.then((value) => fn(value, i, array.length))
+      }
 
-            return fn(value, i, array.length);
-        });
+      return fn(value, i, array.length)
+    })
 
-        return value;
-    }))
-    .then(function (result) {
-        return promiseEach.then(function () {
-            return result;
-        });
-    });
+    return value
+  }))
+  .then((result) => promiseEach.then(() => result))
 }
 
 /*
- * Iterates over the array and calls fn on each value
- * (promise that resolves to a value) in series.
- *
- * If called as `each(fn)` it returns a function that takes the array
- * and returns the desired Promise.
- */
-module.exports = function (array, fn) {
-    if (typeof array === 'function') {
-        fn = array;
+  Iterates over the array and calls fn on each value
+  (promise that resolves to a value) in series.
 
-        return function (array) {
-            return each(array, fn);
-        };
-    }
+  If called as `each(fn)` it returns a function that takes the array
+  and returns the desired Promise.
 
-    return each(array, fn);
-};
+*/
+
+module.exports = (array, fn) => {
+  if (typeof array === 'function') {
+    fn = array
+    return (array) => each(array, fn)
+  }
+
+  return each(array, fn)
+}
