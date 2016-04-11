@@ -1,19 +1,16 @@
-'use strict';
+'use strict'
 
-/*
- * Execute `fn` `n` times.
- */
-module.exports = function (n, fn) {
-    var promises = [];
-    var i;
+const limitConcurrency = require('./util/limitConcurrency')
 
-    for (i = 1; i <= n; ++i) {
-        try {
-            promises.push(fn(i));
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    }
+// Execute `fn` `n` times.
 
-    return Promise.all(promises);
-};
+module.exports = (n, fn, options) => {
+  const operations = []
+  options = options || {concurrency: Infinity}
+
+  while (operations.length < n) {
+    operations.push(fn.bind(null, operations.length + 1))
+  }
+
+  return limitConcurrency(options.concurrency, operations)
+}
