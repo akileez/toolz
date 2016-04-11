@@ -1,34 +1,29 @@
-'use strict';
+'use strict'
 
-var isPromise = require('./util/isPromise');
+var isPromise = require('./util/isPromise')
 
-function retry(retries, fn, options) {
-    try {
-        return fn(function (err) {
-            if (retries <= 0) {
-                throw err || new Error('RetryError');
-            }
+function retry (retries, fn, options) {
+  try {
+    return fn((err) => {
+      if (retries <= 0) {
+        throw err || new Error('RetryError')
+      }
 
-            return new Promise(function (resolve) {
-                setTimeout(function () {
-                    resolve(retry(retries - 1, fn, options));
-                }, options.delay);
-            });
-        }, retries + 1);
-    } catch (err) {
-        return Promise.reject(err);
-    }
+      return new Promise((resolve) => setTimeout(() => resolve(retry(retries - 1, fn, options)), options.delay))
+    }, retries + 1)
+  } catch (err) {
+    return Promise.reject(err)
+  }
 }
 
-/*
- * Retry a function `n` times.
- */
-module.exports = function (retries, fn, options) {
-    var result;
+// Retry a function `n` times.
 
-    options = options || { delay: 0 };
+module.exports = (retries, fn, options) => {
+  var result
 
-    result = retry(retries - 1, fn, options);
+  options = options || {delay: 0}
 
-    return isPromise(result) ? result : Promise.resolve(result);
-};
+  result = retry(retries - 1, fn, options)
+
+  return isPromise(result) ? result : Promise.resolve(result)
+}
