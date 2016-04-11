@@ -39,6 +39,7 @@ runr
   .task('obj',     () => test('object'))
   .task('path',    () => test('path'))
   .task('proc',    () => test('process'))
+  .task('prom',    () => test('promise'))
   .task('stamp',   () => test('stamp'))
   .task('str',     () => test('string'))
   .task('txt',     () => test('text'))
