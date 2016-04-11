@@ -1,27 +1,29 @@
-'use strict';
+'use strict'
 
-var promisify = require('./promisify');
+var promisify = require('./promisify')
 
-function promisifyAll(object, promisifiedObject) {
-    var k;
+function promisifyAll (object, promisifiedObject) {
+  var k
 
-    promisifiedObject = promisifiedObject || {};
+  promisifiedObject = promisifiedObject || {}
 
-    for (k in object) {
-        if (typeof object[k] === 'function') {
-            promisifiedObject[k] = promisify(object[k], object);
+  for (k in object) {
+    if (typeof object[k] === 'function') {
+      promisifiedObject[k] = promisify(object[k], object)
 
-            if (Object.keys(object[k]).length) {
-                promisifiedObject[k] = promisifyAll(object[k], promisifiedObject[k]);
-            }
-        }
+      if (Object.keys(object[k]).length) {
+        promisifiedObject[k] = promisifyAll(object[k], promisifiedObject[k])
+      }
     }
+  }
 
-    return promisifiedObject;
+  return promisifiedObject
 }
 
 /*
- * Promisifies all the enumerable own functions of an object,
- * returning a new object, or assigning methods to the `targetObject`.
- */
-module.exports = promisifyAll;
+  Promisifies all the enumerable own functions of an object,
+  returning a new object, or assigning methods to the `targetObject`.
+
+*/
+
+module.exports = promisifyAll
