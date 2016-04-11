@@ -3,38 +3,28 @@
 var isPromise = require('./util/isPromise');
 
 function values(object) {
-    return Promise.all(
-        Object.keys(object).map(function (key) {
-            if (isPromise(object[key])) {
-                return object[key].then(function (value) {
-                    return { key: key, value: value };
-                });
-            }
+  const result = {}
 
-            return { key: key, value: object[key] };
-        })
-    )
-    .then(function (results) {
-        // Zip the array of keys and values back to an object
-        return results.reduce(function (values, object) {
-            values[object.key] = object.value;
+  return Promise.all(
+    Object.keys(object).map((key) => {
+      if (isPromise(object[key])) {
+        return object[key].then((value) => (result[key] = value));
+      }
 
-            return values;
-        }, {});
-    });
+      return (result[key] = object[key])
+    })
+  )
+  .then(() => result)
 }
 
-/*
- * Resolve the values of an object, whether they are promises or values, fulfilled.
- */
-module.exports = function (fn) {
-    if (typeof fn === 'function') {
-        return function (object) {
-            return values(object)
-            .then(fn);
-        };
-    }
+// Resolve the values of an object,
+// whether they are promises or values, fulfilled.
 
-    // fn is an object
-    return values(fn);
+module.exports = function (fn) {
+  if (typeof fn === 'function') {
+    return (object) => values(object).then(fn);
+  }
+
+  // fn is an object
+  return values(fn);
 };
