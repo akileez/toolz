@@ -1,37 +1,36 @@
-'use strict';
+'use strict'
 
-var isPromise = require('./util/isPromise');
+var isPromise = require('./util/isPromise')
 
 /*
- * Excecute `fn` while passing the resolved value or rejection through,
- * regardless of the promise's resolved value or rejection.
- * The promise fulfillment value is maintained and the rejection error is propagated as well.
- */
-module.exports = function (fn) {
-    return function (value) {
-        var result;
+  Excecute `fn` while passing the resolved value or rejection through,
+  regardless of the promise's resolved value or rejection.
 
-        // If this is a rejection handler, propagate the error, after running fn
-        if (value instanceof Error) {
-            result = fn(value);
+  The promise fulfillment value is maintained and the rejection error is propagated as well.
 
-            if (isPromise(result)) {
-                return result.then(function () {
-                    throw value;
-                });
-            }
+*/
 
-            throw value;
-        }
+module.exports = (fn) => (value) => {
+  var result
 
-        result = fn(value);
+  // If this is a rejection handler, propagate the error, after running fn
+  if (value instanceof Error) {
+    result = fn(value)
 
-        if (isPromise(result)) {
-            return result.then(function () {
-                return value;
-            });
-        }
+    if (isPromise(result)) {
+      return result.then(() => {
+        throw value
+      })
+    }
 
-        return value;
-    };
-};
+    throw value
+  }
+
+  result = fn(value)
+
+  if (isPromise(result)) {
+    return result.then(() => value)
+  }
+
+  return value
+}
