@@ -1,28 +1,39 @@
-'use strict';
+'use strict'
 
-/*
- * Divide the array of functions in partials and Promise.all on each partial in series.
- */
-module.exports = function (concurrency, array) {
-    var partials = [];
-    var i;
+function runPending (pending, running, results, concurrency) {
+  const partialRunning = []
+  let fn
 
-    if (concurrency === Infinity) {
-        return Promise.all(array.map(function (fn) { return fn(); }));
+  while (pending.length && running.length < concurrency) {
+    fn = pending.shift()
+
+    partialRunning.push(fn)
+    running.push(fn)
+  }
+
+  return Promise.all(partialRunning.map((fn) =>
+    Promise.resolve(fn()).then((value) => {
+      running.splice(running.indexOf(fn), 1)
+      results.splice(results.indexOf(fn), 1, value)
+
+      return pending.length && runPending(pending, running, results, concurrency)
+    })
+  ))
+}
+
+// Run a set of functions in parallel but with limited conccurrency
+
+module.exports = function (concurrency, fns) {
+  if (concurrency === Infinity) {
+    try {
+      return Promise.all(fns.map((fn) => fn()))
+    } catch (err) {
+      return Promise.reject(err)
     }
+  }
 
-    for (i = 0; i < array.length; i += concurrency) {
-        partials.push(array.slice(i, i + concurrency));
-    }
+  const results = Array.from(fns)
 
-    return partials.reduce(function (promise, partial) {
-        promise = promise.then(function (result) {
-            return Promise.all(partial.map(function (fn) { return fn(); }))
-            .then(function (partialResult) {
-                return result.concat(partialResult);
-            });
-        });
-
-        return promise;
-    }, Promise.resolve([]));
-};
+  return runPending(fns, [], results, concurrency)
+    .then(() => results)
+}
