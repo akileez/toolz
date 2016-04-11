@@ -1,26 +1,23 @@
-'use strict';
+'use strict'
 
-/*
- * Promisifies a callback style function.
- */
-module.exports = function (fn, ctx) {
-    return function () {
-        var args = Array.prototype.slice.call(arguments);
+//  Promisifies a callback style function.
 
-        return new Promise(function (resolve, reject) {
-            args.push(function (err, result) {
-                if (err) {
-                    return reject(err);
-                }
+module.exports = (fn, ctx) => function () {
+  var args = Array.prototype.slice.call(arguments)
 
-                resolve(result);
-            });
+  return new Promise((resolve, reject) => {
+    args.push((err, result) => {
+      if (err) {
+        return reject(err)
+      }
 
-            try {
-                fn.apply(ctx || fn, args);
-            } catch (err) {
-                reject(err);
-            }
-        });
-    };
-};
+      resolve(result)
+    })
+
+    try {
+      fn.apply(ctx || fn, args)
+    } catch (err) {
+      reject(err)
+    }
+  })
+}
