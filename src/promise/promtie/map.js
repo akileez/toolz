@@ -1,40 +1,37 @@
-'use strict';
+'use strict'
 
-var isPromise = require('./util/isPromise');
-var limitConcurrency = require('./util/limitConcurrency');
+var isPromise = require('./util/isPromise')
+var limitConcurrency = require('./util/limitConcurrency')
 
-function map(array, fn, options) {
-    options = options || { concurrency: Infinity };
+function map (array, fn, options) {
+  options = options || {concurrency: Infinity}
 
-    return limitConcurrency(options.concurrency, array.map(function (value, i) {
-        return function () {
-            if (isPromise(value)) {
-                return value.then(function (value) {
-                    return fn(value, i, array.length);
-                });
-            }
+  return limitConcurrency(options.concurrency, array.map((value, i) => {
+    return () => {
+      if (isPromise(value)) {
+        return value.then((value) => fn(value, i, array.length))
+      }
 
-            try {
-                return fn(value, i, array.length);
-            } catch (err) {
-                return Promise.reject(err);
-            }
-        };
-    }));
+      try {
+        return fn(value, i, array.length)
+      } catch (err) {
+        return Promise.reject(err)
+      }
+    }
+  }))
 }
 
 /*
- * Iterates over the array and calls fn on each value
- * (or promise that resolves to a value) in parallel.
- */
-module.exports = function (array, fn, options) {
-    if (typeof array === 'function') {
-        fn = array;
+  Iterates over the array and calls fn on each value
+  (or promise that resolves to a value) in parallel.
 
-        return function (array) {
-            return map(array, fn, options);
-        };
-    }
+*/
 
-    return map(array, fn, options);
-};
+module.exports = (array, fn, options) => {
+  if (typeof array === 'function') {
+    fn = array
+    return (array) => map(array, fn, options)
+  }
+
+  return map(array, fn, options)
+}
