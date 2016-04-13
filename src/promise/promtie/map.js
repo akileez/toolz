@@ -6,8 +6,7 @@ var limitConcurrency = require('./util/limitConcurrency')
 function map (array, fn, options) {
   options = options || {concurrency: Infinity}
 
-  return limitConcurrency(options.concurrency, array.map((value, i) => {
-    return () => {
+  return limitConcurrency(options.concurrency, array.map((value, i) => () => {
       if (isPromise(value)) {
         return value.then((value) => fn(value, i, array.length))
       }
@@ -17,7 +16,6 @@ function map (array, fn, options) {
       } catch (err) {
         return Promise.reject(err)
       }
-    }
   }))
 }
 
