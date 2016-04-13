@@ -54,47 +54,45 @@ test('map(array, fn): mapper function returns promise', () => {
     })
 })
 
-// test('map(array, fn): mapper function throws', () => {
-//   t.throws(
-//     map([Promise.resolve(1), 2, Promise.resolve(3), 4], () => {
-//       throw new Error('Mapper function failed')
-//     })
-//   )
-// })
-
-test('map(array, fn): deal with promise failure', () => {
-  const expected = [1, 2, 3, 4]
-  function apple () {
-    return map([Promise.resolve(1), 2, Promise.reject(new Error('Failed to fetch third value')), 4],
-      (n, i, length) => {
-        t.is(n, expected[i])
-        t.is(length, expected.length)
-
-        return Promise.resolve(n * 2)
-      }
-    ).then(res => console.log(res), err => t.truthy(err))
-  }
-  apple()
+test('map(array, fn): mapper function throws', () => {
+  p.isRejected(
+    map([Promise.resolve(1), 2, Promise.resolve(3), 4], () => {
+      throw new Error('Mapper function failed')
+    })
+  )
 })
+
+test('map(array, fn): deal with promise failure', t => {
+  const expected = [1, 2, 3, 4];
+
+  return p.isRejected(map([Promise.resolve(1), 2, Promise.reject(new Error('Failed to fetch third value')), 4],
+    (n, i, length) => {
+      t.is(n, expected[i]);
+      t.is(length, expected.length);
+
+      return Promise.resolve(n * 2);
+    }
+  ), 'Failed to fetch third value');
+});
 
 test('map(array, fn, options): limit concurrency', () => {
   const start = Date.now()
   const expected = [1, 2, 3]
 
   return map([Promise.resolve(1), 2, 3], value => {
-    return new Promise((resolve) => {
+      return new Promise((resolve) => {
         setTimeout(
-          () => resolve({n: value, time: Date.now() - start}),
+          () => resolve({ n: value, time: Date.now() - start }),
           250
         )
       })
-  }, {concurrency: 2})
+    }, { concurrency: 2 })
     .then(result => {
       t.is(result.length, 3)
 
       result.forEach((value, i) => {
         t.is(value.n, expected[i])
-        // Only the last one should be delayed
+          // Only the last one should be delayed
         t.true(i >= 2 ? value.time >= 500 : value.time < 500)
       })
     })
@@ -111,13 +109,13 @@ test('map(array, fn, options): limit concurrency (stress test)', () => {
   }
 
   return map(input.map((n, i) => i), value => {
-    return new Promise((resolve) => {
+      return new Promise((resolve) => {
         setTimeout(
-          () => resolve({n: value, time: Date.now() - start}),
+          () => resolve({ n: value, time: Date.now() - start }),
           50
         )
       })
-  }, {concurrency})
+    }, { concurrency })
     .then(result => {
       t.is(result.length, total)
 
