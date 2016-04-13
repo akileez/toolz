@@ -5,17 +5,15 @@ var t = painless.assert
 var attempt = require('../../../src/promise/promtie/attempt')
 
 test('attempt(fn)', () => {
-    return attempt(() => {
-        return 'unicorn'
-    })
-    .then((unicorn) => t.is(unicorn, 'unicorn'))
+  return attempt(() => {
+      return 'unicorn'
+  })
+  .then((unicorn) => t.is(unicorn, 'unicorn'))
 })
 
 test('attempt(fn): deal with promise failure', () => {
-    return attempt(() => {
-        throw new Error('Bad unicorn')
-    })
-    .then(() => t.fail('Promise expected to reject'), err => {
-        t.truthy(err instanceof Error)
-    })
+  attempt(() => { throw new Error('Bad unicorn') })
+  .then(() => t.fail('Promise expected to reject'), err => {
+      t.truthy(err instanceof Error)
+  })
 })
