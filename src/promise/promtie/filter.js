@@ -6,22 +6,10 @@ function filter (arr, fn, options) {
   options = options || {concurrency: Infinity}
 
   return Promise.all(arr)
-    .then((result) => {
-      return limitConcurrency(options.concurrency,
-        result.map((value, i, array) => () => fn(value, i, array))
-      )
-      .then((shouldFilterResults) => {
-        var filteredResult = []
-
-        shouldFilterResults.forEach((shouldFilter, i) => {
-          if (shouldFilter) {
-            filteredResult.push(result[i])
-          }
-        })
-
-        return filteredResult
-      })
-    })
+  .then((arr) =>
+    limitConcurrency(options.concurrency, arr.map((value, i, array) => () => fn(value, i, array)))
+    .then(shouldFilter => arr.filter((value, i) => !!shouldFilter[i]))
+  )
 }
 
 /*
