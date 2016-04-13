@@ -107,7 +107,7 @@ module.exports = {
   assert: ok,
   notOk: notOk,
   truthy: ok,
-  falsey: notOk,
+  falsy: notOk,
   true: isTrue,
   false: isFalse,
   eq: eq,
