@@ -1,6 +1,7 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test promise/promtie::reduce')
 var t = painless.assert
+var p = painless.assert.chai
 
 var reduce = require('../../../src/promise/promtie/reduce')
 
@@ -75,7 +76,7 @@ test('reduce(array, fn): fn returns a value', () => {
 test('reduce(array, fn): deal with promise failure', () => {
   const input = [1, 2, 3, 4];
 
-  return t.throws(reduce([Promise.resolve(1), 2, Promise.reject(new Error('Failed to fetch third value')), 4],
+  return p.isRejected(reduce([Promise.resolve(1), 2, Promise.reject(new Error('Failed to fetch third value')), 4],
     (acc, n, i, length) => {
       t.is(n, input[i]);
       t.is(length, input.length);
