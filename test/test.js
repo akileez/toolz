@@ -1,6 +1,7 @@
 // use this file to automate the running of tests.
 var runr     = require('../task/runr')
 var spawn    = require('../src/cli/spawn-commands')
+var lint     = require('./lint')
 
 function defs () {
   spawn([{cmd: './painless', args: ['spec/**/*.js']}])
@@ -17,15 +18,19 @@ function cover () {
 }
 
 function test (dir) {
-  if (runr.opts.lint) {
-    spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}], () => {
-      process.nextTick(() => {
-        spawn([{cmd: './painless', args: [`spec/${dir}/*.js`]}])
-      })
-    })
-  } else {
-    spawn([{cmd: './painless', args: [`spec/${dir}/*.js`]}])
-  }
+  var args = runr.opts.file
+    ? `spec/${dir}/${runr.opts.file}.js`
+    : `spec/${dir}/*.js`
+
+  spawn([{cmd: './painless', args: [args]}], () => {
+    if (runr.opts.lint && runr.opts.file) {
+      lint(dir, runr.opts)
+    }
+
+    else if (runr.opts.lint && !runr.opts.file) {
+      spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}])
+    }
+  })
 }
 
 runr
