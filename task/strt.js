@@ -24,7 +24,7 @@ function strt () {
         const name = task.name
         let taskPromise
 
-        reporter(name, 'start')
+        reporter(name, 'strt')
 
         // catch an errors that are outside of task Promise
         try {
