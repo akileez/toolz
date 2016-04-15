@@ -1,34 +1,38 @@
 // test suite
-function lintFile (dir, defs, next) {
+function lintTestSingleFile (dir, defs) {
   var painless = require('./assertion/painless')
   var test     = painless.createGroup(`Lint ${dir}/${defs.file}`)
   var t        = painless.assert
 
   // helpers
-  var execfile = require('child_process').exec
-
-  if (!defs.lint) next()
+  const spawn = require('child_process').spawn
 
   // parameters
   var opts = {cwd: `../src/${dir}`}
-  var filez = defs.file + '.js'
-  var cmd = defs.fix ? `eslint --fix ${filez}` : `eslint ${filez}`
+  var file = defs.file + '.js'
+  var cmd  = 'eslint'
 
-  // label each test
+  // label test
   function title (file) {
     return 'lint ' + file
   }
 
-  test(title(filez), function (done) {
-    execfile(cmd, opts, function (err, stdout, stderr) {
-      if (err) {
-        t.fail(stdout)
-      }
-      else t.pass('yes')
+  test(title(file), function (cb) {
+    var cli = spawn(cmd, [file], opts)
 
-      process.nextTick(() => done())
+    cli.stdout.on('data', (data) => {
+      t.fail(`Test failed. run eslint separately --> eslint ${opts.cwd}/${file}`)
+    })
+
+    cli.stderr.on('data', (data) => {
+      // t.pass()
+    })
+
+    cli.on('close', (code) => {
+      t.pass()
+      cb()
     })
   })
 }
 
-module.exports = lintFile
+module.exports = lintTestSingleFile
