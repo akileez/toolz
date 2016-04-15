@@ -18,8 +18,7 @@ var strings = {
   slug: 'this-is-a-string',
   snake: 'this_is_a_string',
   space: 'this is a string',
-  title: 'This Is a String',
-  junk: '-this__is$%a-string...'
+  title: 'This Is a String'
 }
 
 for (var key in strings) testr(key)
@@ -29,3 +28,24 @@ function testr(key) {
     t.eq(camel(strings[key]), strings.camel)
   })
 }
+
+test('underscore.string camelize tests', function(){
+  t.eq(camel('the_camelize_string_method'), 'theCamelizeStringMethod')
+  t.eq(camel('webkit-transform'), 'webkitTransform')
+  t.eq(camel('The-camelize-string-method'), 'theCamelizeStringMethod')
+  t.eq(camel('the camelize string method'), 'theCamelizeStringMethod')
+  t.eq(camel('the camelize   string method'), 'theCamelizeStringMethod')
+  t.eq(camel(''), '', 'Camelize empty string returns empty string')
+})
+
+test('bugs', function () {
+  t.eq(camel(' with   spaces'), 'withSpaces')
+  t.eq(camel('_som eWeird---name-'), 'somEWeirdName')
+  t.eq(camel(' the camelize  string method'), 'theCamelizeStringMethod')
+  t.eq(camel('-the-camelize-string-method'), 'theCamelizeStringMethod')
+  t.eq(camel('_the_camelize_string_method'), 'theCamelizeStringMethod')
+  t.eq(camel('-this__is$%a-string...'), 'thisIsAString')
+  t.eq(camel(123), '123')
+  t.eq(camel(null), '', 'Camelize null returns empty string')
+  t.eq(camel(undefined), '', 'Camelize undefined returns empty string')
+})
