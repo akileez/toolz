@@ -3,11 +3,12 @@
 
 'use strict'
 
-var serial = require('../async/iterate').each
+var serial     = require('../async/iterate').each
 var concurrent = require('../async/concurrent').each
-var forEach = require('../collection/forEach')
-var extend = require('../object/extend')
-var child = require('child_process')
+var forEach    = require('../collection/forEach')
+var extend     = require('../object/extend')
+var spawn      = require('child_process').spawn
+var spawnSync  = require('child_process').spawnSync
 
 // cmds: arrary/object of objects {cmd: 'something', args: ['some', 'things']}
 // cb: callback [function]
@@ -42,7 +43,7 @@ function commands (cmds, opts, cb) {
   var iterate = opts.concurrent ? concurrent : serial
 
   iterate(cmds, function (cmd, idx, next) {
-    child.spawn(cmd.cmd, cmd.args, opts)
+    spawn(cmd.cmd, cmd.args, opts)
       .on('error', next)
       .on('close', next)
   }, cb)
@@ -52,7 +53,7 @@ commands.sync = function (cmds) {
   cmds = Array.isArray(cmds) ? cmds : [cmds]
 
   forEach(cmds, function (cmd) {
-    child.spawnSync(cmd.cmd, cmd.args, opts)
+    spawnSync(cmd.cmd, cmd.args, opts)
   })
 }
 
