@@ -6,7 +6,7 @@ var eslint = require('../task/strt-eslint')
 
 function show () {
   return strt(pp())(
-    files('../src/array/*.js'),
+    files(`../src/${runr.opts.dir}/*.js`),
     eslint()
   )
 }
