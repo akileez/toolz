@@ -1,4 +1,4 @@
-// adopted from: fast-apply <"https://github.com/JayceTDE/fast-apply>
+// adopted from: fast-apply <https://github.com/JayceTDE/fast-apply>
 // copyright: Jayce Pulsipher <jaycemp@gmail.com> (MIT)
 
 function fastApply (fn, context, args) {
