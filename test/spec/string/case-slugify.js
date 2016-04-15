@@ -46,3 +46,16 @@ test('should treat null as empty string', function () {
 test('should treat undefined as empty string', function () {
   t.is(slugify(void 0), '')
 })
+
+test('underscore.string slugify test', function() {
+  t.eq(slugify('Jack & Jill like numbers 1,2,3 and 4 and silly characters ?%.$!/'), 'jack-jill-like-numbers-123-and-4-and-silly-characters')
+  t.eq(slugify('Un éléphant à l\'orée du bois'), 'un-elephant-a-loree-du-bois')
+  // t.eq(slugify('I know latin characters: á í ó ú ç ã õ ñ ü ă ș ț'), 'i-know-latin-characters-a-i-o-u-c-a-o-n-u-a-s-t')
+  t.eq(slugify('I am a word too, even though I am but a single letter: i!'), 'i-am-a-word-too-even-though-i-am-but-a-single-letter-i')
+  t.eq(slugify('Some asian 天地人 characters'), 'some-asian-characters')
+  t.eq(slugify('SOME Capital Letters'), 'some-capital-letters')
+  t.eq(slugify(''), '')
+  t.eq(slugify(null), '')
+  t.eq(slugify(undefined), '')
+})
+
