@@ -41,3 +41,21 @@ test('should treat null as empty string', function () {
 test('should treat undefined as empty string', function () {
   t.is(camelCase(void 0), '')
 })
+
+test('underscore.string camelize tests', function(){
+  t.eq(camelCase('the_camelize_string_method'), 'theCamelizeStringMethod')
+  t.eq(camelCase('webkit-transform'), 'webkitTransform')
+  t.eq(camelCase('-the-camelize-string-method'), 'theCamelizeStringMethod')
+  t.eq(camelCase('_the_camelize_string_method'), 'theCamelizeStringMethod')
+  t.eq(camelCase('The-camelize-string-method'), 'theCamelizeStringMethod')
+  t.eq(camelCase('the camelize string method'), 'theCamelizeStringMethod')
+  t.eq(camelCase(' the camelize  string method'), 'theCamelizeStringMethod')
+  t.eq(camelCase('the camelize   string method'), 'theCamelizeStringMethod')
+  t.eq(camelCase(' with   spaces'), 'withSpaces')
+  t.eq(camelCase('_som eWeird---name-'), 'somEWeirdName')
+  t.eq(camelCase(''), '', 'Camelize empty string returns empty string')
+  t.eq(camelCase(null), '', 'Camelize null returns empty string')
+  t.eq(camelCase(undefined), '', 'Camelize undefined returns empty string')
+  t.eq(camelCase(123), '123')
+})
+
