@@ -15,12 +15,12 @@ test('should deep clone objects', function () {
   var a = {
     a : 1,
     b : {
-        c : 'lorem',
-        d : {
-          e : 'ipsum',
-          f : 2
-        }
+      c : 'lorem',
+      d : {
+        e : 'ipsum',
+        f : 2
       }
+    }
   }
   var b = deepClone(a)
 
