@@ -21,7 +21,7 @@ function lintTestSingleFile (dir, defs) {
     var cli = spawn(cmd, [file], opts)
 
     cli.stdout.on('data', (data) => {
-      t.fail(`Test failed. run eslint separately --> eslint ${opts.cwd}/${file}`)
+      t.fail(`Test failed. Output suppressed.\n      run eslint separately --> eslint ${opts.cwd}/${file}`)
     })
 
     cli.stderr.on('data', (data) => {
