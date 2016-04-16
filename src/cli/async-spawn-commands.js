@@ -11,7 +11,7 @@ const slice = require('../array/slice')
 module.exports = function spawnAsync () {
   let args = slice(arguments, 0)
   let child
-  let promise = new Promise((fulfill, reject) => {
+  let promise = new Promise((resolve, reject) => {
     child = spawn.apply(spawn, args)
     let stdout = ''
     let stderr = ''
@@ -45,7 +45,7 @@ module.exports = function spawnAsync () {
         Object.assign(error, result)
         reject(error)
       } else {
-        fulfill(result)
+        resolve(result)
       }
     })
 
