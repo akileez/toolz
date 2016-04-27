@@ -18,9 +18,7 @@ function cover () {
 }
 
 function test (dir) {
-  var args = runr.opts.file
-    ? `spec/${dir}/${runr.opts.file}.js`
-    : `spec/${dir}/*.js`
+  var args = `spec/${dir}/${runr.opts.file || '*'}.js`
 
   spawn([{cmd: './painless', args: [args]}], () => {
     if (runr.opts.lint && runr.opts.file) {
