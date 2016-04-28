@@ -25,7 +25,7 @@ function factory (handlebars, options) {
 
   return stamp()
   .initializers([
-    function hbsDapr() {
+    function hbsDapr () {
       var defaults = {
         handlebars: handlebars,
         bustCache: true,
