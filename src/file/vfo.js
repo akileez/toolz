@@ -32,6 +32,28 @@ function vfs (fp, fc) {
   }
 }
 
+// virtualFileStats: include file stats metadata but not functions
+function vff (fp, fc) {
+  var filter = require('../object/filter')
+  var filterd = filter(lstat(fp), (val) => {
+    return typeof val !== 'function'
+  })
+
+  if (typeof fc === 'function') {
+    return extend(vfp(fp), {stats: filterd}, fc(fp))
+  }
+
+  if (typeof fc === 'object' && fc.constructor === Object) {
+    return extend(vfp(fp), {stats: filterd}, fc)
+  }
+
+  {
+    stats: filter(lstat(fp), (val) => {
+      return typeof val !== 'function'
+    })
+  }
+}
+
  // virtualFilePath: file path metadata
 function vfp (fp) {
   return {
