@@ -1,10 +1,10 @@
 'use strict'
-var painless = require('toolz/test/assertion/painless')
+var painless = require('../../assertion/painless')
 var test = painless.createGroup()
 var t = painless.assert
 
-var hbwax = require('toolz/src/helper/dap')
-var hb = require('toolz/src/helper/handlebars')
+var hbwax = require('../../../src/helper/hbs-dap')
+var hb = require('../../../src/helper/handlebars')
 
 // this test is for handlebars version >= 4
 
