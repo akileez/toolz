@@ -4,6 +4,7 @@ var uncamelized = require('./case-uncamelize')
 
 function normalized (str) {
   return uncamelized(camelized(stringify(str)))
+    .replace(/\./g, ' ')
 }
 
 module.exports = normalized
