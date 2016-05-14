@@ -32,6 +32,7 @@ function getter (key) {
 }
 
 // checks if a cached value for 'key exists'
+// this assumes the 'key' is a string, not a number!
 function hasit (key) {
   if (key.indexOf('.') === -1) return this.cache.hasOwnProperty(key)
   return has(this.cache, key)
