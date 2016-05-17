@@ -19,8 +19,8 @@ var argv = require('../process/argh').argv
 var table = require('../text/text-table')
 var dateTime = require('../date/clockin')
 var repeat = require('../glob/repeat-string')
-var prettyMs = require('./ms')
-var clrz = require('../util/colorz')
+var prettyMs = require('../time/ms')
+var clrz = require('./colorz')
 
 // extra locals
 var DEFAULT_COLUMNS = 80
