@@ -1,3 +1,7 @@
+// asynquence <https://github.com/getify/asynquence>
+// v0.9.0 (c) Kyle Simpson
+// MIT License: http://getify.mit-license.org
+
 var slice   = require('../array/slice')
 var forEach = require('../array/forEach')
 var map     = require('../array/map')
@@ -584,7 +588,7 @@ module.exports = (function DEF (name, context) {
 
     function includeExtensions () {
       forEach(keys(extensions), function $$each (name) {
-        sequence_api[name] = extensions[name](sequence_api, internals)
+        sequence_api[name] = sequence_api[name] || extensions[name](sequence_api, internals)
       })
     }
 
@@ -749,22 +753,7 @@ module.exports = (function DEF (name, context) {
   }
 
   createSequence.extend = function $$public$extend (name, build) {
-    // reserved API override not allowed
-    if (!~[
-      "then",
-      "or",
-      "gate",
-      "all",
-      "pipe",
-      "seq",
-      "val",
-      "promise",
-      "fork",
-      "abort",
-      "duplicate",
-      "defer"
-      ].indexOf(name)
-    ) extensions[name] = build
+    extensions[name] = build
 
     return createSequence
   }
