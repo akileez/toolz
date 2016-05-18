@@ -10,7 +10,7 @@ function setParam (url, paramName, value) {
   else {
     if (url.indexOf('?') === -1) url += '?'
     if (url.indexOf('=') !== -1) url += '&'
-    return url + name
+    return url + param
   }
 }
 
