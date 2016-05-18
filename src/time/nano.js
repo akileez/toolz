@@ -28,7 +28,7 @@ function convertDiff (diffHRTimes, conversionUnit, precision) {
 
   if (arguments.length === 2 && typeof conversionUnit === 'number') {
     precision = conversionUnit
-    conversionUnit = 's'
+    conversionUnit = 'ms'
   }
 
   conversionUnit = conversionUnit || 'ms'
