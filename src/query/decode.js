@@ -22,7 +22,7 @@ function decode (queryStr, shouldTypecast) {
     if (shouldTypecast !== false) pValue = typecast(pValue)
 
     if (hasOwn(obj, pName)) {
-      if (isArray(ob[pName])) obj[pName].push(pValue)
+      if (isArray(obj[pName])) obj[pName].push(pValue)
       else obj[pName] = [obj[pName], pValue]
     } else {
       obj[pName] = pValue
