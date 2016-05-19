@@ -52,6 +52,7 @@ module.exports = function (val, options) {
 // Parse the given `str` and return milliseconds
 function parse (str) {
   str = '' + str
+  // istanbul ignore if
   if (str.length > 10000) return
 
   var match = /^((?:\d+)?\.?\d+) *(milliseconds?|msecs?|ms|seconds?|secs?|s|minutes?|mins?|m|hours?|hrs?|h|days?|d|years?|yrs?|y)?$/i.exec(str)
