@@ -3,7 +3,7 @@
 
 // tta -- tiny test assertion
 
-var assert = require('./assert')
+var assert = require('assert')
 var AssertionError = assert.AssertionError
 
 function create (val, expected, operator, msg, fn) {
