@@ -3,13 +3,13 @@ var runr     = require('../task/runr')
 var spawn    = require('../src/cli/spawn-commands')
 var lint     = require('./lint')
 
+var type = runr.opts.text ? 'text' : 'html'
+
 function defs () {
   spawn([{cmd: './painless', args: ['spec/**/*.js']}])
 }
 
 function cover () {
-  var type = runr.opts.text ? 'text' : 'html'
-
   spawn([{cmd: 'nyc', args: [
     `--reporter=${type}`,
     './painless',
@@ -20,15 +20,27 @@ function cover () {
 function test (dir) {
   var args = `spec/${dir}/${runr.opts.file || '*'}.js`
 
-  spawn([{cmd: './painless', args: [args]}], () => {
-    if (runr.opts.lint && runr.opts.file) {
-      lint(dir, runr.opts)
-    }
+  // for just testing coverage for a single collection
+  // instead of testing the entire library
+  if (runr.opts.covr) {
+    spawn([{cmd: 'nyc', args: [
+      `--reporter=${type}`,
+      './painless',
+      args
+    ]}])
+  }
 
-    else if (runr.opts.lint && !runr.opts.file) {
-      spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}])
-    }
-  })
+  else {
+    spawn([{cmd: './painless', args: [args]}], () => {
+      if (runr.opts.lint && runr.opts.file) {
+        lint(dir, runr.opts)
+      }
+
+      else if (runr.opts.lint && !runr.opts.file) {
+        spawn([{cmd: './painless', args: [`lint/${dir}.js`, '-a']}])
+      }
+    })
+  }
 }
 
 runr
@@ -46,5 +58,6 @@ runr
   .task('stamp',   () => test('stamp'))
   .task('str',     () => test('string'))
   .task('txt',     () => test('text'))
+  .task('tim',     () => test('time'))
   .task('util',    () => test('util'))
   .task('cov',     cover)
