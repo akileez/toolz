@@ -261,7 +261,7 @@ dlogr.inspector = function (level) {
     let log = {}
     let out = () => {
       dlogr._stdout.write(dlogr._log(
-        map(slice(arguments), (arg) => format(' obj: %j', arg)),
+        map(slice(arguments), (arg) => format(dlogr.blk('res:') +' %j', arg)),
         dlogr._level(level),
         dlogr._label()
       ))
