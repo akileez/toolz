@@ -26,3 +26,8 @@ test('should support aliases', function () {
   t.is(convert(10, 'h', 'm'), 600)
   t.is(convert(2, 'w', 'd'), 14)
 })
+
+test('should throw an error if unsupported units are entered', function () {
+  t.throws(() => {convert(10, 's', 'month')})
+  t.throws(() => {convert(10, 'month', 'year')})
+})
