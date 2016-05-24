@@ -4,13 +4,12 @@ var t = painless.assert
 
 var m = require('../../../src/string/code-point-at')
 
-test('testing code-point-at', () => {
+test('should handle a string that starts with a BMP symbol', () => {
   t.is(m('🐴'), 0x1F434)
 
   // borrowed from:
   // https://github.com/mathiasbynens/String.prototype.codePointAt/blob/075017413b4a99568d0bf290250c8b17ff5441be/tests/tests.js
 
-  // String that starts with a BMP symbol
   t.is(m('abc\uD834\uDF06def', ''), 0x61)
   t.is(m('abc\uD834\uDF06def', '_'), 0x61)
   t.is(m('abc\uD834\uDF06def'), 0x61)
@@ -28,8 +27,9 @@ test('testing code-point-at', () => {
   t.is(m('abc\uD834\uDF06def', false), 0x61)
   t.is(m('abc\uD834\uDF06def', null), 0x61)
   t.is(m('abc\uD834\uDF06def', undefined), 0x61)
+})
 
-  // String that starts with an astral symbol
+test('should handle a string that starts with an astral symbol', () => {
   t.is(m('\uD834\uDF06def', ''), 0x1D306)
   t.is(m('\uD834\uDF06def', '1'), 0xDF06)
   t.is(m('\uD834\uDF06def', '_'), 0x1D306)
@@ -42,8 +42,9 @@ test('testing code-point-at', () => {
   t.is(m('\uD834\uDF06def', false), 0x1D306)
   t.is(m('\uD834\uDF06def', null), 0x1D306)
   t.is(m('\uD834\uDF06def', undefined), 0x1D306)
+})
 
-  // Lone high surrogates
+test('should handle lone high surrogates', () => {
   t.is(m('\uD834abc', ''), 0xD834)
   t.is(m('\uD834abc', '_'), 0xD834)
   t.is(m('\uD834abc'), 0xD834)
@@ -54,8 +55,9 @@ test('testing code-point-at', () => {
   t.is(m('\uD834abc', NaN), 0xD834)
   t.is(m('\uD834abc', null), 0xD834)
   t.is(m('\uD834abc', undefined), 0xD834)
+})
 
-  // Lone low surrogates
+test('should handle lone low surrogates', () => {
   t.is(m('\uDF06abc', ''), 0xDF06)
   t.is(m('\uDF06abc', '_'), 0xDF06)
   t.is(m('\uDF06abc'), 0xDF06)
@@ -66,4 +68,9 @@ test('testing code-point-at', () => {
   t.is(m('\uDF06abc', NaN), 0xDF06)
   t.is(m('\uDF06abc', null), 0xDF06)
   t.is(m('\uDF06abc', undefined), 0xDF06)
+})
+
+test('should throw is string is null or undefined', () => {
+  t.throws(() => m(null))
+  t.throws(() => m(undefined))
 })
