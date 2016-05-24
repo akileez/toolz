@@ -14,6 +14,7 @@ function compareAscending (val, oth) {
       || (valIsUndef && othIsReflexive)
     ) return 1
 
+    // istanbul ignore else
     if ((val < oth && !valIsNull)
       || !othIsReflexive
       || (othIsNull && !valIsUndef && valIsReflexive)
