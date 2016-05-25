@@ -3,6 +3,7 @@ var test = painless.createGroup('Test string/case-camelize')
 var t = painless.assert
 
 var camelCase = require('../../../src/string/case-camelize')
+// var camelCase = require('../../../src/string/case').camel
 
 test('should convert hyphenated text to camelCase', function () {
   var str = 'lorem-ipsum-dolor'
@@ -57,5 +58,18 @@ test('underscore.string camelize tests', function(){
   t.eq(camelCase(null), '', 'Camelize null returns empty string')
   t.eq(camelCase(undefined), '', 'Camelize undefined returns empty string')
   t.eq(camelCase(123), '123')
+})
+
+test ('case tests', function () {
+  var expected = 'thisIsAString'
+  t.is(camelCase('thisIsAString'), expected)
+  t.is(camelCase('This Is A String'), expected)
+  t.ne(camelCase('THIS_IS_A_STRING'), expected)
+  t.ne(camelCase('this.is.a.string'), expected)
+  t.is(camelCase('This is a string.'), expected)
+  t.is(camelCase('this-is-a-string'), expected)
+  t.is(camelCase('this_is_a_string'), expected)
+  t.is(camelCase('this is a string'), expected)
+  t.is(camelCase('This Is a String'), expected)
 })
 
