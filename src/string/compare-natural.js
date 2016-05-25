@@ -22,7 +22,11 @@ function naturalCompare (str1, str2) {
       return a < b ? -1 : 1
     }
   }
-  if (token1.length !== token2.length) return (token1.length - token2.length)
+
+  // istanbul ignore else
+  if (token1.length !== token2.length) {
+    return token1.length - token2.length
+  }
 
   return str1 < str2 ? -1 : 1
 }
