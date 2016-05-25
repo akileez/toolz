@@ -33,6 +33,8 @@ test('should get the kind of value', function () {
 
   t.eq(kindOf(new Date()), 'date')
 
+  t.eq(kindOf(Symbol('a')), 'symbol')
+  t.is(kindOf(Symbol.prototype), 'symbol')
 
   t.eq(kindOf(null), 'null')
 
