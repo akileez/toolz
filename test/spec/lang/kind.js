@@ -126,7 +126,7 @@ test('kind Symbols', function () {
   // default
   t.is(kind.Of(sym), 'symbol')
   t.eq(kind.Of(Symbol('a')), 'symbol')
-  t.is(kind.Of(Symbol.prototype), 'object')
+  t.is(kind.Of(Symbol.prototype), 'symbol')
   // base
   t.is(kind.base(sym), 'symbol')
   t.is(kind.base(Symbol('a')), 'symbol')
