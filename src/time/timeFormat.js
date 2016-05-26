@@ -10,11 +10,12 @@ function timeFormat (ms, opts) {
   opts = opts || {}
 
   if (ms < 1000) {
-    return Math.ceil(ms)
-      + (opts.verbose
-        ? ' ' + plural('millisecond', Math.ceil(ms))
-        : 'ms'
-      )
+    var msDecimalDigits = typeof opts.msDecimalDigits === 'number'
+      ? opts.msDecimalDigits
+      : 0
+
+    return (msDecimalDigits ? ms.toFixed(msDecimalDigits) : Math.ceil(ms))
+      + (opts.verbose ? ' ' + plural('millisecond', Math.ceil(ms)) : 'ms')
   }
 
   var ret = []
