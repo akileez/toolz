@@ -1,7 +1,7 @@
 // adopted from: align-text <https://github.com/jonschlinkert/align-text>
 // Copyright (c) 2015, Jon Schlinkert. (MIT)
 
-var kindOf = require('../lang/kindOf').type
+var kindOf = require('../lang/kind')
 var longish = require('../array/longish')
 var repeat = require('../string/repeat')
 
