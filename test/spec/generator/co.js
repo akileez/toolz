@@ -1,12 +1,14 @@
 var painless = require('../../assertion/painless')
 var t = painless.assert
-var testArgs = painless.createGroup('Test generator/co: Arguments')
-var testProm = painless.createGroup('Test generator/co: Promises')
-var testArr  = painless.createGroup('Test generator/co: Arrays')
-var testCtx  = painless.createGroup('Test generator/co: Context')
-var testGFx  = painless.createGroup('Test generator/co: Generator Functions')
-var testInv  = painless.createGroup('Test generator/co: Invalid')
-var testObj  = painless.createGroup('Test generator/co: Objects')
+var testArgs  = painless.createGroup('Test generator/co: Arguments')
+var testProm  = painless.createGroup('Test generator/co: Promises')
+var testArr   = painless.createGroup('Test generator/co: Arrays')
+var testCtx   = painless.createGroup('Test generator/co: Context')
+var testGFx   = painless.createGroup('Test generator/co: Generator Functions')
+var testInv   = painless.createGroup('Test generator/co: Invalid')
+var testObj   = painless.createGroup('Test generator/co: Objects')
+var testRecur = painless.createGroup('Test generator/co: Recursion')
+var testWrap  = painless.createGroup('Test generator/co: Wrap')
 
 var co = require('../../../src/generator/co')
 var pify = require('../../../src/promise/pify')
@@ -264,4 +266,62 @@ testObj('co(* -> yield {}) should preserve key order', function () {
     var orderAfter = Object.keys(after).join(',')
     t.is(orderBefore, orderAfter)
   })
+})
+
+testRecur('co() recursion should aggregate arrays within array', function () {
+  return co(function* () {
+    var a = pify(read)('../package.json', 'utf8').then(data => data)
+    var b = pify(read)('../LICENSE', 'utf8').then(data => data)
+    var c = pify(read)('../package.json', 'utf8').then(data => data)
+
+    var res = yield [a, [b, c]]
+
+    t.is(res.length, 2)
+    t.assert(~res[0].indexOf('description'))
+    t.is(res[1].length, 2)
+    t.assert(~res[1][0].indexOf('ISC'))
+    t.assert(~res[1][1].indexOf('devDependencies'))
+  })
+})
+
+testRecur('co() recursion should aggregate objects within objects', function () {
+  return co(function* () {
+    var a = pify(read)('../package.json', 'utf8').then(data => data)
+    var b = pify(read)('../LICENSE', 'utf8').then(data => data)
+    var c = pify(read)('../package.json', 'utf8').then(data => data)
+
+    var res = yield {
+      0: a,
+      1: {
+        0: b,
+        1: c
+      }
+    }
+
+    t.assert(~res[0].indexOf('description'))
+    t.assert(~res[1][0].indexOf('ISC'))
+    t.assert(~res[1][1].indexOf('devDependencies'))
+  })
+})
+
+testWrap('co.wrap(fn*) should pass context', function () {
+  var ctx = {
+    some: 'thing'
+  }
+
+  return co.wrap(function* () {
+    t.is(ctx, this)
+  }).call(ctx)
+})
+
+testWrap('co.wrap(fn*) should pass arguments', function () {
+  return co.wrap(function* (a, b, c) {
+    t.same([1, 2, 3], [a, b, c])
+  })(1, 2, 3)
+})
+
+testWrap('co.wrap(fn*) should expose the underlying generator function', function () {
+  var wrapped = co.wrap(function* (a, b, c) {})
+  var source = Object.toString.call(wrapped.__generatorFunction__)
+  t.assert(source.indexOf('function*') === 0)
 })
