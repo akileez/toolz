@@ -4,7 +4,7 @@
  * slice() reference.
  */
 
-var slice = Array.prototype.slice;
+var slice = require('../array/slice')
 
 /**
  * Expose `co`.
@@ -43,7 +43,7 @@ co.wrap = function (fn) {
 
 function co(gen) {
   var ctx = this;
-  var args = slice.call(arguments, 1)
+  var args = slice(arguments, 1);
 
   // we wrap everything in a promise to avoid promise chaining,
   // which leads to memory leak errors.
@@ -137,7 +137,7 @@ function thunkToPromise(fn) {
   return new Promise(function (resolve, reject) {
     fn.call(ctx, function (err, res) {
       if (err) return reject(err);
-      if (arguments.length > 2) res = slice.call(arguments, 1);
+      if (arguments.length > 2) res = slice(arguments, 1);
       resolve(res);
     });
   });
