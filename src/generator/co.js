@@ -1,4 +1,4 @@
-var PinkiePromise = require('../promise/pinkie-promise');
+
 
 /**
  * slice() reference.
@@ -48,7 +48,7 @@ function co(gen) {
   // we wrap everything in a promise to avoid promise chaining,
   // which leads to memory leak errors.
   // see https://github.com/tj/co/issues/180
-  return new PinkiePromise(function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
     if (typeof gen === 'function') gen = gen.apply(ctx, args);
     if (!gen || typeof gen.next !== 'function') return resolve(gen);
 
@@ -68,6 +68,7 @@ function co(gen) {
         return reject(e);
       }
       next(ret);
+      return null;
     }
 
     /**
@@ -133,7 +134,7 @@ function toPromise(obj) {
 
 function thunkToPromise(fn) {
   var ctx = this;
-  return new PinkiePromise(function (resolve, reject) {
+  return new Promise(function (resolve, reject) {
     fn.call(ctx, function (err, res) {
       if (err) return reject(err);
       if (arguments.length > 2) res = slice.call(arguments, 1);
@@ -174,7 +175,7 @@ function objectToPromise(obj){
     if (promise && isPromise(promise)) defer(promise, key);
     else results[key] = obj[key];
   }
-  return PinkiePromise.all(promises).then(function () {
+  return Promise.all(promises).then(function () {
     return results;
   });
 
