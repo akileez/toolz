@@ -138,6 +138,7 @@ function isGenerator (obj) {
 // Check if `obj` is a generator function.
 function isGeneratorFunction (obj) {
   var constructor = obj.constructor
+  // istanbul ignore if
   if (!constructor) return false
   if (constructor.name === 'GeneratorFunction' || constructor.displayName === 'GeneratorFunction') return true
 
