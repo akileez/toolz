@@ -38,7 +38,7 @@ var pify = module.exports = function (obj, P, opts) {
   }
 
   opts = opts || {}
-  opts.exclude = opts.exclude || [/.+Sync$/]
+  var exclude = opts.exclude || [/.+Sync$/]
 
   var filter = function (key) {
     var match = function (pattern) {
@@ -49,7 +49,7 @@ var pify = module.exports = function (obj, P, opts) {
 
     return opts.include
       ? opts.include.some(match)
-      : !opts.exclude.some(match)
+      : !exclude.some(match)
   }
 
   var ret = typeof obj === 'function'
