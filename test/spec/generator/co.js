@@ -419,6 +419,99 @@ testThunk('co(* -> yield fn(done)) should work with nested co()s', function () {
   })
 })
 
+testThunk('co(* -> yield fn(done)) should throw when yielding neither a function nor a promise', function () {
+  var errors = []
+
+  return co(function* () {
+    try {
+      var a = yield 'something'
+    } catch (err) {
+      errors.push(err.message)
+    }
+
+    try {
+      var a = yield 'something'
+    } catch (err) {
+      errors.push(err.message)
+    }
+
+    t.is(errors.length, 2)
+    var msg = 'yield a function, promise, generator, array, or object'
+    t.assert(~errors[0].indexOf(msg))
+    t.assert(~errors[1].indexOf(msg))
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should throw with errors', function () {
+  var errors = []
+
+  return co(function* () {
+    try {
+      var a = yield get(1, new Error('foo'))
+    } catch (err) {
+      errors.push(err.message)
+    }
+
+    try {
+      var a = yield get(1, new Error('bar'))
+    } catch (err) {
+      errors.push(err.message)
+    }
+
+    t.same(errors, ['foo', 'bar'])
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should catch errors on .send()', function () {
+  var errors = []
+
+  return co(function *(){
+    try {
+      var a = yield get(1, null, new Error('foo'))
+    } catch (err) {
+      errors.push(err.message)
+    }
+
+    try {
+      var a = yield get(1, null, new Error('bar'))
+    } catch (err) {
+      errors.push(err.message)
+    }
+
+    t.same(errors, ['foo', 'bar'])
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should pass future errors to the callback', function () {
+  return co(function* () {
+    yield get(1)
+    yield get(2, null, new Error('fail'))
+    t.assert(false)
+    yield get(3)
+  }).catch(function (err) {
+    t.is(err.message, 'fail')
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should pass immediate errors to the callback', function () {
+  return co(function* () {
+    yield get(1)
+    yield get(2, new Error('fail'))
+    t.assert(false)
+    yield get(3)
+  }).catch(function (err) {
+    t.is(err.message, 'fail')
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should catch errors on the first invocation', function () {
+  return co(function* () {
+    throw new Error('fail')
+  }).catch(function (err) {
+    t.is(err.message, 'fail')
+  })
+})
+
 testWrap('co.wrap(fn*) should pass context', function () {
   var ctx = {
     some: 'thing'
