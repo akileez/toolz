@@ -8,6 +8,7 @@ var testGFx   = painless.createGroup('Test generator/co: Generator Functions')
 var testInv   = painless.createGroup('Test generator/co: Invalid')
 var testObj   = painless.createGroup('Test generator/co: Objects')
 var testRecur = painless.createGroup('Test generator/co: Recursion')
+var testThunk = painless.createGroup('Test generator/co: Thunks')
 var testWrap  = painless.createGroup('Test generator/co: Wrap')
 
 var co = require('../../../src/generator/co')
@@ -301,6 +302,120 @@ testRecur('co() recursion should aggregate objects within objects', function () 
     t.assert(~res[0].indexOf('description'))
     t.assert(~res[1][0].indexOf('ISC'))
     t.assert(~res[1][1].indexOf('devDependencies'))
+  })
+})
+
+function get (val, err, error) {
+  return function (done) {
+    if (error) throw error
+    setTimeout(function () {
+      done(err, val)
+    }, 10)
+  }
+}
+
+testThunk('co(* -> yield fn(done)) should work with no yields', function () {
+  return co(function* () {})
+})
+
+testThunk('co(* -> yield fn(done)) should work with one yield', function () {
+  return co(function* () {
+    var a = yield get(1)
+    t.is(a, 1)
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should work with several yields', function () {
+  return co(function* () {
+    var a = yield get(1)
+    var b = yield get(2)
+    var c = yield get(3)
+
+    t.same([a, b, c], [1, 2, 3])
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should return an array with many arguments', function () {
+  function exec (cmd) {
+    return function (done) {
+      done(null, 'stdout', 'stderr')
+    }
+  }
+
+  return co(function* () {
+    var out = yield exec('something')
+    t.same(out, ['stdout', 'stderr'])
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should only catch the first error when an error is passed then thrown', function () {
+  return co(function* () {
+    yield function (done) {
+      done(new Error('first'))
+      throw new Error('second')
+    }
+  }).then(function () {
+    throw new Error('wtf')
+  }, function (err) {
+    t.is(err.message, 'first')
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should throw and resume when an error is passed', function () {
+  var error
+
+  return co(function* () {
+    try {
+      yield get(1, new Error('boom'))
+    } catch (err) {
+      error = err
+    }
+
+    t.assert(error.message === 'boom')
+    var ret = yield get(1)
+    t.assert(ret === 1)
+  })
+})
+
+testThunk('co(* -> yield fn(done)) should work with nested co()s', function () {
+  var hit = []
+
+  return co(function* () {
+    var a = yield get(1)
+    var b = yield get(2)
+    var c = yield get(3)
+    hit.push('one')
+
+    t.same([a, b, c], [1, 2, 3])
+
+    yield co(function *(){
+      hit.push('two')
+      var a = yield get(1)
+      var b = yield get(2)
+      var c = yield get(3)
+
+      t.same([a, b, c], [1, 2, 3])
+
+      yield co(function *(){
+        hit.push('three')
+        var a = yield get(1)
+        var b = yield get(2)
+        var c = yield get(3)
+
+        t.same([a, b, c], [1, 2, 3])
+      })
+    })
+
+    yield co(function *(){
+      hit.push('four')
+      var a = yield get(1)
+      var b = yield get(2)
+      var c = yield get(3)
+
+      t.same([a, b, c], [1, 2, 3])
+    })
+
+    t.same(hit, ['one', 'two', 'three', 'four'])
   })
 })
 
