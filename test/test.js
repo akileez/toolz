@@ -43,6 +43,30 @@ function test (dir) {
   }
 }
 
+function test2 () {
+  var args = `spec/${runr.opts.dir}/${runr.opts.file || '*'}.js`
+
+  if (runr.opts.covr) {
+    spawn([{cmd: 'nyc', args: [
+      `--reporter=${type}`,
+      './painless',
+      args
+    ]}])
+  }
+
+  else {
+    spawn([{cmd: './painless', args: [args]}], () => {
+      if (runr.opts.lint && runr.opts.file) {
+        lint(dir, runr.opts)
+      }
+
+      else if (runr.opts.lint && !runr.opts.file) {
+        spawn([{cmd: './painless', args: [`lint/${runr.opts.dir}.js`, '-a']}])
+      }
+    })
+  }
+}
+
 runr
   .task('default', defs)
   .task('arr',     () => test('array'))
