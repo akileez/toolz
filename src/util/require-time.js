@@ -51,7 +51,7 @@ function _hooker(data) {
   requireData.push({
     order: requireData.length, // loading order
     time: data.startedIn, // time
-    label: data.name + ' (' + filename + ')'
+    label: data.name + ' (' + filename + ')' // `${data.name} (${filename})`
     // name: data.name,
     // filename: filename
   });
@@ -172,6 +172,6 @@ process.once('exit', function() {
 
   log(header)
   log(formatTable(requireData, totalTime))
-  log(clrz.bold('Total require(): ') + clrz.yellow(requireData.length))
-  log(clrz.bold('Total time: ') + clrz.yellow(prettyMs(totalTime)))
+  log(clrz.blue(clrz.bold('Total require(): ')) + clrz.yellow(requireData.length))
+  log(clrz.blue(clrz.bold('Total time: ')) + clrz.yellow(prettyMs(totalTime)))
 })
