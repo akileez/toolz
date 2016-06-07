@@ -53,16 +53,16 @@ test('multiArgs options', function* () {
   t.same(yield pify(fixture3, {multiArgs: true})(), ['unicorn', 'rainbow'])
 })
 
-test('wrap core method', function* () {
-  // must be run from the test directory
-  // i.e. node test prom --file pify
-  // REMINDER: resolve file module to mitigate this recurring issue
-  t.is(JSON.parse(yield pify(fs.readFile)('../package.json')).name, 'toolz')
-})
+// test('wrap core method', function* () {
+//   // must be run from the test directory
+//   // i.e. node test prom --file pify
+//   // REMINDER: resolve file module to mitigate this recurring issue
+//   t.is(JSON.parse(yield pify(fs.readFile)('../package.json')).name, 'toolz')
+// })
 
-test('module support', function* () {
-  t.is(JSON.parse(yield pify(fs).readFile('../package.json')).name, 'toolz')
-})
+// test('module support', function* () {
+//   t.is(JSON.parse(yield pify(fs).readFile('../package.json')).name, 'toolz')
+// })
 
 test('module support - doesn\'t trasform *Sync methods by default', function () {
   t.is(JSON.parse(pify(fs).readFileSync('../package.json')).name, 'toolz')
