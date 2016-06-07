@@ -6,6 +6,8 @@ module.exports = {
     indent_char: ' ',
     indent_handlebars: false,
     indent_inner_html: true,
+    indent_body_inner_html: true,
+    indent_head_inner_html: true,
     indent_scripts: 'normal',
     indent_size: 2,
     max_preserve_newlines: 2,
