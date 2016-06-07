@@ -32,20 +32,20 @@ var fixture = {
   ]
 }
 
-test('testval(obj, { property: primative })', function () {
+test('testval(obj, {property: primative})', function () {
   t.is(testval(fixture, { result: 'clive' }), true)
   t.is(testval(fixture, { hater: true }), true)
   t.is(testval(fixture, { result: 'clive', hater: true }), true)
   t.is(testval(fixture, { ibe: true }), false)
 })
 
-test('testval(obj, { !property: primative })', function () {
+test('testval(obj, {!property: primative})', function () {
   t.is(testval(fixture, { '!result': 'clive' }), false)
   t.is(testval(fixture, { '!result': 'ian' }), true)
   t.is(testval(fixture, { '!result': 'ian', '!hater': false }), true)
 })
 
-test('testval(obj, { property: primative[] })', function () {
+test('testval(obj, {property: primative[]})', function () {
   t.is(testval(fixture, { arr: [ 1, 2, 3 ] }), true)
   t.is(testval(fixture, { arr: [ /1/ ] }), true)
   t.is(testval(fixture, { arr: [ /4/ ] }), false)
@@ -55,17 +55,17 @@ test('testval(obj, { property: primative[] })', function () {
   t.is(testval(fixture, { undefinedProperty: [ null ] }), false)
 })
 
-test('testval(obj, { property: { property: primative[] } })', function () {
+test('testval(obj, {property: {property: primative[]}})', function () {
   t.is(testval(fixture, { deep: { arr: [ 1, 2 ] } }), true)
   t.is(testval(fixture, { deep: { arr: [ 3, 4 ] } }), true)
   t.is(testval(fixture, { deep: { favourite: { colour: [ 'white', 'red' ] } } }), true)
 })
 
-test('testval(obj, { property: undefined, property: regex })', function () {
+test('testval(obj, {property: undefined, property: regex })', function () {
   t.is(testval(fixture.deep, { undefinedProperty: undefined, name: /.+/ }), true)
 })
 
-test('testval(obj, { property: /regex/ })', function () {
+test('testval(obj, {property: /regex/ })', function () {
   t.is(testval(fixture, { colour: /red/ }), true)
   t.is(testval(fixture, { colour: /black/ }), false)
   t.is(testval(fixture, { colour: /RED/i }), true)
@@ -77,32 +77,32 @@ test('testval(obj, { property: /regex/ })', function () {
   t.is(testval(fixture, { boolTrue: /addf/ }), false, 'testing a boolean val')
 })
 
-test('testval(obj, { !property: /regex/ })', function () {
+test('testval(obj, {!property: /regex/})', function () {
   t.is(testval(fixture, { '!colour': /red/ }), false)
   t.is(testval(fixture, { '!colour': /black/ }), true)
   t.is(testval(fixture, { '!colour': /blue/ }), true)
 })
 
-test('testval(obj, { property: function })', function () {
+test('testval(obj, {property: function})', function () {
   t.is(testval(fixture, { number: function (n) { return n < 4 } }), false, '< 4')
   t.is(testval(fixture, { number: function (n) { return n < 10 } }), true, '< 10')
 })
 
-test('testval(obj, { !property: function })', function () {
+test('testval(obj, {!property: function})', function () {
   t.is(testval(fixture, { '!number': function (n) { return n < 10 } }), false, '< 10')
 })
 
-test('testval(obj, { property: object })', function () {
+test('testval(obj, {property: object})', function () {
   t.is(testval(fixture, { testClass: { one: 1 } }), true, 'querying a plain object')
   t.is(testval(fixture, { testClass: testClass }), true, 'querying an object instance')
 })
 
-test('testval(obj, { +property: primitive })', function () {
+test('testval(obj, {+property: primitive})', function () {
   t.is(testval(fixture, { arr: 1 }), false)
   t.is(testval(fixture, { '+arr': 1 }), true)
 })
 
-test('testval(obj, { property. { +property: query } })', function () {
+test('testval(obj, {property: { +property: query}})', function () {
   t.is(testval(fixture, { deep: { favourite: { '+colour': 'red' } } }), true)
   t.is(testval(fixture, { deep: { favourite: { '+colour': /red/ } } }), true)
   t.is(testval(fixture, { deep: { favourite: { '+colour': function (c) {
@@ -111,7 +111,7 @@ test('testval(obj, { property. { +property: query } })', function () {
   t.is(testval(fixture, { deep: { favourite: { '+colour': /green/ } } }), false)
 })
 
-test('testval(obj, { +property: query })', function () {
+test('testval(obj, {+property: query})', function () {
   t.is(testval(fixture, { arrObjects: { number: 1 } }), false)
   t.is(testval(fixture, { '+arrObjects': { number: 1 } }), true)
 })
@@ -209,7 +209,7 @@ test('object deep exists, summary', function () {
   t.is(testval(obj4, query), true, 'true in obj4')
 })
 
-test('testval.where({ property: primative })', function () {
+test('testval.where({property: primative})', function () {
   var arr = [
     { num: 1 }, { num: 2 }, { num: 3 }
   ]
