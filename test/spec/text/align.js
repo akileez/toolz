@@ -1,5 +1,8 @@
 var painless = require('../../assertion/painless')
 var test = painless.createGroup('Test text/align')
+var testr = painless.createGroup('Test text/align.right')
+var testc = painless.createGroup('Test text/align.centered')
+var testb = painless.createGroup('Test text/align.list')
 var t = painless.assert
 
 var align = require('../../../src/text/align')
@@ -92,4 +95,62 @@ test('should throw an error on invalid args:', function () {
   t.throws(function () {
     align()
   })
+})
+
+testr('align.right should right align the strings in an array of strings', function () {
+  var fix = [
+    'Lorem ipsum dolor sit amet,',
+    'consectetur adipiscing',
+    'elit, sed do eiusmod tempor incididunt',
+    'ut labore et dolore',
+    'magna aliqua. Ut enim ad minim',
+    'veniam, quis'
+  ]
+
+  var expected = [
+    '           Lorem ipsum dolor sit amet,',
+    '                consectetur adipiscing',
+    'elit, sed do eiusmod tempor incididunt',
+    '                   ut labore et dolore',
+    '        magna aliqua. Ut enim ad minim',
+    '                          veniam, quis'
+  ]
+
+  t.same(align.right(fix), expected)
+  t.is(align.right(fix).join('\n'), expected.join('\n'))
+})
+
+testc('align.center should center align the strings in an array of strings', function () {
+  var fixture = [
+    'Lorem ipsum dolor sit amet,',
+    'consectetur adipiscing',
+    'elit, sed do eiusmod tempor incididunt',
+    'ut labore et dolore',
+    'magna aliqua. Ut enim ad minim',
+    'veniam, quis'
+  ]
+
+  var expected = [
+    '     Lorem ipsum dolor sit amet,',
+    '        consectetur adipiscing',
+    'elit, sed do eiusmod tempor incididunt',
+    '         ut labore et dolore',
+    '    magna aliqua. Ut enim ad minim',
+    '             veniam, quis'
+  ]
+
+  t.same(align.center(fixture), expected)
+  t.is(align.center(fixture).join('\n'), expected.join('\n'))
+})
+
+testb('align.list ', function () {
+var prefixed = [
+  ' - Lorem ipsum dolor sit amet,',
+  ' - consectetur adipiscing',
+  ' - elit, sed do eiusmod tempor incididunt',
+  ' - ut labore et dolore',
+  ' - magna aliqua. Ut enim ad minim',
+  ' - veniam, quis'
+]
+  t.same(align.list(fixture), prefixed)
 })
