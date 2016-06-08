@@ -43,6 +43,9 @@ test('loop even if array is sparse', function () {
 test('return empty array if target is null/undefined', function () {
   t.same(collect(null), [])
   t.same(collect(undefined), [])
+  t.same(collection(null), [])
+  t.same(collection(undefined), [])
+
 })
 
 test('allow shorthand syntax', function () {
