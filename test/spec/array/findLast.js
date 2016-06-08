@@ -27,6 +27,8 @@ test('should return undefined if array is null/undefined', function () {
 
   t.is(findLast(null, testFunc), undefined)
   t.is(findLast(undefined, testFunc), undefined)
+  t.is(filast(null, testFunc), undefined)
+  t.is(filast(undefined, testFunc), undefined)
 })
 
 test('should support object shortcut syntax', function () {
