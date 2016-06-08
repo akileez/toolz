@@ -1,9 +1,13 @@
 var make = require('./_make')
 var makeIterator = require('../function/makeIterator_')
+var hasOwn = Object.prototype.hasOwnProperty
 
 function arrFilter (arr, fn, thisObj) {
   fn = makeIterator(fn, thisObj)
   var result = []
+  // istanbul ignore if
+  // due to the way `_make` works at present, a null or undefined list
+  // will return undefined. may change in future
   if (arr == null) return result
 
   var val
@@ -24,7 +28,8 @@ function objFilter (obj, fn, thisObj) {
   var key
 
   for (key in obj) {
-    if (obj.hasOwnProperty(key)) {
+    // istanbul ignore else
+    if (hasOwn.call(obj, key)) {
       if (fn(obj[key], key, obj)) result[key] = obj[key]
     }
   }
