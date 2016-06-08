@@ -8,6 +8,10 @@ var some = require('./some')
 function arrFind (arr, fn, thisObj) {
   var idx = findIndex(arr, fn, thisObj)
 
+  // istanbul ignore next
+  // due to the way `_make` works at present, a null or undefined list
+  // will return undefined. may change in future
+  // i.e. void (0) will never be reached
   return idx >= 0
     ? arr[idx]
     : void (0)
