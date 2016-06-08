@@ -45,6 +45,8 @@ test('should return empty array if target is null/undefined', function () {
     return true; }
   t.same(filter(undefined, testFunc), []);
   t.same(filter(null, testFunc), []);
+  t.same(filterd(undefined, testFunc), undefined);
+  t.same(filterd(null, testFunc), undefined);
 });
 
 test('should allow shorthand object syntax', function () {
