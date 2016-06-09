@@ -1,39 +1,45 @@
-'use strict';
+// is-callable <https://github.com/ljharb/is-callable>
+// Copyright (c) 2015 Jordan Harband (MIT)
 
-var fnToStr = Function.prototype.toString;
+'use strict'
 
-var constructorRegex = /\s*class /;
-var isES6ClassFn = function isES6ClassFn(value) {
+var fnToStr = Function.prototype.toString
+
+var constructorRegex = /\s*class /
+var isES6ClassFn = function isES6ClassFn (value) {
   try {
-    var fnStr = fnToStr.call(value);
-    var singleStripped = fnStr.replace(/\/\/.*\n/g, '');
-    var multiStripped = singleStripped.replace(/\/\*[.\s\S]*\*\//g, '');
-    var spaceStripped = multiStripped.replace(/\n/mg, ' ').replace(/ {2}/g, ' ');
-    return constructorRegex.test(spaceStripped);
-  } catch (e) {
-    return false; // not a function
-  }
-};
+    var fnStr = fnToStr.call(value)
+    var singleStripped = fnStr.replace(/\/\/.*\n/g, '')
+    var multiStripped = singleStripped.replace(/\/\*[.\s\S]*\*\//g, '')
+    var spaceStripped = multiStripped.replace(/\n/mg, ' ').replace(/ {2}/g, ' ')
 
-var tryFunctionObject = function tryFunctionObject(value) {
+    return constructorRegex.test(spaceStripped)
+  } catch (e) {
+    return false // not a function
+  }
+}
+
+var tryFunctionObject = function tryFunctionObject (value) {
   try {
-    if (isES6ClassFn(value)) { return false; }
-    fnToStr.call(value);
-    return true;
+    if (isES6ClassFn(value)) return false
+    fnToStr.call(value)
+    return true
   } catch (e) {
-    return false;
+    return false
   }
-};
-var toStr = Object.prototype.toString;
-var fnClass = '[object Function]';
-var genClass = '[object GeneratorFunction]';
-var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol';
+}
+var toStr = Object.prototype.toString
+var fnClass = '[object Function]'
+var genClass = '[object GeneratorFunction]'
+var hasToStringTag = typeof Symbol === 'function' && typeof Symbol.toStringTag === 'symbol'
 
-module.exports = function isCallable(value) {
-  if (!value) { return false; }
-  if (typeof value !== 'function' && typeof value !== 'object') { return false; }
-  if (hasToStringTag) { return tryFunctionObject(value); }
-  if (isES6ClassFn(value)) { return false; }
-  var strClass = toStr.call(value);
-  return strClass === fnClass || strClass === genClass;
-};
+module.exports = function isCallable (value) {
+  if (!value) return false
+  if (typeof value !== 'function' && typeof value !== 'object') return false
+  if (hasToStringTag) return tryFunctionObject(value)
+  if (isES6ClassFn(value)) return false
+
+  var strClass = toStr.call(value)
+
+  return strClass === fnClass || strClass === genClass
+}
