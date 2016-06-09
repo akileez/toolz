@@ -1,5 +1,15 @@
+// random-obj-prop <https://github.com/sindresorhus/random-obj-prop>
+// Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT)
+
 var random = require('./random')
-// from Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) - random-obj-prop
+
+/*
+  Get a random property from an object
+
+    var randomObjProp = require('random-obj-prop')
+    randomObjProp({foo: 'pony', bar: 'unicorn'})
+    //=> 'unicorn'
+*/
 
 function randProp (obj) {
   var keys = Object.keys(obj)
