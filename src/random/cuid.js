@@ -1,3 +1,5 @@
+// cuid <https://github.com/ericelliott/cuid>
+// Copyright (c) 2012 Eric Elliott (MIT)
 
 'use strict'
 
@@ -18,6 +20,7 @@ var randomBlock = function randomBlock () {
 }
 
 var safeCounter = function () {
+  // istanbul ignore next
   c = (c < discreteValues) ? c : 0
   c++
   return c - 1
@@ -40,7 +43,7 @@ function cuid () {
 function slug () {
   var counter
   var date = new Date().getTime().toString(36)
-  var print = nodePrint().slice(0, 1) + nodePrint.slice(-1)
+  var print = nodePrint().slice(0, 1) + nodePrint().slice(-1)
   var random = randomBlock().slice(-2)
 
   counter = safeCounter().toString(36).slice(-4)
