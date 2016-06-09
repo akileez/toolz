@@ -1,4 +1,5 @@
-// https://github.com/feross/simple-get
+// simple-get <https://github.com/feross/simple-get>
+// Copyright (c) Feross Aboukhadijeh (MIT)
 
 module.exports = simpleGet
 
@@ -18,9 +19,13 @@ function simpleGet (opts, cb) {
 
   if (opts.url) parseOptsUrl(opts)
   if (opts.headers == null) opts.headers = {}
+  if (opts.json) opts.headers['content-type'] = 'application/json'
   if (opts.maxRedirects == null) opts.maxRedirects = 10
 
-  var body = opts.body
+  var body = opts.json
+    ? JSON.stringify(opts.body)
+    : opts.body
+
   opts.body = undefined
 
   if (body && !opts.method) opts.method = 'POST'
@@ -71,7 +76,15 @@ module.exports.concat = function (opts, cb) {
     })
 
     res.on('end', function () {
-      cb(null, res, Buffer.concat(chunks))
+      var data = Buffer.concat(chunks)
+      if (opts.json) {
+        try {
+          data = JSON.parse(data.toString())
+        } catch (err) {
+          return cb(err, res, data)
+        }
+      }
+      cb(null, res, data)
     })
   })
 }
@@ -89,6 +102,7 @@ function parseOptsUrl (opts) {
   if (loc.hostname) opts.hostname = loc.hostname
   if (loc.port) opts.port = loc.port
   if (loc.protocol) opts.protocol = loc.protocol
+  if (loc.auth) opts.auth = loc.auth
   opts.path = loc.path
   delete opts.url
 }
