@@ -65,27 +65,29 @@ function nodePrint () {
   return pid + hostId
 }
 
-function globalCount() {
-  // We want to cache the results of this
-  var cache = (function calc() {
-    var i
-    var count = 0
+// NOTE: browser code not in use in this library.
 
-    for (i in window) {
-      count++
-    }
+// function globalCount() {
+//   // We want to cache the results of this
+//   var cache = (function calc() {
+//     var i
+//     var count = 0
 
-    return count
-  }());
+//     for (i in window) {
+//       count++
+//     }
 
-  return cache;
-}
+//     return count
+//   }());
 
-function browserPrint() {
-  return pad((navigator.mimeTypes.length
-    + navigator.userAgent.length).toString(36)
-    + globalCount().toString(36), 4);
-};
+//   return cache;
+// }
+
+// function browserPrint() {
+//   return pad((navigator.mimeTypes.length
+//     + navigator.userAgent.length).toString(36)
+//     + globalCount().toString(36), 4);
+// };
 
 module.exports = cuid
 module.exports.slug = slug
