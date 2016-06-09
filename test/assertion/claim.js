@@ -92,7 +92,7 @@ function doesNotThrow (fn, msg) {
   }
 }
 
-function regexTest (regex, contents, msg) {
+function regexTest (contents, regex, msg) {
   test(regex.test(contents), create(regex, contents, '===', msg, regexTest))
 }
 
