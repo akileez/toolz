@@ -5,7 +5,7 @@ var randInt = require('./randInt')
 var defaultDict = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 function randomString (length, dictionary) {
-  if (!isNumber(length) || length < 0) length = 8
+  if (!isNumber(length) || length <= 0) length = 8
   if (!isString(dictionary) || dictionary.length < 1) dictionary = defaultDict
 
   var result = ''
