@@ -123,6 +123,7 @@ module.exports = {
   throws: throws,
   doesNotThrow: doesNotThrow,
   regexTest: regexTest,
+  matches: regexTest,
   ifError: ifError,
   ifErr: ifError
 }
