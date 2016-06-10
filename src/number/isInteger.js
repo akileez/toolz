@@ -1,7 +1,7 @@
-var isNumber = require('./isFinite')
+var isFinite = require('./isFinite')
 
 function isInteger (value) {
-  return isNumber(value) && (value % 1 === 0)
+  return isFinite(value) && (value % 1 === 0)
 }
 
 module.exports = isInteger
