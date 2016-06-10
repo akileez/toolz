@@ -23,6 +23,13 @@ function or (ans) {
   })
 }
 
+function nor (ans) {
+  var args = slice(arguments, 1)
+  return some(args, function (question) {
+    return (ans !== question)
+  })
+}
+
 // confirms if `who` exists and is of `what` type
 // var str = 'hello'
 // yoda.id('string', str) --> true
@@ -50,6 +57,7 @@ function isEmpty () {
 exports.and = and
 exports.not = not
 exports.or = or
+exports.nor = nor
 exports.id = id
 exports.is = id
 exports.isnt = isNot
