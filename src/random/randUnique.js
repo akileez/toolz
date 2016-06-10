@@ -1,8 +1,17 @@
+// unique-random <https://github.com/sindresorhus/unique-random>
+// Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) (MIT)
+
 var random = require('./random')
-// from Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com) - unique-random
-// Useful for things like slideshows where you don't want to have the same slide twice in a row.
 
 /*
+  Useful for things like slideshows where you don't want to have the
+  same slide twice in a row.
+
+  API:
+  uniqueRandom(min, max)
+  Returns a function that when called will return a random number that's never the same as the previous.
+
+  Usage:
     var uniqueRandom = require('unique-random');
     var rand = uniqueRandom(1, 10);
 
