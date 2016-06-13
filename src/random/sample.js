@@ -24,8 +24,9 @@ function sample (lower, upper, size, precision) {
     // true or false will generate a set of integers
     return map(sample, () => randInt(lower, upper))
   } else {
-    // undefined or any other type generates normal set
-    return map(sample, () => rand(lower, upper))
+    // undefined or any other type generates normal set of
+    // floats with a precision of two decimal places
+    return map(sample, () => precise(rand(lower, upper), 2))
   }
 }
 
