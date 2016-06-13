@@ -38,6 +38,7 @@
       "src/math/*.js",
       "src/number/*.js",
       "src/object/*.js",
+      "src/path/*.js",
       "src/promise/promtie/*.js",
       "src/query/*.js",
       "src/random/*.js",
