@@ -44,6 +44,7 @@ dlogr.dates = false
 dlogr.colors = true
 dlogr.verbose = true
 dlogr.timer = false
+dlogr.inline = false
 
 // dlogr.level === -1 turns off all levels
 // dlogr.level === -2 turns on trak logging
@@ -261,7 +262,7 @@ dlogr.inspector = function (level) {
     let log = {}
     let out = () => {
       dlogr._stdout.write(dlogr._log(
-        map(slice(arguments), (arg) => format(dlogr.blk('res:') +' %j', arg)),
+        map(slice(arguments), (arg) => dlogr.inline ? format(dlogr.blk('res:') +' %j', arg) : dlogr.blk('res:')),
         dlogr._level(level),
         dlogr._label()
       ))
