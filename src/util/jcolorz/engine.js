@@ -158,8 +158,13 @@ function engine () {
     if (type === 'func') {
       if (options.display.func) {
         var str = value.toString().split(/\n/)
-        var first = str[0] + '\n'
-        var rest = str.slice(1)
+        var first
+        var rest
+
+        if (str.length > 1) first = str[0] + '\n'
+        else first = str[0]
+
+        rest = str.slice(1)
         return first + indent(rest.join('\n'), ' ', generateLevel(level).length)
       } else {
         return '[Function]'
