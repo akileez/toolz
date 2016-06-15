@@ -36,6 +36,17 @@ function engine () {
     return result
   }
 
+  function forEach (obj, fn) {
+    var hasOwn = Object.prototype.hasOwnProperty
+    var key
+
+    for (key in obj) {
+      if (hasOwn.call(obj, key)) {
+        fn(obj[key], key, obj)
+      }
+    }
+  }
+
   function repeat (str, n) {
     var result = ''
 
