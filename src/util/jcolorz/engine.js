@@ -125,7 +125,11 @@ function engine () {
   }
 
   function colorify (value, level) {
-    var type = getType(value)
+    var type
+
+    if (value === '[Circular]') type = 'circ'
+    else type = getType(value)
+
     var color = options.colors[type]
 
     return generateLevel(type === 'func' ? 0 : level)
