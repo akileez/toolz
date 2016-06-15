@@ -171,6 +171,27 @@ function engine () {
     return '' + value
   }
 
+  function circular (obj) {
+    function copy (from, seen) {
+      var to = Array.isArray(from) ? [] : {}
+      seen.push(from)
+
+      forEach(from, function (val, key) {
+        if (!val || !isObject(val))
+          to[key] = val
+
+        else if (seen.indexOf(val) === -1)
+          to[key] = copy(val, seen.slice(0))
+
+        else to[key] = '[Circular]'
+      })
+
+      return to
+    }
+
+    return copy(obj, [])
+  }
+
   return {
     gen: function (json, level, isChild) {
       var colored = ''
@@ -180,6 +201,7 @@ function engine () {
       level = level || 0
 
       if (isObject(json)) {
+        json = circular(json)
         var lastKey = cleanObject(json)
         colored += colorifySpec('{', 'brack', isChild ? 0 : level) + '\n'
         level++
