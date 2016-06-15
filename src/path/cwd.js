@@ -6,7 +6,8 @@
  */
 
 var path = require('path')
-var findPkg = require('./find-pkg')
+// var findPkg = require('./find-pkg')
+var findRoot = require('./find-root')
 
 /**
  * Expose `cwd`
@@ -41,17 +42,21 @@ function cwd (filepath) {
   }
 
   try {
-    if (/package\.json$/.test(fp) && fs.accessSync(fp)) {
-      return (cache[fp] = fp)
-    }
+    // if (/package\.json$/.test(fp) && fs.accessSync(fp)) {
+    //   return (cache[fp] = fp)
+    // }
 
-    var filepath = findPkg.sync(fp)
-    var base = filepath ? path.dirname(filepath) : ''
+    // var filepath = findPkg.sync(fp)
+    // var filepath = findRoot(fp)
 
-    return (cache[fp] = path.resolve(base, fp))
+    // var base = filepath ? path.dirname(filepath) : ''
+    // console.log(base)
+    // console.log(findRoot(fp), fp)
+
+    return (cache[fp] = path.resolve(findRoot(fp), fp))
   } catch (err) {
     return (cache[fp] = fp)
   }
 }
 
-module.exports =  process.cwd || cwd
+module.exports =  cwd
