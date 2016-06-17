@@ -1,4 +1,13 @@
-var painless = require('../../assertion/painless')
+var memo = require('../../../src/path/memo')
+var root = require('../../../src/path/find-root')
+
+var cwd = memo(root())
+var src = cwd('src')
+var tst = cwd('test')
+var tsa = tst('assertion')
+var tss = tst('spec')
+
+var painless = require(`${tsa()}/painless`)
 var t = painless.assert
 var testArgs  = painless.createGroup('Test generator/co: Arguments')
 var testProm  = painless.createGroup('Test generator/co: Promises')
@@ -11,8 +20,8 @@ var testRecur = painless.createGroup('Test generator/co: Recursion')
 var testThunk = painless.createGroup('Test generator/co: Thunks')
 var testWrap  = painless.createGroup('Test generator/co: Wrap')
 
-var co = require('../../../src/generator/co')
-var pify = require('../../../src/promise/pify')
+var co = require(`${src()}/generator/co`)
+var pify = require(`${src()}/promise/pify`)
 var read = require('fs').readFile
 
 // pify(read)
@@ -110,9 +119,9 @@ testProm('co(function) -> promise should catch errors', function () {
 
 testArr('co(* -> yield []) should aggregate several promises', function () {
   return co(function * () {
-    var a = pify(read)('../package.json', 'utf8').then(data => data)
-    var b = pify(read)('../LICENSE', 'utf8').then(data => data)
-    var c = pify(read)('../package.json', 'utf8').then(data => data)
+    var a = pify(read)(`${cwd()}/package.json`, 'utf8').then(data => data)
+    var b = pify(read)(`${cwd()}/LICENSE`, 'utf8').then(data => data)
+    var c = pify(read)(`${cwd()}/package.json`, 'utf8').then(data => data)
 
     var res = yield [a, b, c]
     t.is(3, res.length)
@@ -198,9 +207,9 @@ testInv('yield <invalid> should throw an error', function () {
 
 testObj('co(* -> yield {}) should aggregate several promises', function () {
   return co(function * () {
-    var a = pify(read)('../package.json', 'utf8').then(data => data)
-    var b = pify(read)('../LICENSE', 'utf8').then(data => data)
-    var c = pify(read)('../package.json', 'utf8').then(data => data)
+    var a = pify(read)(`${cwd()}/package.json`, 'utf8').then(data => data)
+    var b = pify(read)(`${cwd()}/LICENSE`, 'utf8').then(data => data)
+    var c = pify(read)(`${cwd()}/package.json`, 'utf8').then(data => data)
 
     var res = yield {
       a: a,
@@ -226,7 +235,8 @@ testObj('co(* -> yield {}) should ignore non-thunkable properties', function () 
       name: { first: 'tobi' },
       age: 2,
       // should read the lint.js file from the test directory
-      address: pify(read)('./lint.js', 'utf8').then(data => data),
+      // problem reoslved as shown below
+      address: pify(read)(`${tst()}/lint.js`, 'utf8').then(data => data),
       tobi: new Pet('tobi'),
       now: new Date(),
       falsey: false,
@@ -271,9 +281,9 @@ testObj('co(* -> yield {}) should preserve key order', function () {
 
 testRecur('co() recursion should aggregate arrays within array', function () {
   return co(function* () {
-    var a = pify(read)('../package.json', 'utf8').then(data => data)
-    var b = pify(read)('../LICENSE', 'utf8').then(data => data)
-    var c = pify(read)('../package.json', 'utf8').then(data => data)
+    var a = pify(read)(`${cwd()}/package.json`, 'utf8').then(data => data)
+    var b = pify(read)(`${cwd()}/LICENSE`, 'utf8').then(data => data)
+    var c = pify(read)(`${cwd()}/package.json`, 'utf8').then(data => data)
 
     var res = yield [a, [b, c]]
 
@@ -287,9 +297,9 @@ testRecur('co() recursion should aggregate arrays within array', function () {
 
 testRecur('co() recursion should aggregate objects within objects', function () {
   return co(function* () {
-    var a = pify(read)('../package.json', 'utf8').then(data => data)
-    var b = pify(read)('../LICENSE', 'utf8').then(data => data)
-    var c = pify(read)('../package.json', 'utf8').then(data => data)
+    var a = pify(read)(`${cwd()}/package.json`, 'utf8').then(data => data)
+    var b = pify(read)(`${cwd()}/LICENSE`, 'utf8').then(data => data)
+    var c = pify(read)(`${cwd()}/package.json`, 'utf8').then(data => data)
 
     var res = yield {
       0: a,
