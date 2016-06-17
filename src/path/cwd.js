@@ -1,62 +1,35 @@
-/*!
- * cwd <https://github.com/jonschlinkert/cwd>
- *
- * Copyright (c) 2014-2015, Jon Schlinkert.
- * Licensed under the MIT License.
- */
+/*
+  adopted from: cwd <https://github.com/jonschlinkert/cwd>
+  Copyright (c) 2014-2015, Jon Schlinkert. (MIT)
 
-var path = require('path')
-// var findPkg = require('./find-pkg')
+  Cache filepaths to prevent hitting the file system
+  for multiple lookups for the exact same path.
+
+  resolves the absolute path to the root of a project.
+
+  API:
+    @filepath {String|Array} The starting filepath.
+    Can be a string, or path parts as a list of arguments or array.
+
+    @return {String} Resolve filepath
+*/
+
+
+var apply    = require('../function/apply')
+var slice    = require('../array/slice')
 var findRoot = require('./find-root')
-
-/**
- * Expose `cwd`
- */
-
-
-
-/**
- * Cache filepaths to prevent hitting the file system
- * for multiple lookups for the exact same path.
- */
+var path     = require('path')
 
 var cache = {}
 
-/**
- * Uses [look-up] to resolve the absolute path to the root of a project.
- *
- * @param {String|Array} `filepath` The starting filepath. Can be a string, or path parts as a list of arguments or array.
- * @return {String} Resolve filepath.
- * @api public
- */
-
 function cwd (filepath) {
-  var fp = path.resolve(filepath || '')
+  var fp = arguments.length > 1
+    ? apply(path.resolve, path, slice(arguments))
+    : path.resolve(filepath || '')
 
-  if (arguments.length > 1) {
-    fp = path.resolve.apply(path, [].concat.apply([], arguments))
-  }
+  if (cache.hasOwnProperty(fp)) return cache[fp]
 
-  if (cache.hasOwnProperty(fp)) {
-    return cache[fp]
-  }
-
-  try {
-    // if (/package\.json$/.test(fp) && fs.accessSync(fp)) {
-    //   return (cache[fp] = fp)
-    // }
-
-    // var filepath = findPkg.sync(fp)
-    // var filepath = findRoot(fp)
-
-    // var base = filepath ? path.dirname(filepath) : ''
-    // console.log(base)
-    // console.log(findRoot(fp), fp)
-
-    return (cache[fp] = path.resolve(findRoot(fp), fp))
-  } catch (err) {
-    return (cache[fp] = fp)
-  }
+  return (cache[fp] = path.resolve(findRoot(fp), fp))
 }
 
 module.exports =  cwd
