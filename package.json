@@ -34,6 +34,7 @@
       "src/function/*.js",
       "src/generator/*.js",
       "src/helper/ent/*.js",
+      "src/json/*.js",
       "src/lang/*.js",
       "src/math/*.js",
       "src/number/*.js",
