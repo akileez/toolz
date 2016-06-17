@@ -57,7 +57,7 @@ function test2 () {
   else {
     spawn([{cmd: './painless', args: [args]}], () => {
       if (runr.opts.lint && runr.opts.file) {
-        lint(dir, runr.opts)
+        lint(runr.opts.dir, runr.opts)
       }
 
       else if (runr.opts.lint && !runr.opts.file) {
