@@ -69,10 +69,12 @@ function test2 () {
 
 runr
   .task('default', defs)
+  .task('runr',    () => test2())
   .task('arr',     () => test('array'))
   .task('async',   () => test('async'))
   .task('func',    () => test('function'))
   .task('gen',     () => test('generator'))
+  .task('json',    () => test('json'))
   .task('lang',    () => test('lang'))
   .task('num',     () => test('number'))
   .task('obj',     () => test('object'))
