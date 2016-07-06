@@ -188,7 +188,7 @@ function clockin (date, mask) {
     var abs = Math.abs(offset)
     var hr = pad(Math.floor(abs / 60), 2)
     var min = pad(abs % 60, 2)
-    return [(offset > 0 ? '-' : '+'), hr, min].join('')
+    return [(offset > 0 ? '-' : '+'), hr, `:${min}`].join('')
   }
 
   function totalDaysThisMonth (date) {
