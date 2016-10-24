@@ -28,7 +28,8 @@ var colors = {
 var display = {
   func: false,
   date: false,
-  xarr: true
+  xarr: true,
+  prot: true
 }
 
 var level = {
