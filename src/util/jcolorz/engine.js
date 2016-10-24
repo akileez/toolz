@@ -36,7 +36,7 @@ function engine () {
     return result
   }
 
-  function forEach (obj, fn) {
+  function forOwn (obj, fn) {
     var hasOwn = Object.prototype.hasOwnProperty
     var key
 
