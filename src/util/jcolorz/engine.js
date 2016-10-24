@@ -47,6 +47,14 @@ function engine () {
     }
   }
 
+  function forIn (obj, fn) {
+    var key
+
+    for (key in obj) {
+      fn(obj[key], key, obj)
+    }
+  }
+
   function repeat (str, n) {
     var result = ''
 
