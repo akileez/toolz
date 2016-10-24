@@ -185,11 +185,13 @@ function engine () {
   }
 
   function circular (obj) {
+    var fn = options.display.prot ? forIn : forOwn
+
     function copy (from, seen) {
       var to = Array.isArray(from) ? [] : {}
       seen.push(from)
 
-      forEach(from, function (val, key) {
+      fn(from, function (val, key) {
         if (!val || !isObject(val))
           to[key] = val
 
