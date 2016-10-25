@@ -10,11 +10,11 @@ var apply   = require('../function/apply')
 // Small event-emitter stamp.
 
 module.exports = stamp()
-  .initializers({
+  .initializers([
     function () {
       this._fns = {}
     }
-  })
+  ])
   .methods({
     emit : emit,
     on   : on,
