@@ -1,7 +1,3 @@
-var isFunction = require('../lang/isFunction')
+const isObject = require('./is-object')
 
-function isComposable (obj) {
-  return isFunction(obj) && isFunction(obj.compose)
-}
-
-module.exports = isComposable
+module.exports = isObject
