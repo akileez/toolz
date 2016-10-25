@@ -1,16 +1,15 @@
 var painless = require('../../assertion/painless')
 var t        = painless.assert
 var test     = painless.createGroup('Test object/stampit (init)')
+var log      = require('../../../src/util/jcolorz')
 
 var stampit = require('../../../src/object/stamp')
 
-test('stampit({ init })', function () {
-  var obj = stampit({
-    init() {
-      var secret = 'foo'
-      this.getSecret = function () {
-        return secret
-      }
+test('stampit({ init }) -- syntax no longer in use -- adjustments made', function () {
+  var obj = stampit().init((opts, {instance}) => {
+    var secret = 'foo'
+    instance.getSecret = () => {
+      return secret
     }
   }).create()
 
@@ -20,22 +19,25 @@ test('stampit({ init })', function () {
   t.is(results, expected, 'should set closure')
 })
 
-test('stampit().init()', function () {
+test('should work with init keyword -- stampit().init()', function () {
   var obj = stampit()
+    // using `this` with anon func.
     .init(function () {
       var secret = 'foo'
       this.getSecret = function () {
         return secret
       }
     })
-    .init(function () {
-      this.a = 'a'
+    // using `instance` with ES6 func
+    .init((opts, {instance, stamp, args}) => {
+      instance.a = 'a'
     })
-    .init({
-      bar () { this.b = 'b' }
-    }, {
-      baz () { this.c = 'c' }
-    })
+    // init takes an array of functions or an anons functions
+    // no functions in object literals
+    .init([
+      function bar () { this.b = 'b' },
+      function baz () { this.c = 'c' }
+    ])
     .create()
 
   var results = obj.getSecret()
@@ -45,36 +47,35 @@ test('stampit().init()', function () {
   t.ok(obj.a && obj.b && obj.c, 'should allow chaining and take object literals.')
 })
 
-test('stampit({ init }).init()', () => {
-  var obj = stampit({init() {
+test('stampit({ init }).init() -- syntax no longer in use -- adjustments made', () => {
+  var obj = stampit()
+  .init(function () {
     var secret = 'foo'
     this.getSecret = () => { return secret }
-  }})
+  })
   .init(function () {
     this.a = 'a'
   })
-  .init({
-    bar () { this.b = 'b' }
-  }, {
-    baz () { this.c = 'c' }
-  })
+  .init([
+    function bar () { this.b = 'b' },
+    function baz () { this.c = 'c' }
+  ])
   .create()
 
   t.is(obj.getSecret(), 'foo', 'should set closure')
   t.ok(obj.a && obj.b && obj.c, 'should allow chaining and take object literals.')
 })
 
-test('stampit({ initializers })', function () {
-  var obj = stampit({
-    initializers: {
+test('should work with initializers keyword stampit().initializers', function () {
+  var obj = stampit()
+    .initializers (
       function () {
         var secret = 'foo'
         this.getSecret = function () {
           return secret
         }
       }
-    }
-  }).create()
+    ).create()
 
   var results = obj.getSecret()
   var expected = 'foo'
@@ -84,21 +85,19 @@ test('stampit({ initializers })', function () {
 
 test('stampit().initializers()', function () {
   var obj = stampit()
-    .initializers(function () {
+    .initializers((opts, {instance, stamp, args}) => {
       var secret = 'foo'
-      this.getSecret = function () {
+      instance.getSecret = function () {
         return secret
       }
     })
-    .initializers(function () {
-      this.a = 'a'
+    .initializers((opts, {instance}) => {
+      instance.a = 'a'
     })
-    .initializers({
-      bar () { this.b = 'b' }
-    }, {
-      baz () { this.c = 'c' }
-    })
-    .create()
+    .initializers([
+      function bar () { this.b = 'b' },
+      function baz () { this.c = 'c' }
+    ]).create()
 
   var results = obj.getSecret()
   var expected = 'foo'
@@ -108,20 +107,19 @@ test('stampit().initializers()', function () {
 })
 
 test('stampit({ initializers }).initializers()', () => {
-  var obj = stampit({ initializers: {
-    function () {
+  var obj = stampit()
+  .initializers(function () {
       var secret = 'foo'
      this.getSecret = () => { return secret }
     }
-  }})
+  )
   .initializers(function () {
     this.a = 'a'
   })
-  .initializers({
-    bar () { this.b = 'b' }
-  }, {
-    baz () { this.c = 'c' }
-  })
+  .initializers([
+    function bar () { this.b = 'b' },
+    function baz () { this.c = 'c' }
+  ])
   .create()
 
   t.is(obj.getSecret(), 'foo', 'should set closure')
