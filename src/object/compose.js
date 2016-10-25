@@ -25,28 +25,20 @@
     @returns {Function} A new stamp (aka composable factory function).
 */
 
-const isFunction = require('../lang/isFunction')
-const apply      = require('../function/apply')
-const reduce     = require('../array/reduce')
-const filter     = require('../array/filter')
-const slice      = require('../array/slice')
-const mergeWith  = require('./mergeWith')
-const isObject   = require('./is-object')
-const assign     = require('./assign')
-
-const isDescriptor = isObject
-
-const merge = (dst, src) => mergeWith(dst, src, (dstValue, srcValue) => {
-  if (Array.isArray(dstValue)) {
-    if (Array.isArray(srcValue)) return dstValue.concat(srcValue)
-    if (isObject(srcValue)) return merge({}, srcValue)
-  }
-})
+const isFunction   = require('../lang/isFunction')
+const isObject     = require('./is-object')
+const isComposable = require('./is-composable')
+const merge        = require('./merger')
+const assign       = require('./assign')
+const slice        = require('../array/slice')
+const reduce       = require('../array/reduce')
+const filter       = require('../array/filter')
+const apply        = require('../function/apply')
 
 function createFactory (descriptor) {
   return function Stamp (options) {
     let args = slice(arguments, 1)
-    let obj = Object.create(descriptor.methods || {})
+    const obj = Object.create(descriptor.methods || {})
 
     merge(obj, descriptor.deepProperties)
     assign(obj, descriptor.properties)
@@ -54,12 +46,11 @@ function createFactory (descriptor) {
 
     if (!descriptor.initializers || descriptor.initializers.length === 0) return obj
 
-    return reduce(descriptor.initializers, (resultingObj, initializer) => {
-      const returnedValue = initializer.call(resultingObj, options, {
-        instance: resultingObj,
-        stamp: Stamp,
-        args: [options].concat(args)
-      })
+    if (options === undefined) options = {}
+
+    return reduce(filter(descriptor.initializers, isFunction), (resultingObj, initializer) => {
+      const returnedValue = initializer.call(resultingObj, options,
+        {instance: resultingObj, stamp: Stamp, args: [options].concat(args)})
 
       return returnedValue === undefined
         ? resultingObj
@@ -79,8 +70,9 @@ function createStamp (descriptor, composeFunction) {
     ? Stamp.compose
     : composeFunction
 
-  Stamp.compose = function () {
-    return apply(composeImplementation, this, arguments)
+  Stamp.compose = function _compose () {
+    let args = slice(arguments)
+    return apply(composeImplementation, this, args)
   }
 
   assign(Stamp.compose, descriptor)
@@ -90,7 +82,7 @@ function createStamp (descriptor, composeFunction) {
 
 function mergeComposable (dstDescriptor, srcComposable) {
   const srcDescriptor = (srcComposable && srcComposable.compose) || srcComposable
-  if (!isDescriptor(srcDescriptor)) return dstDescriptor
+  if (!isComposable(srcDescriptor)) return dstDescriptor
 
   const combineProperty = (propName, action) => {
     if (!isObject(srcDescriptor[propName])) return
@@ -109,8 +101,10 @@ function mergeComposable (dstDescriptor, srcComposable) {
   combineProperty('deepConfiguration', merge)
 
   if (Array.isArray(srcDescriptor.initializers)) {
-    if (!Array.isArray(dstDescriptor.initializers)) dstDescriptor.initializers = []
-    apply(dstDescriptor.initializers.push, dstDescriptor.initializers, filter(srcDescriptor.initializers, isFunction))
+    dstDescriptor.initializers = reduce(srcDescriptor.initializers, (result, init) => {
+      if (isFunction(init) && result.indexOf(init) < 0) result.push(init)
+      return result
+    }, Array.isArray(dstDescriptor.initializers) ? dstDescriptor.initializers : [])
   }
 
   return dstDescriptor
