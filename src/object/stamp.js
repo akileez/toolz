@@ -3,110 +3,140 @@
 
 'use strict'
 
-const slice            = require('../array/slice')
-const apply            = require('../function/apply')
-const merge            = require('./merge')
-const assign           = require('./assign')
 const compose          = require('./compose')
-const isObject         = require('./is-object')
 const isComposable     = require('./is-composable')
-const extractFunctions = require('./extract')
+const isStamp          = require('./is-stamp')
+const stampDescriptor  = require('./descriptor')
+const extractFunctions = require('./extract-functions')
+const merge            = require('./merger')
+const assign           = require('./assign')
+const apply            = require('../function/apply')
+const slice            = require('../array/slice')
+const filter           = require('../array/filter')
+const map              = require('../array/map')
 
-const rawUtilities = {
-  methods : function methods () {
-    let methodsObject = slice(arguments)
-    return (this.compose || compose).call(this, {methods: apply(assign, undefined, [{}].concat(methodsObject))})
-  },
-  properties : function properties () {
-    let propertiesObject = slice(arguments)
-    return (this.compose || compose).call(this, {properties: apply(assign, undefined, [{}].concat(propertiesObject))})
-  },
-  initializers : function initializers () {
-    let args = slice(arguments)
-    return (this.compose || compose).call(this, {initializers: apply(extractFunctions, undefined, args)})
-  },
-  deepProperties : function deepProperties () {
-    let propertiesObject = slice(arguments)
-    return (this.compose || compose).call(this, {deepProperties: apply(merge, undefined, [{}].concat(propertiesObject))})
-  },
-  staticProperties : function staticProperties () {
-    let propertiesObject = slice(arguments)
-    return (this.compose || compose).call(this, {staticProperties: apply(assign, undefined, [{}].concat(propertiesObject))})
-  },
-  staticDeepProperties : function staticDeepProperties () {
-    let propertiesObject = slice(arguments)
-    return (this.compose || compose).call(this, {staticDeepProperties: apply(merge, undefined, [{}].concat(propertiesObject))})
-  }
+function composeArgsCall (self, propName, action, args) {
+  const descriptor = {}
+  descriptor[propName] = apply(action, undefined, [{}].concat(args))
+  return ((self && self.compose) || baseStampit.compose).call(self, descriptor)
+}
+
+function methods () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'methods', assign, args)
+}
+
+function properties () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'properties', assign, args)
+}
+
+function initializers () {
+  let args = slice(arguments)
+  return ((this && this.compose) || baseStampit.compose).call(this, {
+    initializers: apply(extractFunctions, undefined, args)
+  })
+}
+
+function deepProperties () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'deepProperties', merge, args)
+}
+
+function staticProperties () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'staticProperties', assign, args)
+}
+
+function staticDeepProperties () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'staticDeepProperties', merge, args)
+}
+
+function configuration () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'configuration', assign, args)
+}
+
+function deepConfiguration () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'deepConfiguration', merge, args)
+}
+
+function propertyDescriptors () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'propertyDescriptors', assign, args)
+}
+
+function staticPropertyDescriptors () {
+  let args = slice(arguments)
+  return composeArgsCall(this, 'staticPropertyDescriptors', assign, args)
+}
+
+const allUtilities = {
+  methods: methods,
+  properties: properties,
+  refs: properties,
+  props: properties,
+  initializers: initializers,
+  init: initializers,
+  deepProperties: deepProperties,
+  deepProps: deepProperties,
+  staticProperties: staticProperties,
+  statics: staticProperties,
+  staticDeepProperties: staticDeepProperties,
+  deepStatics: staticDeepProperties,
+  configuration: configuration,
+  conf: configuration,
+  deepConfiguration: deepConfiguration,
+  deepConf: deepConfiguration,
+  propertyDescriptors: propertyDescriptors,
+  staticPropertyDescriptors: staticPropertyDescriptors
 }
 
 const baseStampit = compose({
   staticProperties: assign({
-    refs: rawUtilities.properties,
-    props: rawUtilities.properties,
-    init: rawUtilities.initializers,
-    deepProps: rawUtilities.deepProperties,
-    statics: rawUtilities.staticProperties,
-
-    create: function create () {
-      return apply(this, undefined, arguments)
+    create: function _create () {
+      let args = slice(arguments)
+      return this(args)
+    },
+    compose: function _compose () {
+      let args = slice(arguments)
+      args = map(filter(args, isComposable), (arg) => isStamp(arg) ? arg : stampDescriptor(arg))
+      return apply(compose, this || baseStampit, args)
     }
-  }, rawUtilities)
+  }, allUtilities)
 })
 
 function stampit () {
-  let _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0]
-
-  let methods = _ref.methods
-  let properties = _ref.properties
-  let props = _ref.props
-  let refs = _ref.refs
-  let initializers = _ref.initializers
-  let init = _ref.init
-  let deepProperties = _ref.deepProperties
-  let deepProps = _ref.deepProps
-  let propertyDescriptors = _ref.propertyDescriptors
-  let staticProperties = _ref.staticProperties
-  let statics = _ref.statics
-  let staticDeepProperties = _ref.deepStaticProperties
-  let staticPropertyDescriptors = _ref.staticPropertyDescriptors
-  let configuration = _ref.configuration
-  let deepConfiguration = _ref.deepConfiguration
-
-  let args = slice(arguments, 1)
-
-  const p = isObject(props) || isObject(refs) || isObject(properties)
-    ? assign({}, props, refs, properties)
-    : undefined
-
-  const dp = isObject(deepProps) || isObject(deepProperties)
-    ? merge({}, deepProps, deepProperties)
-    : undefined
-
-  const sp = isObject(statics) || isObject(staticProperties)
-    ? assign({}, statics, staticProperties)
-    : undefined
-
-  return apply(baseStampit.compose, baseStampit, [{
-    methods: methods,
-    properties: p,
-    initializers: extractFunctions(init, initializers),
-    deepProperties: dp,
-    staticProperties: sp,
-    staticDeepProperties: staticDeepProperties,
-    propertyDescriptors: propertyDescriptors,
-    staticPropertyDescriptors: staticPropertyDescriptors,
-    configuration: configuration,
-    deepConfiguration: deepConfiguration
-  }].concat(args))
+  let args = slice(arguments)
+  return baseStampit.compose(args)
 }
 
 module.exports = assign(stampit, {
-  isStamp: isComposable,
+  isStamp: isStamp,
   isComposable: isComposable,
-  compose: baseStampit.compose,
-  refs: rawUtilities.properties,
-  props: rawUtilities.properties,
-  init: rawUtilities.initializers,
-  deepProps: rawUtilities.deepProperties,
-  statics: rawUtilities.staticProperties
-}, rawUtilities)
+  compose: baseStampit.compose
+}, allUtilities)
+
+module.exports.methods                   = methods
+module.exports.properties                = properties
+module.exports.refs                      = properties
+module.exports.props                     = properties
+module.exports.initializers              = initializers
+module.exports.init                      = initializers
+module.exports.deepProperties            = deepProperties
+module.exports.deepProps                 = deepProperties
+module.exports.staticProperties          = staticProperties
+module.exports.statics                   = staticProperties
+module.exports.staticDeepProperties      = staticDeepProperties
+module.exports.deepStatics               = staticDeepProperties
+module.exports.configuration             = configuration
+module.exports.conf                      = configuration
+module.exports.deepConfiguration         = deepConfiguration
+module.exports.deepConf                  = deepConfiguration
+module.exports.propertyDescriptors       = propertyDescriptors
+module.exports.staticPropertyDescriptors = staticPropertyDescriptors
+module.exports.compose                   = compose
+module.exports.isComposable              = isComposable
+module.exports.isStamp                   = isStamp
