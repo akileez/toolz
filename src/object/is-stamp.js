@@ -1,12 +1,7 @@
-var isFunction = require('../lang/isFunction')
-var isDescriptor = require('./is-object')
-
-// module.exports = (obj) => isFunction(obj) && isFunction(obj.compose) && isDescriptor(obj.compose)
+const isFunction = require('../lang/isFunction')
 
 function isStamp (obj) {
-  return isFunction(obj)
-    && isFunction(obj.compose)
-    && isDescriptor(obj.compose)
+  return isFunction(obj) && isFunction(obj.compose)
 }
 
 module.exports = isStamp
