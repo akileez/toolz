@@ -51,13 +51,13 @@ function rand (arr, num) {
     }
     return result
   }
-  return (arr && arr.length) ? pickOne(arr) : void (0)
+  return (arr && arr.length) ? [pickOne(arr)] : void (0)
 }
 
 function pickOne (arr) {
   var idx = randInt(0, arr.length - 1)
   // dont mutate array
-  return [arr[idx]]
+  return arr[idx]
 }
 
 exports.first   = first
