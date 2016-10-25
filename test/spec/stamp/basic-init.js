@@ -68,7 +68,7 @@ test('stampit({ init }).init() -- syntax no longer in use -- adjustments made', 
 
 test('should work with initializers keyword stampit().initializers', function () {
   var obj = stampit()
-    .initializers (
+    .initializers(
       function () {
         var secret = 'foo'
         this.getSecret = function () {
@@ -109,9 +109,9 @@ test('stampit().initializers()', function () {
 test('stampit({ initializers }).initializers()', () => {
   var obj = stampit()
   .initializers(function () {
-      var secret = 'foo'
-     this.getSecret = () => { return secret }
-    }
+    var secret = 'foo'
+    this.getSecret = () => { return secret }
+  }
   )
   .initializers(function () {
     this.a = 'a'
