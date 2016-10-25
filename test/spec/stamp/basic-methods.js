@@ -5,9 +5,9 @@ var test     = painless.createGroup('Test object/stampit (methods)')
 var stampit = require('../../../src/object/stamp')
 
 test('stampit({ methods })', () => {
-  const obj = stampit({ methods: {
-    foo() { return 'foo'; }
-  }}).create();
+  const obj = stampit().methods({
+    foo () {return 'foo'}
+  }).create()
 
   t.ok(obj.foo() && !obj.hasOwnProperty('foo'),
     'Should set the new object\'s prototype.');
@@ -37,11 +37,13 @@ test('stampit().methods()', () => {
 });
 
 test('stampit({ methods }).methods()', () => {
-  const obj = stampit({ methods: {
+  const obj = stampit()
+  .methods({
     foo() { return 'foo'; },
     methodOverride() { return false; },
     prop1: 1
-  }}).methods({
+  })
+  .methods({
     bar() { return 'bar'; },
     methodOverride() { return true; },
     prop2: 2
@@ -55,7 +57,7 @@ test('stampit({ methods }).methods()', () => {
     'Should let you override by chaining .methods().');
   t.ok(obj.prop1 && !obj.hasOwnProperty('prop1'),
     'Should mix properties.');
-  t.ok(obj.prop2 && !obj.hasOwnProperty('prop1'),
+  t.ok(obj.prop2 && !obj.hasOwnProperty('prop2'),
     'Should mix properties.');
 });
 
