@@ -92,6 +92,29 @@ function engine () {
     return map[kindOf(value)] || map['' + value]
   }
 
+  function circular (obj) {
+    var fn = options.display.prot ? forIn : forOwn
+
+    function copy (from, seen) {
+      var to = Array.isArray(from) ? [] : {}
+      seen.push(from)
+
+      fn(from, function (val, key) {
+        if (!val || !isObject(val))
+          to[key] = val
+
+        else if (seen.indexOf(val) === -1)
+          to[key] = copy(val, seen.slice(0))
+
+        else to[key] = '[Circular]'
+      })
+
+      return to
+    }
+
+    return copy(obj, [])
+  }
+
   function cleanObject (obj) {
     var lastKey = ''
     var key
@@ -182,29 +205,6 @@ function engine () {
     if (type === 'date' && !options.display.date) return '[Date]'
 
     return '' + value
-  }
-
-  function circular (obj) {
-    var fn = options.display.prot ? forIn : forOwn
-
-    function copy (from, seen) {
-      var to = Array.isArray(from) ? [] : {}
-      seen.push(from)
-
-      fn(from, function (val, key) {
-        if (!val || !isObject(val))
-          to[key] = val
-
-        else if (seen.indexOf(val) === -1)
-          to[key] = copy(val, seen.slice(0))
-
-        else to[key] = '[Circular]'
-      })
-
-      return to
-    }
-
-    return copy(obj, [])
   }
 
   return {
