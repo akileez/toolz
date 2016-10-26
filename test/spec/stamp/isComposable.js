@@ -1,5 +1,5 @@
 var painless = require('../../assertion/painless')
-var test = painless.createGroup('Test object/stampit::isStamp')
+var test = painless.createGroup('Test object/stampit::isComposable')
 var t = painless.assert
 var stampit = require('../../../src/object/stamp')
 
