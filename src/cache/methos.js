@@ -7,11 +7,9 @@ var visit    = require('../object/visit')
 // Using stampit version 3
 
 module.exports = stampit()
-  .initializers([
-    function () {
-      this.cache = {}
-    }
-  ])
+  .initializers(function () {
+    this.cache = {}
+  })
   .methods({
     set: setter,
     get: getter,
