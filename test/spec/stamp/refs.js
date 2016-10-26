@@ -7,7 +7,7 @@ test('Stamp refs shallow copied for object created', () => {
   'use strict'
   const deep = { foo: 'foo', bar: 'bar' }
   const stamp1 = stampit().refs({ deep: deep, foo: 'foo' })
-  const stamp2 = stampit({ refs: { deep: deep, foo: 'foo' } })
+  const stamp2 = stampit().refs({ deep: deep, foo: 'foo' })
 
   const o1 = stamp1()
   const o2 = stamp2()
@@ -32,8 +32,9 @@ test('stampit.refs(refs) shallow copied into stamp', () => {
 })
 
 test('stamp.compose() shallow copy refs', () => {
-  const stamp = stampit({ refs: { deep: { foo: '1', bar: '1' }, foo: '1', bar: '1' } })
-    .compose(stampit({ refs: { deep: { foo: 'override', baz: 'baz' }, foo: 'override', baz: 'baz' } }))
+  const stamp = stampit()
+  .refs({ deep: { foo: '1', bar: '1' }, foo: '1', bar: '1' })
+    .compose(stampit().refs({ deep: { foo: 'override', baz: 'baz' }, foo: 'override', baz: 'baz' }))
   const o = stamp()
 
   t.eq(o.foo, 'override')
