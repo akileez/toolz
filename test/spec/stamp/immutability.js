@@ -10,12 +10,13 @@ test('Basic stamp immutability', () => {
   const refs = { s: { deep: 1 } };
   const props = { p: { deep: 1 } };
   const init = () => {}
-  const stamp1 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
+  // const stamp1 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
+  const stamp1 = stampit().methods(methods).refs(refs).deepProps(props).init(init)
 
   methods.f = () => {};
   refs.s.deep = 2;
   props.p.deep = 2;
-  const stamp2 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
+  const stamp2 = stampit().methods(methods).refs(refs).deepProps(props).init(init)
 
   t.ne(stamp1.compose.methods, stamp2.compose.methods);
   t.ne(stamp1.compose.methods.f, stamp2.compose.methods.f);
@@ -33,8 +34,8 @@ test('Stamp immutability made of same source', () => {
   const refs = { s: { deep: 1 } };
   const props = { p: { deep: 1 } };
   const init = () => {};
-  const stamp1 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
-  const stamp2 = stampit({ methods: methods, refs: refs, deepProps: props, init: init });
+  const stamp1 = stampit().methods(methods).refs(refs).deepProps(props).init(init)
+  const stamp2 = stampit().methods(methods).refs(refs).deepProps(props).init(init)
 
   t.ne(stamp1.compose.methods, stamp2.compose.methods);
   t.ne(stamp1.compose.properties, stamp2.compose.properties);
@@ -48,19 +49,19 @@ test('Basic object immutability', () => {
   const methods = { f() {} };
   const refs = { s: { deep: 1 } };
   const props = { p: { deep: 1 } };
-  const o1 = stampit({ methods: methods, refs: refs, deepProps: props })();
+  const o1 = stampit().methods(methods).refs(refs).deepProps(props)();
 
   methods.f = () => {};
   refs.s.deep = 2;
   props.p.deep = 2;
-  const o2 = stampit({ methods: methods, refs: refs, deepProps: props })();
+  const o2 = stampit().methods(methods).refs(refs).deepProps(props)();
 
   t.ne(o1, o2);
   t.ne(o1.f, o2.f);
   t.eq(o1.s, o2.s);
   t.eq(o1.s.deep, o2.s.deep);
-  // t.ne(o1.p, o2.p);
-  // t.ne(o1.p.deep, o2.p.deep);
+  t.ne(o1.p, o2.p);
+  t.ne(o1.p.deep, o2.p.deep);
 });
 
 test('Stamp chaining functions immutability', () => {
