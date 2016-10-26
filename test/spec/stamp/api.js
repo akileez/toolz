@@ -12,9 +12,9 @@ test('stampit({})', () => {
 })
 
 test('incorrect stampit({ init }) args', () => {
-  t.same(stampit({ init: 42 }).compose.initializers, undefined)
-  t.same(stampit({ init: null }).compose.initializers, undefined)
-  t.same(stampit({ init: new RegExp() }).compose.initializers, undefined)
-  t.same(stampit({ init: [42] }).compose.initializers, undefined)
-  t.same(stampit({ init: 'a string' }).compose.initializers, undefined)
+  t.same(stampit().init(42).compose.initializers, undefined)
+  t.same(stampit().init(null).compose.initializers, undefined)
+  t.same(stampit().init(new RegExp ()).compose.initializers, undefined)
+  t.same(stampit().init([42]).compose.initializers, undefined)
+  t.same(stampit().init('a string').compose.initializers, undefined)
 })
