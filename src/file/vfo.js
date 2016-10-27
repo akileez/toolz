@@ -1,4 +1,5 @@
 var extend = require('../object/extend')
+var filter = require('../object/filter')
 var lstat  = require('./lstat')
 var path   = require('path')
 var fs     = require('fs')
@@ -32,9 +33,8 @@ function vfs (fp, fc) {
   }
 }
 
-// virtualFileStats: include file stats metadata but not functions
+// virtualFileStats: include file stats metadata sans functions
 function vff (fp, fc) {
-  var filter = require('../object/filter')
   var filterd = filter(lstat(fp), (val) => {
     return typeof val !== 'function'
   })
@@ -45,12 +45,6 @@ function vff (fp, fc) {
 
   if (typeof fc === 'object' && fc.constructor === Object) {
     return extend(vfp(fp), {stats: filterd}, fc)
-  }
-
-  {
-    stats: filter(lstat(fp), (val) => {
-      return typeof val !== 'function'
-    })
   }
 }
 
@@ -71,3 +65,4 @@ function vfp (fp) {
 
 module.exports = vfo
 module.exports.stats = vfs
+module.exports.meta  = vff
