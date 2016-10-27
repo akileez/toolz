@@ -9,9 +9,11 @@ var fs     = require('fs')
   fp (filepath) [string] file path to read
   fc (filecontent) [object|function] object or function returning an object to mixin
 
+  return an object with filepath and stats metadata
+
 */
 
-// virtualFileObject: compose normalize file object
+// virtualFileObject: normalized file object
 function vfo (fp, fc) {
   if (typeof fc === 'function') {
     return extend(vfp(fp), fc(fp))
@@ -22,19 +24,8 @@ function vfo (fp, fc) {
   }
 }
 
-// virtualFileStats: include file stats metadata
+// virtualFileStats: file stats metadata sans functions
 function vfs (fp, fc) {
-  if (typeof fc === 'function') {
-    return extend(vfp(fp), {stats: lstat(fp)}, fc(fp))
-  }
-
-  if (typeof fc === 'object' && fc.constructor === Object) {
-    return extend(vfp(fp), {stats: lstat(fp)}, fc)
-  }
-}
-
-// virtualFileStats: include file stats metadata sans functions
-function vff (fp, fc) {
   var filterd = filter(lstat(fp), (val) => {
     return typeof val !== 'function'
   })
@@ -48,7 +39,18 @@ function vff (fp, fc) {
   }
 }
 
- // virtualFilePath: file path metadata
+// virtualFileStats: file stats metadata
+function vff (fp, fc) {
+  if (typeof fc === 'function') {
+    return extend(vfp(fp), {stats: lstat(fp)}, fc(fp))
+  }
+
+  if (typeof fc === 'object' && fc.constructor === Object) {
+    return extend(vfp(fp), {stats: lstat(fp)}, fc)
+  }
+}
+
+// virtualFilePath: file path metadata
 function vfp (fp) {
   return {
     path : {
@@ -65,4 +67,4 @@ function vfp (fp) {
 
 module.exports = vfo
 module.exports.stats = vfs
-module.exports.meta  = vff
+module.exports.statsf  = vff
