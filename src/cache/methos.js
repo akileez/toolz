@@ -2,13 +2,14 @@ var stampit  = require('../object/stamp')
 var set      = require('../object/set')
 var get      = require('../object/get')
 var has      = require('../object/has')
+var hasOwn   = require('../object/hasOwn')
 var visit    = require('../object/visit')
 
 // Using stampit version 3
 
 module.exports = stampit()
   .initializers(function () {
-    this.cache = {}
+    this.cache = Object.create(null)
   })
   .methods({
     set: setter,
@@ -33,7 +34,7 @@ function getter (key) {
 
 // checks if a cached value for 'key exists'
 function hasit (key) {
-  if (key.indexOf('.') === -1) return this.cache.hasOwnProperty(key)
+  if (key.indexOf('.') === -1) return hasOwn(this.cache, key)
   return has(this.cache, key)
 }
 
