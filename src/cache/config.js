@@ -6,11 +6,12 @@ var slice  = require('../array/slice')
 var isOr   = require('../lang/yoda').or
 var kindOf = require('../lang/kindOf')
 var has    = require('../object/has')
+var hasOwn = require('../object/hasOwn')
 
 module.exports = Stamp()
   .initializers([
     function () {
-      this.config = {}
+      this.config = Object.create(null)
     }
   ])
   .methods({
@@ -55,6 +56,6 @@ function disabled (key) {
 }
 
 function hasOption (key) {
-  if (key.indexOf('.') === -1) return this.config.hasOwnProperty(key)
+  if (key.indexOf('.') === -1) return hasOwn(this.config, key)
   return has(this.config, key)
 }
