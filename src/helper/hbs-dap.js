@@ -15,6 +15,7 @@ var requireGlob = require('../path/req-glob')
 
 function factory (handlebars, options) {
   var toString              = Object.prototype.toString
+  var ESCAPE_CHARACTERS     = /[-\/\\^$*+?.()|[\]{}]/g
   var NON_WORD_CHARACTERS   = /\W+/g
   var PATH_SEPARATOR        = '/'
   var PATH_SEPARATORS       = /[\\\/]/g
@@ -50,6 +51,7 @@ function factory (handlebars, options) {
     data       : data,
     compile    : compile
   })
+  .create()
 
   // Methods (Prototypes)
 
@@ -126,6 +128,10 @@ function factory (handlebars, options) {
 
   // Utilities
 
+  function escapeRx (str) {
+    return str.replace(ESCAPE_CHARACTERS, '\\$&')
+  }
+
   function getTypeOf (value) {
     return toString
       .call(value)
@@ -157,7 +163,7 @@ function factory (handlebars, options) {
   function keygenPartial (options, file) {
     var fullPath = file.path.replace(PATH_SEPARATORS, PATH_SEPARATOR)
     var basePath = file.base.replace(PATH_SEPARATORS, PATH_SEPARATOR) + PATH_SEPARATOR
-    var shortPath = fullPath.replace(basePath, '')
+    var shortPath = fullPath.replace(new RegExp('^' + escapeRx(basePath), 'i'), '')
     var extension = path.extname(shortPath)
 
     return shortPath
