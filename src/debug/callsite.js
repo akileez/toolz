@@ -31,7 +31,7 @@
 
 */
 
-module.exports = function () {
+function callsite () {
   var orig = Error.prepareStackTrace
 
   Error.prepareStackTrace = function (_, stack) {
@@ -45,3 +45,33 @@ module.exports = function () {
 
   return stack
 }
+
+function stack () {
+  process.stdout.write('\n')
+  callsite().forEach(function(site){
+    process.stdout.write(`  \u001b[36m${site.getFunctionName() || 'anonymous'}\u001b[90m in ${site.getFileName()} at line \u001b[32m${site.getLineNumber()}\u001b[0m\n`)
+  })
+  process.stdout.write('\n')
+    // console.log('  \033[36m%s\033[90m in %s at line \033[32m%d\033[0m'
+    //   , site.getFunctionName() || 'anonymous'
+    //   , site.getFileName()
+    //   , site.getLineNumber());
+}
+
+module.exports = stack
+module.exports.callr = callsite
+
+// module.exports = function () {
+//   var orig = Error.prepareStackTrace
+
+//   Error.prepareStackTrace = function (_, stack) {
+//     return stack
+//   }
+
+//   var err = new Error
+//   Error.captureStackTrace(err, arguments.callee)
+//   var stack = err.stack
+//   Error.prepareStackTrace = orig
+
+//   return stack
+// }
