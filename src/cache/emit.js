@@ -12,7 +12,7 @@ var apply   = require('../function/apply')
 module.exports = stamp()
   .initializers([
     function () {
-      this._fns = Object.create(null)
+      this._fns = {}
     }
   ])
   .methods({
