@@ -247,13 +247,7 @@ ilog.trace = function () {
       ))
     }
 
-    forEach(callr(), function (site) {
-      ilog._stdout.write(format('  \u001b[36m%s\u001b[90m in %s at line \u001b[32m%d\u001b[0m\n',
-        site.getFunctionName() || 'anonymous',
-        site.getFileName(),
-        site.getLineNumber()
-      ))
-    })
+    callr()
   }
 }
 
