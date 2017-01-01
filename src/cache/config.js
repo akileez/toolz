@@ -11,7 +11,7 @@ var hasOwn = require('../object/hasOwn')
 module.exports = Stamp()
   .initializers([
     function () {
-      this.config = Object.create(null)
+      this.config = {}
     }
   ])
   .methods({
