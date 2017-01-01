@@ -9,7 +9,7 @@ var visit    = require('../object/visit')
 
 module.exports = stampit()
   .initializers(function () {
-    this.cache = Object.create(null)
+    this.cache = {}
   })
   .methods({
     set: setter,
