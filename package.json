@@ -23,10 +23,8 @@
   },
   "license": "ISC",
   "keywords": [],
-  "dependencies": {
-  },
-  "devDependencies": {
-  },
+  "dependencies": {},
+  "devDependencies": {},
   "nyc": {
     "include": [
       "src/array/*.js",
