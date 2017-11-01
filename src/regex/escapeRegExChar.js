@@ -3,8 +3,8 @@
 
 'use strict'
 
-const assert = require('assert')
-const replace = require('./replace')
+const assert     = require('assert')
+const replace    = require('./replace')
 const matchOpsRe = require('./rex-escRegexpStrChars')
 
 function escRegExpChars (str) {
