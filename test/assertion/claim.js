@@ -124,6 +124,7 @@ module.exports = {
   doesNotThrow: doesNotThrow,
   regexTest: regexTest,
   matches: regexTest,
+  regex: regexTest,
   ifError: ifError,
   ifErr: ifError
 }
