@@ -1,15 +1,11 @@
-'use strict';
+'use strict'
 
-module.exports = function (str) {
-  var reAstral = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+const stripAnsi = require('../util/strip-ansi')
+const astralRegex = require('../regex/astral-regex')
+const replace     = require('../regex/replace')
 
-  return stripAnsi(str).replace(reAstral, ' ').length;
-};
+function stringLength (input) {
+	return replace(stripAnsi(input), astralRegex(), ' ').length
+}
 
-function stripAnsi (str) {
-  return typeof str === 'string' ? str.replace(ansiRegex(), '') : str;
-};
-
-function ansiRegex () {
-  return /\u001b\[(?:[0-9]{1,3}(?:;[0-9]{1,3})*)?[m|K]/g;
-};
+module.exports = stringLength
