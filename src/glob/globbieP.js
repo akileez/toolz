@@ -1,7 +1,7 @@
 'use strict';
 var Promise = require('../promise/pinkie-promise');
 var arrayUnion = require('../array/union');
-var objectAssign = require('../object/object-assign');
+var objectAssign = require('../object/assign');
 var glob = require('./glob');
 var arrify = require('../array/convert');
 var pify = require('../promise/pify');
