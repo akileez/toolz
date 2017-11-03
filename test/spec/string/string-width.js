@@ -14,3 +14,16 @@ test('tests for string-width', () => {
   t.is(fn('A\ud83c\ude00BC'), 5, 'surrogate')
   t.is(fn('\u001b[31m\u001b[39m'), 0)
 })
+
+test('ignores control characters', () => {
+	t.is(fn(String.fromCharCode(0)), 0)
+	t.is(fn(String.fromCharCode(31)), 0)
+	t.is(fn(String.fromCharCode(127)), 0)
+	t.is(fn(String.fromCharCode(134)), 0)
+	t.is(fn(String.fromCharCode(159)), 0)
+	t.is(fn('\u001B'), 0)
+})
+
+test('handles combining characters', () => {
+	t.is(fn('x\u0300'), 1)
+})
