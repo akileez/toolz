@@ -6,7 +6,7 @@
  * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <https://lodash.com/license>
  */
-var Stack = require('../cache/stack'),
+var Stack = require('../cache/mappr'),
     keys = require('../object/keys'),
     root = require('./GLOBAL');
 
