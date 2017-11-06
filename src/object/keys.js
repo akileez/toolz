@@ -1,5 +1,6 @@
 function keys (obj) {
-  var hasOwn = Object.prototype.hasOwnProperty
+  // var hasOwn = Object.prototype.hasOwnProperty
+  var hasOwn = {}.hasOwnProperty
   var result = []
   var key
 
