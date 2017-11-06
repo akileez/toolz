@@ -4,7 +4,7 @@ var domain = require('domain');
 
 var eos = require('../stream/end-of-stream');
 var setAsap = require('../process/set-asap');
-var co = require('../generator/co'); // co-with-promise
+var co = require('../generator/co');
 var once = require('../glob/glob/once');
 var exhaust = require('../stream/exhaust');
 
